@@ -1,0 +1,20 @@
+wutsi:
+  application:
+    gateway-url: https://wutsi-gateway-test.herokuapp.com
+    server-url: ${wutsi.application.gateway-url}/shell
+  platform:
+    cache:
+      type: memcached
+      memcached:
+        username: ${MEMCACHIER_USERNAME}
+        password: ${MEMCACHIER_PASSWORD}
+        servers: ${MEMCACHIER_SERVERS}
+        ttl: 86400
+    storage:
+      type: aws
+      aws:
+        bucket: int-wutsi
+  toggles:
+    send-sms-code: true
+    verify-sms-code: true
+    account: true

@@ -1,0 +1,76 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 512
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    info:
+      git:
+        mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "beans,health,info,scheduledtasks,mappings"
+
+spring:
+  main:
+    lazy-initialization: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+  jackson:
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+      ACCEPT_EMPTY_STRING_AS_NULL_OBJECT: true
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_ENUMS: true
+      ACCEPT_CASE_INSENSITIVE_PROPERTIES: true
+    default-property-inclusion: non_null
+
+wutsi:
+  application:
+    name: wutsi-shell-bff
+    server-url: http://localhost:${server.port}
+    gateway-url: https://wutsi-gateway-test.herokuapp.com
+    cash-url: ${wutsi.application.gateway-url}/cash
+    login-url: ${wutsi.application.gateway-url}/login
+    catalog-url: ${wutsi.application.gateway-url}/catalog
+  platform:
+    cache:
+      name: ${wutsi.application.name}
+      type: local
+    security:
+      type: jwt
+    tracing:
+      client-id: ${wutsi.application.name}
+    storage:
+      type: local
+
+logging:
+  level:
+    root: INFO
+    com:
+      wutsi:
+        platform:
+          account:
+            WutsiAccountApi: DEBUG
+          contact:
+            WutsiContactApi: DEBUG
+          payment:
+            WutsiPaymentApi: DEBUG
+          sms:
+            WutsiSmsApi: DEBUG
+          tenant:
+            WutsiTenantApi: DEBUG
+  pattern:
+    console: "%d type=%level logger=%class{20} thread=%thread %m%n"
+    file: "%d type=%level logger=%class{20} thread=%thread %m%n"
+
+

@@ -1,0 +1,24 @@
+{
+  "type" : "Screen",
+  "attributes" : {
+    "id" : "page.settings.store",
+    "safe" : false
+  },
+  "children" : [ {
+    "type" : "Text",
+    "attributes" : {
+      "caption" : "STORE"
+    },
+    "children" : [ ]
+  } ],
+  "appBar" : {
+    "type" : "AppBar",
+    "attributes" : {
+      "title" : "Store",
+      "elevation" : 0.0,
+      "backgroundColor" : "#FFFFFF",
+      "foregroundColor" : "#000000"
+    },
+    "children" : [ ]
+  }
+}
