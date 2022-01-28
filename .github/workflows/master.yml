@@ -41,7 +41,6 @@ jobs:
           heroku buildpacks:add heroku/jvm --app ${HEROKU_APP}
           heroku config:set --app ${HEROKU_APP} APP_PROFILE=test
           heroku addons -a ${HEROKU_APP} | grep papertrail && echo 'addon: papertrail exists' ||  heroku addons:create papertrail -a ${HEROKU_APP}
-          heroku addons -a ${HEROKU_APP} | grep memcachier && echo 'addon: memcachier exists' ||  heroku addons:create memcachier -a ${HEROKU_APP}
           heroku deploy:jar target/wutsi-store-bff.jar --app ${HEROKU_APP}
           echo Health check....
           sleep 90
@@ -49,8 +48,6 @@ jobs:
 
       - name: Heroku-Deploy-Prod
         env:
-          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_PROD }}
-          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY_PROD }}
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PROD }}
           CLOUDAMQP_URL: ${{secrets.CLOUDAMQP_URL_PROD}}
           HEROKU_APP: wutsi-store-bff-prod
@@ -60,7 +57,6 @@ jobs:
           heroku buildpacks:add heroku/jvm --app ${HEROKU_APP}
           heroku config:set --app ${HEROKU_APP} APP_PROFILE=prod
           heroku addons -a ${HEROKU_APP} | grep papertrail && echo 'addon: papertrail exists' ||  heroku addons:create papertrail -a ${HEROKU_APP}
-          heroku addons -a ${HEROKU_APP} | grep memcachier && echo 'addon: memcachier exists' ||  heroku addons:create memcachier -a ${HEROKU_APP}
           heroku deploy:jar target/wutsi-store-bff.jar --app ${HEROKU_APP}
           echo Health check....
           sleep 90

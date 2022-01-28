@@ -36,22 +36,17 @@ spring:
 
 wutsi:
   application:
-    name: wutsi-shell-bff
+    name: wutsi-store-bff
     server-url: http://localhost:${server.port}
     gateway-url: https://wutsi-gateway-test.herokuapp.com
     cash-url: ${wutsi.application.gateway-url}/cash
     login-url: ${wutsi.application.gateway-url}/login
     catalog-url: ${wutsi.application.gateway-url}/catalog
   platform:
-    cache:
-      name: ${wutsi.application.name}
-      type: local
     security:
       type: jwt
     tracing:
       client-id: ${wutsi.application.name}
-    storage:
-      type: local
 
 logging:
   level:
