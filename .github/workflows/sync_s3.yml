@@ -21,7 +21,7 @@ jobs:
           aws s3 sync \
           --acl public-read \
           --region us-east-1 \
-          target/classes/static/ s3://int-wutsi/static/wutsi-store-bff
+          src/main/resources/static/ s3://int-wutsi/static/wutsi-store-bff
 
       - name: S3-Deploy-Prod
         env:
@@ -31,4 +31,4 @@ jobs:
           aws s3 sync \
           --acl public-read \
           --region us-east-1 \
-          target/classes/static/ s3://prod-wutsi/static/wutsi-store-bff
+          src/main/resources/static/ s3://prod-wutsi/static/wutsi-store-bff
