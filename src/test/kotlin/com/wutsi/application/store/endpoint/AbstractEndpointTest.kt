@@ -8,6 +8,7 @@ import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.account.dto.Phone
+import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.core.security.SubjectType
 import com.wutsi.platform.core.security.SubjectType.USER
 import com.wutsi.platform.core.security.spring.SpringAuthorizationRequestInterceptor
@@ -55,6 +56,9 @@ abstract class AbstractEndpointTest {
 
     @MockBean
     protected lateinit var accountApi: WutsiAccountApi
+
+    @MockBean
+    protected lateinit var catalogApi: WutsiCatalogApi
 
     @Autowired
     private lateinit var messages: MessageSource

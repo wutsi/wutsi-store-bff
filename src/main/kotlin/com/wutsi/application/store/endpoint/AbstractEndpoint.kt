@@ -1,5 +1,7 @@
 package com.wutsi.application.store.endpoint
 
+import com.wutsi.flutter.sdui.Action
+import com.wutsi.flutter.sdui.enums.ActionType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
@@ -7,6 +9,17 @@ import org.springframework.context.i18n.LocaleContextHolder
 abstract class AbstractEndpoint {
     @Autowired
     private lateinit var messages: MessageSource
+
+    protected fun gotoUrl(
+        url: String,
+        replacement: Boolean? = null,
+        parameters: Map<String, String>? = null
+    ) = Action(
+        type = ActionType.Route,
+        url = url,
+        replacement = replacement,
+        parameters = parameters
+    )
 
     protected fun getText(key: String, args: Array<Any?> = emptyArray()) =
         messages.getMessage(key, args, LocaleContextHolder.getLocale()) ?: key

@@ -1,24 +1,40 @@
 {
-  "type" : "Screen",
-  "attributes" : {
-    "id" : "page.settings.store",
-    "safe" : false
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.store",
+    "safe": false
   },
-  "children" : [ {
-    "type" : "Text",
-    "attributes" : {
-      "caption" : "STORE"
+  "children": [
+    {
+      "type": "Container",
+      "attributes": {
+        "padding": 10.0
+      },
+      "children": [
+        {
+          "type": "Button",
+          "attributes": {
+            "caption": "Add Product",
+            "padding": 15.0,
+            "type": "Elevated"
+          },
+          "children": [],
+          "action": {
+            "type": "Route",
+            "url": "http://localhost:0/settings/store/product/add"
+          }
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Store",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
     },
-    "children" : [ ]
-  } ],
-  "appBar" : {
-    "type" : "AppBar",
-    "attributes" : {
-      "title" : "Store",
-      "elevation" : 0.0,
-      "backgroundColor" : "#FFFFFF",
-      "foregroundColor" : "#000000"
-    },
-    "children" : [ ]
+    "children": []
   }
 }

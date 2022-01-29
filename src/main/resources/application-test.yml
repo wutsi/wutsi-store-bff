@@ -1,4 +1,3 @@
 wutsi:
   application:
-    gateway-url: https://wutsi-gateway-test.herokuapp.com
     server-url: ${wutsi.application.gateway-url}/store
