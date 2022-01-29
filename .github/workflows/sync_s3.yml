@@ -1,4 +1,4 @@
-name: master
+name: sync-s3
 
 on:
   push:
