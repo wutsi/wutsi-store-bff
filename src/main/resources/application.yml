@@ -38,17 +38,20 @@ wutsi:
   application:
     name: wutsi-store-bff
     server-url: http://localhost:${server.port}
-    asset-url: https://wutsi-store-asset-int.s3.amazonaws.com
+    asset-url: https://int-wutsi.s3.amazonaws.com
+    asset-root-url: ${wutsi.application.asset-url}/static/wutsi-blog-bff
     gateway-url: https://wutsi-gateway-test.herokuapp.com
     cash-url: ${wutsi.application.gateway-url}/cash
     login-url: ${wutsi.application.gateway-url}/login
     catalog-url: ${wutsi.application.gateway-url}/catalog
-    default-picture-url: ${wutsi.application.asset-url}/images/nopicture.jpeg
+    default-picture-url: ${wutsi.application.asset-root-url}/images/nopicture.jpeg
   platform:
     security:
       type: jwt
     tracing:
       client-id: ${wutsi.application.name}
+    storage:
+      type: local
 
 logging:
   level:

@@ -1,3 +1,8 @@
 wutsi:
   application:
     server-url: ${wutsi.application.gateway-url}/store
+  platform:
+    storage:
+      type: aws
+      aws:
+        bucket: prod-wutsi

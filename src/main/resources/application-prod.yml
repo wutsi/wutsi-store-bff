@@ -2,4 +2,9 @@ wutsi:
   application:
     gateway-url: https://wutsi-gateway-prod.herokuapp.com
     server-url: ${wutsi.application.gateway-url}/store
-    asset-url: https://wutsi-store-asset-prod.s3.amazonaws.com
+    asset-url: https://prod-wutsi.s3.amazonaws.com
+  platform:
+    storage:
+      type: aws
+      aws:
+        bucket: prod-wutsi
