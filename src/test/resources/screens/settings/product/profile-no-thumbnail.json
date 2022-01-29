@@ -38,7 +38,7 @@
                         {
                           "type": "Image",
                           "attributes": {
-                            "url": "https://wutsi-store-asset-int.s3.amazonaws.com/images/nopicture.jpeg",
+                            "url": "https://int-wutsi.s3.amazonaws.com/static/wutsi-store-bff/images/nopicture.jpeg",
                             "width": 150.0,
                             "height": 150.0
                           },

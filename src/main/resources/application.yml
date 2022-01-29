@@ -39,7 +39,7 @@ wutsi:
     name: wutsi-store-bff
     server-url: http://localhost:${server.port}
     asset-url: https://int-wutsi.s3.amazonaws.com
-    asset-root-url: ${wutsi.application.asset-url}/static/wutsi-blog-bff
+    asset-root-url: ${wutsi.application.asset-url}/static/wutsi-store-bff
     gateway-url: https://wutsi-gateway-test.herokuapp.com
     cash-url: ${wutsi.application.gateway-url}/cash
     login-url: ${wutsi.application.gateway-url}/login
