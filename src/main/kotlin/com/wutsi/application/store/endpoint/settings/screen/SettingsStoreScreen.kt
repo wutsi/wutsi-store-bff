@@ -2,16 +2,28 @@ package com.wutsi.application.store.endpoint.settings.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SecurityContext
+import com.wutsi.application.shared.service.SharedUIMapper
+import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.URLBuilder
+import com.wutsi.application.shared.ui.ProductListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
+import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
+import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.Flexible
+import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
+import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
-import com.wutsi.flutter.sdui.enums.ActionType
+import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.ButtonType
+import com.wutsi.flutter.sdui.enums.TextAlignment
+import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.SearchProductRequest
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -20,10 +32,23 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/settings/store")
 class SettingsStoreScreen(
     private val urlBuilder: URLBuilder,
+    private val catalogApi: WutsiCatalogApi,
     private val securityContext: SecurityContext,
+    private val sharedUIMapper: SharedUIMapper,
+    private val tenantProvider: TenantProvider,
+
+    @Value("\${wutsi.application.default-picture-url}") private var defaultPictureUrl: String
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
+        val tenant = tenantProvider.get()
+        val products = catalogApi.searchProduct(
+            request = SearchProductRequest(
+                accountId = securityContext.currentAccountId(),
+                limit = 100
+            )
+        ).products
+
         return Screen(
             id = Page.SETTINGS_STORE,
             appBar = AppBar(
@@ -32,16 +57,42 @@ class SettingsStoreScreen(
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.settings.store.app-bar.title"),
             ),
-            child = Container(
-                padding = 10.0,
-                child = Button(
-                    caption = getText("page.settings.store.app-bar.button.create"),
-                    action = Action(
-                        type = ActionType.Route,
-                        url = urlBuilder.build("settings/store/product/add")
+            floatingActionButton = Button(
+                type = ButtonType.Floatable,
+                icon = Theme.ICON_ADD,
+                stretched = false,
+                iconColor = Theme.COLOR_WHITE,
+                action = gotoUrl(
+                    url = urlBuilder.build("settings/store/product/add")
+                ),
+            ),
+            child = Column(
+                children = listOf(
+                    Container(
+                        padding = 10.0,
+                        alignment = Alignment.CenterLeft,
+                        child = Text(
+                            caption = getText("page.settings.store.product-count", arrayOf(products.size)),
+                            alignment = TextAlignment.Left
+                        )
+                    ),
+                    Divider(color = Theme.COLOR_DIVIDER, height = 2.0),
+                    Flexible(
+                        child = ListView(
+                            separator = true,
+                            separatorColor = Theme.COLOR_DIVIDER,
+                            children = products.map {
+                                ProductListItem(
+                                    model = sharedUIMapper.toProductModel(it, tenant, defaultPictureUrl),
+                                    action = gotoUrl(
+                                        url = urlBuilder.build("/settings/store/product?id=${it.id}")
+                                    )
+                                )
+                            }
+                        )
                     )
                 )
-            )
+            ),
         ).toWidget()
     }
 }
