@@ -43,6 +43,7 @@ internal class SettingsProductScreenTest : AbstractEndpointTest() {
     }
 
     private fun createProduct(withThumbnail: Boolean = true) = Product(
+        id = 1,
         title = "Sample product",
         summary = "Summary of product",
         description = "This is a long description of the product",

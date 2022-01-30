@@ -53,6 +53,12 @@ wutsi:
     storage:
       type: local
 
+  store:
+    pictures:
+      max-per-product: 5
+      max-width: 512
+      max-height: 512
+
 logging:
   level:
     root: INFO

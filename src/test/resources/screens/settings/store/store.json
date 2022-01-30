@@ -52,15 +52,8 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "1",
+                    "subCaption": "Short description of product1",
                     "padding": 10.0,
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f",
-                        "size": 24.0
-                      },
-                      "children": []
-                    },
                     "leading": {
                       "type": "Image",
                       "attributes": {
@@ -82,14 +75,6 @@
                   "attributes": {
                     "caption": "2",
                     "padding": 10.0,
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f",
-                        "size": 24.0
-                      },
-                      "children": []
-                    },
                     "leading": {
                       "type": "Image",
                       "attributes": {
@@ -111,14 +96,6 @@
                   "attributes": {
                     "caption": "3",
                     "padding": 10.0,
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f",
-                        "size": 24.0
-                      },
-                      "children": []
-                    },
                     "leading": {
                       "type": "Image",
                       "attributes": {

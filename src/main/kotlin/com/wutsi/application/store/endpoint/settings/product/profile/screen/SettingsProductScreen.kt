@@ -11,22 +11,24 @@ import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Dialog
+import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.Icon
-import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
+import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.ImageSource
 import com.wutsi.flutter.sdui.enums.InputType
-import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.Product
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -41,8 +43,16 @@ class SettingsProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
 
-    @Value("\${wutsi.application.default-picture-url}") private val defaultPictureUrl: String
+    @Value("\${wutsi.store.pictures.max-width}") private val pictureMaxWidth: Int,
+    @Value("\${wutsi.store.pictures.max-width}") private val pictureMaxHeight: Int,
+    @Value("\${wutsi.store.pictures.max-per-product}") private val maxPicturesPerProduct: Int,
 ) : AbstractQuery() {
+    companion object {
+        const val IMAGE_WIDTH = 150.0
+        const val IMAGE_HEIGHT = 150.0
+        const val IMAGE_PADDING = 2.0
+    }
+
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
         val product = catalogApi.getProduct(id).product
@@ -58,61 +68,50 @@ class SettingsProductScreen(
                 title = getText("page.settings.store.product.app-bar.title"),
             ),
             child = Container(
-                child = Flexible(
-                    child = ListView(
-                        separatorColor = Theme.COLOR_DIVIDER,
-                        separator = true,
-                        children = listOf(
-                            Container(
-                                alignment = Alignment.Center,
-                                child = Column(
-                                    mainAxisSize = MainAxisSize.min,
-                                    children = listOf(
-                                        Image(
-                                            width = 150.0,
-                                            height = 150.0,
-                                            url = product.thumbnail?.url ?: defaultPictureUrl
-                                        ),
-                                        Button(
-                                            type = ButtonType.Text,
-                                            padding = 10.0,
-                                            caption = getText("page.settings.store.product.button.upload-picture"),
-                                            action = Action(
-                                                type = ActionType.Prompt,
-                                                prompt = uploadDialog(id).toWidget()
-                                            )
+                child = Column(
+                    children = listOf(
+                        Container(
+                            padding = 10.0,
+                            height = IMAGE_HEIGHT + 2 * (10.0 + IMAGE_PADDING),
+                            child = pictureListView(product),
+                        ),
+                        Divider(color = Theme.COLOR_DIVIDER),
+                        Flexible(
+                            flex = 10,
+                            child = ListView(
+                                separatorColor = Theme.COLOR_DIVIDER,
+                                separator = true,
+                                children = listOf(
+                                    item(
+                                        "page.settings.store.product.attribute.title",
+                                        product.title,
+                                        urlBuilder.build("/settings/store/product/title?id=$id")
+                                    ),
+                                    item(
+                                        "page.settings.store.product.attribute.price",
+                                        price,
+                                        urlBuilder.build("/settings/store/product/price?id=$id")
+                                    ),
+                                    item(
+                                        "page.settings.store.product.attribute.summary",
+                                        product.summary,
+                                        urlBuilder.build("/settings/store/product/summary?id=$id")
+                                    ),
+                                    item(
+                                        "page.settings.store.product.attribute.description",
+                                        description(product.description),
+                                        urlBuilder.build("/settings/store/product/description?id=$id")
+                                    ),
+                                    ListItemSwitch(
+                                        caption = getText("page.settings.store.product.attribute.visible"),
+                                        subCaption = getText("page.settings.store.product.attribute.visible.description"),
+                                        name = "value",
+                                        selected = product.visible,
+                                        action = Action(
+                                            type = ActionType.Command,
+                                            url = urlBuilder.build("commands/update-product-attribute?id=$id&name=visible")
                                         )
                                     )
-                                )
-                            ),
-                            item(
-                                "page.settings.store.product.attribute.title",
-                                product.title,
-                                urlBuilder.build("/settings/store/product/title?id=$id")
-                            ),
-                            item(
-                                "page.settings.store.product.attribute.price",
-                                price,
-                                urlBuilder.build("/settings/store/product/price?id=$id")
-                            ),
-                            item(
-                                "page.settings.store.product.attribute.summary",
-                                product.summary,
-                                urlBuilder.build("/settings/store/product/summary?id=$id")
-                            ),
-                            item(
-                                "page.settings.store.product.attribute.description",
-                                description(product.description),
-                                urlBuilder.build("/settings/store/product/description?id=$id")
-                            ),
-                            ListItemSwitch(
-                                caption = getText("page.settings.store.product.attribute.visible"),
-                                subCaption = getText("page.settings.store.product.attribute.visible.description"),
-                                name = "value",
-                                selected = product.visible,
-                                action = Action(
-                                    type = ActionType.Command,
-                                    url = urlBuilder.build("commands/update-product-attribute?id=$id&name=visible")
                                 )
                             )
                         )
@@ -144,17 +143,63 @@ class SettingsProductScreen(
         else
             value.substring(0, 160) + "..."
 
-    private fun uploadDialog(id: Long) = Dialog(
-        title = getText("page.settings.store.product.button.upload-picture"),
+    private fun pictureListView(product: Product): WidgetAware {
+        val images = mutableListOf<WidgetAware>()
+        images.addAll(
+            product.pictures.map {
+                Container(
+                    padding = IMAGE_PADDING,
+                    width = IMAGE_WIDTH,
+                    height = IMAGE_HEIGHT,
+                    alignment = Alignment.Center,
+                    borderColor = Theme.COLOR_PRIMARY_LIGHT,
+                    border = 1.0,
+                    backgroundImageUrl = it.url,
+                )
+            }
+        )
+        if (product.pictures.size < maxPicturesPerProduct)
+            images.add(
+                Container(
+                    background = Theme.COLOR_PRIMARY_LIGHT,
+                    borderColor = Theme.COLOR_GRAY,
+                    padding = IMAGE_PADDING,
+                    width = IMAGE_WIDTH,
+                    height = IMAGE_HEIGHT,
+                    alignment = Alignment.Center,
+                    child = Button(
+                        type = ButtonType.Text,
+                        icon = Theme.ICON_ADD,
+                        iconColor = Theme.COLOR_PRIMARY,
+                        iconSize = 32.0,
+                        caption = getText("page.settings.store.product.button.add-picture"),
+                        action = Action(
+                            type = ActionType.Prompt,
+                            prompt = uploadDialog(product).toWidget()
+                        ),
+                    ),
+                )
+            )
+
+        return ListView(
+            direction = Axis.Horizontal,
+            children = images,
+            separatorColor = Theme.COLOR_DIVIDER,
+            separator = true
+        )
+    }
+
+    private fun uploadDialog(product: Product) = Dialog(
+        title = getText("page.settings.store.product.button.add-picture"),
         actions = listOf(
             Input(
                 name = "file",
-                uploadUrl = urlBuilder.build("commands/upload-picture?id=$id"),
+                uploadUrl = urlBuilder.build("commands/upload-picture?id=${product.id}"),
                 type = InputType.Image,
                 imageSource = ImageSource.Camera,
                 caption = getText("page.settings.store.product.button.picture-from-camera"),
-                imageMaxWidth = 512,
-                imageMaxHeight = 512,
+                imageMaxWidth = pictureMaxWidth,
+                imageMaxHeight = pictureMaxHeight,
                 action = Action(
                     type = ActionType.Route,
                     url = "route:/.."
@@ -162,12 +207,12 @@ class SettingsProductScreen(
             ),
             Input(
                 name = "file",
-                uploadUrl = urlBuilder.build("commands/upload-picture?id=$id"),
+                uploadUrl = urlBuilder.build("commands/upload-picture?id=${product.id}"),
                 type = InputType.Image,
                 imageSource = ImageSource.Gallery,
                 caption = getText("page.settings.store.product.button.picture-from-gallery"),
-                imageMaxWidth = 512,
-                imageMaxHeight = 512,
+                imageMaxWidth = pictureMaxWidth,
+                imageMaxHeight = pictureMaxHeight,
                 action = Action(
                     type = ActionType.Route,
                     url = "route:/.."
