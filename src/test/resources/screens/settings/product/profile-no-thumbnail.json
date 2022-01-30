@@ -33,45 +33,6 @@
                       "attributes": {
                         "alignment": "Center",
                         "padding": 2.0,
-                        "border": 1.0,
-                        "borderColor": "#e4edf7",
-                        "height": 150.0,
-                        "width": 150.0,
-                        "backgroundImageUrl": "https://www.imag.com/1.png"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "alignment": "Center",
-                        "padding": 2.0,
-                        "border": 1.0,
-                        "borderColor": "#e4edf7",
-                        "height": 150.0,
-                        "width": 150.0,
-                        "backgroundImageUrl": "https://www.imag.com/2.png"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "alignment": "Center",
-                        "padding": 2.0,
-                        "border": 1.0,
-                        "borderColor": "#e4edf7",
-                        "height": 150.0,
-                        "width": 150.0,
-                        "backgroundImageUrl": "https://www.imag.com/3.png"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "alignment": "Center",
-                        "padding": 2.0,
                         "background": "#e4edf7",
                         "borderColor": "#95A5A6",
                         "height": 150.0,
@@ -97,7 +58,6 @@
                               "attributes": {
                                 "type": "Alert",
                                 "title": "Add Picture",
-                                "message": "",
                                 "actions": [
                                   {
                                     "type": "Input",
@@ -118,7 +78,8 @@
                                     "children": [],
                                     "action": {
                                       "type": "Route",
-                                      "url": "route:/.."
+                                      "url": "http://localhost:0/settings/store/product?id=1",
+                                      "replacement": true
                                     }
                                   },
                                   {
@@ -140,7 +101,8 @@
                                     "children": [],
                                     "action": {
                                       "type": "Route",
-                                      "url": "route:/.."
+                                      "url": "http://localhost:0/settings/store/product?id=1",
+                                      "replacement": true
                                     }
                                   },
                                   {

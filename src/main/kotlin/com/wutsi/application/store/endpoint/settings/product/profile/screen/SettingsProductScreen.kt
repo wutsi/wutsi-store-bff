@@ -155,6 +155,9 @@ class SettingsProductScreen(
                     borderColor = Theme.COLOR_PRIMARY_LIGHT,
                     border = 1.0,
                     backgroundImageUrl = it.url,
+                    action = gotoUrl(
+                        urlBuilder.build("/settings/store/picture?product-id=${product.id}&picture-id=${it.id}")
+                    )
                 )
             }
         )
@@ -200,10 +203,10 @@ class SettingsProductScreen(
                 caption = getText("page.settings.store.product.button.picture-from-camera"),
                 imageMaxWidth = pictureMaxWidth,
                 imageMaxHeight = pictureMaxHeight,
-                action = Action(
-                    type = ActionType.Route,
-                    url = "route:/.."
-                ),
+                action = gotoUrl(
+                    url = urlBuilder.build("/settings/store/product?id=${product.id}"),
+                    replacement = true
+                )
             ),
             Input(
                 name = "file",
@@ -213,9 +216,9 @@ class SettingsProductScreen(
                 caption = getText("page.settings.store.product.button.picture-from-gallery"),
                 imageMaxWidth = pictureMaxWidth,
                 imageMaxHeight = pictureMaxHeight,
-                action = Action(
-                    type = ActionType.Route,
-                    url = "route:/.."
+                action = gotoUrl(
+                    url = urlBuilder.build("/settings/store/product?id=${product.id}"),
+                    replacement = true
                 )
             ),
             Button(

@@ -1,0 +1,81 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.store.picture",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "Container",
+      "attributes": {},
+      "children": [
+        {
+          "type": "PhotoView",
+          "attributes": {
+            "url": "https://www.imag.com/3.png"
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Picture",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  },
+  "floatingActionButton": {
+    "type": "Button",
+    "attributes": {
+      "caption": "",
+      "padding": 15.0,
+      "type": "Floatable",
+      "stretched": false,
+      "icon": "e8b8",
+      "color": "#FFFFFF"
+    },
+    "children": [],
+    "action": {
+      "type": "Prompt",
+      "url": "",
+      "prompt": {
+        "type": "Dialog",
+        "attributes": {
+          "type": "Alert",
+          "title": "Confirmation",
+          "message": "Are you sure you want to delete this picture?",
+          "actions": [
+            {
+              "type": "Button",
+              "attributes": {
+                "caption": "Yes",
+                "padding": 10.0,
+                "type": "Text"
+              },
+              "children": [],
+              "action": {
+                "type": "Command",
+                "url": "http://localhost:0/commands/delete-picture?picture-id=3"
+              }
+            },
+            {
+              "type": "Button",
+              "attributes": {
+                "caption": "No",
+                "padding": 10.0,
+                "type": "Text"
+              },
+              "children": []
+            }
+          ]
+        },
+        "children": []
+      }
+    }
+  }
+}

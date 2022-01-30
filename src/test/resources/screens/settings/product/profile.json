@@ -39,7 +39,11 @@
                         "width": 150.0,
                         "backgroundImageUrl": "https://www.imag.com/1.png"
                       },
-                      "children": []
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=1"
+                      }
                     },
                     {
                       "type": "Container",
@@ -52,7 +56,11 @@
                         "width": 150.0,
                         "backgroundImageUrl": "https://www.imag.com/2.png"
                       },
-                      "children": []
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=2"
+                      }
                     },
                     {
                       "type": "Container",
@@ -65,7 +73,11 @@
                         "width": 150.0,
                         "backgroundImageUrl": "https://www.imag.com/3.png"
                       },
-                      "children": []
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=3"
+                      }
                     },
                     {
                       "type": "Container",
@@ -97,7 +109,6 @@
                               "attributes": {
                                 "type": "Alert",
                                 "title": "Add Picture",
-                                "message": "",
                                 "actions": [
                                   {
                                     "type": "Input",
@@ -118,7 +129,8 @@
                                     "children": [],
                                     "action": {
                                       "type": "Route",
-                                      "url": "route:/.."
+                                      "url": "http://localhost:0/settings/store/product?id=1",
+                                      "replacement": true
                                     }
                                   },
                                   {
@@ -140,7 +152,8 @@
                                     "children": [],
                                     "action": {
                                       "type": "Route",
-                                      "url": "route:/.."
+                                      "url": "http://localhost:0/settings/store/product?id=1",
+                                      "replacement": true
                                     }
                                   },
                                   {

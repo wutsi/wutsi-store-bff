@@ -50,20 +50,23 @@ internal class SettingsProductScreenTest : AbstractEndpointTest() {
         price = 7000.0,
         comparablePrice = 10000.0,
         visible = true,
-        pictures = listOf(
-            PictureSummary(
-                id = 1,
-                url = "https://www.imag.com/1.png"
-            ),
-            PictureSummary(
-                id = 2,
-                url = "https://www.imag.com/2.png"
-            ),
-            PictureSummary(
-                id = 3,
-                url = "https://www.imag.com/3.png"
+        pictures = if (withThumbnail)
+            listOf(
+                PictureSummary(
+                    id = 1,
+                    url = "https://www.imag.com/1.png"
+                ),
+                PictureSummary(
+                    id = 2,
+                    url = "https://www.imag.com/2.png"
+                ),
+                PictureSummary(
+                    id = 3,
+                    url = "https://www.imag.com/3.png"
+                )
             )
-        ),
+        else
+            emptyList(),
         thumbnail = if (withThumbnail)
             PictureSummary(
                 id = 3,

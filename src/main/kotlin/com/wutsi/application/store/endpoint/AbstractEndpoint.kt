@@ -26,6 +26,11 @@ abstract class AbstractEndpoint {
         url = "route:/..",
     )
 
+    protected fun executeCommand(url: String) = Action(
+        type = ActionType.Command,
+        url = url
+    )
+
     protected fun getText(key: String, args: Array<Any?> = emptyArray()) =
         messages.getMessage(key, args, LocaleContextHolder.getLocale()) ?: key
 
