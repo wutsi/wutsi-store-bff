@@ -73,31 +73,39 @@ class SettingsProductScreen(
                                             type = ButtonType.Text,
                                             padding = 10.0,
                                             caption = getText("page.settings.store.product.button.upload-picture"),
-                                            action = gotoUrl(urlBuilder.build("/settings/store/picture"))
+                                            action = gotoUrl(urlBuilder.build("/settings/store/picture?id=$id"))
                                         )
                                     )
                                 )
                             ),
-                            item("page.settings.store.product.title", product.title, "/settings/store/product/title"),
-                            item("page.settings.store.product.price", price, "/settings/store/product/price"),
                             item(
-                                "page.settings.store.product.summary",
-                                product.summary,
-                                "/settings/store/product/summary"
+                                "page.settings.store.product.attribute.title",
+                                product.title,
+                                urlBuilder.build("/settings/store/product/title?id=$id")
                             ),
                             item(
-                                "page.settings.store.product.description",
-                                product.description,
-                                "/settings/store/product/description"
+                                "page.settings.store.product.attribute.price",
+                                price,
+                                urlBuilder.build("/settings/store/product/price?id=$id")
+                            ),
+                            item(
+                                "page.settings.store.product.attribute.summary",
+                                product.summary,
+                                urlBuilder.build("/settings/store/product/summary?id=$id")
+                            ),
+                            item(
+                                "page.settings.store.product.attribute.description",
+                                description(product.description),
+                                urlBuilder.build("/settings/store/product/description?id=$id")
                             ),
                             ListItemSwitch(
-                                caption = getText("page.settings.store.product.visible"),
-                                subCaption = getText("page.settings.store.product.visible.description"),
+                                caption = getText("page.settings.store.product.attribute.visible"),
+                                subCaption = getText("page.settings.store.product.attribute.visible.description"),
                                 name = "value",
                                 selected = product.visible,
                                 action = Action(
                                     type = ActionType.Command,
-                                    url = urlBuilder.build("commands/update-product-attribute?name=visible")
+                                    url = urlBuilder.build("commands/update-product-attribute?id=$id&name=visible")
                                 )
                             )
                         )
@@ -120,4 +128,12 @@ class SettingsProductScreen(
             url = url
         )
     )
+
+    private fun description(value: String?): String? =
+        if (value == null)
+            null
+        else if (value.length < 160)
+            value
+        else
+            value.substring(0, 160) + "..."
 }

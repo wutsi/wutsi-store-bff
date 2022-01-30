@@ -44,7 +44,7 @@ wutsi:
     cash-url: ${wutsi.application.gateway-url}/cash
     login-url: ${wutsi.application.gateway-url}/login
     catalog-url: ${wutsi.application.gateway-url}/catalog
-    default-picture-url: ${wutsi.application.asset-root-url}/images/nopicture.jpeg
+    default-picture-url: ${wutsi.application.asset-root-url}/images/nopicture.png
   platform:
     security:
       type: jwt

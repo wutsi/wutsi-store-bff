@@ -9,40 +9,32 @@ import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class SettingsProductScreenTest : AbstractEndpointTest() {
+internal abstract class AbstractSettingsProductAttributeScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     public val port: Int = 0
-
-    private lateinit var url: String
 
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/settings/store/product?id=777"
+        val product = createProduct()
+        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
     }
+
+    abstract fun attributeName(): String
+
+    fun url(): String = "http://localhost:$port/settings/store/product/${attributeName()}?id=777"
+
+    fun path(): String = "/screens/settings/product/${attributeName()}.json"
 
     @Test
-    fun profile() {
-        val product = createProduct(true)
-        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
-
-        assertEndpointEquals("/screens/settings/product/profile.json", url)
+    fun index() {
+        assertEndpointEquals(path(), url())
     }
 
-    @Test
-    fun noThumbnail() {
-        val product = createProduct(false)
-        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
-
-        assertEndpointEquals("/screens/settings/product/profile-no-thumbnail.json", url)
-    }
-
-    private fun createProduct(withThumbnail: Boolean = true) = Product(
+    protected fun createProduct() = Product(
         title = "Sample product",
         summary = "Summary of product",
         description = "This is a long description of the product",
@@ -63,12 +55,9 @@ internal class SettingsProductScreenTest : AbstractEndpointTest() {
                 url = "https://www.imag.com/3.png"
             )
         ),
-        thumbnail = if (withThumbnail)
-            PictureSummary(
-                id = 3,
-                url = "https://www.imag.com/3.png"
-            )
-        else
-            null
+        thumbnail = PictureSummary(
+            id = 3,
+            url = "https://www.imag.com/3.png"
+        )
     )
 }

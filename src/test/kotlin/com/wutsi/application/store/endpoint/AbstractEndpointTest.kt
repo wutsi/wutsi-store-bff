@@ -85,7 +85,7 @@ abstract class AbstractEndpointTest {
             numberFormat = "#,###,##0",
             monetaryFormat = "#,###,##0 CFA",
             currency = "XAF",
-            currencySymbol = "CFA",
+            currencySymbol = "FCFA",
             dateFormat = "dd MMM yyyy",
             timeFormat = "HH:mm",
             dateTimeFormat = "dd MMM yyyy, HH:mm",

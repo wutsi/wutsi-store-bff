@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.settings.product.add.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -21,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/settings/store/product/add")
 class SettingsProductAddScreen(
     private val urlBuilder: URLBuilder,
+    private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
+        val tenant = tenantProvider.get()
         return Screen(
             id = Page.SETTINGS_STORE_PRODUCT_ADD,
             appBar = AppBar(
@@ -57,7 +60,8 @@ class SettingsProductAddScreen(
                             name = "price",
                             maxLength = 10,
                             caption = getText("page.settings.store.product.add.price"),
-                            type = InputType.Number
+                            type = InputType.Number,
+                            suffix = tenant.currencySymbol
                         )
                     ),
                     Container(

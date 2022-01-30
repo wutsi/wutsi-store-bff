@@ -38,7 +38,7 @@
                         {
                           "type": "Image",
                           "attributes": {
-                            "url": "https://int-wutsi.s3.amazonaws.com/static/wutsi-store-bff/images/nopicture.jpeg",
+                            "url": "https://int-wutsi.s3.amazonaws.com/static/wutsi-store-bff/images/nopicture.png",
                             "width": 150.0,
                             "height": 150.0
                           },
@@ -54,7 +54,7 @@
                           "children": [],
                           "action": {
                             "type": "Route",
-                            "url": "http://localhost:0/settings/store/picture"
+                            "url": "http://localhost:0/settings/store/picture?id=777"
                           }
                         }
                       ]
@@ -79,7 +79,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "/settings/store/product/title"
+                    "url": "http://localhost:0/settings/store/product/title?id=777"
                   }
                 },
                 {
@@ -100,7 +100,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "/settings/store/product/price"
+                    "url": "http://localhost:0/settings/store/product/price?id=777"
                   }
                 },
                 {
@@ -121,7 +121,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "/settings/store/product/summary"
+                    "url": "http://localhost:0/settings/store/product/summary?id=777"
                   }
                 },
                 {
@@ -142,21 +142,21 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "/settings/store/product/description"
+                    "url": "http://localhost:0/settings/store/product/description?id=777"
                   }
                 },
                 {
                   "type": "ListItemSwitch",
                   "attributes": {
                     "caption": "Visible",
-                    "subCaption": "Customers to see this product?",
+                    "subCaption": "Customers to see the product?",
                     "name": "value",
                     "selected": true
                   },
                   "children": [],
                   "action": {
                     "type": "Command",
-                    "url": "http://localhost:0/commands/update-product-attribute?name=visible"
+                    "url": "http://localhost:0/commands/update-product-attribute?id=777&name=visible"
                   }
                 }
               ]

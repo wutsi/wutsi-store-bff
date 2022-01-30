@@ -21,6 +21,11 @@ abstract class AbstractEndpoint {
         parameters = parameters
     )
 
+    protected fun gotoPreviousScreen() = Action(
+        type = ActionType.Route,
+        url = "route:/..",
+    )
+
     protected fun getText(key: String, args: Array<Any?> = emptyArray()) =
         messages.getMessage(key, args, LocaleContextHolder.getLocale()) ?: key
 
