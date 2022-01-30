@@ -10,9 +10,11 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
+import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.Image
+import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
@@ -21,6 +23,8 @@ import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.ButtonType
+import com.wutsi.flutter.sdui.enums.ImageSource
+import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import org.springframework.beans.factory.annotation.Value
@@ -73,7 +77,10 @@ class SettingsProductScreen(
                                             type = ButtonType.Text,
                                             padding = 10.0,
                                             caption = getText("page.settings.store.product.button.upload-picture"),
-                                            action = gotoUrl(urlBuilder.build("/settings/store/picture?id=$id"))
+                                            action = Action(
+                                                type = ActionType.Prompt,
+                                                prompt = uploadDialog(id).toWidget()
+                                            )
                                         )
                                     )
                                 )
@@ -136,4 +143,40 @@ class SettingsProductScreen(
             value
         else
             value.substring(0, 160) + "..."
+
+    private fun uploadDialog(id: Long) = Dialog(
+        title = getText("page.settings.store.product.button.upload-picture"),
+        actions = listOf(
+            Input(
+                name = "file",
+                uploadUrl = urlBuilder.build("commands/upload-picture?id=$id"),
+                type = InputType.Image,
+                imageSource = ImageSource.Camera,
+                caption = getText("page.settings.store.product.button.picture-from-camera"),
+                imageMaxWidth = 512,
+                imageMaxHeight = 512,
+                action = Action(
+                    type = ActionType.Route,
+                    url = "route:/.."
+                ),
+            ),
+            Input(
+                name = "file",
+                uploadUrl = urlBuilder.build("commands/upload-picture?id=$id"),
+                type = InputType.Image,
+                imageSource = ImageSource.Gallery,
+                caption = getText("page.settings.store.product.button.picture-from-gallery"),
+                imageMaxWidth = 512,
+                imageMaxHeight = 512,
+                action = Action(
+                    type = ActionType.Route,
+                    url = "route:/.."
+                )
+            ),
+            Button(
+                type = ButtonType.Text,
+                caption = getText("page.settings.store.product.button.cancel"),
+            ),
+        )
+    )
 }

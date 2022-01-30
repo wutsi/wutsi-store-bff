@@ -53,8 +53,72 @@
                           },
                           "children": [],
                           "action": {
-                            "type": "Route",
-                            "url": "http://localhost:0/settings/store/picture?id=777"
+                            "type": "Prompt",
+                            "url": "",
+                            "prompt": {
+                              "type": "Dialog",
+                              "attributes": {
+                                "type": "Alert",
+                                "title": "Upload Picture",
+                                "message": "",
+                                "actions": [
+                                  {
+                                    "type": "Input",
+                                    "attributes": {
+                                      "name": "file",
+                                      "hideText": false,
+                                      "required": false,
+                                      "caption": "Camera",
+                                      "enabled": true,
+                                      "readOnly": false,
+                                      "type": "Image",
+                                      "minLength": 0,
+                                      "uploadUrl": "http://localhost:0/commands/upload-picture?id=777",
+                                      "imageSource": "Camera",
+                                      "imageMaxHeight": 512,
+                                      "imageMaxWidth": 512
+                                    },
+                                    "children": [],
+                                    "action": {
+                                      "type": "Route",
+                                      "url": "route:/.."
+                                    }
+                                  },
+                                  {
+                                    "type": "Input",
+                                    "attributes": {
+                                      "name": "file",
+                                      "hideText": false,
+                                      "required": false,
+                                      "caption": "Image Gallery",
+                                      "enabled": true,
+                                      "readOnly": false,
+                                      "type": "Image",
+                                      "minLength": 0,
+                                      "uploadUrl": "http://localhost:0/commands/upload-picture?id=777",
+                                      "imageSource": "Gallery",
+                                      "imageMaxHeight": 512,
+                                      "imageMaxWidth": 512
+                                    },
+                                    "children": [],
+                                    "action": {
+                                      "type": "Route",
+                                      "url": "route:/.."
+                                    }
+                                  },
+                                  {
+                                    "type": "Button",
+                                    "attributes": {
+                                      "caption": "Cancel",
+                                      "padding": 15.0,
+                                      "type": "Text"
+                                    },
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              "children": []
+                            }
                           }
                         }
                       ]
