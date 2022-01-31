@@ -6,17 +6,11 @@
   },
   "children": [
     {
-      "type": "Container",
-      "attributes": {},
-      "children": [
-        {
-          "type": "PhotoView",
-          "attributes": {
-            "url": "https://www.imag.com/3.png"
-          },
-          "children": []
-        }
-      ]
+      "type": "PhotoView",
+      "attributes": {
+        "url": "https://www.imag.com/3.png"
+      },
+      "children": []
     }
   ],
   "appBar": {

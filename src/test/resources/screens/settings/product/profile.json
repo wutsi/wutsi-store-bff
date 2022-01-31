@@ -23,11 +23,26 @@
                 {
                   "type": "ListView",
                   "attributes": {
-                    "direction": "Horizontal",
-                    "separator": true,
-                    "separatorColor": "#8c8c8c"
+                    "direction": "Horizontal"
                   },
                   "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "alignment": "Center",
+                        "padding": 2.0,
+                        "border": 1.0,
+                        "borderColor": "#e4edf7",
+                        "height": 150.0,
+                        "width": 150.0,
+                        "backgroundImageUrl": "https://www.imag.com/3.png"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=3"
+                      }
+                    },
                     {
                       "type": "Container",
                       "attributes": {
@@ -60,23 +75,6 @@
                       "action": {
                         "type": "Route",
                         "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=2"
-                      }
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "alignment": "Center",
-                        "padding": 2.0,
-                        "border": 1.0,
-                        "borderColor": "#e4edf7",
-                        "height": 150.0,
-                        "width": 150.0,
-                        "backgroundImageUrl": "https://www.imag.com/3.png"
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=3"
                       }
                     },
                     {
