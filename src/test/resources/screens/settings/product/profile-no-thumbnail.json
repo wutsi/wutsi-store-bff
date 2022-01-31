@@ -190,6 +190,27 @@
                     {
                       "type": "ListItem",
                       "attributes": {
+                        "caption": "Comparable Price",
+                        "subCaption": "10,000 CFA",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/comparable-price?id=777"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
                         "caption": "Summary",
                         "subCaption": "Summary of product",
                         "trailing": {

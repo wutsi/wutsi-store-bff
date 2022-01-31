@@ -26,7 +26,7 @@ class SettingsProductPriceScreen(
         val tenant = tenantProvider.get()
         return Input(
             name = "value",
-            value = product.price.toString(),
+            value = product.price?.toString() ?: "",
             type = InputType.Number,
             caption = getText("page.settings.store.product.attribute.${getAttributeName()}"),
             suffix = tenant.currencySymbol

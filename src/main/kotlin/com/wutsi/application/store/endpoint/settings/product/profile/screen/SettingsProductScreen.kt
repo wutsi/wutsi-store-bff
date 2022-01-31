@@ -59,6 +59,7 @@ class SettingsProductScreen(
         val product = catalogApi.getProduct(id).product
         val tenant = tenantProvider.get()
         val price = product.price?.let { DecimalFormat(tenant.monetaryFormat).format(it) }
+        val comparablePrice = product.comparablePrice?.let { DecimalFormat(tenant.monetaryFormat).format(it) }
 
         return Screen(
             id = Page.SETTINGS_STORE_PRODUCT,
@@ -82,7 +83,7 @@ class SettingsProductScreen(
                             child = ListView(
                                 separatorColor = Theme.COLOR_DIVIDER,
                                 separator = true,
-                                children = listOf(
+                                children = listOfNotNull(
                                     item(
                                         "page.settings.store.product.attribute.title",
                                         product.title,
@@ -93,6 +94,14 @@ class SettingsProductScreen(
                                         price,
                                         urlBuilder.build("/settings/store/product/price?id=$id")
                                     ),
+                                    if (product.price != null)
+                                        item(
+                                            "page.settings.store.product.attribute.comparable-price",
+                                            comparablePrice,
+                                            urlBuilder.build("/settings/store/product/comparable-price?id=$id")
+                                        )
+                                    else
+                                        null,
                                     item(
                                         "page.settings.store.product.attribute.summary",
                                         product.summary,

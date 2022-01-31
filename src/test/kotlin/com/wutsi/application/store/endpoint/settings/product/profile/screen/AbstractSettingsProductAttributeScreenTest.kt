@@ -34,7 +34,7 @@ internal abstract class AbstractSettingsProductAttributeScreenTest : AbstractEnd
         assertEndpointEquals(path(), url())
     }
 
-    protected fun createProduct() = Product(
+    private fun createProduct() = Product(
         title = "Sample product",
         summary = "Summary of product",
         description = "This is a long description of the product",

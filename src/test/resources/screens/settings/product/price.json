@@ -17,11 +17,11 @@
           },
           "children": [
             {
-              "type": "Image",
+              "type": "Text",
               "attributes": {
-                "url": "https://www.imag.com/3.png",
-                "width": 150.0,
-                "height": 150.0
+                "caption": "Sample product",
+                "color": "#1D7EDF",
+                "bold": true
               },
               "children": []
             }
@@ -36,7 +36,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Enter the price of the product"
+                "caption": "Enter the price of the product that the customer will be (it includes discounts, if any)"
               },
               "children": []
             }

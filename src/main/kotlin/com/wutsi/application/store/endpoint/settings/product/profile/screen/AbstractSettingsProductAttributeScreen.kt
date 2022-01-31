@@ -7,7 +7,6 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Form
-import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
@@ -52,10 +51,10 @@ abstract class AbstractSettingsProductAttributeScreen(
                 children = listOf(
                     Container(
                         padding = 10.0,
-                        child = Image(
-                            width = 150.0,
-                            height = 150.0,
-                            url = product.thumbnail?.url ?: defaultPictureUrl
+                        child = Text(
+                            bold = true,
+                            color = Theme.COLOR_PRIMARY,
+                            caption = product.title
                         )
                     ),
                     Container(

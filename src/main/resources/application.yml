@@ -43,7 +43,7 @@ wutsi:
     gateway-url: https://wutsi-gateway-test.herokuapp.com
     cash-url: ${wutsi.application.gateway-url}/cash
     login-url: ${wutsi.application.gateway-url}/login
-    catalog-url: ${wutsi.application.gateway-url}/catalog
+    shell-url: ${wutsi.application.gateway-url}/shell
     default-picture-url: ${wutsi.application.asset-root-url}/images/nopicture.png
   platform:
     security:
