@@ -7,7 +7,6 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
-import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.PhotoView
 import com.wutsi.flutter.sdui.Screen
@@ -42,9 +41,7 @@ class SettingsPictureScreen(
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.settings.store.picture.app-bar.title"),
             ),
-            child = Container(
-                child = PhotoView(url = picture.url),
-            ),
+            child = PhotoView(url = picture.url),
             floatingActionButton = Button(
                 type = ButtonType.Floatable,
                 icon = Theme.ICON_DELETE,
@@ -61,7 +58,7 @@ class SettingsPictureScreen(
                                 padding = 10.0,
                                 caption = getText("page.settings.store.picture.button.yes"),
                                 action = executeCommand(
-                                    url = urlBuilder.build("commands/delete-picture?picture-id=${picture.id}")
+                                    url = urlBuilder.build("commands/delete-picture?picture-id=$pictureId")
                                 )
                             ),
                             Button(
@@ -69,10 +66,9 @@ class SettingsPictureScreen(
                                 padding = 10.0,
                                 caption = getText("page.settings.store.picture.button.no")
                             )
-
                         )
                     ).toWidget()
-                ),
+                )
             )
         ).toWidget()
     }

@@ -28,6 +28,7 @@ import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.ImageSource
 import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
@@ -145,22 +146,19 @@ class SettingsProductScreen(
 
     private fun pictureListView(product: Product): WidgetAware {
         val images = mutableListOf<WidgetAware>()
+
+        // Thumbnail as 1st image
+        if (product.thumbnail != null)
+            images.add(listItem(product, product.thumbnail!!))
+
+        // Other pictures
         images.addAll(
-            product.pictures.map {
-                Container(
-                    padding = IMAGE_PADDING,
-                    width = IMAGE_WIDTH,
-                    height = IMAGE_HEIGHT,
-                    alignment = Alignment.Center,
-                    borderColor = Theme.COLOR_PRIMARY_LIGHT,
-                    border = 1.0,
-                    backgroundImageUrl = it.url,
-                    action = gotoUrl(
-                        urlBuilder.build("/settings/store/picture?product-id=${product.id}&picture-id=${it.id}")
-                    )
-                )
-            }
+            product.pictures
+                .filter { it.id != product.thumbnail?.id }
+                .map { listItem(product, it) }
         )
+
+        // Add button
         if (product.pictures.size < maxPicturesPerProduct)
             images.add(
                 Container(
@@ -187,10 +185,21 @@ class SettingsProductScreen(
         return ListView(
             direction = Axis.Horizontal,
             children = images,
-            separatorColor = Theme.COLOR_DIVIDER,
-            separator = true
         )
     }
+
+    private fun listItem(product: Product, picture: PictureSummary) = Container(
+        padding = IMAGE_PADDING,
+        width = IMAGE_WIDTH,
+        height = IMAGE_HEIGHT,
+        alignment = Alignment.Center,
+        borderColor = Theme.COLOR_PRIMARY_LIGHT,
+        border = 1.0,
+        backgroundImageUrl = picture.url,
+        action = gotoUrl(
+            urlBuilder.build("/settings/store/picture?product-id=${product.id}&picture-id=${picture.id}")
+        )
+    )
 
     private fun uploadDialog(product: Product) = Dialog(
         title = getText("page.settings.store.product.button.add-picture"),
