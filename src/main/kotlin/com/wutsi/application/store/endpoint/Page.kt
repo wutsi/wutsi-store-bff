@@ -2,6 +2,7 @@ package com.wutsi.application.store.endpoint
 
 object Page {
     const val CATALOG = "page.catalog"
+    const val PRODUCT = "page.product"
     const val SETTINGS_STORE = "page.settings.store"
     const val SETTINGS_STORE_PRODUCT = "page.settings.store.product"
     const val SETTINGS_STORE_PICTURE = "page.settings.store.picture"

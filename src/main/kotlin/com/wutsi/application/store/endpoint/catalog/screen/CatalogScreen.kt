@@ -24,6 +24,7 @@ import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.catalog.dto.ProductSummary
 import com.wutsi.platform.catalog.dto.SearchProductRequest
@@ -31,12 +32,14 @@ import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/catalog")
 class CatalogScreen(
     private val urlBuilder: URLBuilder,
+    private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
     private val securityContext: SecurityContext,
@@ -46,13 +49,13 @@ class CatalogScreen(
     @Value("\${wutsi.application.shell-url}") private val shellUrl: String,
 ) : AbstractQuery() {
     @PostMapping
-    fun index(): Widget {
-        val account = securityContext.currentAccount()
+    fun index(@RequestParam(required = false) id: Long? = null): Widget {
+        val account = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
         val tenant = tenantProvider.get()
         val products = catalogApi.searchProduct(
             SearchProductRequest(
                 accountId = account.id,
-                limit = 1000
+                limit = 100
             )
         ).products
         val rows = toRows(products, 2)

@@ -9,6 +9,9 @@ import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.account.dto.Phone
 import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.PictureSummary
+import com.wutsi.platform.catalog.dto.Product
+import com.wutsi.platform.catalog.dto.ProductSummary
 import com.wutsi.platform.core.security.SubjectType
 import com.wutsi.platform.core.security.SubjectType.USER
 import com.wutsi.platform.core.security.spring.SpringAuthorizationRequestInterceptor
@@ -139,6 +142,7 @@ abstract class AbstractEndpointTest {
             biography = "Thsi is my bio",
             categoryId = 1000,
             timezoneId = "Africa/Douala",
+            whatsapp = "+1237666666666"
         )
         doReturn(GetAccountResponse(account)).whenever(accountApi).getAccount(any())
 
@@ -214,5 +218,70 @@ abstract class AbstractEndpointTest {
             }
         """.trimIndent().toByteArray(),
         emptyMap()
+    )
+
+    protected fun createProduct(withThumbnail: Boolean = true) = Product(
+        id = 1,
+        title = "Sample product",
+        summary = "Summary of product",
+        description = "This is a long description of the product",
+        price = 7000.0,
+        comparablePrice = 10000.0,
+        visible = true,
+        pictures = if (withThumbnail)
+            listOf(
+                PictureSummary(
+                    id = 1,
+                    url = "https://www.imag.com/1.png"
+                ),
+                PictureSummary(
+                    id = 2,
+                    url = "https://www.imag.com/2.png"
+                ),
+                PictureSummary(
+                    id = 3,
+                    url = "https://www.imag.com/3.png"
+                )
+            )
+        else
+            emptyList(),
+        thumbnail = if (withThumbnail)
+            PictureSummary(
+                id = 3,
+                url = "https://www.imag.com/3.png"
+            )
+        else
+            null
+    )
+
+    protected fun createProductSummary(id: Long) = ProductSummary(
+        id = id,
+        title = "Sample product",
+        summary = "Summary of product",
+        price = 7000.0,
+        comparablePrice = 10000.0,
+        thumbnail = PictureSummary(
+            id = 3,
+            url = "https://www.imag.com/$id.png"
+        )
+    )
+
+    protected fun createAccount(id: Long = ACCOUNT_ID) = Account(
+        id = id,
+        displayName = "Ray Sponsible - $id",
+        country = "CM",
+        language = "en",
+        status = "ACTIVE",
+        phone = Phone(
+            id = 1,
+            number = "+123766666666$id",
+            country = "CM"
+        ),
+        business = true,
+        website = "https://www.google.ca",
+        biography = "Short bio to descbribe my business",
+        categoryId = 1000,
+        timezoneId = "Africa/Douala",
+        whatsapp = "+123766666666$id"
     )
 }

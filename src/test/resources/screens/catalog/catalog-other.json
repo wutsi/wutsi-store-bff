@@ -1,0 +1,594 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.catalog",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {
+        "mainAxisAlignment": "start",
+        "crossAxisAlignment": "start"
+      },
+      "children": [
+        {
+          "type": "ListItem",
+          "attributes": {
+            "caption": "Ray Sponsible - 9",
+            "subCaption": "Advertising/Marketing",
+            "padding": 10.0,
+            "leading": {
+              "type": "CircleAvatar",
+              "attributes": {
+                "radius": 24.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "R9",
+                    "bold": true,
+                    "size": 16.0
+                  },
+                  "children": []
+                }
+              ]
+            }
+          },
+          "children": []
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "ListView",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Container",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Row",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Flexible",
+                          "attributes": {
+                            "flex": 1,
+                            "fit": "Tight"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "TopCenter"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0,
+                                    "border": 0.5,
+                                    "borderColor": "#8c8c8c"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Column",
+                                      "attributes": {
+                                        "mainAxisAlignment": "start",
+                                        "crossAxisAlignment": "start"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Container",
+                                          "attributes": {},
+                                          "children": [
+                                            {
+                                              "type": "Center",
+                                              "attributes": {},
+                                              "children": [
+                                                {
+                                                  "type": "AspectRatio",
+                                                  "attributes": {
+                                                    "aspectRatio": 1.3333333333333333
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Image",
+                                                      "attributes": {
+                                                        "url": "https://www.imag.com/1.png",
+                                                        "height": 200.0,
+                                                        "fit": "fitWidth"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "padding": 5.0
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "alignment": "Center",
+                                            "height": 50.0
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "Column",
+                                              "attributes": {
+                                                "mainAxisAlignment": "start",
+                                                "crossAxisAlignment": "start"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "7,000 CFA",
+                                                    "color": "#1D7EDF",
+                                                    "bold": true
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "10,000 CFA",
+                                                    "size": 10.0,
+                                                    "decoration": "Strikethrough"
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "Sample product",
+                                                    "size": 10.0,
+                                                    "overflow": "Elipsis",
+                                                    "maxLines": 2
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "action": {
+                                    "type": "Route",
+                                    "url": "http://localhost:0/product?id=1"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Flexible",
+                          "attributes": {
+                            "flex": 1,
+                            "fit": "Tight"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "TopCenter"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0,
+                                    "border": 0.5,
+                                    "borderColor": "#8c8c8c"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Column",
+                                      "attributes": {
+                                        "mainAxisAlignment": "start",
+                                        "crossAxisAlignment": "start"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Container",
+                                          "attributes": {},
+                                          "children": [
+                                            {
+                                              "type": "Center",
+                                              "attributes": {},
+                                              "children": [
+                                                {
+                                                  "type": "AspectRatio",
+                                                  "attributes": {
+                                                    "aspectRatio": 1.3333333333333333
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Image",
+                                                      "attributes": {
+                                                        "url": "https://www.imag.com/2.png",
+                                                        "height": 200.0,
+                                                        "fit": "fitWidth"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "padding": 5.0
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "alignment": "Center",
+                                            "height": 50.0
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "Column",
+                                              "attributes": {
+                                                "mainAxisAlignment": "start",
+                                                "crossAxisAlignment": "start"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "7,000 CFA",
+                                                    "color": "#1D7EDF",
+                                                    "bold": true
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "10,000 CFA",
+                                                    "size": 10.0,
+                                                    "decoration": "Strikethrough"
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "Sample product",
+                                                    "size": 10.0,
+                                                    "overflow": "Elipsis",
+                                                    "maxLines": 2
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "action": {
+                                    "type": "Route",
+                                    "url": "http://localhost:0/product?id=2"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Row",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Flexible",
+                          "attributes": {
+                            "flex": 1,
+                            "fit": "Tight"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "TopCenter"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0,
+                                    "border": 0.5,
+                                    "borderColor": "#8c8c8c"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Column",
+                                      "attributes": {
+                                        "mainAxisAlignment": "start",
+                                        "crossAxisAlignment": "start"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Container",
+                                          "attributes": {},
+                                          "children": [
+                                            {
+                                              "type": "Center",
+                                              "attributes": {},
+                                              "children": [
+                                                {
+                                                  "type": "AspectRatio",
+                                                  "attributes": {
+                                                    "aspectRatio": 1.3333333333333333
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Image",
+                                                      "attributes": {
+                                                        "url": "https://www.imag.com/3.png",
+                                                        "height": 200.0,
+                                                        "fit": "fitWidth"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "padding": 5.0
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "alignment": "Center",
+                                            "height": 50.0
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "Column",
+                                              "attributes": {
+                                                "mainAxisAlignment": "start",
+                                                "crossAxisAlignment": "start"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "7,000 CFA",
+                                                    "color": "#1D7EDF",
+                                                    "bold": true
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "10,000 CFA",
+                                                    "size": 10.0,
+                                                    "decoration": "Strikethrough"
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "Sample product",
+                                                    "size": 10.0,
+                                                    "overflow": "Elipsis",
+                                                    "maxLines": 2
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "action": {
+                                    "type": "Route",
+                                    "url": "http://localhost:0/product?id=3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Flexible",
+                          "attributes": {
+                            "flex": 1,
+                            "fit": "Tight"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "TopCenter"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0,
+                                    "border": 0.5,
+                                    "borderColor": "#8c8c8c"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Column",
+                                      "attributes": {
+                                        "mainAxisAlignment": "start",
+                                        "crossAxisAlignment": "start"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Container",
+                                          "attributes": {},
+                                          "children": [
+                                            {
+                                              "type": "Center",
+                                              "attributes": {},
+                                              "children": [
+                                                {
+                                                  "type": "AspectRatio",
+                                                  "attributes": {
+                                                    "aspectRatio": 1.3333333333333333
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Image",
+                                                      "attributes": {
+                                                        "url": "https://www.imag.com/4.png",
+                                                        "height": 200.0,
+                                                        "fit": "fitWidth"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "padding": 5.0
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "Container",
+                                          "attributes": {
+                                            "alignment": "Center",
+                                            "height": 50.0
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "Column",
+                                              "attributes": {
+                                                "mainAxisAlignment": "start",
+                                                "crossAxisAlignment": "start"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "7,000 CFA",
+                                                    "color": "#1D7EDF",
+                                                    "bold": true
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "10,000 CFA",
+                                                    "size": 10.0,
+                                                    "decoration": "Strikethrough"
+                                                  },
+                                                  "children": []
+                                                },
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "Sample product",
+                                                    "size": 10.0,
+                                                    "overflow": "Elipsis",
+                                                    "maxLines": 2
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "action": {
+                                    "type": "Route",
+                                    "url": "http://localhost:0/product?id=4"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Product Catalog",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000",
+      "actions": [
+        {
+          "type": "IconButton",
+          "attributes": {
+            "icon": "e57f"
+          },
+          "children": [],
+          "action": {
+            "type": "Route",
+            "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
+          }
+        }
+      ]
+    },
+    "children": []
+  }
+}
