@@ -17,7 +17,6 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.catalog.dto.Product
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 
@@ -25,9 +24,6 @@ abstract class AbstractSettingsProductAttributeScreen(
     protected val urlBuilder: URLBuilder,
     protected val catalogApi: WutsiCatalogApi,
 ) : AbstractQuery() {
-    @Value("\${wutsi.application.default-picture-url}")
-    private lateinit var defaultPictureUrl: String
-
     abstract fun getAttributeName(): String
 
     abstract fun getPageId(): String

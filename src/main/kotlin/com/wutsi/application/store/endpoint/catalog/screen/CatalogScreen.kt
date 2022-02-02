@@ -45,7 +45,6 @@ class CatalogScreen(
     private val securityContext: SecurityContext,
     private val sharedUIMapper: SharedUIMapper,
 
-    @Value("\${wutsi.application.default-picture-url}") private val defaultPictureUrl: String,
     @Value("\${wutsi.application.shell-url}") private val shellUrl: String,
 ) : AbstractQuery() {
     @PostMapping
@@ -119,7 +118,7 @@ class CatalogScreen(
                 child = Container(
                     alignment = Alignment.TopCenter,
                     child = ProductCard(
-                        model = sharedUIMapper.toProductModel(it, tenant, defaultPictureUrl),
+                        model = sharedUIMapper.toProductModel(it, tenant),
                         action = gotoUrl(urlBuilder.build("/product?id=${it.id}"))
                     )
                 )

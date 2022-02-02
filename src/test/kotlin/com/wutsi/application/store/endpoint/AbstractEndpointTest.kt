@@ -122,6 +122,9 @@ abstract class AbstractEndpointTest {
                         Logo(type = "PICTORIAL", url = "http://www.goole.com/images/orange.png")
                     )
                 )
+            ),
+            product = com.wutsi.platform.tenant.dto.Product(
+                defaultPictureUrl = "http://img.com/nopicture.png"
             )
         )
         doReturn(GetTenantResponse(tenant)).whenever(tenantApi).getTenant(any())

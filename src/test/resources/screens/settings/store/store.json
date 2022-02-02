@@ -52,12 +52,11 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "1",
-                    "subCaption": "Short description of product1",
                     "padding": 10.0,
                     "leading": {
                       "type": "Image",
                       "attributes": {
-                        "url": "https://int-wutsi.s3.amazonaws.com/static/wutsi-store-bff/images/nopicture.png",
+                        "url": "http://img.com/nopicture.png",
                         "width": 48.0,
                         "height": 48.0
                       },
@@ -78,7 +77,7 @@
                     "leading": {
                       "type": "Image",
                       "attributes": {
-                        "url": "https://int-wutsi.s3.amazonaws.com/static/wutsi-store-bff/images/nopicture.png",
+                        "url": "http://img.com/nopicture.png",
                         "width": 48.0,
                         "height": 48.0
                       },

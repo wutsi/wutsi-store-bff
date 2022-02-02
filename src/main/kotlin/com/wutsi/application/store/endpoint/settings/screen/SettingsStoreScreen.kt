@@ -23,7 +23,6 @@ import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.catalog.dto.SearchProductRequest
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -36,8 +35,6 @@ class SettingsStoreScreen(
     private val securityContext: SecurityContext,
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
-
-    @Value("\${wutsi.application.default-picture-url}") private var defaultPictureUrl: String
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
@@ -83,7 +80,7 @@ class SettingsStoreScreen(
                             separatorColor = Theme.COLOR_DIVIDER,
                             children = products.map {
                                 ProductListItem(
-                                    model = sharedUIMapper.toProductModel(it, tenant, defaultPictureUrl),
+                                    model = sharedUIMapper.toProductModel(it, tenant),
                                     action = gotoUrl(
                                         url = urlBuilder.build("/settings/store/product?id=${it.id}")
                                     )
