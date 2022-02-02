@@ -68,12 +68,10 @@ logging:
         platform:
           account:
             WutsiAccountApi: DEBUG
-          contact:
-            WutsiContactApi: DEBUG
+          catalog:
+            WutsiCatalogApi: DEBUG
           payment:
             WutsiPaymentApi: DEBUG
-          sms:
-            WutsiSmsApi: DEBUG
           tenant:
             WutsiTenantApi: DEBUG
   pattern:
