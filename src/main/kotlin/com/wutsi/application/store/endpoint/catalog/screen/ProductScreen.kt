@@ -152,32 +152,32 @@ class ProductScreen(
                         Container(
                             padding = 4.0,
                             child = CircleAvatar(
-                                radius = 16.0,
+                                radius = 20.0,
                                 backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
                                 child = IconButton(
                                     icon = Theme.ICON_CHAT,
-                                    size = 16.0
+                                    size = 20.0,
+                                    action = Action(
+                                        type = ActionType.Navigate,
+                                        url = it,
+                                    )
                                 )
                             ),
-                            action = Action(
-                                type = ActionType.Navigate,
-                                url = it,
-                            )
                         )
                     },
                     Container(
                         padding = 4.0,
                         child = CircleAvatar(
-                            radius = 16.0,
+                            radius = 20.0,
                             backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
                             child = IconButton(
                                 icon = Theme.ICON_SHARE,
-                                size = 16.0
+                                size = 20.0,
+                                action = Action(
+                                    type = ActionType.Share,
+                                    url = productUrl,
+                                )
                             ),
-                            action = Action(
-                                type = ActionType.Share,
-                                url = productUrl,
-                            )
                         )
                     ),
                 )

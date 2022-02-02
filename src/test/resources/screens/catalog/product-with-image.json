@@ -248,7 +248,7 @@
             {
               "type": "CircleAvatar",
               "attributes": {
-                "radius": 16.0,
+                "radius": 20.0,
                 "backgroundColor": "#e4edf7"
               },
               "children": [
@@ -256,17 +256,17 @@
                   "type": "IconButton",
                   "attributes": {
                     "icon": "e153",
-                    "size": 16.0
+                    "size": 20.0
                   },
-                  "children": []
+                  "children": [],
+                  "action": {
+                    "type": "Navigate",
+                    "url": "https://wa.me/1237666666666?text=https%3A%2F%2Fwww.wutsi.com%2Fstore%2Fproduct%3Fid%3D1"
+                  }
                 }
               ]
             }
-          ],
-          "action": {
-            "type": "Navigate",
-            "url": "https://wa.me/1237666666666?text=https%3A%2F%2Fwww.wutsi.com%2Fstore%2Fproduct%3Fid%3D1"
-          }
+          ]
         },
         {
           "type": "Container",
@@ -277,7 +277,7 @@
             {
               "type": "CircleAvatar",
               "attributes": {
-                "radius": 16.0,
+                "radius": 20.0,
                 "backgroundColor": "#e4edf7"
               },
               "children": [
@@ -285,15 +285,15 @@
                   "type": "IconButton",
                   "attributes": {
                     "icon": "ea47",
-                    "size": 16.0
+                    "size": 20.0
                   },
-                  "children": []
+                  "children": [],
+                  "action": {
+                    "type": "Share",
+                    "url": "https://www.wutsi.com/store/product?id=1"
+                  }
                 }
-              ],
-              "action": {
-                "type": "Share",
-                "url": "https://www.wutsi.com/store/product?id=1"
-              }
+              ]
             }
           ]
         }
