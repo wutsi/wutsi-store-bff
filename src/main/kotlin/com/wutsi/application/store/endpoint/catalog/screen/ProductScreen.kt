@@ -66,7 +66,7 @@ class ProductScreen(
                             child = Text(
                                 caption = getText("page.product.visit-store", arrayOf(merchant.displayName)),
                                 color = Theme.COLOR_PRIMARY,
-                                size = Theme.TEXT_SIZE_SMALL,
+                                decoration = TextDecoration.Underline
                             )
                         ),
 
@@ -175,6 +175,7 @@ class ProductScreen(
                                 size = 20.0,
                                 action = Action(
                                     type = ActionType.Share,
+                                    message = product.title,
                                     url = productUrl,
                                 )
                             ),
