@@ -55,6 +55,7 @@ abstract class AbstractSettingsProductAttributeScreen(
                     ),
                     Container(
                         alignment = Alignment.Center,
+                        padding = 10.0,
                         child = Text(getText("page.settings.store.product.attribute.$name.description"))
                     ),
                     Container(

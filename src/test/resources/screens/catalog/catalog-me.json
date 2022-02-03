@@ -73,8 +73,8 @@
                                 {
                                   "type": "Container",
                                   "attributes": {
-                                    "padding": 5.0,
-                                    "border": 0.5,
+                                    "margin": 2.0,
+                                    "border": 0.2,
                                     "borderColor": "#8c8c8c"
                                   },
                                   "children": [
@@ -86,29 +86,22 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "Container",
-                                          "attributes": {},
+                                          "type": "AspectRatio",
+                                          "attributes": {
+                                            "aspectRatio": 1.3333333333333333
+                                          },
                                           "children": [
                                             {
-                                              "type": "Center",
+                                              "type": "Container",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "AspectRatio",
+                                                  "type": "Image",
                                                   "attributes": {
-                                                    "aspectRatio": 1.3333333333333333
+                                                    "url": "https://www.imag.com/1.png",
+                                                    "fit": "fill"
                                                   },
-                                                  "children": [
-                                                    {
-                                                      "type": "Image",
-                                                      "attributes": {
-                                                        "url": "https://www.imag.com/1.png",
-                                                        "height": 200.0,
-                                                        "fit": "fitWidth"
-                                                      },
-                                                      "children": []
-                                                    }
-                                                  ]
+                                                  "children": []
                                                 }
                                               ]
                                             }
@@ -117,14 +110,8 @@
                                         {
                                           "type": "Container",
                                           "attributes": {
-                                            "padding": 5.0
-                                          },
-                                          "children": []
-                                        },
-                                        {
-                                          "type": "Container",
-                                          "attributes": {
                                             "alignment": "Center",
+                                            "padding": 5.0,
                                             "height": 50.0
                                           },
                                           "children": [
@@ -195,8 +182,8 @@
                                 {
                                   "type": "Container",
                                   "attributes": {
-                                    "padding": 5.0,
-                                    "border": 0.5,
+                                    "margin": 2.0,
+                                    "border": 0.2,
                                     "borderColor": "#8c8c8c"
                                   },
                                   "children": [
@@ -208,29 +195,22 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "Container",
-                                          "attributes": {},
+                                          "type": "AspectRatio",
+                                          "attributes": {
+                                            "aspectRatio": 1.3333333333333333
+                                          },
                                           "children": [
                                             {
-                                              "type": "Center",
+                                              "type": "Container",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "AspectRatio",
+                                                  "type": "Image",
                                                   "attributes": {
-                                                    "aspectRatio": 1.3333333333333333
+                                                    "url": "https://www.imag.com/2.png",
+                                                    "fit": "fill"
                                                   },
-                                                  "children": [
-                                                    {
-                                                      "type": "Image",
-                                                      "attributes": {
-                                                        "url": "https://www.imag.com/2.png",
-                                                        "height": 200.0,
-                                                        "fit": "fitWidth"
-                                                      },
-                                                      "children": []
-                                                    }
-                                                  ]
+                                                  "children": []
                                                 }
                                               ]
                                             }
@@ -239,14 +219,8 @@
                                         {
                                           "type": "Container",
                                           "attributes": {
-                                            "padding": 5.0
-                                          },
-                                          "children": []
-                                        },
-                                        {
-                                          "type": "Container",
-                                          "attributes": {
                                             "alignment": "Center",
+                                            "padding": 5.0,
                                             "height": 50.0
                                           },
                                           "children": [
@@ -329,8 +303,8 @@
                                 {
                                   "type": "Container",
                                   "attributes": {
-                                    "padding": 5.0,
-                                    "border": 0.5,
+                                    "margin": 2.0,
+                                    "border": 0.2,
                                     "borderColor": "#8c8c8c"
                                   },
                                   "children": [
@@ -342,29 +316,22 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "Container",
-                                          "attributes": {},
+                                          "type": "AspectRatio",
+                                          "attributes": {
+                                            "aspectRatio": 1.3333333333333333
+                                          },
                                           "children": [
                                             {
-                                              "type": "Center",
+                                              "type": "Container",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "AspectRatio",
+                                                  "type": "Image",
                                                   "attributes": {
-                                                    "aspectRatio": 1.3333333333333333
+                                                    "url": "https://www.imag.com/3.png",
+                                                    "fit": "fill"
                                                   },
-                                                  "children": [
-                                                    {
-                                                      "type": "Image",
-                                                      "attributes": {
-                                                        "url": "https://www.imag.com/3.png",
-                                                        "height": 200.0,
-                                                        "fit": "fitWidth"
-                                                      },
-                                                      "children": []
-                                                    }
-                                                  ]
+                                                  "children": []
                                                 }
                                               ]
                                             }
@@ -373,14 +340,8 @@
                                         {
                                           "type": "Container",
                                           "attributes": {
-                                            "padding": 5.0
-                                          },
-                                          "children": []
-                                        },
-                                        {
-                                          "type": "Container",
-                                          "attributes": {
                                             "alignment": "Center",
+                                            "padding": 5.0,
                                             "height": 50.0
                                           },
                                           "children": [
@@ -451,8 +412,8 @@
                                 {
                                   "type": "Container",
                                   "attributes": {
-                                    "padding": 5.0,
-                                    "border": 0.5,
+                                    "margin": 2.0,
+                                    "border": 0.2,
                                     "borderColor": "#8c8c8c"
                                   },
                                   "children": [
@@ -464,29 +425,22 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "Container",
-                                          "attributes": {},
+                                          "type": "AspectRatio",
+                                          "attributes": {
+                                            "aspectRatio": 1.3333333333333333
+                                          },
                                           "children": [
                                             {
-                                              "type": "Center",
+                                              "type": "Container",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "AspectRatio",
+                                                  "type": "Image",
                                                   "attributes": {
-                                                    "aspectRatio": 1.3333333333333333
+                                                    "url": "https://www.imag.com/4.png",
+                                                    "fit": "fill"
                                                   },
-                                                  "children": [
-                                                    {
-                                                      "type": "Image",
-                                                      "attributes": {
-                                                        "url": "https://www.imag.com/4.png",
-                                                        "height": 200.0,
-                                                        "fit": "fitWidth"
-                                                      },
-                                                      "children": []
-                                                    }
-                                                  ]
+                                                  "children": []
                                                 }
                                               ]
                                             }
@@ -495,14 +449,8 @@
                                         {
                                           "type": "Container",
                                           "attributes": {
-                                            "padding": 5.0
-                                          },
-                                          "children": []
-                                        },
-                                        {
-                                          "type": "Container",
-                                          "attributes": {
                                             "alignment": "Center",
+                                            "padding": 5.0,
                                             "height": 50.0
                                           },
                                           "children": [
