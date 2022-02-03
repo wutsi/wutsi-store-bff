@@ -109,7 +109,11 @@ class ProductScreen(
                             crossAxisAlignment = CrossAxisAlignment.start,
                             children = listOfNotNull(
                                 priceWidget(product, tenant),
-                                product.summary?.let { Text(it) }
+
+                                if (product.summary.isNullOrEmpty())
+                                    null
+                                else
+                                    product.summary?.let { Text(it) }
                             )
                         )
                     )
@@ -117,7 +121,7 @@ class ProductScreen(
             )
 
         // Product Details
-        if (product.description != null) {
+        if (!product.description.isNullOrEmpty()) {
             children.addAll(
                 listOf(
                     Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
