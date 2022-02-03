@@ -49,7 +49,6 @@ jobs:
       - name: Heroku-Deploy-Prod
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PROD }}
-          CLOUDAMQP_URL: ${{secrets.CLOUDAMQP_URL_PROD}}
           HEROKU_APP: wutsi-store-bff-prod
         run: |
           heroku apps | grep ${HEROKU_APP} && echo 'app: ${HEROKU_APP} exists' ||  heroku apps:create ${HEROKU_APP}

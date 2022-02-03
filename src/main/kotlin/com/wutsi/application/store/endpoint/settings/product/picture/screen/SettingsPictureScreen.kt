@@ -58,7 +58,7 @@ class SettingsPictureScreen(
                                 padding = 10.0,
                                 caption = getText("page.settings.store.picture.button.yes"),
                                 action = executeCommand(
-                                    url = urlBuilder.build("commands/delete-picture?picture-id=$pictureId")
+                                    url = urlBuilder.build("commands/delete-picture?picture-id=$pictureId&product-id=$productId")
                                 )
                             ),
                             Button(

@@ -17,7 +17,7 @@ internal class DeletePictureCommandTest : AbstractEndpointTest() {
     @Test
     fun index() {
         // WHEN
-        val url = "http://localhost:$port/commands/delete-picture?picture-id=111"
+        val url = "http://localhost:$port/commands/delete-picture?picture-id=111&product-id=1"
         val response = rest.postForEntity(url, null, Action::class.java)
 
         // THEN
@@ -27,6 +27,6 @@ internal class DeletePictureCommandTest : AbstractEndpointTest() {
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
-        assertEquals("route:/..", action.url)
+        assertEquals("http://localhost:0/settings/store/product?id=1", action.url)
     }
 }

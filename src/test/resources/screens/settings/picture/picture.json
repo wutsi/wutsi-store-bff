@@ -54,7 +54,7 @@
               "children": [],
               "action": {
                 "type": "Command",
-                "url": "http://localhost:0/commands/delete-picture?picture-id=3"
+                "url": "http://localhost:0/commands/delete-picture?picture-id=3&product-id=777"
               }
             },
             {
