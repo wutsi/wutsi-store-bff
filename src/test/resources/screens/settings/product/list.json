@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.settings.store",
+    "id": "page.settings.product-list",
     "safe": false
   },
   "children": [
@@ -19,7 +19,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Configure your Store",
+                "caption": "3 product(s)",
                 "alignment": "Left"
               },
               "children": []
@@ -51,19 +51,14 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Products",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f"
-                      },
-                      "children": []
-                    },
+                    "caption": "1",
+                    "padding": 10.0,
                     "leading": {
-                      "type": "Icon",
+                      "type": "Image",
                       "attributes": {
-                        "code": "e59a",
-                        "color": "#1D7EDF"
+                        "url": "",
+                        "width": 48.0,
+                        "height": 48.0
                       },
                       "children": []
                     }
@@ -71,25 +66,20 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/products"
+                    "url": "http://localhost:0/settings/store/product?id=1"
                   }
                 },
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Categories",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f"
-                      },
-                      "children": []
-                    },
+                    "caption": "2",
+                    "padding": 10.0,
                     "leading": {
-                      "type": "Icon",
+                      "type": "Image",
                       "attributes": {
-                        "code": "e148",
-                        "color": "#1D7EDF"
+                        "url": "",
+                        "width": 48.0,
+                        "height": 48.0
                       },
                       "children": []
                     }
@@ -97,7 +87,28 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/categories"
+                    "url": "http://localhost:0/settings/store/product?id=2"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "3",
+                    "padding": 10.0,
+                    "leading": {
+                      "type": "Image",
+                      "attributes": {
+                        "url": "http://u.com/1.png",
+                        "width": 48.0,
+                        "height": 48.0
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/product?id=3"
                   }
                 }
               ]
@@ -110,11 +121,27 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Store",
+      "title": "Products",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"
     },
     "children": []
+  },
+  "floatingActionButton": {
+    "type": "Button",
+    "attributes": {
+      "caption": "",
+      "padding": 15.0,
+      "type": "Floatable",
+      "stretched": false,
+      "icon": "e758",
+      "iconColor": "#FFFFFF"
+    },
+    "children": [],
+    "action": {
+      "type": "Route",
+      "url": "http://localhost:0/settings/store/product/add"
+    }
   }
 }

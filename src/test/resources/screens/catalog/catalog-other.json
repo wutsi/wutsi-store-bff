@@ -519,7 +519,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Product Catalog",
+      "title": "Store",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000",

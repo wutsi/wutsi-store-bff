@@ -1,23 +1,25 @@
-package com.wutsi.application.store.endpoint.settings.screen
+package com.wutsi.application.store.endpoint.settings.product.list.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SecurityContext
+import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.URLBuilder
+import com.wutsi.application.shared.ui.ProductListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.flutter.sdui.AppBar
+import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Flexible
-import com.wutsi.flutter.sdui.Icon
-import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.catalog.dto.SearchProductRequest
@@ -26,11 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/settings/store")
-class SettingsStoreScreen(
+@RequestMapping("/settings/store/products")
+class SettingsProductListScreen(
     private val urlBuilder: URLBuilder,
     private val catalogApi: WutsiCatalogApi,
     private val securityContext: SecurityContext,
+    private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     @PostMapping
@@ -44,12 +47,21 @@ class SettingsStoreScreen(
         ).products
 
         return Screen(
-            id = Page.SETTINGS_STORE,
+            id = Page.SETTINGS_STORE_PRODUCT_LIST,
             appBar = AppBar(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.settings.store.app-bar.title"),
+                title = getText("page.settings.store.product-list.app-bar.title"),
+            ),
+            floatingActionButton = Button(
+                type = ButtonType.Floatable,
+                icon = Theme.ICON_ADD,
+                stretched = false,
+                iconColor = Theme.COLOR_WHITE,
+                action = gotoUrl(
+                    url = urlBuilder.build("settings/store/product/add")
+                ),
             ),
             child = Column(
                 children = listOf(
@@ -57,7 +69,7 @@ class SettingsStoreScreen(
                         padding = 10.0,
                         alignment = Alignment.CenterLeft,
                         child = Text(
-                            caption = getText("page.settings.store.message"),
+                            caption = getText("page.settings.store.product-list.count", arrayOf(products.size)),
                             alignment = TextAlignment.Left
                         )
                     ),
@@ -66,24 +78,14 @@ class SettingsStoreScreen(
                         child = ListView(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
-                            children = listOf(
-                                ListItem(
-                                    caption = getText("page.settings.store.products"),
-                                    leading = Icon(code = Theme.ICON_PRODUCT, color = Theme.COLOR_PRIMARY),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                            children = products.map {
+                                ProductListItem(
+                                    model = sharedUIMapper.toProductModel(it, tenant),
                                     action = gotoUrl(
-                                        urlBuilder.build("/settings/store/products")
+                                        url = urlBuilder.build("/settings/store/product?id=${it.id}")
                                     )
-                                ),
-                                ListItem(
-                                    caption = getText("page.settings.store.categories"),
-                                    leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_PRIMARY),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/categories")
-                                    )
-                                ),
-                            )
+                                )
+                            }
                         )
                     )
                 )
