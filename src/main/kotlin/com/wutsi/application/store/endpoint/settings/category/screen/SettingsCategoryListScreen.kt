@@ -1,11 +1,8 @@
-package com.wutsi.application.store.endpoint.settings.product.list.screen
+package com.wutsi.application.store.endpoint.settings.category.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SecurityContext
-import com.wutsi.application.shared.service.SharedUIMapper
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.URLBuilder
-import com.wutsi.application.shared.ui.ProductListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.flutter.sdui.AppBar
@@ -14,6 +11,7 @@ import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Flexible
+import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
@@ -22,37 +20,33 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.catalog.WutsiCatalogApi
-import com.wutsi.platform.catalog.dto.SearchProductRequest
+import com.wutsi.platform.catalog.dto.SearchCategoryRequest
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/settings/store/products")
-class SettingsProductListScreen(
+@RequestMapping("/settings/store/categories")
+class SettingsCategoryListScreen(
     private val urlBuilder: URLBuilder,
     private val catalogApi: WutsiCatalogApi,
     private val securityContext: SecurityContext,
-    private val sharedUIMapper: SharedUIMapper,
-    private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
-        val tenant = tenantProvider.get()
-        val products = catalogApi.searchProducts(
-            request = SearchProductRequest(
+        val categories = catalogApi.searchCategories(
+            request = SearchCategoryRequest(
                 accountId = securityContext.currentAccountId(),
-                limit = 100
             )
-        ).products
+        ).categories.sortedBy { it.title }
 
         return Screen(
-            id = Page.SETTINGS_STORE_PRODUCT_LIST,
+            id = Page.SETTINGS_STORE_CATEGORY_LIST,
             appBar = AppBar(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.settings.store.product.list.app-bar.title"),
+                title = getText("page.settings.store.category.list.app-bar.title"),
             ),
             floatingActionButton = Button(
                 type = ButtonType.Floatable,
@@ -60,7 +54,7 @@ class SettingsProductListScreen(
                 stretched = false,
                 iconColor = Theme.COLOR_WHITE,
                 action = gotoUrl(
-                    url = urlBuilder.build("settings/store/product/add")
+                    url = urlBuilder.build("settings/store/category/add")
                 ),
             ),
             child = Column(
@@ -69,7 +63,7 @@ class SettingsProductListScreen(
                         padding = 10.0,
                         alignment = Alignment.CenterLeft,
                         child = Text(
-                            caption = getText("page.settings.store.product.list.count", arrayOf(products.size)),
+                            caption = getText("page.settings.store.category.list.count", arrayOf(categories.size)),
                             alignment = TextAlignment.Left
                         )
                     ),
@@ -78,11 +72,11 @@ class SettingsProductListScreen(
                         child = ListView(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
-                            children = products.map {
-                                ProductListItem(
-                                    model = sharedUIMapper.toProductModel(it, tenant),
+                            children = categories.map {
+                                ListItem(
+                                    caption = it.title,
                                     action = gotoUrl(
-                                        url = urlBuilder.build("/settings/store/product?id=${it.id}")
+                                        urlBuilder.build("settings/store/category?id=${it.id}")
                                     )
                                 )
                             }

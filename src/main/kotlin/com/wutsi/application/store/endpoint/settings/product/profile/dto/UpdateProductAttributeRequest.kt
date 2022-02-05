@@ -1,5 +1,5 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.dto
 
-data class UpdateProfileAttributeRequest(
+data class UpdateProductAttributeRequest(
     val value: String = ""
 )

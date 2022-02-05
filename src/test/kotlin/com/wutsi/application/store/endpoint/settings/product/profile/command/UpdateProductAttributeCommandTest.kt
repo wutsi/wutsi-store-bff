@@ -4,10 +4,8 @@ import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.application.store.endpoint.settings.product.profile.dto.UpdateProfileAttributeRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
-import com.wutsi.platform.catalog.dto.UpdateProductAttributeRequest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -23,7 +21,7 @@ internal class UpdateProductAttributeCommandTest : AbstractEndpointTest() {
     @Test
     fun title() {
         // WHEN
-        val request = UpdateProfileAttributeRequest(
+        val request = com.wutsi.application.store.endpoint.settings.product.profile.dto.UpdateProductAttributeRequest(
             value = "this is the title"
         )
         val response = rest.postForEntity(url("title"), request, Action::class.java)
@@ -31,20 +29,19 @@ internal class UpdateProductAttributeCommandTest : AbstractEndpointTest() {
         // THEN
         kotlin.test.assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<UpdateProductAttributeRequest>()
+        val req = argumentCaptor<com.wutsi.platform.catalog.dto.UpdateProductAttributeRequest>()
         verify(catalogApi).updateProductAttribute(eq(productId), eq("title"), req.capture())
         assertEquals(request.value, req.firstValue.value)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("route:/..", action.url)
-//        kotlin.test.assertEquals("http://localhost:0/settings/store/product?id=$productId", action.url)
     }
 
     @Test
     fun visible() {
         // WHEN
-        val request = UpdateProfileAttributeRequest(
+        val request = com.wutsi.application.store.endpoint.settings.product.profile.dto.UpdateProductAttributeRequest(
             value = "false"
         )
         val response = rest.postForEntity(url("visible"), request, Action::class.java)
@@ -52,7 +49,7 @@ internal class UpdateProductAttributeCommandTest : AbstractEndpointTest() {
         // THEN
         kotlin.test.assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<UpdateProductAttributeRequest>()
+        val req = argumentCaptor<com.wutsi.platform.catalog.dto.UpdateProductAttributeRequest>()
         verify(catalogApi).updateProductAttribute(eq(productId), eq("visible"), req.capture())
         assertEquals(request.value, req.firstValue.value)
 

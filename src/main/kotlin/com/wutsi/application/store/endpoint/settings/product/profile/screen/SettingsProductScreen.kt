@@ -112,6 +112,14 @@ class SettingsProductScreen(
                                         description(product.description),
                                         urlBuilder.build("/settings/store/product/description?id=$id")
                                     ),
+                                    item(
+                                        "page.settings.store.product.attribute.categories",
+                                        product.categories
+                                            .map { it.title }
+                                            .sortedBy { it }
+                                            .joinToString(separator = ","),
+                                        urlBuilder.build("/settings/store/product/categories?id=$id")
+                                    ),
                                     ListItemSwitch(
                                         caption = getText("page.settings.store.product.attribute.visible"),
                                         subCaption = getText("page.settings.store.product.attribute.visible.description"),

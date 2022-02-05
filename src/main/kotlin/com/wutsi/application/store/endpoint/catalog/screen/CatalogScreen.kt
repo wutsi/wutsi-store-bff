@@ -51,7 +51,7 @@ class CatalogScreen(
     fun index(@RequestParam(required = false) id: Long? = null): Widget {
         val account = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
         val tenant = tenantProvider.get()
-        val products = catalogApi.searchProduct(
+        val products = catalogApi.searchProducts(
             SearchProductRequest(
                 accountId = account.id,
                 limit = 100

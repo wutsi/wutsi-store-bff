@@ -251,6 +251,27 @@
                       }
                     },
                     {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Categories",
+                        "subCaption": "Category 1,Category 2,Category 3",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/categories?id=777"
+                      }
+                    },
+                    {
                       "type": "ListItemSwitch",
                       "attributes": {
                         "caption": "Visible",

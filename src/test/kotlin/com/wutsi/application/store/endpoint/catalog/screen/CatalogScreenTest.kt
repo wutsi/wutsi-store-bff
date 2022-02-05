@@ -26,7 +26,7 @@ internal class CatalogScreenTest : AbstractEndpointTest() {
             createProductSummary(3),
             createProductSummary(4)
         )
-        doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProduct(any())
+        doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
     }
 
     @Test

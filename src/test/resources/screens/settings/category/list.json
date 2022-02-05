@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.settings.product.list",
+    "id": "page.settings.store.category.list",
     "safe": false
   },
   "children": [
@@ -19,7 +19,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "3 product(s)",
+                "caption": "3 categories(s)",
                 "alignment": "Left"
               },
               "children": []
@@ -51,64 +51,34 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "1",
-                    "padding": 10.0,
-                    "leading": {
-                      "type": "Image",
-                      "attributes": {
-                        "url": "http://img.com/nopicture.png",
-                        "width": 48.0,
-                        "height": 48.0
-                      },
-                      "children": []
-                    }
+                    "caption": "1"
                   },
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/product?id=1"
+                    "url": "http://localhost:0/settings/store/category?id=1"
                   }
                 },
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "2",
-                    "padding": 10.0,
-                    "leading": {
-                      "type": "Image",
-                      "attributes": {
-                        "url": "http://img.com/nopicture.png",
-                        "width": 48.0,
-                        "height": 48.0
-                      },
-                      "children": []
-                    }
+                    "caption": "2"
                   },
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/product?id=2"
+                    "url": "http://localhost:0/settings/store/category?id=2"
                   }
                 },
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "3",
-                    "padding": 10.0,
-                    "leading": {
-                      "type": "Image",
-                      "attributes": {
-                        "url": "http://u.com/1.png",
-                        "width": 48.0,
-                        "height": 48.0
-                      },
-                      "children": []
-                    }
+                    "caption": "3"
                   },
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/product?id=3"
+                    "url": "http://localhost:0/settings/store/category?id=3"
                   }
                 }
               ]
@@ -121,7 +91,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Products",
+      "title": "Categories",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"
@@ -141,7 +111,7 @@
     "children": [],
     "action": {
       "type": "Route",
-      "url": "http://localhost:0/settings/store/product/add"
+      "url": "http://localhost:0/settings/store/category/add"
     }
   }
 }

@@ -9,6 +9,7 @@ import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.account.dto.Phone
 import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.CategorySummary
 import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
 import com.wutsi.platform.catalog.dto.ProductSummary
@@ -231,6 +232,11 @@ abstract class AbstractEndpointTest {
         price = 7000.0,
         comparablePrice = 10000.0,
         visible = true,
+        categories = listOf(
+            CategorySummary(id = 3, "Category 3"),
+            CategorySummary(id = 2, "Category 2"),
+            CategorySummary(id = 1, "Category 1"),
+        ),
         pictures = if (withThumbnail)
             listOf(
                 PictureSummary(

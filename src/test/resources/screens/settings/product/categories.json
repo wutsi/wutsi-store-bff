@@ -1,0 +1,116 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.store.product.categories",
+    "safe": false,
+    "backgroundColor": "#FFFFFF"
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Sample product",
+                "color": "#1D7EDF",
+                "bold": true
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "alignment": "Center",
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Select the product categories"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "ListView",
+              "attributes": {
+                "separator": true,
+                "separatorColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "c1",
+                    "name": "value",
+                    "selected": true
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/add-product-category?product-id=777&category-id=1"
+                  }
+                },
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "c2",
+                    "name": "value",
+                    "selected": true
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/add-product-category?product-id=777&category-id=2"
+                  }
+                },
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "c3",
+                    "name": "value",
+                    "selected": false
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/add-product-category?product-id=777&category-id=3"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Categories",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

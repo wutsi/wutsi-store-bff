@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.platform.catalog.dto.CategorySummary
 import com.wutsi.platform.catalog.dto.GetProductResponse
 import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
@@ -34,13 +35,17 @@ internal abstract class AbstractSettingsProductAttributeScreenTest : AbstractEnd
         assertEndpointEquals(path(), url())
     }
 
-    private fun createProduct() = Product(
+    protected fun createProduct() = Product(
         title = "Sample product",
         summary = "Summary of product",
         description = "This is a long description of the product",
         price = 7000.0,
         comparablePrice = 10000.0,
         visible = true,
+        categories = listOf(
+            CategorySummary(1, "c1"),
+            CategorySummary(2, "c2")
+        ),
         pictures = listOf(
             PictureSummary(
                 id = 1,

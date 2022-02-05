@@ -55,7 +55,6 @@ internal class AddProductCommandTest : AbstractEndpointTest() {
         assertEquals(request.summary, req.firstValue.summary)
         assertEquals(request.price, req.firstValue.price)
         assertNull(req.firstValue.comparablePrice)
-        assertNull(req.firstValue.categoryId)
         assertNull(req.firstValue.description)
 
         val action = response.body!!
