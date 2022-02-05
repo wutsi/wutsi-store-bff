@@ -8,22 +8,26 @@ import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.ProductListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.application.store.endpoint.settings.product.list.dto.FilterProductRequest
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.DropdownButton
+import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
-import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.SearchCategoryRequest
 import com.wutsi.platform.catalog.dto.SearchProductRequest
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -36,12 +40,21 @@ class SettingsProductListScreen(
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
+    companion object {
+        const val DEFAULT_CATEGORY_ID = -1L
+    }
+
     @PostMapping
-    fun index(): Widget {
+    fun index(@RequestBody request: FilterProductRequest?): Widget {
         val tenant = tenantProvider.get()
+        val accountId = securityContext.currentAccountId()
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
-                accountId = securityContext.currentAccountId(),
+                accountId = accountId,
+                categoryIds = if (request?.categoryId == DEFAULT_CATEGORY_ID || request?.categoryId == null)
+                    emptyList()
+                else
+                    listOf(request.categoryId),
                 limit = 100
             )
         ).products
@@ -67,13 +80,21 @@ class SettingsProductListScreen(
                 children = listOf(
                     Container(
                         padding = 10.0,
-                        alignment = Alignment.CenterLeft,
-                        child = Text(
-                            caption = getText("page.settings.store.product.list.count", arrayOf(products.size)),
-                            alignment = TextAlignment.Left
+                        child = DropdownButton(
+                            name = "categoryId",
+                            value = request?.categoryId?.toString() ?: DEFAULT_CATEGORY_ID.toString(),
+                            children = categoriesListItems(accountId),
+                            action = gotoUrl(
+                                url = urlBuilder.build("settings/store/products"),
+                                replacement = true
+                            )
                         )
                     ),
-                    Divider(color = Theme.COLOR_DIVIDER, height = 2.0),
+                    Text(
+                        caption = getText("page.settings.store.product.list.count", arrayOf(products.size)),
+                        alignment = TextAlignment.Center
+                    ),
+                    Divider(color = Theme.COLOR_DIVIDER),
                     Flexible(
                         child = ListView(
                             separator = true,
@@ -91,5 +112,29 @@ class SettingsProductListScreen(
                 )
             ),
         ).toWidget()
+    }
+
+    private fun categoriesListItems(accountId: Long): List<DropdownMenuItem> {
+        val result = mutableListOf<DropdownMenuItem>()
+        val categories = catalogApi.searchCategories(
+            request = SearchCategoryRequest(
+                accountId = accountId,
+            )
+        ).categories.sortedBy { it.title }
+        result.add(
+            DropdownMenuItem(
+                caption = getText("page.settings.store.product.list.all-products"),
+                value = DEFAULT_CATEGORY_ID.toString()
+            )
+        )
+        result.addAll(
+            categories.map {
+                DropdownMenuItem(
+                    caption = it.title,
+                    value = it.id.toString()
+                )
+            }
+        )
+        return result
     }
 }

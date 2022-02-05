@@ -4,8 +4,10 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.platform.catalog.dto.CategorySummary
 import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.ProductSummary
+import com.wutsi.platform.catalog.dto.SearchCategoryResponse
 import com.wutsi.platform.catalog.dto.SearchProductResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -24,6 +26,10 @@ internal class SettingsProductListScreenTest : AbstractEndpointTest() {
         super.setUp()
 
         url = "http://localhost:$port/settings/store/products"
+
+        val category1 = CategorySummary(id = 1, title = "Category1")
+        val category2 = CategorySummary(id = 2, title = "Category2")
+        doReturn(SearchCategoryResponse(listOf(category1, category2))).whenever(catalogApi).searchCategories(any())
     }
 
     @Test

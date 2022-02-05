@@ -12,24 +12,63 @@
         {
           "type": "Container",
           "attributes": {
-            "alignment": "CenterLeft",
             "padding": 10.0
           },
           "children": [
             {
-              "type": "Text",
+              "type": "DropdownButton",
               "attributes": {
-                "caption": "3 product(s)",
-                "alignment": "Left"
+                "name": "categoryId",
+                "value": "-1"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "All Products",
+                    "enabled": true,
+                    "value": "-1"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Category1",
+                    "enabled": true,
+                    "value": "1"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Category2",
+                    "enabled": true,
+                    "value": "2"
+                  },
+                  "children": []
+                }
+              ],
+              "action": {
+                "type": "Route",
+                "url": "http://localhost:0/settings/store/products",
+                "replacement": true
+              }
             }
           ]
         },
         {
+          "type": "Text",
+          "attributes": {
+            "caption": "3 product(s)",
+            "alignment": "Center"
+          },
+          "children": []
+        },
+        {
           "type": "Divider",
           "attributes": {
-            "height": 2.0,
             "color": "#8c8c8c"
           },
           "children": []

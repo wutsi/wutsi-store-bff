@@ -63,7 +63,7 @@
                       "type": "Icon",
                       "attributes": {
                         "code": "e59a",
-                        "color": "#1D7EDF"
+                        "color": "#4CAF50"
                       },
                       "children": []
                     }
@@ -89,7 +89,7 @@
                       "type": "Icon",
                       "attributes": {
                         "code": "e148",
-                        "color": "#1D7EDF"
+                        "color": "#000000"
                       },
                       "children": []
                     }

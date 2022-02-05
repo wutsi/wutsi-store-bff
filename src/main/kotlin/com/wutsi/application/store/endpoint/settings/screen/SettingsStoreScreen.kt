@@ -54,7 +54,7 @@ class SettingsStoreScreen(
                             children = listOf(
                                 ListItem(
                                     caption = getText("page.settings.store.products"),
-                                    leading = Icon(code = Theme.ICON_PRODUCT, color = Theme.COLOR_PRIMARY),
+                                    leading = Icon(code = Theme.ICON_PRODUCT, color = Theme.COLOR_SUCCESS),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
                                         urlBuilder.build("/settings/store/products")
@@ -62,7 +62,7 @@ class SettingsStoreScreen(
                                 ),
                                 ListItem(
                                     caption = getText("page.settings.store.categories"),
-                                    leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_PRIMARY),
+                                    leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_BLACK),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
                                         urlBuilder.build("/settings/store/categories")
