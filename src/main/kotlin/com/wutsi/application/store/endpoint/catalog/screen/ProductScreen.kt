@@ -224,18 +224,18 @@ class ProductScreen(
                             bold = true
                         )
                     ),
-                    if (percent > 5)
-                        row(
-                            Text(getText("page.product.savings")),
-                            Text(
-                                caption = getText("page.product.savings-percent", arrayOf(percent.toString())),
-                                color = Theme.COLOR_SUCCESS,
-                            )
-                        )
-                    else
-                        null
                 )
             )
+            if (percent >= 1)
+                children.add(
+                    row(
+                        Text(getText("page.product.savings")),
+                        Text(
+                            caption = getText("page.product.savings-percent", arrayOf(percent.toString())),
+                            color = Theme.COLOR_SUCCESS,
+                        )
+                    )
+                )
         } else {
             children.addAll(
                 listOfNotNull(
