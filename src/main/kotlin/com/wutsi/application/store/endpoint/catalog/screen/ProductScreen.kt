@@ -60,19 +60,20 @@ class ProductScreen(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
                     children = listOf(
+                        // Title
+                        Text(caption = product.title, size = Theme.TEXT_SIZE_LARGE, bold = true),
+
                         // Link to merchant store
+                        Container(padding = 5.0),
                         Container(
                             action = gotoUrl(urlBuilder.build("catalog?id=${merchant.id}")),
                             child = Text(
                                 caption = getText("page.product.visit-store", arrayOf(merchant.displayName)),
                                 color = Theme.COLOR_PRIMARY,
-                                decoration = TextDecoration.Underline
+                                decoration = TextDecoration.Underline,
+                                size = Theme.TEXT_SIZE_SMALL
                             )
                         ),
-
-                        // Title
-                        Container(padding = 5.0),
-                        Text(caption = product.title, size = Theme.TEXT_SIZE_LARGE)
                     )
                 )
             ),
@@ -98,27 +99,24 @@ class ProductScreen(
                 )
             )
 
-        // Price + Summary
-        if (product.price != null || !product.summary.isNullOrEmpty())
+        // Price
+        if (product.price != null)
             children.addAll(
                 listOf(
                     Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     Container(
                         padding = 10.0,
-                        child = Column(
-                            mainAxisAlignment = MainAxisAlignment.start,
-                            crossAxisAlignment = CrossAxisAlignment.start,
-                            children = listOfNotNull(
-                                priceWidget(product, tenant),
-                                Container(padding = 5.0),
-
-                                if (product.summary.isNullOrEmpty())
-                                    null
-                                else
-                                    product.summary?.let { Text(it) }
-                            )
-                        )
+                        child = priceWidget(product, tenant)
                     )
+                )
+            )
+
+        // Summary
+        if (!product.summary.isNullOrEmpty())
+            children.add(
+                Container(
+                    padding = 10.0,
+                    child = Text(product.summary!!)
                 )
             )
 
@@ -197,30 +195,76 @@ class ProductScreen(
         ).toWidget()
     }
 
-    private fun priceWidget(product: Product, tenant: Tenant): WidgetAware? =
-        if (product.price != null)
-            Row(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.end,
-                children = listOfNotNull(
-                    Text(
-                        caption = DecimalFormat(tenant.monetaryFormat).format(product.price),
-                        size = Theme.TEXT_SIZE_X_LARGE,
-                        bold = true,
-                        color = Theme.COLOR_PRIMARY
+    private fun priceWidget(product: Product, tenant: Tenant): WidgetAware {
+        val children = mutableListOf<WidgetAware>()
+        val price = product.price!!
+        val comparablePrice = product.comparablePrice ?: 0.0
+        val savings = comparablePrice - price
+        val percent = (100.0 * savings / comparablePrice).toInt()
+        val fmt = DecimalFormat(tenant.monetaryFormat)
+
+        if (savings > 0) {
+            children.addAll(
+                listOfNotNull(
+                    row(
+                        Text(getText("page.product.list-price")),
+                        Text(
+                            caption = fmt.format(comparablePrice),
+                            decoration = TextDecoration.Strikethrough,
+                            color = Theme.COLOR_GRAY,
+                            size = Theme.TEXT_SIZE_SMALL
+                        )
                     ),
-                    if (product.comparablePrice != null && product.price != null && product.comparablePrice!! > product.price!!)
-                        Container(
-                            child = Text(
-                                caption = DecimalFormat(tenant.monetaryFormat).format(product.comparablePrice),
-                                decoration = TextDecoration.Strikethrough,
-                                color = Theme.COLOR_GRAY
+                    row(
+                        Text(getText("page.product.price-with-savings")),
+                        Text(
+                            caption = fmt.format(price),
+                            color = Theme.COLOR_PRIMARY,
+                            size = Theme.TEXT_SIZE_LARGE,
+                            bold = true
+                        )
+                    ),
+                    if (percent > 5)
+                        row(
+                            Text(getText("page.product.savings")),
+                            Text(
+                                caption = getText("page.product.savings-percent", arrayOf(percent.toString())),
+                                color = Theme.COLOR_SUCCESS,
                             )
                         )
                     else
-                        null,
-                ),
+                        null
+                )
             )
-        else
-            null
+        } else {
+            children.addAll(
+                listOfNotNull(
+                    row(
+                        Text(getText("page.product.price")),
+                        Text(
+                            caption = fmt.format(price),
+                            color = Theme.COLOR_PRIMARY_LIGHT,
+                            size = Theme.TEXT_SIZE_LARGE,
+                            bold = true
+                        )
+                    ),
+                )
+            )
+        }
+
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.end,
+            children = children
+        )
+    }
+
+    private fun row(name: WidgetAware, value: WidgetAware) = Row(
+        mainAxisAlignment = MainAxisAlignment.start,
+        crossAxisAlignment = CrossAxisAlignment.center,
+        children = listOf(
+            Container(child = name, padding = 2.0, width = 120.0),
+            value
+        ),
+    )
 }

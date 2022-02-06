@@ -48,7 +48,6 @@ internal class AddProductCategoryCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<AddCategoryRequest>()
         verify(catalogApi).removeCategory(productId, categoryId)
     }
 }

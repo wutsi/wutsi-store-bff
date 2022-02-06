@@ -101,7 +101,7 @@ class SettingsProductListScreen(
                             separatorColor = Theme.COLOR_DIVIDER,
                             children = products.map {
                                 ProductListItem(
-                                    model = sharedUIMapper.toProductModel(it, tenant),
+                                    model = sharedUIMapper.toProductModel(it, tenant, messages),
                                     action = gotoUrl(
                                         url = urlBuilder.build("/settings/store/product?id=${it.id}")
                                     )

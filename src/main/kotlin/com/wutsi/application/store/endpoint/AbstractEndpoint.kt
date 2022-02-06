@@ -8,7 +8,7 @@ import org.springframework.context.i18n.LocaleContextHolder
 
 abstract class AbstractEndpoint {
     @Autowired
-    private lateinit var messages: MessageSource
+    protected lateinit var messages: MessageSource
 
     protected fun gotoUrl(
         url: String,
