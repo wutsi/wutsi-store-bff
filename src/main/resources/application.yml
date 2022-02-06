@@ -57,8 +57,6 @@ wutsi:
       max-per-product: 5
       max-width: 512
       max-height: 512
-    product:
-      deep-link: https://www.wutsi.com/store/product
 
 logging:
   level:

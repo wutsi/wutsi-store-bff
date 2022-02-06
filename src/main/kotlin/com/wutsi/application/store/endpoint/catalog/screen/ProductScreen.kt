@@ -30,7 +30,6 @@ import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.catalog.dto.Product
 import com.wutsi.platform.tenant.dto.Tenant
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -44,8 +43,6 @@ class ProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
     private val tenantProvider: TenantProvider,
-
-    @Value("\${wutsi.store.product.deep-link}") private val productDeepLink: String,
 ) : AbstractQuery() {
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
@@ -144,7 +141,7 @@ class ProductScreen(
             )
         }
 
-        val productUrl = "$productDeepLink?id=${product.id}"
+        val productUrl = "${tenant.webappUrl}/product?id=${product.id}"
         return Screen(
             id = Page.PRODUCT,
             appBar = AppBar(

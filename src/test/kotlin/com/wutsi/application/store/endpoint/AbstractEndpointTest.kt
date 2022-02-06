@@ -93,6 +93,7 @@ abstract class AbstractEndpointTest {
             dateFormat = "dd MMM yyyy",
             timeFormat = "HH:mm",
             dateTimeFormat = "dd MMM yyyy, HH:mm",
+            webappUrl = "https://www.wutsi.me",
             domainName = "www.wutsi.com",
             mobileCarriers = listOf(
                 MobileCarrier(
