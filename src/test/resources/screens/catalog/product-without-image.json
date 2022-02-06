@@ -46,10 +46,16 @@
                       }
                     },
                     {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 5.0
+                      },
+                      "children": []
+                    },
+                    {
                       "type": "Text",
                       "attributes": {
                         "caption": "Sample product",
-                        "bold": true,
                         "size": 16.0
                       },
                       "children": []
@@ -81,21 +87,18 @@
                   "children": [
                     {
                       "type": "Row",
-                      "attributes": {},
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "end"
+                      },
                       "children": [
                         {
                           "type": "Text",
                           "attributes": {
                             "caption": "7,000 CFA",
+                            "color": "#1D7EDF",
                             "bold": true,
                             "size": 18.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 5.0
                           },
                           "children": []
                         },
@@ -107,7 +110,7 @@
                               "type": "Text",
                               "attributes": {
                                 "caption": "10,000 CFA",
-                                "color": "#1D7EDF",
+                                "color": "#95A5A6",
                                 "decoration": "Strikethrough"
                               },
                               "children": []
@@ -115,6 +118,13 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 5.0
+                      },
+                      "children": []
                     },
                     {
                       "type": "Text",

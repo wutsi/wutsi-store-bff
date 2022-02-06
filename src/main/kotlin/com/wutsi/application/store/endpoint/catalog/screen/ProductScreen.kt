@@ -71,7 +71,8 @@ class ProductScreen(
                         ),
 
                         // Title
-                        Text(caption = product.title, bold = true, size = Theme.TEXT_SIZE_LARGE)
+                        Container(padding = 5.0),
+                        Text(caption = product.title, size = Theme.TEXT_SIZE_LARGE)
                     )
                 )
             ),
@@ -109,6 +110,7 @@ class ProductScreen(
                             crossAxisAlignment = CrossAxisAlignment.start,
                             children = listOfNotNull(
                                 priceWidget(product, tenant),
+                                Container(padding = 5.0),
 
                                 if (product.summary.isNullOrEmpty())
                                     null
@@ -198,24 +200,26 @@ class ProductScreen(
     private fun priceWidget(product: Product, tenant: Tenant): WidgetAware? =
         if (product.price != null)
             Row(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.end,
                 children = listOfNotNull(
                     Text(
                         caption = DecimalFormat(tenant.monetaryFormat).format(product.price),
                         size = Theme.TEXT_SIZE_X_LARGE,
-                        bold = true
+                        bold = true,
+                        color = Theme.COLOR_PRIMARY
                     ),
-                    Container(padding = 5.0),
                     if (product.comparablePrice != null && product.price != null && product.comparablePrice!! > product.price!!)
                         Container(
                             child = Text(
                                 caption = DecimalFormat(tenant.monetaryFormat).format(product.comparablePrice),
                                 decoration = TextDecoration.Strikethrough,
-                                color = Theme.COLOR_PRIMARY
+                                color = Theme.COLOR_GRAY
                             )
                         )
                     else
                         null,
-                )
+                ),
             )
         else
             null

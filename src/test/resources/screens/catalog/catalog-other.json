@@ -86,22 +86,72 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "AspectRatio",
+                                          "type": "Container",
                                           "attributes": {
-                                            "aspectRatio": 1.3333333333333333
+                                            "background": "#e8e8e8"
                                           },
                                           "children": [
                                             {
-                                              "type": "Container",
+                                              "type": "Stack",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "Image",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "url": "https://www.imag.com/1.png",
-                                                    "fit": "fill"
+                                                    "padding": 10.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "AspectRatio",
+                                                      "attributes": {
+                                                        "aspectRatio": 1.3333333333333333
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Container",
+                                                          "attributes": {},
+                                                          "children": [
+                                                            {
+                                                              "type": "Image",
+                                                              "attributes": {
+                                                                "url": "https://www.imag.com/1.png",
+                                                                "fit": "fitHeight"
+                                                              },
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "Positioned",
+                                                  "attributes": {
+                                                    "bottom": 5.0,
+                                                    "left": 5.0
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "padding": 4.0,
+                                                        "background": "#4CAF50",
+                                                        "borderRadius": 4.0
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Text",
+                                                          "attributes": {
+                                                            "caption": "30% off",
+                                                            "color": "#FFFFFF",
+                                                            "size": 10.0
+                                                          },
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -112,7 +162,7 @@
                                           "attributes": {
                                             "alignment": "Center",
                                             "padding": 5.0,
-                                            "height": 50.0
+                                            "height": 96.0
                                           },
                                           "children": [
                                             {
@@ -123,20 +173,37 @@
                                               },
                                               "children": [
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Row",
                                                   "attributes": {
-                                                    "caption": "7,000 CFA",
-                                                    "color": "#1D7EDF",
-                                                    "bold": true
+                                                    "mainAxisAlignment": "start",
+                                                    "crossAxisAlignment": "end"
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "bold": true
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "10,000 CFA",
+                                                        "color": "#95A5A6",
+                                                        "size": 10.0,
+                                                        "decoration": "Strikethrough"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 },
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "caption": "10,000 CFA",
-                                                    "size": 10.0,
-                                                    "decoration": "Strikethrough"
+                                                    "padding": 5.0
                                                   },
                                                   "children": []
                                                 },
@@ -144,9 +211,8 @@
                                                   "type": "Text",
                                                   "attributes": {
                                                     "caption": "Sample product",
-                                                    "size": 10.0,
                                                     "overflow": "Elipsis",
-                                                    "maxLines": 2
+                                                    "maxLines": 3
                                                   },
                                                   "children": []
                                                 }
@@ -195,22 +261,72 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "AspectRatio",
+                                          "type": "Container",
                                           "attributes": {
-                                            "aspectRatio": 1.3333333333333333
+                                            "background": "#e8e8e8"
                                           },
                                           "children": [
                                             {
-                                              "type": "Container",
+                                              "type": "Stack",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "Image",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "url": "https://www.imag.com/2.png",
-                                                    "fit": "fill"
+                                                    "padding": 10.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "AspectRatio",
+                                                      "attributes": {
+                                                        "aspectRatio": 1.3333333333333333
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Container",
+                                                          "attributes": {},
+                                                          "children": [
+                                                            {
+                                                              "type": "Image",
+                                                              "attributes": {
+                                                                "url": "https://www.imag.com/2.png",
+                                                                "fit": "fitHeight"
+                                                              },
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "Positioned",
+                                                  "attributes": {
+                                                    "bottom": 5.0,
+                                                    "left": 5.0
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "padding": 4.0,
+                                                        "background": "#4CAF50",
+                                                        "borderRadius": 4.0
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Text",
+                                                          "attributes": {
+                                                            "caption": "30% off",
+                                                            "color": "#FFFFFF",
+                                                            "size": 10.0
+                                                          },
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -221,7 +337,7 @@
                                           "attributes": {
                                             "alignment": "Center",
                                             "padding": 5.0,
-                                            "height": 50.0
+                                            "height": 96.0
                                           },
                                           "children": [
                                             {
@@ -232,20 +348,37 @@
                                               },
                                               "children": [
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Row",
                                                   "attributes": {
-                                                    "caption": "7,000 CFA",
-                                                    "color": "#1D7EDF",
-                                                    "bold": true
+                                                    "mainAxisAlignment": "start",
+                                                    "crossAxisAlignment": "end"
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "bold": true
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "10,000 CFA",
+                                                        "color": "#95A5A6",
+                                                        "size": 10.0,
+                                                        "decoration": "Strikethrough"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 },
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "caption": "10,000 CFA",
-                                                    "size": 10.0,
-                                                    "decoration": "Strikethrough"
+                                                    "padding": 5.0
                                                   },
                                                   "children": []
                                                 },
@@ -253,9 +386,8 @@
                                                   "type": "Text",
                                                   "attributes": {
                                                     "caption": "Sample product",
-                                                    "size": 10.0,
                                                     "overflow": "Elipsis",
-                                                    "maxLines": 2
+                                                    "maxLines": 3
                                                   },
                                                   "children": []
                                                 }
@@ -316,22 +448,72 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "AspectRatio",
+                                          "type": "Container",
                                           "attributes": {
-                                            "aspectRatio": 1.3333333333333333
+                                            "background": "#e8e8e8"
                                           },
                                           "children": [
                                             {
-                                              "type": "Container",
+                                              "type": "Stack",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "Image",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "url": "https://www.imag.com/3.png",
-                                                    "fit": "fill"
+                                                    "padding": 10.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "AspectRatio",
+                                                      "attributes": {
+                                                        "aspectRatio": 1.3333333333333333
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Container",
+                                                          "attributes": {},
+                                                          "children": [
+                                                            {
+                                                              "type": "Image",
+                                                              "attributes": {
+                                                                "url": "https://www.imag.com/3.png",
+                                                                "fit": "fitHeight"
+                                                              },
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "Positioned",
+                                                  "attributes": {
+                                                    "bottom": 5.0,
+                                                    "left": 5.0
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "padding": 4.0,
+                                                        "background": "#4CAF50",
+                                                        "borderRadius": 4.0
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Text",
+                                                          "attributes": {
+                                                            "caption": "30% off",
+                                                            "color": "#FFFFFF",
+                                                            "size": 10.0
+                                                          },
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -342,7 +524,7 @@
                                           "attributes": {
                                             "alignment": "Center",
                                             "padding": 5.0,
-                                            "height": 50.0
+                                            "height": 96.0
                                           },
                                           "children": [
                                             {
@@ -353,20 +535,37 @@
                                               },
                                               "children": [
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Row",
                                                   "attributes": {
-                                                    "caption": "7,000 CFA",
-                                                    "color": "#1D7EDF",
-                                                    "bold": true
+                                                    "mainAxisAlignment": "start",
+                                                    "crossAxisAlignment": "end"
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "bold": true
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "10,000 CFA",
+                                                        "color": "#95A5A6",
+                                                        "size": 10.0,
+                                                        "decoration": "Strikethrough"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 },
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "caption": "10,000 CFA",
-                                                    "size": 10.0,
-                                                    "decoration": "Strikethrough"
+                                                    "padding": 5.0
                                                   },
                                                   "children": []
                                                 },
@@ -374,9 +573,8 @@
                                                   "type": "Text",
                                                   "attributes": {
                                                     "caption": "Sample product",
-                                                    "size": 10.0,
                                                     "overflow": "Elipsis",
-                                                    "maxLines": 2
+                                                    "maxLines": 3
                                                   },
                                                   "children": []
                                                 }
@@ -425,22 +623,72 @@
                                       },
                                       "children": [
                                         {
-                                          "type": "AspectRatio",
+                                          "type": "Container",
                                           "attributes": {
-                                            "aspectRatio": 1.3333333333333333
+                                            "background": "#e8e8e8"
                                           },
                                           "children": [
                                             {
-                                              "type": "Container",
+                                              "type": "Stack",
                                               "attributes": {},
                                               "children": [
                                                 {
-                                                  "type": "Image",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "url": "https://www.imag.com/4.png",
-                                                    "fit": "fill"
+                                                    "padding": 10.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "AspectRatio",
+                                                      "attributes": {
+                                                        "aspectRatio": 1.3333333333333333
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Container",
+                                                          "attributes": {},
+                                                          "children": [
+                                                            {
+                                                              "type": "Image",
+                                                              "attributes": {
+                                                                "url": "https://www.imag.com/4.png",
+                                                                "fit": "fitHeight"
+                                                              },
+                                                              "children": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "Positioned",
+                                                  "attributes": {
+                                                    "bottom": 5.0,
+                                                    "left": 5.0
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "padding": 4.0,
+                                                        "background": "#4CAF50",
+                                                        "borderRadius": 4.0
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "type": "Text",
+                                                          "attributes": {
+                                                            "caption": "30% off",
+                                                            "color": "#FFFFFF",
+                                                            "size": 10.0
+                                                          },
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -451,7 +699,7 @@
                                           "attributes": {
                                             "alignment": "Center",
                                             "padding": 5.0,
-                                            "height": 50.0
+                                            "height": 96.0
                                           },
                                           "children": [
                                             {
@@ -462,20 +710,37 @@
                                               },
                                               "children": [
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Row",
                                                   "attributes": {
-                                                    "caption": "7,000 CFA",
-                                                    "color": "#1D7EDF",
-                                                    "bold": true
+                                                    "mainAxisAlignment": "start",
+                                                    "crossAxisAlignment": "end"
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "bold": true
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "10,000 CFA",
+                                                        "color": "#95A5A6",
+                                                        "size": 10.0,
+                                                        "decoration": "Strikethrough"
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 },
                                                 {
-                                                  "type": "Text",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "caption": "10,000 CFA",
-                                                    "size": 10.0,
-                                                    "decoration": "Strikethrough"
+                                                    "padding": 5.0
                                                   },
                                                   "children": []
                                                 },
@@ -483,9 +748,8 @@
                                                   "type": "Text",
                                                   "attributes": {
                                                     "caption": "Sample product",
-                                                    "size": 10.0,
                                                     "overflow": "Elipsis",
-                                                    "maxLines": 2
+                                                    "maxLines": 3
                                                   },
                                                   "children": []
                                                 }
