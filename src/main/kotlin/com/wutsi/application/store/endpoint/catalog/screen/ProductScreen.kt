@@ -243,7 +243,7 @@ class ProductScreen(
                         Text(getText("page.product.price")),
                         Text(
                             caption = fmt.format(price),
-                            color = Theme.COLOR_PRIMARY_LIGHT,
+                            color = Theme.COLOR_PRIMARY,
                             size = Theme.TEXT_SIZE_LARGE,
                             bold = true
                         )
