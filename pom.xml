@@ -35,7 +35,7 @@
     <wutsi-sms.version>1.0.8</wutsi-sms.version>
     <wutsi-mail.version>0.0.1</wutsi-mail.version>
     <wutsi-platform-payment.version>0.0.67</wutsi-platform-payment.version>
-    <wutsi-shared-ui.version>0.0.82</wutsi-shared-ui.version>
+    <wutsi-shared-ui.version>0.0.83</wutsi-shared-ui.version>
   </properties>
 
   <dependencies>
