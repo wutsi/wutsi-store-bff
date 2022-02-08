@@ -176,7 +176,6 @@ class ProductScreen(
                                 size = 20.0,
                                 action = Action(
                                     type = ActionType.Share,
-                                    message = product.title,
                                     url = productUrl,
                                 )
                             ),

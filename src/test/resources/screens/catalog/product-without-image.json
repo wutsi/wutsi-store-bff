@@ -313,8 +313,7 @@
                   "children": [],
                   "action": {
                     "type": "Share",
-                    "url": "https://www.wutsi.me/product?id=1",
-                    "message": "Sample product"
+                    "url": "https://www.wutsi.me/product?id=1"
                   }
                 }
               ]
