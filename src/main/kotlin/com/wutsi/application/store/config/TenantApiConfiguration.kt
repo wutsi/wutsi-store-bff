@@ -3,6 +3,7 @@ package com.wutsi.application.store.config
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.wutsi.platform.core.security.feign.FeignAuthorizationRequestInterceptor
 import com.wutsi.platform.core.tracing.feign.FeignTracingRequestInterceptor
+import com.wutsi.platform.core.util.feign.Custom5XXErrorDecoder
 import com.wutsi.platform.tenant.Environment.PRODUCTION
 import com.wutsi.platform.tenant.Environment.SANDBOX
 import com.wutsi.platform.tenant.WutsiTenantApi
@@ -27,7 +28,8 @@ class TenantApiConfiguration(
             interceptors = listOf(
                 tracingRequestInterceptor,
                 authorizationRequestInterceptor
-            )
+            ),
+            errorDecoder = Custom5XXErrorDecoder()
         )
 
     private fun environment(): com.wutsi.platform.tenant.Environment =
