@@ -189,11 +189,19 @@
                                                       "children": []
                                                     },
                                                     {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "width": 2.0
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
                                                       "type": "Text",
                                                       "attributes": {
                                                         "caption": "10,000 CFA",
                                                         "color": "#95A5A6",
                                                         "size": 10.0,
+                                                        "overflow": "Elipsis",
                                                         "decoration": "Strikethrough"
                                                       },
                                                       "children": []
@@ -364,11 +372,19 @@
                                                       "children": []
                                                     },
                                                     {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "width": 2.0
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
                                                       "type": "Text",
                                                       "attributes": {
                                                         "caption": "10,000 CFA",
                                                         "color": "#95A5A6",
                                                         "size": 10.0,
+                                                        "overflow": "Elipsis",
                                                         "decoration": "Strikethrough"
                                                       },
                                                       "children": []
@@ -551,11 +567,19 @@
                                                       "children": []
                                                     },
                                                     {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "width": 2.0
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
                                                       "type": "Text",
                                                       "attributes": {
                                                         "caption": "10,000 CFA",
                                                         "color": "#95A5A6",
                                                         "size": 10.0,
+                                                        "overflow": "Elipsis",
                                                         "decoration": "Strikethrough"
                                                       },
                                                       "children": []
@@ -726,11 +750,19 @@
                                                       "children": []
                                                     },
                                                     {
+                                                      "type": "Container",
+                                                      "attributes": {
+                                                        "width": 2.0
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
                                                       "type": "Text",
                                                       "attributes": {
                                                         "caption": "10,000 CFA",
                                                         "color": "#95A5A6",
                                                         "size": 10.0,
+                                                        "overflow": "Elipsis",
                                                         "decoration": "Strikethrough"
                                                       },
                                                       "children": []
