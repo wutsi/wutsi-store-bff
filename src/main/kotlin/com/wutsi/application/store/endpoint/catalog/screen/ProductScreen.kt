@@ -141,7 +141,7 @@ class ProductScreen(
             )
         }
 
-        val productUrl = "${tenant.webappUrl}/product?id=${product.id}"
+        val productUrl = "${tenant.webappUrl}/product?id=$$id"
         return Screen(
             id = Page.PRODUCT,
             appBar = AppBar(
