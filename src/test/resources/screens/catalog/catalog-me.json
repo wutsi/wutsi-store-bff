@@ -16,7 +16,7 @@
           "type": "ListItem",
           "attributes": {
             "caption": "Ray Sponsible",
-            "subCaption": "Advertising/Marketing",
+            "subCaption": "Business Account",
             "padding": 10.0,
             "leading": {
               "type": "CircleAvatar",

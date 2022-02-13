@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
+import com.wutsi.platform.account.dto.Category
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.account.dto.Phone
 import com.wutsi.platform.catalog.WutsiCatalogApi
@@ -131,24 +132,7 @@ abstract class AbstractEndpointTest {
         )
         doReturn(GetTenantResponse(tenant)).whenever(tenantApi).getTenant(any())
 
-        val account = Account(
-            id = ACCOUNT_ID,
-            displayName = "Ray Sponsible",
-            country = "CM",
-            language = "en",
-            status = "ACTIVE",
-            phone = Phone(
-                id = 1,
-                number = "+1237666666666",
-                country = "CM"
-            ),
-            business = false,
-            website = "https://www.google.ca",
-            biography = "Thsi is my bio",
-            categoryId = 1000,
-            timezoneId = "Africa/Douala",
-            whatsapp = "+1237666666666"
-        )
+        val account = createAccount(ACCOUNT_ID)
         doReturn(GetAccountResponse(account)).whenever(accountApi).getAccount(any())
 
         rest = createResTemplate()
@@ -278,7 +262,7 @@ abstract class AbstractEndpointTest {
 
     protected fun createAccount(id: Long = ACCOUNT_ID) = Account(
         id = id,
-        displayName = "Ray Sponsible - $id",
+        displayName = "Ray Sponsible",
         country = "CM",
         language = "en",
         status = "ACTIVE",
@@ -290,7 +274,11 @@ abstract class AbstractEndpointTest {
         business = true,
         website = "https://www.google.ca",
         biography = "Short bio to descbribe my business",
-        categoryId = 1000,
+        category = Category(
+            id = 1000,
+            title = "Marketing",
+            titleFrench = "Marketing"
+        ),
         timezoneId = "Africa/Douala",
         whatsapp = "+123766666666$id"
     )

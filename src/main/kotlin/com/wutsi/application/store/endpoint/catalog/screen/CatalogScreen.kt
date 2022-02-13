@@ -118,7 +118,7 @@ class CatalogScreen(
                 child = Container(
                     alignment = Alignment.TopCenter,
                     child = ProductCard(
-                        model = sharedUIMapper.toProductModel(it, tenant, messages),
+                        model = sharedUIMapper.toProductModel(it, tenant),
                         action = gotoUrl(urlBuilder.build("/product?id=${it.id}"))
                     )
                 )
