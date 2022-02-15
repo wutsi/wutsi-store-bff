@@ -58,15 +58,17 @@ class SettingsProductAddScreen(
                         child = ListView(
                             separatorColor = Theme.COLOR_DIVIDER,
                             separator = true,
-                            children = categories.map {
-                                ListItem(
-                                    caption = it.title,
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("settings/store/product/editor?category-id=${it.id}")
+                            children = categories
+                                .sortedBy { it.title }
+                                .map {
+                                    ListItem(
+                                        caption = it.title,
+                                        trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                                        action = gotoUrl(
+                                            urlBuilder.build("settings/store/product/editor?category-id=${it.id}")
+                                        )
                                     )
-                                )
-                            }
+                                }
                         )
                     ),
                 ),
