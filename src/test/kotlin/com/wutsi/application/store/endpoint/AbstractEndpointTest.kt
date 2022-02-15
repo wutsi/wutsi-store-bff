@@ -274,7 +274,6 @@ abstract class AbstractEndpointTest {
         category = Category(
             id = 1000,
             title = "Marketing",
-            titleFrench = "Marketing"
         ),
         timezoneId = "Africa/Douala",
         whatsapp = "+123766666666$id"
