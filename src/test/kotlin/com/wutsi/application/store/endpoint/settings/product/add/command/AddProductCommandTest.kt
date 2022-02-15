@@ -29,7 +29,7 @@ internal class AddProductCommandTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/commands/add-product"
+        url = "http://localhost:$port/commands/add-product?category-id=111"
     }
 
     @Test
@@ -42,7 +42,8 @@ internal class AddProductCommandTest : AbstractEndpointTest() {
         val request = AddProductRequest(
             title = "Product1",
             summary = "This is a nice summary",
-            price = 10000.0
+            price = 10000.0,
+            subCategoryId = 333L
         )
         val response = rest.postForEntity(url, request, Action::class.java)
 
@@ -54,6 +55,8 @@ internal class AddProductCommandTest : AbstractEndpointTest() {
         assertEquals(request.title, req.firstValue.title)
         assertEquals(request.summary, req.firstValue.summary)
         assertEquals(request.price, req.firstValue.price)
+        assertEquals(request.subCategoryId, req.firstValue.subCategoryId)
+        assertEquals(111L, req.firstValue.categoryId)
         assertNull(req.firstValue.comparablePrice)
         assertNull(req.firstValue.description)
 

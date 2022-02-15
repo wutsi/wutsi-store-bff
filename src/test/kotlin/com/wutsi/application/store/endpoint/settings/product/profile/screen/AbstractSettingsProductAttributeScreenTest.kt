@@ -8,6 +8,7 @@ import com.wutsi.platform.catalog.dto.CategorySummary
 import com.wutsi.platform.catalog.dto.GetProductResponse
 import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
+import com.wutsi.platform.catalog.dto.SearchCategoryResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.web.server.LocalServerPort
@@ -22,6 +23,13 @@ internal abstract class AbstractSettingsProductAttributeScreenTest : AbstractEnd
 
         val product = createProduct()
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
+
+        val categories = listOf(
+            CategorySummary(id = 1, title = "c1"),
+            CategorySummary(id = 2, title = "c2"),
+            CategorySummary(id = 3, title = "c3")
+        )
+        doReturn(SearchCategoryResponse(categories)).whenever(catalogApi).searchCategories(any())
     }
 
     abstract fun attributeName(): String
@@ -42,10 +50,8 @@ internal abstract class AbstractSettingsProductAttributeScreenTest : AbstractEnd
         price = 7000.0,
         comparablePrice = 10000.0,
         visible = true,
-        categories = listOf(
-            CategorySummary(1, "c1"),
-            CategorySummary(2, "c2")
-        ),
+        category = CategorySummary(id = 1, "c1"),
+        subCategory = CategorySummary(id = 2, "c2"),
         pictures = listOf(
             PictureSummary(
                 id = 1,

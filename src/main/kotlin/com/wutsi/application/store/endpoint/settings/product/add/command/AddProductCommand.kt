@@ -9,6 +9,7 @@ import com.wutsi.platform.catalog.dto.CreateProductRequest
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -18,12 +19,17 @@ class AddProductCommand(
     val catalogApi: WutsiCatalogApi
 ) : AbstractCommand() {
     @PostMapping
-    fun index(@RequestBody request: AddProductRequest): Action {
+    fun index(
+        @RequestParam(name = "category-id") categoryId: Long,
+        @RequestBody request: AddProductRequest
+    ): Action {
         val id = catalogApi.createProduct(
             request = CreateProductRequest(
                 title = request.title,
                 summary = request.summary,
-                price = if (request.price == 0.0) null else request.price
+                price = if (request.price == 0.0) null else request.price,
+                categoryId = categoryId,
+                subCategoryId = request.subCategoryId
             )
         ).id
 

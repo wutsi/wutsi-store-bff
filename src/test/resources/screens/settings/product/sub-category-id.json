@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.settings.store.category.title",
+    "id": "page.settings.store.product.sub-category",
     "safe": false,
     "backgroundColor": "#FFFFFF"
   },
@@ -37,7 +37,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Enter the title of the category"
+                "caption": "Select the product secondary category"
               },
               "children": []
             }
@@ -50,20 +50,41 @@
           },
           "children": [
             {
-              "type": "Input",
+              "type": "DropdownButton",
               "attributes": {
                 "name": "value",
-                "value": "Sample product",
-                "hideText": false,
-                "required": true,
-                "caption": "Titre",
-                "enabled": true,
-                "readOnly": false,
-                "type": "Text",
-                "maxLength": 100,
-                "minLength": 0
+                "value": "2",
+                "required": true
               },
-              "children": []
+              "children": [
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "c1",
+                    "enabled": true,
+                    "value": "1"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "c2",
+                    "enabled": true,
+                    "value": "2"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "c3",
+                    "enabled": true,
+                    "value": "3"
+                  },
+                  "children": []
+                }
+              ]
             }
           ]
         },
@@ -88,7 +109,7 @@
               "children": [],
               "action": {
                 "type": "Command",
-                "url": "http://localhost:0/commands/update-category-attribute?id=777&name=title"
+                "url": "http://localhost:0/commands/update-product-attribute?id=777&name=sub-category-id"
               }
             }
           ]
@@ -99,7 +120,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Title",
+      "title": "Secondary Category",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

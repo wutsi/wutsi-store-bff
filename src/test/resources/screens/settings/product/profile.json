@@ -11,7 +11,10 @@
       "children": [
         {
           "type": "Column",
-          "attributes": {},
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
+          },
           "children": [
             {
               "type": "Container",
@@ -176,8 +179,26 @@
               ]
             },
             {
+              "type": "Container",
+              "attributes": {
+                "alignment": "CenterLeft",
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Category: Category 1",
+                    "alignment": "Left"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
               "type": "Divider",
               "attributes": {
+                "height": 1.0,
                 "color": "#8c8c8c"
               },
               "children": []
@@ -215,6 +236,27 @@
                       "action": {
                         "type": "Route",
                         "url": "http://localhost:0/settings/store/product/title?id=777"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Secondary Category",
+                        "subCaption": "Category 2",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/sub-category-id?id=777"
                       }
                     },
                     {
@@ -299,27 +341,6 @@
                       "action": {
                         "type": "Route",
                         "url": "http://localhost:0/settings/store/product/description?id=777"
-                      }
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Categories",
-                        "subCaption": "Category 1,Category 2,Category 3",
-                        "trailing": {
-                          "type": "Icon",
-                          "attributes": {
-                            "code": "e21a",
-                            "size": 24.0,
-                            "color": "#000000"
-                          },
-                          "children": []
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/settings/store/product/categories?id=777"
                       }
                     },
                     {

@@ -1,10 +1,12 @@
 package com.wutsi.application.store.endpoint.settings.product.add.screen
 
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.platform.catalog.dto.Category
 import com.wutsi.platform.catalog.dto.CategorySummary
+import com.wutsi.platform.catalog.dto.GetCategoryResponse
+import com.wutsi.platform.catalog.dto.SearchCategoryRequest
 import com.wutsi.platform.catalog.dto.SearchCategoryResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -12,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class SettingsProductAddScreenTest : AbstractEndpointTest() {
+internal class SettingsProductEditorScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     public val port: Int = 0
 
@@ -22,16 +24,20 @@ internal class SettingsProductAddScreenTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/settings/store/product/add"
+        url = "http://localhost:$port/settings/store/product/editor?category-id=111"
 
         val categories = listOf(
             CategorySummary(id = 1, title = "c1"),
             CategorySummary(id = 2, title = "c2"),
             CategorySummary(id = 3, title = "c3")
         )
-        doReturn(SearchCategoryResponse(categories)).whenever(catalogApi).searchCategories(any())
+        doReturn(SearchCategoryResponse(categories)).whenever(catalogApi)
+            .searchCategories(SearchCategoryRequest(parentId = 111))
+
+        val category = Category(id = 111L, title = "Foo")
+        doReturn(GetCategoryResponse(category)).whenever(catalogApi).getCategory(111)
     }
 
     @Test
-    fun index() = assertEndpointEquals("/screens/settings/product/add.json", url)
+    fun index() = assertEndpointEquals("/screens/settings/product/editor.json", url)
 }

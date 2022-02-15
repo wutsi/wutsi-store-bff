@@ -217,11 +217,8 @@ abstract class AbstractEndpointTest {
         price = 7000.0,
         comparablePrice = 10000.0,
         visible = true,
-        categories = listOf(
-            CategorySummary(id = 3, "Category 3"),
-            CategorySummary(id = 2, "Category 2"),
-            CategorySummary(id = 1, "Category 1"),
-        ),
+        category = CategorySummary(id = 1, "Category 1"),
+        subCategory = CategorySummary(id = 2, "Category 2"),
         pictures = if (withThumbnail)
             listOf(
                 PictureSummary(

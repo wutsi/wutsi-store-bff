@@ -19,14 +19,18 @@ import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
+import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.ButtonType
+import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.ImageSource
 import com.wutsi.flutter.sdui.enums.InputType
+import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.catalog.WutsiCatalogApi
 import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
@@ -71,13 +75,23 @@ class SettingsProductScreen(
             ),
             child = Container(
                 child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
                     children = listOf(
                         Container(
                             padding = 10.0,
                             height = IMAGE_HEIGHT + 2 * (10.0 + IMAGE_PADDING),
                             child = pictureListView(product),
                         ),
-                        Divider(color = Theme.COLOR_DIVIDER),
+                        Container(
+                            padding = 10.0,
+                            alignment = Alignment.CenterLeft,
+                            child = Text(
+                                alignment = TextAlignment.Left,
+                                caption = getText("page.settings.store.product.attribute.category") + ": ${product.category.title}",
+                            ),
+                        ),
+                        Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                         Flexible(
                             flex = 10,
                             child = ListView(
@@ -88,6 +102,11 @@ class SettingsProductScreen(
                                         "page.settings.store.product.attribute.title",
                                         product.title,
                                         urlBuilder.build("/settings/store/product/title?id=$id")
+                                    ),
+                                    item(
+                                        "page.settings.store.product.attribute.sub-category-id",
+                                        product.subCategory.title,
+                                        urlBuilder.build("/settings/store/product/sub-category-id?id=$id")
                                     ),
                                     item(
                                         "page.settings.store.product.attribute.price",
@@ -111,14 +130,6 @@ class SettingsProductScreen(
                                         "page.settings.store.product.attribute.description",
                                         description(product.description),
                                         urlBuilder.build("/settings/store/product/description?id=$id")
-                                    ),
-                                    item(
-                                        "page.settings.store.product.attribute.categories",
-                                        product.categories
-                                            .map { it.title }
-                                            .sortedBy { it }
-                                            .joinToString(separator = ","),
-                                        urlBuilder.build("/settings/store/product/categories?id=$id")
                                     ),
                                     ListItemSwitch(
                                         caption = getText("page.settings.store.product.attribute.visible"),

@@ -60,14 +60,6 @@ class SettingsStoreScreen(
                                         urlBuilder.build("/settings/store/products")
                                     )
                                 ),
-                                ListItem(
-                                    caption = getText("page.settings.store.categories"),
-                                    leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_BLACK),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/categories")
-                                    )
-                                ),
                             )
                         )
                     )

@@ -73,32 +73,6 @@
                     "type": "Route",
                     "url": "http://localhost:0/settings/store/products"
                   }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
-                    "caption": "Categories",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f"
-                      },
-                      "children": []
-                    },
-                    "leading": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e148",
-                        "color": "#000000"
-                      },
-                      "children": []
-                    }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/categories"
-                  }
                 }
               ]
             }

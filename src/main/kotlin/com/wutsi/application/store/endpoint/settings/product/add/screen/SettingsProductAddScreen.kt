@@ -1,19 +1,23 @@
 package com.wutsi.application.store.endpoint.settings.product.add.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
+import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
-import com.wutsi.flutter.sdui.Form
-import com.wutsi.flutter.sdui.Input
+import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.Flexible
+import com.wutsi.flutter.sdui.Icon
+import com.wutsi.flutter.sdui.ListItem
+import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
+import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
-import com.wutsi.flutter.sdui.enums.ActionType
-import com.wutsi.flutter.sdui.enums.InputType
+import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.platform.catalog.WutsiCatalogApi
+import com.wutsi.platform.catalog.dto.SearchCategoryRequest
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -22,11 +26,16 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/settings/store/product/add")
 class SettingsProductAddScreen(
     private val urlBuilder: URLBuilder,
-    private val tenantProvider: TenantProvider,
+    private val catalogApi: WutsiCatalogApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
-        val tenant = tenantProvider.get()
+        val categories = catalogApi.searchCategories(
+            request = SearchCategoryRequest(
+                parentId = null
+            )
+        ).categories
+
         return Screen(
             id = Page.SETTINGS_STORE_PRODUCT_ADD,
             appBar = AppBar(
@@ -35,47 +44,31 @@ class SettingsProductAddScreen(
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.settings.store.product.add.app-bar.title")
             ),
-            child = Form(
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
                 children = listOf(
                     Container(
                         padding = 10.0,
-                        child = Input(
-                            name = "title",
-                            maxLength = 100,
-                            caption = getText("page.settings.store.product.add.title"),
-                            required = true
+                        child = Text(
+                            caption = getText("page.settings.store.product.add.message"),
                         )
                     ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "summary",
-                            maxLength = 160,
-                            caption = getText("page.settings.store.product.add.summary")
+                    Divider(color = Theme.COLOR_DIVIDER),
+                    Flexible(
+                        child = ListView(
+                            separatorColor = Theme.COLOR_DIVIDER,
+                            separator = true,
+                            children = categories.map {
+                                ListItem(
+                                    caption = it.title,
+                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                                    action = gotoUrl(
+                                        urlBuilder.build("settings/store/product/editor?category-id=${it.id}")
+                                    )
+                                )
+                            }
                         )
                     ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "price",
-                            maxLength = 10,
-                            caption = getText("page.settings.store.product.add.price"),
-                            type = InputType.Number,
-                            suffix = tenant.currencySymbol
-                        )
-                    ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "submit",
-                            type = InputType.Submit,
-                            caption = getText("page.settings.store.product.add.button.submit"),
-                            action = Action(
-                                type = ActionType.Command,
-                                url = urlBuilder.build("commands/add-product")
-                            )
-                        )
-                    )
                 ),
             )
         ).toWidget()
