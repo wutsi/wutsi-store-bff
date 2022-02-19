@@ -877,6 +877,59 @@
               ]
             }
           ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 4.0
+          },
+          "children": [
+            {
+              "type": "CircleAvatar",
+              "attributes": {
+                "radius": 20.0,
+                "backgroundColor": "#e4edf7"
+              },
+              "children": [
+                {
+                  "type": "Stack",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "IconButton",
+                      "attributes": {
+                        "icon": "f37f",
+                        "size": 20.0
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/cart?merchant-id=77777"
+                      }
+                    },
+                    {
+                      "type": "Positioned",
+                      "attributes": {
+                        "top": 6.0,
+                        "right": 6.0
+                      },
+                      "children": [
+                        {
+                          "type": "Badge",
+                          "attributes": {
+                            "caption": "2",
+                            "fontSize": 10.0,
+                            "padding": 3.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },

@@ -20,49 +20,13 @@
               },
               "children": [
                 {
-                  "type": "Column",
+                  "type": "Text",
                   "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
+                    "caption": "Sample product",
+                    "bold": true,
+                    "size": 16.0
                   },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "Sample product",
-                        "bold": true,
-                        "size": 16.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 5.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {},
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Visit Ray Sponsible Store",
-                            "color": "#1D7EDF",
-                            "size": 10.0,
-                            "decoration": "Underline"
-                          },
-                          "children": []
-                        }
-                      ],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/catalog?id=77777"
-                      }
-                    }
-                  ]
+                  "children": []
                 }
               ]
             },
@@ -245,6 +209,106 @@
                         "caption": "This is a long description of the product"
                       },
                       "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Row",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min",
+                    "crossAxisAlignment": "start"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "RS",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "mainAxisSize": "min",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Ray Sponsible",
+                                "bold": true
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Marketing",
+                                "color": "#95A5A6"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Button",
+                              "attributes": {
+                                "caption": "Write to Merchant",
+                                "padding": 10.0,
+                                "type": "Outlined",
+                                "stretched": false
+                              },
+                              "children": [],
+                              "action": {
+                                "type": "Share",
+                                "url": "https://www.wutsi.me/product?id=$11"
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }

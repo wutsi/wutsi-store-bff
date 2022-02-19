@@ -16,7 +16,7 @@
           "type": "ListItem",
           "attributes": {
             "caption": "Ray Sponsible",
-            "subCaption": "Business Account",
+            "subCaption": "Marketing",
             "padding": 10.0,
             "leading": {
               "type": "CircleAvatar",
@@ -821,15 +821,62 @@
       "foregroundColor": "#000000",
       "actions": [
         {
-          "type": "IconButton",
+          "type": "Container",
           "attributes": {
-            "icon": "e57f"
+            "padding": 4.0
           },
-          "children": [],
-          "action": {
-            "type": "Route",
-            "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
-          }
+          "children": [
+            {
+              "type": "CircleAvatar",
+              "attributes": {
+                "radius": 20.0,
+                "backgroundColor": "#e4edf7"
+              },
+              "children": [
+                {
+                  "type": "IconButton",
+                  "attributes": {
+                    "icon": "e153",
+                    "size": 20.0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Navigate",
+                    "url": "https://wa.me/1237666666669?text=https%3A%2F%2Fwww.wutsi.me%2Fprofile%3Fid%3D%249"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 4.0
+          },
+          "children": [
+            {
+              "type": "CircleAvatar",
+              "attributes": {
+                "radius": 20.0,
+                "backgroundColor": "#e4edf7"
+              },
+              "children": [
+                {
+                  "type": "IconButton",
+                  "attributes": {
+                    "icon": "ea47",
+                    "size": 20.0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Share",
+                    "url": "https://www.wutsi.me/profile?id=$9"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
