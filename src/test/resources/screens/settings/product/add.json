@@ -62,7 +62,8 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/product/editor?category-id=1"
+                    "url": "http://localhost:0/settings/store/product/editor?category-id=1",
+                    "replacement": true
                   }
                 },
                 {
@@ -80,7 +81,8 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/product/editor?category-id=2"
+                    "url": "http://localhost:0/settings/store/product/editor?category-id=2",
+                    "replacement": true
                   }
                 },
                 {
@@ -98,7 +100,8 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/product/editor?category-id=3"
+                    "url": "http://localhost:0/settings/store/product/editor?category-id=3",
+                    "replacement": true
                   }
                 }
               ]

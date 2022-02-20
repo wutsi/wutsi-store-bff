@@ -11,6 +11,7 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.platform.catalog.dto.CreateProductRequest
 import com.wutsi.platform.catalog.dto.CreateProductResponse
+import com.wutsi.platform.catalog.entity.ProductType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -43,7 +44,10 @@ internal class AddProductCommandTest : AbstractEndpointTest() {
             title = "Product1",
             summary = "This is a nice summary",
             price = 10000.0,
-            subCategoryId = 333L
+            subCategoryId = 333L,
+            type = ProductType.NUMERIC.name,
+            quantity = 100,
+            maxOrder = 5,
         )
         val response = rest.postForEntity(url, request, Action::class.java)
 
@@ -59,6 +63,9 @@ internal class AddProductCommandTest : AbstractEndpointTest() {
         assertEquals(111L, req.firstValue.categoryId)
         assertNull(req.firstValue.comparablePrice)
         assertNull(req.firstValue.description)
+        assertEquals(request.type, req.firstValue.type)
+        assertEquals(request.quantity, req.firstValue.quantity)
+        assertEquals(request.maxOrder, req.firstValue.maxOrder)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)

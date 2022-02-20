@@ -109,6 +109,11 @@ class SettingsProductScreen(
                                         urlBuilder.build("/settings/store/product/sub-category-id?id=$id")
                                     ),
                                     item(
+                                        "page.settings.store.product.attribute.type",
+                                        getText("product.type." + product.type),
+                                        urlBuilder.build("/settings/store/product/type?id=$id")
+                                    ),
+                                    item(
                                         "page.settings.store.product.attribute.price",
                                         price,
                                         urlBuilder.build("/settings/store/product/price?id=$id")
@@ -125,6 +130,16 @@ class SettingsProductScreen(
                                         "page.settings.store.product.attribute.summary",
                                         product.summary,
                                         urlBuilder.build("/settings/store/product/summary?id=$id")
+                                    ),
+                                    item(
+                                        "page.settings.store.product.attribute.quantity",
+                                        product.quantity.toString(),
+                                        urlBuilder.build("/settings/store/product/quantity?id=$id")
+                                    ),
+                                    item(
+                                        "page.settings.store.product.attribute.max-order",
+                                        product.maxOrder?.toString(),
+                                        urlBuilder.build("/settings/store/product/max-order?id=$id")
                                     ),
                                     item(
                                         "page.settings.store.product.attribute.description",

@@ -65,7 +65,8 @@ class SettingsProductAddScreen(
                                         caption = it.title,
                                         trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                         action = gotoUrl(
-                                            urlBuilder.build("settings/store/product/editor?category-id=${it.id}")
+                                            urlBuilder.build("settings/store/product/editor?category-id=${it.id}"),
+                                            replacement = true
                                         )
                                     )
                                 }

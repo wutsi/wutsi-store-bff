@@ -262,6 +262,27 @@
                     {
                       "type": "ListItem",
                       "attributes": {
+                        "caption": "Type",
+                        "subCaption": "Physical Product",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/type?id=777"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
                         "caption": "Price",
                         "subCaption": "7,000 CFA",
                         "trailing": {
@@ -320,6 +341,48 @@
                       "action": {
                         "type": "Route",
                         "url": "http://localhost:0/settings/store/product/summary?id=777"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Quantity in Stock",
+                        "subCaption": "30",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/quantity?id=777"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Max Items per Order",
+                        "subCaption": "5",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/max-order?id=777"
                       }
                     },
                     {

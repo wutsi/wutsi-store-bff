@@ -19,6 +19,7 @@ import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.ListView
@@ -124,20 +125,36 @@ class ProductScreen(
                 )
             )
 
-        // Buttons
-        if (cart != null)
-            children.add(
-                Container(
-                    padding = 10.0,
-                    child = Button(
-                        padding = 10.0,
-                        caption = getText("page.product.button.add-to-cart"),
-                        action = executeCommand(
-                            url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+        // Stock
+        children.add(
+            Container(
+                padding = 10.0,
+                child = Column(
+                    children = listOf(
+                        Row(
+                            children = listOf(
+                                if (product.quantity > 0)
+                                    Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS)
+                                else
+                                    Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER),
+
+                                if (product.quantity > 0)
+                                    Text(getText("page.product.in-stock"))
+                                else
+                                    Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
+                            )
+                        ),
+                        Button(
+                            padding = 10.0,
+                            caption = getText("page.product.button.add-to-cart"),
+                            action = executeCommand(
+                                url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+                            )
                         )
                     )
                 )
             )
+        )
 
         // Product Details
         if (!product.description.isNullOrEmpty())

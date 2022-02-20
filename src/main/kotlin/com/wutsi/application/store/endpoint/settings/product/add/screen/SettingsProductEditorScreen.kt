@@ -8,11 +8,13 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Container
+import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.DropdownButton
 import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Form
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.Screen
+import com.wutsi.flutter.sdui.SingleChildScrollView
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.InputType
@@ -47,67 +49,108 @@ class SettingsProductEditorScreen(
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.settings.store.product.editor.app-bar.title")
             ),
-            child = Form(
-                children = listOf(
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "title",
-                            maxLength = 100,
-                            caption = getText("page.settings.store.product.editor.title"),
-                            required = true
-                        )
-                    ),
-                    Container(
-                        padding = 10.0,
-                        child = DropdownButton(
-                            name = "subCategoryId",
-                            value = null,
-                            required = true,
-                            children = categories
-                                .sortedBy { it.title }
-                                .map {
+            child = SingleChildScrollView(
+                child = Form(
+                    children = listOf(
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "title",
+                                maxLength = 100,
+                                caption = getText("page.settings.store.product.editor.title"),
+                                required = true
+                            )
+                        ),
+                        Container(
+                            padding = 10.0,
+                            child = DropdownButton(
+                                name = "subCategoryId",
+                                hint = getText("page.settings.store.product.editor.sub-category"),
+                                value = null,
+                                required = true,
+                                children = categories
+                                    .sortedBy { it.title }
+                                    .map {
+                                        DropdownMenuItem(
+                                            caption = it.title,
+                                            value = it.id.toString(),
+                                        )
+                                    }
+                            )
+                        ),
+                        Container(
+                            padding = 10.0,
+                            child = DropdownButton(
+                                name = "type",
+                                hint = getText("page.settings.store.product.editor.type"),
+                                value = null,
+                                required = true,
+                                children = listOf(
                                     DropdownMenuItem(
-                                        caption = it.title,
-                                        value = it.id.toString(),
+                                        caption = getText("product.type.PHYSICAL"),
+                                        value = "PHYSICAL",
+                                    ),
+                                    DropdownMenuItem(
+                                        caption = getText("product.type.NUMERIC"),
+                                        value = "NUMERIC",
+                                    ),
+                                )
+                            )
+                        ),
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "summary",
+                                maxLength = 160,
+                                caption = getText("page.settings.store.product.editor.summary")
+                            )
+                        ),
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "price",
+                                maxLength = 10,
+                                caption = getText("page.settings.store.product.editor.price"),
+                                type = InputType.Number,
+                                suffix = tenant.currencySymbol
+                            )
+                        ),
+                        Divider(color = Theme.COLOR_DIVIDER),
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "quantity",
+                                caption = getText("page.settings.store.product.editor.quantity"),
+                                type = InputType.Number,
+                                required = true
+                            )
+                        ),
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "maxOrder",
+                                caption = getText("page.settings.store.product.editor.max-order"),
+                                type = InputType.Number,
+                            )
+                        ),
+
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "submit",
+                                type = InputType.Submit,
+                                caption = getText("page.settings.store.product.editor.button.submit"),
+                                action = Action(
+                                    type = ActionType.Command,
+                                    url = urlBuilder.build("commands/add-product"),
+                                    parameters = mapOf(
+                                        "category-id" to categoryId.toString()
                                     )
-                                }
-                        )
-                    ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "summary",
-                            maxLength = 160,
-                            caption = getText("page.settings.store.product.editor.summary")
-                        )
-                    ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "price",
-                            maxLength = 10,
-                            caption = getText("page.settings.store.product.editor.price"),
-                            type = InputType.Number,
-                            suffix = tenant.currencySymbol
-                        )
-                    ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "submit",
-                            type = InputType.Submit,
-                            caption = getText("page.settings.store.product.editor.button.submit"),
-                            action = Action(
-                                type = ActionType.Command,
-                                url = urlBuilder.build("commands/add-product"),
-                                parameters = mapOf(
-                                    "category-id" to categoryId.toString()
                                 )
                             )
                         )
-                    )
-                ),
+                    ),
+                )
             )
         ).toWidget()
     }

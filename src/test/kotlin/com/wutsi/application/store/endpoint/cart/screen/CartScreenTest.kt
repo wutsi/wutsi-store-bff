@@ -51,11 +51,28 @@ internal class CartScreenTest : AbstractEndpointTest() {
         doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
 
         val products = listOf(
-            ProductSummary(id = 1, price = 100.0),
-            ProductSummary(id = 2, price = 1000.0)
+            ProductSummary(id = 1, price = 100.0, quantity = 5, maxOrder = null),
+            ProductSummary(id = 2, price = 1000.0, quantity = 10, maxOrder = 3)
         )
         doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
 
         assertEndpointEquals("/screens/cart/cart.json", url)
+    }
+
+    @Test
+    fun outOfStock() {
+        val cart = Cart(
+            products = listOf(
+                Product(productId = 1, quantity = 5),
+            )
+        )
+        doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
+
+        val products = listOf(
+            ProductSummary(id = 1, price = 100.0, quantity = 0, maxOrder = null),
+        )
+        doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
+
+        assertEndpointEquals("/screens/cart/cart-out-of-stock.json", url)
     }
 }

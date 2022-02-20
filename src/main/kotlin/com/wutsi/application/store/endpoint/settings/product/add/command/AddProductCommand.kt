@@ -29,7 +29,10 @@ class AddProductCommand(
                 summary = request.summary,
                 price = if (request.price == 0.0) null else request.price,
                 categoryId = categoryId,
-                subCategoryId = request.subCategoryId
+                subCategoryId = request.subCategoryId,
+                type = request.type,
+                maxOrder = if (request.maxOrder == 0) null else request.maxOrder,
+                quantity = request.quantity
             )
         ).id
 

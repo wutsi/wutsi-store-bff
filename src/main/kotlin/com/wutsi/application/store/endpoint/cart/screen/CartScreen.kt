@@ -16,6 +16,7 @@ import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.DropdownButton
 import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Flexible
+import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
@@ -39,7 +40,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.lang.Integer.max
 import java.text.DecimalFormat
 
 @RestController
@@ -97,7 +97,7 @@ class CartScreen(
                     ProfileListItem(
                         model = sharedUIMapper.toAccountModel(merchant)
                     ),
-                    Divider(color = Theme.COLOR_DIVIDER),
+                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     Flexible(
                         child = ListView(
                             children = children,
@@ -112,7 +112,8 @@ class CartScreen(
 
     private fun toProductWidget(cart: Cart, product: ProductSummary, tenant: Tenant): WidgetAware {
         val quantity = getQuantity(cart, product.id)
-        val maxQuantity = max(10, quantity)
+        val maxQuantity = product.maxOrder ?: product.quantity
+
         return Container(
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
@@ -130,17 +131,25 @@ class CartScreen(
                             Container(
                                 padding = 10.0,
                                 width = 100.0,
-                                child = DropdownButton(
-                                    name = "quantity",
-                                    value = quantity.toString(),
-                                    children = IntRange(1, maxQuantity).map {
-                                        DropdownMenuItem(caption = it.toString(), value = it.toString())
-                                    },
-                                    outlinedBorder = false,
-                                    action = executeCommand(
-                                        urlBuilder.build("commands/update-cart?merchant-id=${product.accountId}&product-id=${product.id}")
+                                child = if (product.quantity > 0)
+                                    DropdownButton(
+                                        name = "quantity",
+                                        value = quantity.toString(),
+                                        children = IntRange(1, maxQuantity).map {
+                                            DropdownMenuItem(caption = it.toString(), value = it.toString())
+                                        },
+                                        outlinedBorder = false,
+                                        action = executeCommand(
+                                            urlBuilder.build("commands/update-cart?merchant-id=${product.accountId}&product-id=${product.id}")
+                                        )
                                     )
-                                )
+                                else
+                                    Row(
+                                        children = listOf(
+                                            Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER),
+                                            Text(getText("page.cart.out-of-stock"), color = Theme.COLOR_DANGER)
+                                        )
+                                    )
                             ),
                             Button(
                                 padding = 10.0,

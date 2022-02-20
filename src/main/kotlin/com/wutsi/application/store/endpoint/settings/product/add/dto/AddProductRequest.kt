@@ -5,4 +5,7 @@ data class AddProductRequest(
     val summary: String = "",
     val price: Double = 0.0,
     val subCategoryId: Long = -1,
+    val quantity: Int = 0,
+    val maxOrder: Int? = null,
+    val type: String = ""
 )

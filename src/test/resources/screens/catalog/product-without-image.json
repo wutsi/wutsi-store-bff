@@ -174,6 +174,54 @@
               ]
             },
             {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Row",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e156",
+                            "color": "#4CAF50"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "In Stock"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "Add to Cart",
+                        "padding": 10.0,
+                        "type": "Elevated"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Command",
+                        "url": "http://localhost:0/commands/add-to-cart?product-id=1&merchant-id=77777"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "type": "Divider",
               "attributes": {
                 "height": 1.0,

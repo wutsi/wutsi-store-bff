@@ -6,149 +6,243 @@
   },
   "children": [
     {
-      "type": "Form",
+      "type": "SingleChildScrollView",
       "attributes": {},
       "children": [
         {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
+          "type": "Form",
+          "attributes": {},
           "children": [
             {
-              "type": "Input",
+              "type": "Container",
               "attributes": {
-                "name": "title",
-                "hideText": false,
-                "required": true,
-                "caption": "Titre (Required)",
-                "enabled": true,
-                "readOnly": false,
-                "type": "Text",
-                "maxLength": 100,
-                "minLength": 0
-              },
-              "children": []
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "DropdownButton",
-              "attributes": {
-                "name": "subCategoryId",
-                "required": true
+                "padding": 10.0
               },
               "children": [
                 {
-                  "type": "DropdownMenuItem",
+                  "type": "Input",
                   "attributes": {
-                    "caption": "c1",
+                    "name": "title",
+                    "hideText": false,
+                    "required": true,
+                    "caption": "Titre (Required)",
                     "enabled": true,
-                    "value": "1"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "c2",
-                    "enabled": true,
-                    "value": "2"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "c3",
-                    "enabled": true,
-                    "value": "3"
+                    "readOnly": false,
+                    "type": "Text",
+                    "maxLength": 100,
+                    "minLength": 0
                   },
                   "children": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
+            },
             {
-              "type": "Input",
+              "type": "Container",
               "attributes": {
-                "name": "summary",
-                "hideText": false,
-                "required": false,
-                "caption": "Summary",
-                "enabled": true,
-                "readOnly": false,
-                "type": "Text",
-                "maxLength": 160,
-                "minLength": 0
+                "padding": 10.0
               },
-              "children": []
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "Input",
-              "attributes": {
-                "name": "price",
-                "hideText": false,
-                "required": false,
-                "caption": "Price",
-                "enabled": true,
-                "readOnly": false,
-                "type": "Number",
-                "maxLength": 10,
-                "minLength": 0,
-                "suffix": "FCFA"
-              },
-              "children": []
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "Input",
-              "attributes": {
-                "name": "submit",
-                "hideText": false,
-                "required": false,
-                "caption": "Submit",
-                "enabled": true,
-                "readOnly": false,
-                "type": "Submit",
-                "minLength": 0
-              },
-              "children": [],
-              "action": {
-                "type": "Command",
-                "url": "http://localhost:0/commands/add-product",
-                "parameters": {
-                  "category-id": "111"
+              "children": [
+                {
+                  "type": "DropdownButton",
+                  "attributes": {
+                    "name": "subCategoryId",
+                    "hint": "Secondary Category (required)",
+                    "required": true
+                  },
+                  "children": [
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "c1",
+                        "enabled": true,
+                        "value": "1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "c2",
+                        "enabled": true,
+                        "value": "2"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "c3",
+                        "enabled": true,
+                        "value": "3"
+                      },
+                      "children": []
+                    }
+                  ]
                 }
-              }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "DropdownButton",
+                  "attributes": {
+                    "name": "type",
+                    "hint": "Type (Required)",
+                    "required": true
+                  },
+                  "children": [
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "Physical Product",
+                        "enabled": true,
+                        "value": "PHYSICAL"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "Numeric Product",
+                        "enabled": true,
+                        "value": "NUMERIC"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "summary",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Summary",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Text",
+                    "maxLength": 160,
+                    "minLength": 0
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "price",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Price",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Number",
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "suffix": "FCFA"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "quantity",
+                    "hideText": false,
+                    "required": true,
+                    "caption": "Quantity in Stock (Required)",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Number",
+                    "minLength": 0
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "maxOrder",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Max Items per Order",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Number",
+                    "minLength": 0
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "submit",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Submit",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Submit",
+                    "minLength": 0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/add-product",
+                    "parameters": {
+                      "category-id": "111"
+                    }
+                  }
+                }
+              ]
             }
           ]
         }

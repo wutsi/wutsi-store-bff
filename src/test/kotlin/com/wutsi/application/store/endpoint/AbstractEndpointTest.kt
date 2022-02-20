@@ -14,6 +14,7 @@ import com.wutsi.platform.catalog.dto.CategorySummary
 import com.wutsi.platform.catalog.dto.PictureSummary
 import com.wutsi.platform.catalog.dto.Product
 import com.wutsi.platform.catalog.dto.ProductSummary
+import com.wutsi.platform.catalog.entity.ProductType
 import com.wutsi.platform.core.security.SubjectType
 import com.wutsi.platform.core.security.SubjectType.USER
 import com.wutsi.platform.core.security.spring.SpringAuthorizationRequestInterceptor
@@ -219,6 +220,9 @@ abstract class AbstractEndpointTest {
         visible = true,
         category = CategorySummary(id = 1, "Category 1"),
         subCategory = CategorySummary(id = 2, "Category 2"),
+        type = ProductType.PHYSICAL.name,
+        quantity = 30,
+        maxOrder = 5,
         pictures = if (withThumbnail)
             listOf(
                 PictureSummary(
@@ -254,7 +258,12 @@ abstract class AbstractEndpointTest {
         thumbnail = PictureSummary(
             id = 3,
             url = "https://www.imag.com/$id.png"
-        )
+        ),
+        categoryId = 1,
+        subCategoryId = 2,
+        type = ProductType.PHYSICAL.name,
+        quantity = 30,
+        maxOrder = 5,
     )
 
     protected fun createAccount(id: Long = ACCOUNT_ID) = Account(
@@ -276,6 +285,6 @@ abstract class AbstractEndpointTest {
             title = "Marketing",
         ),
         timezoneId = "Africa/Douala",
-        whatsapp = "+123766666666$id"
+        whatsapp = "+123766666666$id",
     )
 }

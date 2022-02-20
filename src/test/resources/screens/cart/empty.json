@@ -41,6 +41,7 @@
         {
           "type": "Divider",
           "attributes": {
+            "height": 1.0,
             "color": "#8c8c8c"
           },
           "children": []
