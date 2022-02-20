@@ -5,10 +5,10 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.application.store.endpoint.cart.dto.UpdateCartRequest
+import com.wutsi.ecommerce.cart.WutsiCartApi
+import com.wutsi.ecommerce.cart.dto.UpdateProductRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
-import com.wutsi.platform.cart.WutsiCartApi
-import com.wutsi.platform.cart.dto.UpdateProductRequest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

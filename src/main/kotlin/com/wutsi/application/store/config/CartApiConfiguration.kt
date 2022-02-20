@@ -2,10 +2,8 @@ package com.wutsi.application.store.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.wutsi.application.shared.service.FeignAcceptLanguageInterceptor
-import com.wutsi.platform.cart.Environment.PRODUCTION
-import com.wutsi.platform.cart.Environment.SANDBOX
-import com.wutsi.platform.cart.WutsiCartApi
-import com.wutsi.platform.cart.WutsiCartApiBuilder
+import com.wutsi.ecommerce.cart.WutsiCartApi
+import com.wutsi.ecommerce.cart.WutsiCartApiBuilder
 import com.wutsi.platform.core.security.feign.FeignAuthorizationRequestInterceptor
 import com.wutsi.platform.core.tracing.feign.FeignTracingRequestInterceptor
 import com.wutsi.platform.core.util.feign.Custom5XXErrorDecoder
@@ -35,9 +33,9 @@ class CartApiConfiguration(
             errorDecoder = Custom5XXErrorDecoder()
         )
 
-    private fun environment(): com.wutsi.platform.cart.Environment =
+    private fun environment(): com.wutsi.ecommerce.cart.Environment =
         if (env.acceptsProfiles(Profiles.of("prod")))
-            PRODUCTION
+            com.wutsi.ecommerce.cart.Environment.PRODUCTION
         else
-            SANDBOX
+            com.wutsi.ecommerce.cart.Environment.SANDBOX
 }

@@ -4,12 +4,12 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.ecommerce.cart.WutsiCartApi
+import com.wutsi.ecommerce.cart.dto.Cart
+import com.wutsi.ecommerce.cart.dto.GetCartResponse
+import com.wutsi.ecommerce.cart.dto.Product
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
-import com.wutsi.platform.cart.WutsiCartApi
-import com.wutsi.platform.cart.dto.Cart
-import com.wutsi.platform.cart.dto.GetCartResponse
-import com.wutsi.platform.cart.dto.Product
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

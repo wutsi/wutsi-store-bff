@@ -2,9 +2,9 @@ package com.wutsi.application.store.endpoint.cart.command
 
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
+import com.wutsi.ecommerce.cart.WutsiCartApi
+import com.wutsi.ecommerce.cart.dto.AddProductRequest
 import com.wutsi.flutter.sdui.Action
-import com.wutsi.platform.cart.WutsiCartApi
-import com.wutsi.platform.cart.dto.AddProductRequest
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
