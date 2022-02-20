@@ -1,8 +1,8 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.command
 
 import com.wutsi.application.store.endpoint.AbstractCommand
-import com.wutsi.platform.catalog.WutsiCatalogApi
-import com.wutsi.platform.catalog.dto.AddPictureRequest
+import com.wutsi.ecommerce.catalog.WutsiCatalogApi
+import com.wutsi.ecommerce.catalog.dto.AddPictureRequest
 import com.wutsi.platform.core.logging.KVLogger
 import com.wutsi.platform.core.storage.StorageService
 import org.springframework.web.bind.annotation.PostMapping

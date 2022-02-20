@@ -3,8 +3,8 @@ package com.wutsi.application.store.endpoint.settings.product.profile.command
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.settings.product.profile.dto.UpdateProductAttributeRequest
+import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.flutter.sdui.Action
-import com.wutsi.platform.catalog.WutsiCatalogApi
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -26,7 +26,7 @@ class UpdateProductAttributeCommand(
         catalogApi.updateProductAttribute(
             id = id,
             name = name,
-            request = com.wutsi.platform.catalog.dto.UpdateProductAttributeRequest(
+            request = com.wutsi.ecommerce.catalog.dto.UpdateProductAttributeRequest(
                 value = request.value
             )
         )

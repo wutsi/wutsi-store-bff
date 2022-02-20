@@ -1,17 +1,17 @@
-package com.wutsi.application.store.endpoint.catalog.screen
+package com.wutsi.application.store.endpoint.home.screen
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.ecommerce.catalog.dto.GetProductResponse
+import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.cart.WutsiCartApi
 import com.wutsi.platform.cart.dto.Cart
 import com.wutsi.platform.cart.dto.GetCartResponse
 import com.wutsi.platform.cart.dto.Product
-import com.wutsi.platform.catalog.dto.GetProductResponse
-import com.wutsi.platform.catalog.dto.SearchProductResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -19,7 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class CatalogScreenTest : AbstractEndpointTest() {
+internal class HomeScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     public val port: Int = 0
 
@@ -44,17 +44,17 @@ internal class CatalogScreenTest : AbstractEndpointTest() {
 
     @Test
     fun myCatalog() {
-        val url = "http://localhost:$port/catalog"
-        assertEndpointEquals("/screens/catalog/catalog-me.json", url)
+        val url = "http://localhost:$port"
+        assertEndpointEquals("/screens/home/catalog-me.json", url)
     }
 
     @Test
     fun otherCatalog() {
         val accountId = 9L
-        val url = "http://localhost:$port/catalog?id=$accountId"
+        val url = "http://localhost:$port?id=$accountId"
         val account = createAccount(accountId)
         doReturn(GetAccountResponse(account)).whenever(accountApi).getAccount(accountId)
-        assertEndpointEquals("/screens/catalog/catalog-other.json", url)
+        assertEndpointEquals("/screens/home/catalog-other.json", url)
     }
 
     @Test
@@ -72,7 +72,7 @@ internal class CatalogScreenTest : AbstractEndpointTest() {
         val product = createProduct(true)
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
-        val url = "http://localhost:$port/catalog"
-        assertEndpointEquals("/screens/catalog/catalog-with-cart-enabled.json", url)
+        val url = "http://localhost:$port"
+        assertEndpointEquals("/screens/home/catalog-with-cart-enabled.json", url)
     }
 }

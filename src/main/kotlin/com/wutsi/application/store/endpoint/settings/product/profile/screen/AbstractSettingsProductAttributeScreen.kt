@@ -3,6 +3,8 @@ package com.wutsi.application.store.endpoint.settings.product.profile.screen
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
+import com.wutsi.ecommerce.catalog.WutsiCatalogApi
+import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Container
@@ -15,8 +17,6 @@ import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.InputType
-import com.wutsi.platform.catalog.WutsiCatalogApi
-import com.wutsi.platform.catalog.dto.Product
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 

@@ -2,12 +2,12 @@ package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.ecommerce.catalog.WutsiCatalogApi
+import com.wutsi.ecommerce.catalog.dto.Product
+import com.wutsi.ecommerce.catalog.dto.SearchCategoryRequest
 import com.wutsi.flutter.sdui.DropdownButton
 import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.WidgetAware
-import com.wutsi.platform.catalog.WutsiCatalogApi
-import com.wutsi.platform.catalog.dto.Product
-import com.wutsi.platform.catalog.dto.SearchCategoryRequest
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 

@@ -1,4 +1,4 @@
-package com.wutsi.application.store.endpoint.catalog.screen
+package com.wutsi.application.store.endpoint.home
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.PhoneUtil
@@ -12,6 +12,9 @@ import com.wutsi.application.shared.ui.ProductCard
 import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.ecommerce.catalog.WutsiCatalogApi
+import com.wutsi.ecommerce.catalog.dto.ProductSummary
+import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.CircleAvatar
@@ -32,9 +35,6 @@ import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.cart.WutsiCartApi
 import com.wutsi.platform.cart.dto.Cart
-import com.wutsi.platform.catalog.WutsiCatalogApi
-import com.wutsi.platform.catalog.dto.ProductSummary
-import com.wutsi.platform.catalog.dto.SearchProductRequest
 import com.wutsi.platform.tenant.dto.Tenant
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -43,8 +43,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/catalog")
-class CatalogScreen(
+@RequestMapping("/")
+class HomeScreen(
     private val urlBuilder: URLBuilder,
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
@@ -55,7 +55,7 @@ class CatalogScreen(
     private val togglesProvider: TogglesProvider,
 ) : AbstractQuery() {
     companion object {
-        private val LOGGER = LoggerFactory.getLogger(CatalogScreen::class.java)
+        private val LOGGER = LoggerFactory.getLogger(HomeScreen::class.java)
     }
 
     @PostMapping

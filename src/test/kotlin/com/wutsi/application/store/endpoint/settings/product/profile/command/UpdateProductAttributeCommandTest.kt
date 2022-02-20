@@ -29,7 +29,7 @@ internal class UpdateProductAttributeCommandTest : AbstractEndpointTest() {
         // THEN
         kotlin.test.assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<com.wutsi.platform.catalog.dto.UpdateProductAttributeRequest>()
+        val req = argumentCaptor<com.wutsi.ecommerce.catalog.dto.UpdateProductAttributeRequest>()
         verify(catalogApi).updateProductAttribute(eq(productId), eq("title"), req.capture())
         assertEquals(request.value, req.firstValue.value)
 
@@ -49,7 +49,7 @@ internal class UpdateProductAttributeCommandTest : AbstractEndpointTest() {
         // THEN
         kotlin.test.assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<com.wutsi.platform.catalog.dto.UpdateProductAttributeRequest>()
+        val req = argumentCaptor<com.wutsi.ecommerce.catalog.dto.UpdateProductAttributeRequest>()
         verify(catalogApi).updateProductAttribute(eq(productId), eq("visible"), req.capture())
         assertEquals(request.value, req.firstValue.value)
 

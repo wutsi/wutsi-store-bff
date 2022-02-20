@@ -4,9 +4,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.platform.catalog.dto.PictureSummary
-import com.wutsi.platform.catalog.dto.ProductSummary
-import com.wutsi.platform.catalog.dto.SearchProductResponse
+import com.wutsi.ecommerce.catalog.dto.PictureSummary
+import com.wutsi.ecommerce.catalog.dto.ProductSummary
+import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

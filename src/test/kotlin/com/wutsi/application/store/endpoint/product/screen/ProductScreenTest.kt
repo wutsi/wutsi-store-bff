@@ -1,15 +1,15 @@
-package com.wutsi.application.store.endpoint.catalog.screen
+package com.wutsi.application.store.endpoint.product.screen
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.ecommerce.catalog.dto.GetProductResponse
 import com.wutsi.platform.cart.WutsiCartApi
 import com.wutsi.platform.cart.dto.Cart
 import com.wutsi.platform.cart.dto.GetCartResponse
 import com.wutsi.platform.cart.dto.Product
-import com.wutsi.platform.catalog.dto.GetProductResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -41,7 +41,7 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         val product = createProduct(true)
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
-        assertEndpointEquals("/screens/catalog/product-with-image.json", url)
+        assertEndpointEquals("/screens/product/product-with-image.json", url)
     }
 
     @Test
@@ -49,7 +49,7 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         val product = createProduct(false)
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
-        assertEndpointEquals("/screens/catalog/product-without-image.json", url)
+        assertEndpointEquals("/screens/product/product-without-image.json", url)
     }
 
     @Test
@@ -67,6 +67,6 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         val product = createProduct(true)
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
-        assertEndpointEquals("/screens/catalog/product-with-cart-enabled.json", url)
+        assertEndpointEquals("/screens/product/product-with-cart-enabled.json", url)
     }
 }

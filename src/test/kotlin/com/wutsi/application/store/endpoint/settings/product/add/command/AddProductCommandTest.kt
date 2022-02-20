@@ -7,11 +7,11 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.application.store.endpoint.settings.product.add.dto.AddProductRequest
+import com.wutsi.ecommerce.catalog.dto.CreateProductRequest
+import com.wutsi.ecommerce.catalog.dto.CreateProductResponse
+import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
-import com.wutsi.platform.catalog.dto.CreateProductRequest
-import com.wutsi.platform.catalog.dto.CreateProductResponse
-import com.wutsi.platform.catalog.entity.ProductType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

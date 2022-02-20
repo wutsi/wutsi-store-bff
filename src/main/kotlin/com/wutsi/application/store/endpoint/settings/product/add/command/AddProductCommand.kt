@@ -3,9 +3,9 @@ package com.wutsi.application.store.endpoint.settings.product.add.command
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.settings.product.add.dto.AddProductRequest
+import com.wutsi.ecommerce.catalog.WutsiCatalogApi
+import com.wutsi.ecommerce.catalog.dto.CreateProductRequest
 import com.wutsi.flutter.sdui.Action
-import com.wutsi.platform.catalog.WutsiCatalogApi
-import com.wutsi.platform.catalog.dto.CreateProductRequest
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
