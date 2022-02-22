@@ -122,7 +122,7 @@ class CheckoutReviewScreen(
                 leading = IconButton(
                     icon = Theme.ICON_CANCEL,
                     action = executeCommand(
-                        url = urlBuilder.build(loginUrl, "commands/cancel-order?order-id=$orderId")
+                        url = urlBuilder.build("commands/cancel-order?order-id=$orderId")
                     )
                 )
             ),
@@ -146,12 +146,19 @@ class CheckoutReviewScreen(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.end,
                 children = listOfNotNull(
-                    Text(fmt.format(item.unitPrice), bold = true),
+                    Text(fmt.format(item.quantity * item.unitPrice), bold = true),
                     if (item.unitComparablePrice != null && item.unitComparablePrice!! > item.unitPrice)
                         Text(
-                            fmt.format(item.unitComparablePrice),
+                            fmt.format(item.quantity * item.unitComparablePrice!!),
                             size = Theme.TEXT_SIZE_SMALL,
                             decoration = TextDecoration.Strikethrough
+                        )
+                    else
+                        null,
+                    if (item.quantity > 1)
+                        Text(
+                            getText("page.checkout.review.price_each", arrayOf(fmt.format(item.unitPrice))),
+                            size = Theme.TEXT_SIZE_SMALL,
                         )
                     else
                         null
@@ -172,12 +179,15 @@ class CheckoutReviewScreen(
                 mainAxisAlignment = MainAxisAlignment.start,
                 mainAxisSize = MainAxisSize.min,
                 children = listOfNotNull(
-                    toPriceRow(getText("page.checkout.review.sub-total-price"), fmt.format(order.subTotalPrice)),
+                    toPriceRow(
+                        getText("page.checkout.review.sub-total-price", arrayOf(order.items.size)),
+                        fmt.format(order.subTotalPrice)
+                    ),
                     toPriceRow(getText("page.checkout.review.delivery-fees"), fmt.format(order.deliveryFees)),
                     if (order.savingsAmount > 0)
                         toPriceRow(
                             getText("page.checkout.review.savings"),
-                            fmt.format(order.savingsAmount),
+                            "-" + fmt.format(order.savingsAmount),
                             false,
                             Theme.COLOR_SUCCESS
                         )
@@ -195,7 +205,7 @@ class CheckoutReviewScreen(
                     Container(padding = 10.0),
                     Button(
                         caption = getText("page.checkout.review.button.pay", arrayOf(fmt.format(order.totalPrice))),
-                        action = gotoUrl(urlBuilder.build(getPaymentUrl(order.id)))
+                        action = gotoUrl(urlBuilder.build(loginUrl, getPaymentUrl(order.id)))
                     )
                 )
             ),

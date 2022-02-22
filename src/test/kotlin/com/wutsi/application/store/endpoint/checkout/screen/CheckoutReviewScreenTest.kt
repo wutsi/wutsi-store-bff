@@ -40,8 +40,8 @@ internal class CheckoutReviewScreenTest : AbstractEndpointTest() {
     )
 
     private val products = listOf(
-        ProductSummary(id = 1, price = 100.0, title = "Item 1"),
-        ProductSummary(id = 2, price = 200.0, title = "Item 2"),
+        ProductSummary(id = 1, title = "Item 1"),
+        ProductSummary(id = 2, title = "Item 2"),
     )
 
     @Test

@@ -108,7 +108,7 @@
                     {
                       "type": "Text",
                       "attributes": {
-                        "caption": "100 CFA",
+                        "caption": "1,000 CFA",
                         "bold": true
                       },
                       "children": []
@@ -116,9 +116,17 @@
                     {
                       "type": "Text",
                       "attributes": {
-                        "caption": "150 CFA",
+                        "caption": "1,500 CFA",
                         "size": 10.0,
                         "decoration": "Strikethrough"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "(100 CFA each)",
+                        "size": 10.0
                       },
                       "children": []
                     }
@@ -184,7 +192,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "Sub Total - {0} product(s)",
+                                "caption": "Sub Total - 2 product(s)",
                                 "bold": false
                               },
                               "children": []
@@ -282,7 +290,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "5,000 CFA",
+                                "caption": "-5,000 CFA",
                                 "color": "#4CAF50",
                                 "bold": false,
                                 "alignment": "Right"
@@ -360,7 +368,7 @@
                       "children": [],
                       "action": {
                         "type": "Route",
-                        "url": "http://localhost:0/?phone=%2B12376666666677777&icon=e3ae&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
+                        "url": "https://wutsi-gateway-test.herokuapp.com/login/?phone=%2B12376666666677777&icon=e3ae&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
                       }
                     }
                   ]
@@ -388,7 +396,7 @@
         "children": [],
         "action": {
           "type": "Command",
-          "url": "https://wutsi-gateway-test.herokuapp.com/login/commands/cancel-order?order-id=111"
+          "url": "http://localhost:0/commands/cancel-order?order-id=111"
         }
       }
     },
