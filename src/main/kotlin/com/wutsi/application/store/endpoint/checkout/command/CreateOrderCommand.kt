@@ -41,8 +41,7 @@ class CreateOrderCommand(
             ).id
             logger.add("order_id", orderId)
             return gotoUrl(
-                url = urlBuilder.build("checkout/review?order-id=$orderId"),
-                replacement = true
+                url = urlBuilder.build("checkout/review?order-id=$orderId")
             )
         } catch (ex: FeignException.Conflict) {
             logger.setException(ex)

@@ -27,19 +27,21 @@ internal class CheckoutReviewScreenTest : AbstractEndpointTest() {
     private val order = Order(
         id = "111",
         merchantId = 55L,
-        totalPrice = 1000.0,
+        totalPrice = 25000.0,
+        subTotalPrice = 30000.0,
+        savingsAmount = 5000.0,
         currency = "XAF",
         status = OrderStatus.CREATED.name,
         reservationId = 777L,
         items = listOf(
-            OrderItem(productId = 1, quantity = 10),
-            OrderItem(productId = 2, quantity = 1)
+            OrderItem(productId = 1, quantity = 10, unitPrice = 100.0, unitComparablePrice = 150.0),
+            OrderItem(productId = 2, quantity = 1, unitPrice = 15000.0)
         )
     )
 
     private val products = listOf(
-        ProductSummary(id = 1, price = 100.0),
-        ProductSummary(id = 2, price = 200.0),
+        ProductSummary(id = 1, price = 100.0, title = "Item 1"),
+        ProductSummary(id = 2, price = 200.0, title = "Item 2"),
     )
 
     @Test

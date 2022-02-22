@@ -32,7 +32,7 @@
 
     <wutsi-shared-ui.version>0.0.107</wutsi-shared-ui.version>
     <wutsi-cart.version>0.0.5</wutsi-cart.version>
-    <wutsi-order.version>0.0.2</wutsi-order.version>
+    <wutsi-order.version>0.0.3</wutsi-order.version>
   </properties>
 
   <dependencies>

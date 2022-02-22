@@ -32,6 +32,7 @@ import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.flutter.sdui.enums.TextAlignment
+import com.wutsi.flutter.sdui.enums.TextDecoration
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.beans.factory.annotation.Value
@@ -68,25 +69,46 @@ class CheckoutReviewScreen(
         ).products.associateBy { it.id }
 
         // Merchant
-        val children = mutableListOf(
-            ProfileListItem(
-                model = sharedUIMapper.toAccountModel(merchant)
+        val children = mutableListOf<WidgetAware>(
+            Container(
+                padding = 10.0,
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = listOf(
+                        Text(
+                            caption = getText("page.checkout.review.merchant"),
+                            bold = true,
+                            size = Theme.TEXT_SIZE_LARGE
+                        ),
+                        ProfileListItem(
+                            model = sharedUIMapper.toAccountModel(merchant)
+                        )
+                    ),
+                )
             ),
-            Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
         )
 
-        // Items
+        // Products
+        children.addAll(
+            listOf(
+                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+                Container(
+                    padding = 10.0,
+                    child = Text(
+                        caption = getText("page.checkout.review.products", arrayOf(order.items.size.toString())),
+                        bold = true,
+                        size = Theme.TEXT_SIZE_LARGE
+                    )
+                )
+            )
+        )
         children.addAll(
             order.items.map { toItemWidget(it, products[it.productId]!!, tenant) }
         )
 
         // Price
-        children.addAll(
-            listOf(
-                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                toPriceWidget(order, tenant)
-            )
-        )
+        children.add(toPriceWidget(order, tenant))
 
         // Result
         return Screen(
@@ -120,53 +142,89 @@ class CheckoutReviewScreen(
             caption = product.title,
             subCaption = getText("page.checkout.review.quantity", arrayOf(item.quantity)),
             leading = product.thumbnail?.let { Image(url = it.url, width = 48.0, height = 48.8) },
-            trailing = Text(fmt.format(item.unitPrice * item.quantity)),
+            trailing = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.end,
+                children = listOfNotNull(
+                    Text(fmt.format(item.unitPrice), bold = true),
+                    if (item.unitComparablePrice != null && item.unitComparablePrice!! > item.unitPrice)
+                        Text(
+                            fmt.format(item.unitComparablePrice),
+                            size = Theme.TEXT_SIZE_SMALL,
+                            decoration = TextDecoration.Strikethrough
+                        )
+                    else
+                        null
+                )
+            )
         )
     }
 
     private fun toPriceWidget(order: Order, tenant: Tenant): WidgetAware {
         val fmt = DecimalFormat(tenant.monetaryFormat)
-        val totalPriceText = fmt.format(order.totalPrice)
-
         return Container(
-            padding = 20.0,
-            background = Theme.COLOR_PRIMARY_LIGHT,
+            padding = 10.0,
+            border = 1.0,
+            borderColor = Theme.COLOR_DIVIDER,
+            borderRadius = 2.0,
+            margin = 10.0,
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
                 mainAxisSize = MainAxisSize.min,
-                children = listOf(
-                    Row(
-                        children = listOf(
-                            Container(
-                                padding = 10.0,
-                                child = Text(
-                                    getText("page.checkout.review.total-price"),
-                                    bold = true,
-                                    size = Theme.TEXT_SIZE_LARGE
-                                ),
-                            ),
-                            Container(
-                                padding = 10.0,
-                                child = Text(
-                                    totalPriceText,
-                                    bold = true,
-                                    color = Theme.COLOR_PRIMARY,
-                                    alignment = TextAlignment.Right,
-                                    size = Theme.TEXT_SIZE_LARGE
-                                )
-                            )
+                children = listOfNotNull(
+                    toPriceRow(getText("page.checkout.review.sub-total-price"), fmt.format(order.subTotalPrice)),
+                    toPriceRow(getText("page.checkout.review.delivery-fees"), fmt.format(order.deliveryFees)),
+                    if (order.savingsAmount > 0)
+                        toPriceRow(
+                            getText("page.checkout.review.savings"),
+                            fmt.format(order.savingsAmount),
+                            false,
+                            Theme.COLOR_SUCCESS
+                        )
+                    else
+                        null,
+                    Container(
+                        background = Theme.COLOR_PRIMARY_LIGHT,
+                        child = toPriceRow(
+                            getText("page.checkout.review.total-price"),
+                            fmt.format(order.totalPrice),
+                            true,
+                            Theme.COLOR_PRIMARY
                         ),
-                        mainAxisAlignment = MainAxisAlignment.spaceBetween
                     ),
                     Container(padding = 10.0),
                     Button(
-                        caption = getText("page.checkout.review.button.pay", arrayOf(totalPriceText)),
-                        action = executeCommand(urlBuilder.build(getPaymentUrl(order.id)))
+                        caption = getText("page.checkout.review.button.pay", arrayOf(fmt.format(order.totalPrice))),
+                        action = gotoUrl(urlBuilder.build(getPaymentUrl(order.id)))
                     )
-                ),
-            )
+                )
+            ),
         )
     }
+
+    private fun toPriceRow(
+        name: String,
+        value: String,
+        bold: Boolean = false,
+        color: String? = null
+    ) = Row(
+        children = listOf(
+            Container(
+                padding = 10.0,
+                child = Text(name, bold = bold),
+            ),
+            Container(
+                padding = 10.0,
+                child = Text(
+                    value,
+                    bold = bold,
+                    color = color,
+                    alignment = TextAlignment.Right,
+                )
+            )
+        ),
+        mainAxisAlignment = MainAxisAlignment.spaceBetween
+    )
 
     private fun getPaymentUrl(orderId: String): String {
         val me = accountApi.getAccount(securityContext.currentAccountId()).account
