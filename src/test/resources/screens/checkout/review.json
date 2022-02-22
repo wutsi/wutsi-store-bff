@@ -85,7 +85,7 @@
                 {
                   "type": "Text",
                   "attributes": {
-                    "caption": "Products (2)",
+                    "caption": "Products",
                     "bold": true,
                     "size": 16.0
                   },
@@ -136,6 +136,13 @@
               "children": []
             },
             {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
               "type": "ListItem",
               "attributes": {
                 "caption": "Item 2",
@@ -157,6 +164,13 @@
                     }
                   ]
                 }
+              },
+              "children": []
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
               },
               "children": []
             },

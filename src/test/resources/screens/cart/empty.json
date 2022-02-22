@@ -6,75 +6,89 @@
   },
   "children": [
     {
-      "type": "Column",
-      "attributes": {
-        "mainAxisAlignment": "start",
-        "crossAxisAlignment": "start"
-      },
+      "type": "SingleChildScrollView",
+      "attributes": {},
       "children": [
         {
-          "type": "ListItem",
+          "type": "Column",
           "attributes": {
-            "caption": "Ray Sponsible",
-            "subCaption": "Marketing",
-            "padding": 10.0,
-            "leading": {
-              "type": "CircleAvatar",
-              "attributes": {
-                "radius": 24.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "RS",
-                    "bold": true,
-                    "size": 16.0
-                  },
-                  "children": []
-                }
-              ]
-            }
-          },
-          "children": []
-        },
-        {
-          "type": "Divider",
-          "attributes": {
-            "height": 1.0,
-            "color": "#8c8c8c"
-          },
-          "children": []
-        },
-        {
-          "type": "Flexible",
-          "attributes": {
-            "flex": 1,
-            "fit": "Tight"
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
           },
           "children": [
             {
-              "type": "ListView",
+              "type": "Container",
               "attributes": {
-                "separator": true,
-                "separatorColor": "#8c8c8c"
+                "padding": 10.0
               },
               "children": [
                 {
-                  "type": "Container",
+                  "type": "Column",
                   "attributes": {
-                    "alignment": "Center",
-                    "padding": 10.0
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
                   },
                   "children": [
                     {
                       "type": "Text",
                       "attributes": {
-                        "caption": "Your Cart is empty"
+                        "caption": "Merchant",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Ray Sponsible",
+                        "subCaption": "Marketing",
+                        "padding": 10.0,
+                        "leading": {
+                          "type": "CircleAvatar",
+                          "attributes": {
+                            "radius": 24.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "RS",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
                       },
                       "children": []
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "alignment": "Center",
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Your Cart is empty"
+                  },
+                  "children": []
                 }
               ]
             }

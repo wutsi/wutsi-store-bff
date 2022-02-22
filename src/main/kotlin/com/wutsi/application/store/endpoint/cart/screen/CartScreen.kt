@@ -4,7 +4,6 @@ import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.URLBuilder
-import com.wutsi.application.shared.ui.ProductListItem
 import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -20,11 +19,12 @@ import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.DropdownButton
 import com.wutsi.flutter.sdui.DropdownMenuItem
-import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.Icon
-import com.wutsi.flutter.sdui.ListView
+import com.wutsi.flutter.sdui.Image
+import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
+import com.wutsi.flutter.sdui.SingleChildScrollView
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
@@ -34,6 +34,7 @@ import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.flutter.sdui.enums.TextAlignment
+import com.wutsi.flutter.sdui.enums.TextDecoration
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.web.bind.annotation.PostMapping
@@ -68,18 +69,63 @@ class CartScreen(
                 )
             ).products
 
-        val children = mutableListOf<WidgetAware>()
+        // Merchant
+        val children = mutableListOf<WidgetAware>(
+            Container(
+                padding = 10.0,
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = listOf(
+                        Text(
+                            caption = getText("page.cart.merchant"),
+                            bold = true,
+                            size = Theme.TEXT_SIZE_LARGE
+                        ),
+                        ProfileListItem(
+                            model = sharedUIMapper.toAccountModel(merchant)
+                        )
+                    ),
+                )
+            ),
+        )
+
+        // Products
         if (products.isNotEmpty()) {
-            children.addAll(products.map { toProductWidget(cart, it, tenant) })
-            children.add(toPriceWidget(cart, products, tenant))
-        } else {
-            children.add(
-                Container(
-                    padding = 10.0,
-                    alignment = Alignment.Center,
-                    child = Text(getText("page.cart.empty"))
+            children.addAll(
+                listOf(
+                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+                    Container(
+                        padding = 10.0,
+                        child = Text(
+                            caption = getText("page.cart.products", arrayOf(cart.products.size.toString())),
+                            bold = true,
+                            size = Theme.TEXT_SIZE_LARGE
+                        )
+                    )
                 )
             )
+            products.map { toItemWidget(cart, it, tenant) }
+                .forEach {
+                    children.add(it)
+                    children.add(Divider(color = Theme.COLOR_DIVIDER))
+                }
+        } else {
+            children.addAll(
+                listOf(
+                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+                    Container(
+                        padding = 10.0,
+                        alignment = Alignment.Center,
+                        child = Text(getText("page.cart.empty"))
+                    )
+                )
+            )
+        }
+
+        // Price
+        if (products.isNotEmpty()) {
+            children.add(toPriceWidget(cart, products, tenant))
         }
 
         return Screen(
@@ -90,29 +136,20 @@ class CartScreen(
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.cart.app-bar.title"),
             ),
-            child = Column(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.start,
-                children = listOf(
-                    ProfileListItem(
-                        model = sharedUIMapper.toAccountModel(merchant)
-                    ),
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    Flexible(
-                        child = ListView(
-                            children = children,
-                            separator = true,
-                            separatorColor = Theme.COLOR_DIVIDER
-                        )
-                    )
+            child = SingleChildScrollView(
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = children
                 )
             )
         ).toWidget()
     }
 
-    private fun toProductWidget(cart: Cart, product: ProductSummary, tenant: Tenant): WidgetAware {
+    private fun toItemWidget(cart: Cart, product: ProductSummary, tenant: Tenant): WidgetAware {
         val quantity = getQuantity(cart, product.id)
         val maxQuantity = product.maxOrder ?: product.quantity
+        val fmt = DecimalFormat(tenant.monetaryFormat)
 
         return Container(
             child = Column(
@@ -120,14 +157,41 @@ class CartScreen(
                 crossAxisAlignment = CrossAxisAlignment.start,
                 mainAxisSize = MainAxisSize.min,
                 children = listOf(
-                    ProductListItem(
-                        model = sharedUIMapper.toProductModel(product, tenant),
-                        action = gotoUrl("product?id=${product.id}")
+                    ListItem(
+                        caption = product.title,
+                        subCaption = null,
+                        leading = product.thumbnail?.let { Image(url = it.url, width = 48.0, height = 48.8) },
+                        trailing = Column(
+                            mainAxisAlignment = MainAxisAlignment.start,
+                            crossAxisAlignment = CrossAxisAlignment.end,
+                            children = listOfNotNull(
+                                Text(
+                                    caption = fmt.format(quantity * (product.price ?: 0.0)),
+                                    bold = true
+                                ),
+                                if (product.comparablePrice != null)
+                                    Text(
+                                        fmt.format(quantity * product.comparablePrice!!),
+                                        size = Theme.TEXT_SIZE_SMALL,
+                                        decoration = TextDecoration.Strikethrough
+                                    )
+                                else
+                                    null,
+                                if (quantity > 1)
+                                    Text(
+                                        getText("page.cart.price_each", arrayOf(fmt.format(product.price))),
+                                        size = Theme.TEXT_SIZE_SMALL,
+                                    )
+                                else
+                                    null
+                            )
+                        )
                     ),
                     Row(
-                        mainAxisAlignment = MainAxisAlignment.spaceAround,
+                        mainAxisAlignment = MainAxisAlignment.start,
                         crossAxisAlignment = CrossAxisAlignment.center,
                         children = listOf(
+                            Container(padding = 10.0),
                             Container(
                                 padding = 10.0,
                                 width = 100.0,
@@ -158,7 +222,7 @@ class CartScreen(
                             Button(
                                 padding = 10.0,
                                 stretched = false,
-                                type = ButtonType.Outlined,
+                                type = ButtonType.Text,
                                 caption = getText("page.cart.button.remove"),
                                 action = executeCommand(
                                     urlBuilder.build("commands/remove-from-cart?merchant-id=${product.accountId}&product-id=${product.id}")
@@ -172,40 +236,34 @@ class CartScreen(
     }
 
     private fun toPriceWidget(cart: Cart, products: List<ProductSummary>, tenant: Tenant): WidgetAware {
+        val subTotal = products.sumOf { getQuantity(cart, it.id) * (it.comparablePrice ?: it.price ?: 0.0) }
         val total = products.sumOf { getQuantity(cart, it.id) * (it.price ?: 0.0) }
+        val savings = total - subTotal
+
         val fmt = DecimalFormat(tenant.monetaryFormat)
         return Container(
-            padding = 20.0,
-            background = Theme.COLOR_PRIMARY_LIGHT,
+            padding = 10.0,
+            margin = 10.0,
+            border = 1.0,
+            borderColor = Theme.COLOR_DIVIDER,
+            borderRadius = 5.0,
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
                 mainAxisSize = MainAxisSize.min,
-                children = listOf(
-                    Row(
-                        children = listOf(
-                            Container(
-                                padding = 10.0,
-                                child = Text(
-                                    getText(
-                                        if (products.size == 1) "page.cart.total_1_item" else "page.cart.total_n_items",
-                                        arrayOf(products.size.toString())
-                                    ),
-                                    bold = true,
-                                    size = Theme.TEXT_SIZE_LARGE
-                                ),
-                            ),
-                            Container(
-                                padding = 10.0,
-                                child = Text(
-                                    fmt.format(total),
-                                    bold = true,
-                                    color = Theme.COLOR_PRIMARY,
-                                    alignment = TextAlignment.Right,
-                                    size = Theme.TEXT_SIZE_LARGE
-                                )
-                            )
-                        ),
-                        mainAxisAlignment = MainAxisAlignment.spaceBetween
+                children = listOfNotNull(
+                    toPriceRow(getText("page.cart.sub-total", arrayOf(cart.products.size)), fmt.format(subTotal)),
+                    if (subTotal > 0)
+                        toPriceRow(
+                            getText("page.cart.savings", arrayOf(cart.products.size)),
+                            "-" + fmt.format(savings),
+                            false,
+                            Theme.COLOR_SUCCESS
+                        )
+                    else
+                        null,
+                    Container(
+                        background = Theme.COLOR_PRIMARY_LIGHT,
+                        child = toPriceRow(getText("page.cart.total"), fmt.format(total), true),
                     ),
                     Container(padding = 10.0),
                     Button(
@@ -216,6 +274,30 @@ class CartScreen(
             )
         )
     }
+
+    private fun toPriceRow(
+        name: String,
+        value: String,
+        bold: Boolean = false,
+        color: String? = null
+    ) = Row(
+        children = listOf(
+            Container(
+                padding = 10.0,
+                child = Text(name, bold = bold),
+            ),
+            Container(
+                padding = 10.0,
+                child = Text(
+                    value,
+                    bold = bold,
+                    color = color,
+                    alignment = TextAlignment.Right,
+                )
+            )
+        ),
+        mainAxisAlignment = MainAxisAlignment.spaceBetween
+    )
 
     private fun getQuantity(cart: Cart, productId: Long): Int =
         cart.products.find { it.productId == productId }?.quantity ?: 0

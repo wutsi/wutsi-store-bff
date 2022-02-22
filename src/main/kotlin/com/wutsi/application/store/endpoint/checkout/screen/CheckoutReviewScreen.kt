@@ -103,9 +103,11 @@ class CheckoutReviewScreen(
                 )
             )
         )
-        children.addAll(
-            order.items.map { toItemWidget(it, products[it.productId]!!, tenant) }
-        )
+        order.items.map { toItemWidget(it, products[it.productId]!!, tenant) }
+            .forEach {
+                children.add(it)
+                children.add(Divider(color = Theme.COLOR_DIVIDER))
+            }
 
         // Price
         children.add(toPriceWidget(order, tenant))
@@ -147,7 +149,7 @@ class CheckoutReviewScreen(
                 crossAxisAlignment = CrossAxisAlignment.end,
                 children = listOfNotNull(
                     Text(fmt.format(item.quantity * item.unitPrice), bold = true),
-                    if (item.unitComparablePrice != null && item.unitComparablePrice!! > item.unitPrice)
+                    if (item.unitComparablePrice != null)
                         Text(
                             fmt.format(item.quantity * item.unitComparablePrice!!),
                             size = Theme.TEXT_SIZE_SMALL,
