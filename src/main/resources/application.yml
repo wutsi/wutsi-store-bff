@@ -41,9 +41,7 @@ wutsi:
     asset-url: https://int-wutsi.s3.amazonaws.com
     asset-root-url: ${wutsi.application.asset-url}/static/wutsi-store-bff
     gateway-url: https://wutsi-gateway-test.herokuapp.com
-    cash-url: ${wutsi.application.gateway-url}/cash
     login-url: ${wutsi.application.gateway-url}/login
-    shell-url: ${wutsi.application.gateway-url}/shell
   platform:
     security:
       type: jwt

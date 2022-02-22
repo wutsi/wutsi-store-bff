@@ -1,10 +1,13 @@
 package com.wutsi.application.store.endpoint
 
 import com.wutsi.flutter.sdui.Action
+import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.enums.ActionType
+import com.wutsi.flutter.sdui.enums.DialogType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
+import java.net.URLEncoder
 
 abstract class AbstractEndpoint {
     @Autowired
@@ -31,8 +34,19 @@ abstract class AbstractEndpoint {
         url = url
     )
 
+    protected fun showError(message: String) = Action(
+        type = ActionType.Prompt,
+        prompt = Dialog(
+            type = DialogType.Error,
+            message = message,
+        ).toWidget()
+    )
+
     protected fun getText(key: String, args: Array<Any?> = emptyArray()) =
         messages.getMessage(key, args, LocaleContextHolder.getLocale()) ?: key
+
+    protected fun encodeURLParam(text: String?): String =
+        text?.let { URLEncoder.encode(it, "utf-8") } ?: ""
 
 //    @Autowired
 //    protected lateinit var logger: KVLogger

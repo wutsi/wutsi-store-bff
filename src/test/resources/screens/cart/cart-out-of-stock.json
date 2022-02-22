@@ -141,7 +141,8 @@
                                       "type": "Text",
                                       "attributes": {
                                         "caption": "Out of Stock",
-                                        "color": "#8B0000"
+                                        "color": "#8B0000",
+                                        "size": 10.0
                                       },
                                       "children": []
                                     }

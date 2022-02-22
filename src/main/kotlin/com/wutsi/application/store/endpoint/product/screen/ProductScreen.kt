@@ -130,7 +130,7 @@ class ProductScreen(
             Container(
                 padding = 10.0,
                 child = Column(
-                    children = listOf(
+                    children = listOfNotNull(
                         Row(
                             children = listOf(
                                 if (product.quantity > 0)
@@ -144,13 +144,16 @@ class ProductScreen(
                                     Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
                             )
                         ),
-                        Button(
-                            padding = 10.0,
-                            caption = getText("page.product.button.add-to-cart"),
-                            action = executeCommand(
-                                url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+                        if (product.quantity > 0)
+                            Button(
+                                padding = 10.0,
+                                caption = getText("page.product.button.add-to-cart"),
+                                action = executeCommand(
+                                    url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+                                )
                             )
-                        )
+                        else
+                            null
                     )
                 )
             )

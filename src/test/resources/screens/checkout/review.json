@@ -1,0 +1,200 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.review",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Column",
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
+          },
+          "children": [
+            {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "Ray Sponsible",
+                "subCaption": "Marketing",
+                "padding": 10.0,
+                "leading": {
+                  "type": "CircleAvatar",
+                  "attributes": {
+                    "radius": 24.0
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "RS",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "",
+                "subCaption": "Quantity: 10",
+                "trailing": {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "0 CFA"
+                  },
+                  "children": []
+                }
+              },
+              "children": []
+            },
+            {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "",
+                "subCaption": "Quantity: 1",
+                "trailing": {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "0 CFA"
+                  },
+                  "children": []
+                }
+              },
+              "children": []
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 20.0,
+                "background": "#e4edf7"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min"
+                  },
+                  "children": [
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceBetween"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Total Price",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "1,000 CFA",
+                                "color": "#1D7EDF",
+                                "bold": true,
+                                "size": 16.0,
+                                "alignment": "Right"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "Pay 1,000 CFA",
+                        "padding": 15.0,
+                        "type": "Elevated"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Command",
+                        "url": "http://localhost:0/?phone=%2B12376666666677777&icon=e3ae&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Your Order",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000",
+      "automaticallyImplyLeading": false,
+      "leading": {
+        "type": "IconButton",
+        "attributes": {
+          "icon": "ef28"
+        },
+        "children": [],
+        "action": {
+          "type": "Command",
+          "url": "https://wutsi-gateway-test.herokuapp.com/login/commands/cancel-order?order-id=111"
+        }
+      }
+    },
+    "children": []
+  }
+}

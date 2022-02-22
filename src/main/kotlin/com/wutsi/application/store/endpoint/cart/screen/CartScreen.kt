@@ -147,7 +147,11 @@ class CartScreen(
                                     Row(
                                         children = listOf(
                                             Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER),
-                                            Text(getText("page.cart.out-of-stock"), color = Theme.COLOR_DANGER)
+                                            Text(
+                                                getText("page.cart.out-of-stock"),
+                                                color = Theme.COLOR_DANGER,
+                                                size = Theme.TEXT_SIZE_SMALL
+                                            )
                                         )
                                     )
                             ),
