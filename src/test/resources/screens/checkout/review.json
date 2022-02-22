@@ -131,6 +131,15 @@
                       "children": []
                     }
                   ]
+                },
+                "leading": {
+                  "type": "Image",
+                  "attributes": {
+                    "url": "http://img.com/nopicture.png",
+                    "width": 48.0,
+                    "height": 48.8
+                  },
+                  "children": []
                 }
               },
               "children": []
@@ -163,6 +172,15 @@
                       "children": []
                     }
                   ]
+                },
+                "leading": {
+                  "type": "Image",
+                  "attributes": {
+                    "url": "http://img.com/nopicture.png",
+                    "width": 48.0,
+                    "height": 48.8
+                  },
+                  "children": []
                 }
               },
               "children": []
@@ -206,7 +224,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "Sub Total - 2 product(s)",
+                                "caption": "Sub Total",
                                 "bold": false
                               },
                               "children": []
@@ -223,47 +241,6 @@
                               "type": "Text",
                               "attributes": {
                                 "caption": "30,000 CFA",
-                                "bold": false,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "spaceBetween"
-                      },
-                      "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Delivery Fees",
-                                "bold": false
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "0 CFA",
                                 "bold": false,
                                 "alignment": "Right"
                               },
@@ -336,7 +313,7 @@
                                 {
                                   "type": "Text",
                                   "attributes": {
-                                    "caption": "Total Price",
+                                    "caption": "Total",
                                     "bold": true
                                   },
                                   "children": []

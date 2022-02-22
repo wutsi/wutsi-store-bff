@@ -125,6 +125,15 @@
                               "children": []
                             }
                           ]
+                        },
+                        "leading": {
+                          "type": "Image",
+                          "attributes": {
+                            "url": "http://img.com/nopicture.png",
+                            "width": 48.0,
+                            "height": 48.8
+                          },
+                          "children": []
                         }
                       },
                       "children": []
@@ -164,42 +173,6 @@
                                     "caption": "1",
                                     "enabled": true,
                                     "value": "1"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "2",
-                                    "enabled": true,
-                                    "value": "2"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "3",
-                                    "enabled": true,
-                                    "value": "3"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "4",
-                                    "enabled": true,
-                                    "value": "4"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "5",
-                                    "enabled": true,
-                                    "value": "5"
                                   },
                                   "children": []
                                 }
@@ -278,6 +251,15 @@
                               "children": []
                             }
                           ]
+                        },
+                        "leading": {
+                          "type": "Image",
+                          "attributes": {
+                            "url": "http://img.com/nopicture.png",
+                            "width": 48.0,
+                            "height": 48.8
+                          },
+                          "children": []
                         }
                       },
                       "children": []
@@ -379,7 +361,7 @@
                 "padding": 10.0,
                 "margin": 10.0,
                 "border": 1.0,
-                "borderRadius": 5.0,
+                "borderRadius": 2.0,
                 "borderColor": "#8c8c8c"
               },
               "children": [
@@ -405,7 +387,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "Sub Total - 2 product(s)",
+                                "caption": "Sub Total",
                                 "bold": false
                               },
                               "children": []
@@ -422,48 +404,6 @@
                               "type": "Text",
                               "attributes": {
                                 "caption": "2,100 CFA",
-                                "bold": false,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "spaceBetween"
-                      },
-                      "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Savings",
-                                "bold": false
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "-0 CFA",
-                                "color": "#4CAF50",
                                 "bold": false,
                                 "alignment": "Right"
                               },
@@ -511,6 +451,7 @@
                                   "type": "Text",
                                   "attributes": {
                                     "caption": "2,100 CFA",
+                                    "color": "#1D7EDF",
                                     "bold": true,
                                     "alignment": "Right"
                                   },
