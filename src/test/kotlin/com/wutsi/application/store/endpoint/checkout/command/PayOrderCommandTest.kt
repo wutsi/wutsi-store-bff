@@ -4,9 +4,11 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
@@ -37,6 +39,9 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
     @MockBean
     private lateinit var paymentApi: WutsiPaymentApi
+
+    @MockBean
+    private lateinit var cartApi: WutsiCartApi
 
     private lateinit var url: String
 
@@ -77,6 +82,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(order.totalPrice, request.firstValue.amount)
         assertNull(request.firstValue.description)
 
+        verify(cartApi).emptyCart(order.merchantId)
+
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
@@ -100,6 +107,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
+
+        verify(cartApi, never()).emptyCart(any())
     }
 
     @Test
@@ -120,5 +129,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
+
+        verify(cartApi, never()).emptyCart(any())
     }
 }
