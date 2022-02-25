@@ -1,4 +1,4 @@
-package com.wutsi.application.store.endpoint.home
+package com.wutsi.application.store.endpoint.home.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.PhoneUtil
@@ -150,6 +150,29 @@ class HomeScreen(
                     ),
                 )
             )
+        ).toWidget()
+    }
+
+    @PostMapping("/widget")
+    fun widget(@RequestParam(required = false) id: Long? = null): Widget {
+        val tenant = tenantProvider.get()
+        val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
+        val products = catalogApi.searchProducts(
+            SearchProductRequest(
+                accountId = merchant.id,
+                limit = 100
+            )
+        ).products
+        val rows = toRows(products, 2)
+
+        return ListView(
+            children = rows.map {
+                Container(
+                    child = Row(
+                        children = thumbnails(it, tenant),
+                    )
+                )
+            }
         ).toWidget()
     }
 
