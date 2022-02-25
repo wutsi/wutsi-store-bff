@@ -1,7 +1,7 @@
 {
   "type" : "Screen",
   "attributes" : {
-    "id" : "page.checkout.review",
+    "id" : "page.order",
     "safe" : false
   },
   "children" : [ {
@@ -14,6 +14,101 @@
         "crossAxisAlignment" : "start"
       },
       "children" : [ {
+        "type" : "Row",
+        "attributes" : { },
+        "children" : [ {
+          "type" : "Flexible",
+          "attributes" : {
+            "flex" : 1,
+            "fit" : "Tight"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "Order ID",
+                "bold" : true
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "type" : "Flexible",
+          "attributes" : {
+            "flex" : 2,
+            "fit" : "Tight"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "111",
+                "size" : 10.0
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Row",
+        "attributes" : { },
+        "children" : [ {
+          "type" : "Flexible",
+          "attributes" : {
+            "flex" : 1,
+            "fit" : "Tight"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "Order Date",
+                "bold" : true
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "type" : "Flexible",
+          "attributes" : {
+            "flex" : 2,
+            "fit" : "Tight"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "05 May 2020, 01:01",
+                "size" : 10.0
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Divider",
+        "attributes" : {
+          "height" : 1.0,
+          "color" : "#8c8c8c"
+        },
+        "children" : [ ]
+      }, {
         "type" : "Container",
         "attributes" : {
           "padding" : 10.0
@@ -27,7 +122,7 @@
           "children" : [ {
             "type" : "Text",
             "attributes" : {
-              "caption" : "Merchant",
+              "caption" : "Customer",
               "bold" : true,
               "size" : 16.0
             },
@@ -36,7 +131,6 @@
             "type" : "ListItem",
             "attributes" : {
               "caption" : "Ray Sponsible",
-              "subCaption" : "Marketing",
               "padding" : 10.0,
               "leading" : {
                 "type" : "CircleAvatar",
@@ -289,24 +383,6 @@
                 } ]
               } ]
             } ]
-          }, {
-            "type" : "Container",
-            "attributes" : {
-              "padding" : 10.0
-            },
-            "children" : [ ]
-          }, {
-            "type" : "Button",
-            "attributes" : {
-              "caption" : "Pay 25,000 CFA",
-              "padding" : 15.0,
-              "type" : "Elevated"
-            },
-            "children" : [ ],
-            "action" : {
-              "type" : "Route",
-              "url" : "https://wutsi-gateway-test.herokuapp.com/login/?phone=%2B12376666666677777&icon=e3ae&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
-            }
           } ]
         } ]
       } ]
@@ -315,22 +391,10 @@
   "appBar" : {
     "type" : "AppBar",
     "attributes" : {
-      "title" : "Your Order",
+      "title" : "Orders",
       "elevation" : 0.0,
       "backgroundColor" : "#FFFFFF",
-      "foregroundColor" : "#000000",
-      "automaticallyImplyLeading" : false,
-      "leading" : {
-        "type" : "IconButton",
-        "attributes" : {
-          "icon" : "ef28"
-        },
-        "children" : [ ],
-        "action" : {
-          "type" : "Command",
-          "url" : "http://localhost:0/commands/cancel-order?order-id=111"
-        }
-      }
+      "foregroundColor" : "#000000"
     },
     "children" : [ ]
   }
