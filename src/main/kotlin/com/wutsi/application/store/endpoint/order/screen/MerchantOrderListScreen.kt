@@ -92,10 +92,13 @@ class MerchantOrderListScreen(
                     Container(
                         padding = 10.0,
                         child = Text(
-                            caption = if (orders.isEmpty())
-                                getText("page.order.merchant.no-order")
-                            else
-                                getText("page.order.merchant.order-count", arrayOf(orders.size.toString()))
+                            caption = getText(
+                                if (orders.size <= 1)
+                                    "page.order.merchant.order-count-1"
+                                else
+                                    "page.order.merchant.order-count-n",
+                                arrayOf(orders.size.toString())
+                            )
                         )
                     ),
                     if (orders.isEmpty())
