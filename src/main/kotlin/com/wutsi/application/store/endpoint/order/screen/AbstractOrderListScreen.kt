@@ -1,18 +1,14 @@
 package com.wutsi.application.store.endpoint.order.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.SecurityContext
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.store.endpoint.AbstractQuery
-import com.wutsi.application.store.endpoint.Page
 import com.wutsi.application.store.endpoint.order.dto.FilterOrderRequest
-import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.OrderSummary
-import com.wutsi.ecommerce.order.dto.SearchOrderRequest
 import com.wutsi.ecommerce.order.entity.OrderStatus
+import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -33,41 +29,34 @@ import com.wutsi.platform.account.dto.SearchAccountRequest
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
 import java.text.DecimalFormat
 import java.time.format.DateTimeFormatter
 
-@RestController
-@RequestMapping("/orders/merchant")
-class MerchantOrderListScreen(
-    private val urlBuilder: URLBuilder,
+abstract class AbstractOrderListScreen(
     private val accountApi: WutsiAccountApi,
-    private val orderApi: WutsiOrderApi,
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
-    private val securityContext: SecurityContext
 ) : AbstractQuery() {
+    protected abstract fun getPageId(): String
+    protected abstract fun getFilterUrl(): String
+    protected abstract fun getTitle(): String
+    protected abstract fun getOrders(request: FilterOrderRequest?): List<OrderSummary>
+    protected abstract fun getAction(order: OrderSummary): Action
+    protected abstract fun getAccountId(order: OrderSummary): Long
 
     @PostMapping
     fun index(
         @RequestBody(required = false) request: FilterOrderRequest? = null
     ): Widget {
-        val orders = orderApi.searchOrders(
-            SearchOrderRequest(
-                merchantId = securityContext.currentAccountId(),
-                status = request?.status?.let { listOf(request?.status?.name) } ?: emptyList(),
-                limit = 100
-            )
-        ).orders
+        val orders = getOrders(request)
 
         return Screen(
-            id = Page.ORDER_LIST_MERCHANT,
+            id = getPageId(),
             appBar = AppBar(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.order.merchant.app-bar.title"),
+                title = getTitle(),
             ),
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
@@ -78,13 +67,8 @@ class MerchantOrderListScreen(
                         child = DropdownButton(
                             value = request?.status?.name ?: OrderStatus.READY.name,
                             name = "status",
-                            children = listOf(
-                                orderStatusWidget(OrderStatus.READY),
-                                orderStatusWidget(OrderStatus.PROCESSING),
-                                orderStatusWidget(OrderStatus.COMPLETED),
-                                orderStatusWidget(OrderStatus.CANCELLED),
-                            ),
-                            action = gotoUrl(urlBuilder.build("/orders/merchant"), true)
+                            children = getOrderStatusList().map { orderStatusWidget(it) },
+                            action = gotoUrl(getFilterUrl(), true)
                         )
                     ),
                     Container(
@@ -92,9 +76,9 @@ class MerchantOrderListScreen(
                         child = Text(
                             caption = getText(
                                 if (orders.size <= 1)
-                                    "page.order.merchant.order-count-1"
+                                    "page.order.list.count-1"
                                 else
-                                    "page.order.merchant.order-count-n",
+                                    "page.order.list.count-n",
                                 arrayOf(orders.size.toString())
                             )
                         )
@@ -108,44 +92,53 @@ class MerchantOrderListScreen(
         ).toWidget()
     }
 
+    protected fun getDefaultOrderStatus(): OrderStatus = getOrderStatusList()[0]
+
+    private fun getOrderStatusList() = listOf(
+        OrderStatus.READY,
+        OrderStatus.PROCESSING,
+        OrderStatus.COMPLETED,
+        OrderStatus.CANCELLED,
+    )
+
     private fun toListView(orders: List<OrderSummary>): WidgetAware {
-        val customerIds = orders.map { it.accountId }.toSet()
-        val customers = accountApi.searchAccount(
+        val accountIds = orders.map { getAccountId(it) }.toSet()
+        val accounts = accountApi.searchAccount(
             SearchAccountRequest(
-                ids = customerIds.toList(),
-                limit = customerIds.size
+                ids = accountIds.toList(),
+                limit = accountIds.size
             )
         ).accounts.associateBy { it.id }
 
         val tenant = tenantProvider.get()
         val moneyFormat = DecimalFormat(tenant.monetaryFormat)
-        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateTimeFormat, LocaleContextHolder.getLocale())
+        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateFormat, LocaleContextHolder.getLocale())
 
         return ListView(
             separatorColor = Theme.COLOR_DIVIDER,
             separator = true,
             children = orders.map {
-                toOrderListItem(it, customers[it.accountId], moneyFormat, dateFormat)
+                toOrderListItem(it, accounts[getAccountId(it)], moneyFormat, dateFormat)
             }
         )
     }
 
     private fun toOrderListItem(
         order: OrderSummary,
-        customer: AccountSummary?,
+        account: AccountSummary?,
         moneyFormat: DecimalFormat,
-        dateFormat: DateTimeFormatter
+        dateFormat: DateTimeFormatter,
     ) = ListItem(
-        leading = customer?.let {
+        leading = account?.let {
             Avatar(
                 model = sharedUIMapper.toAccountModel(it),
                 radius = 24.0
             )
         },
         trailing = Text(moneyFormat.format(order.totalPrice), bold = true, color = Theme.COLOR_PRIMARY),
-        caption = customer?.displayName ?: "",
+        caption = account?.displayName ?: "",
         subCaption = order.created.format(dateFormat),
-        action = gotoUrl(urlBuilder.build("/order?id=${order.id}&hide-merchant=true"))
+        action = getAction(order)
     )
 
     private fun orderStatusWidget(status: OrderStatus) = DropdownMenuItem(

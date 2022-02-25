@@ -3,6 +3,7 @@ package com.wutsi.application.store.endpoint.order.screen
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
+import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.OrderItemListItem
 import com.wutsi.application.shared.ui.PriceSummaryCard
 import com.wutsi.application.shared.ui.ProfileListItem
@@ -31,6 +32,7 @@ import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.SearchAccountRequest
 import com.wutsi.platform.tenant.dto.Tenant
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -45,6 +47,9 @@ class OrderScreen(
     private val catalogApi: WutsiCatalogApi,
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
+    private val urlBuilder: URLBuilder,
+
+    @Value("\${wutsi.application.shell-url}") private val shellUrl: String
 ) : AbstractQuery() {
 
     @PostMapping
@@ -64,6 +69,7 @@ class OrderScreen(
             listOf(
                 toRow(getText("page.order.order-id"), order.id),
                 toRow(getText("page.order.order-date"), order.created.format(dateFormat)),
+                toRow(getText("page.order.status"), getText("order.status.${order.status}")),
             )
         )
 
@@ -150,7 +156,8 @@ class OrderScreen(
                         size = Theme.TEXT_SIZE_LARGE
                     ),
                     ProfileListItem(
-                        model = sharedUIMapper.toAccountModel(it)
+                        model = sharedUIMapper.toAccountModel(it),
+                        action = gotoUrl(urlBuilder.build(shellUrl, "/profile?id=${account.id}"))
                     )
                 ),
             )

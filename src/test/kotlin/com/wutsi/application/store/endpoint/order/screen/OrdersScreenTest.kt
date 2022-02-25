@@ -19,7 +19,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class MerchantOrderListScreenTest : AbstractEndpointTest() {
+internal class OrdersScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     public val port: Int = 0
 
@@ -64,7 +64,7 @@ internal class MerchantOrderListScreenTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/orders/merchant"
+        url = "http://localhost:$port/orders"
     }
 
     @Test
@@ -72,6 +72,6 @@ internal class MerchantOrderListScreenTest : AbstractEndpointTest() {
         doReturn(SearchOrderResponse(orders)).whenever(orderApi).searchOrders(any())
         doReturn(SearchAccountResponse(customers)).whenever(accountApi).searchAccount(any())
 
-        assertEndpointEquals("/screens/order/merchant-orders.json", url)
+        assertEndpointEquals("/screens/order/orders.json", url)
     }
 }

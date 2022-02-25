@@ -102,6 +102,50 @@
           } ]
         } ]
       }, {
+        "type" : "Row",
+        "attributes" : { },
+        "children" : [ {
+          "type" : "Flexible",
+          "attributes" : {
+            "flex" : 1,
+            "fit" : "Tight"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "Status",
+                "bold" : true
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        }, {
+          "type" : "Flexible",
+          "attributes" : {
+            "flex" : 2,
+            "fit" : "Tight"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "Created",
+                "size" : 10.0
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
+      }, {
         "type" : "Divider",
         "attributes" : {
           "height" : 1.0,
@@ -131,7 +175,15 @@
             "type" : "ListItem",
             "attributes" : {
               "caption" : "John Smith",
+              "iconRight" : "e15f",
               "padding" : 10.0,
+              "trailing" : {
+                "type" : "Icon",
+                "attributes" : {
+                  "code" : "e15f"
+                },
+                "children" : [ ]
+              },
               "leading" : {
                 "type" : "CircleAvatar",
                 "attributes" : {
@@ -148,7 +200,11 @@
                 } ]
               }
             },
-            "children" : [ ]
+            "children" : [ ],
+            "action" : {
+              "type" : "Route",
+              "url" : "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=55"
+            }
           } ]
         } ]
       }, {

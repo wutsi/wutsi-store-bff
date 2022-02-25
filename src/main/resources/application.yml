@@ -42,6 +42,7 @@ wutsi:
     asset-root-url: ${wutsi.application.asset-url}/static/wutsi-store-bff
     gateway-url: https://wutsi-gateway-test.herokuapp.com
     login-url: ${wutsi.application.gateway-url}/login
+    shell-url: ${wutsi.application.gateway-url}/shell
   platform:
     security:
       type: jwt
