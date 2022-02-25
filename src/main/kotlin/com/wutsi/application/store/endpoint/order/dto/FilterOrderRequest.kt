@@ -1,4 +1,4 @@
-package com.wutsi.application.store.endpoint.order.command
+package com.wutsi.application.store.endpoint.order.dto
 
 import com.wutsi.ecommerce.order.entity.OrderStatus
 

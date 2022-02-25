@@ -8,7 +8,7 @@ import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.application.store.endpoint.order.command.FilterOrderRequest
+import com.wutsi.application.store.endpoint.order.dto.FilterOrderRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.OrderSummary
 import com.wutsi.ecommerce.order.dto.SearchOrderRequest
@@ -51,12 +51,12 @@ class MerchantOrderListScreen(
 
     @PostMapping
     fun index(
-        @RequestBody(required = false) request: FilterOrderRequest = FilterOrderRequest()
+        @RequestBody(required = false) request: FilterOrderRequest? = null
     ): Widget {
         val orders = orderApi.searchOrders(
             SearchOrderRequest(
                 merchantId = securityContext.currentAccountId(),
-                status = request.status?.let { listOf(request.status.name) } ?: emptyList(),
+                status = request?.status?.let { listOf(request?.status?.name) } ?: emptyList(),
                 limit = 100
             )
         ).orders
@@ -76,7 +76,7 @@ class MerchantOrderListScreen(
                     Container(
                         padding = 10.0,
                         child = DropdownButton(
-                            value = request.status?.name ?: OrderStatus.READY.name,
+                            value = request?.status?.name ?: OrderStatus.READY.name,
                             name = "status",
                             children = listOf(
                                 orderStatusWidget(OrderStatus.READY),
