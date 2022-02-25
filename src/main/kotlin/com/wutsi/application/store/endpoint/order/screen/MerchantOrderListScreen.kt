@@ -30,6 +30,7 @@ import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.SearchAccountRequest
+import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -117,7 +118,7 @@ class MerchantOrderListScreen(
 
         val tenant = tenantProvider.get()
         val moneyFormat = DecimalFormat(tenant.monetaryFormat)
-        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateTimeFormat)
+        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateTimeFormat, LocaleContextHolder.getLocale())
 
         return ListView(
             separatorColor = Theme.COLOR_DIVIDER,

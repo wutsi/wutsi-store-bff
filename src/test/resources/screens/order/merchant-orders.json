@@ -122,7 +122,7 @@
           "type" : "ListItem",
           "attributes" : {
             "caption" : "John Smith",
-            "subCaption" : "05 Jun. 2020, 01:01",
+            "subCaption" : "05 Jun 2020, 01:01",
             "trailing" : {
               "type" : "Text",
               "attributes" : {
