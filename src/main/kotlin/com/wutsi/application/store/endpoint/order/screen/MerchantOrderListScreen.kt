@@ -84,9 +84,7 @@ class MerchantOrderListScreen(
                                 orderStatusWidget(OrderStatus.COMPLETED),
                                 orderStatusWidget(OrderStatus.CANCELLED),
                             ),
-                            action = gotoUrl(
-                                urlBuilder.build("/orders/merchant")
-                            )
+                            action = gotoUrl(urlBuilder.build("/orders/merchant"), true)
                         )
                     ),
                     Container(
