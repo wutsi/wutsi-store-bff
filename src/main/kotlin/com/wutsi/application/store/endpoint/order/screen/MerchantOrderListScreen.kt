@@ -51,7 +51,7 @@ class MerchantOrderListScreen(
 
     @PostMapping
     fun index(
-        @RequestBody request: FilterOrderRequest
+        @RequestBody(required = false) request: FilterOrderRequest = FilterOrderRequest()
     ): Widget {
         val orders = orderApi.searchOrders(
             SearchOrderRequest(
