@@ -447,7 +447,7 @@
   "appBar" : {
     "type" : "AppBar",
     "attributes" : {
-      "title" : "Orders",
+      "title" : "Order",
       "elevation" : 0.0,
       "backgroundColor" : "#FFFFFF",
       "foregroundColor" : "#000000"
