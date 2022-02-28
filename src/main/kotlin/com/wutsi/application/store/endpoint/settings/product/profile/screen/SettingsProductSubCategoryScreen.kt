@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
@@ -14,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/settings/store/product/sub-category-id")
 class SettingsProductSubCategoryScreen(
-    urlBuilder: URLBuilder,
     catalogApi: WutsiCatalogApi,
-) : AbstractSettingsProductAttributeScreen(urlBuilder, catalogApi) {
+) : AbstractSettingsProductAttributeScreen(catalogApi) {
     override fun getAttributeName() = "sub-category-id"
 
     override fun getPageId() = Page.SETTINGS_STORE_PRODUCT_SUB_CATEGORY

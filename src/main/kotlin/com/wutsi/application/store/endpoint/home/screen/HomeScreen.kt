@@ -2,11 +2,9 @@ package com.wutsi.application.store.endpoint.home.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.PhoneUtil
-import com.wutsi.application.shared.service.SecurityContext
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.TogglesProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.shared.ui.ProductCard
 import com.wutsi.application.shared.ui.ProfileListItem
@@ -45,12 +43,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/")
 class HomeScreen(
-    private val urlBuilder: URLBuilder,
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
     private val cartApi: WutsiCartApi,
     private val tenantProvider: TenantProvider,
-    private val securityContext: SecurityContext,
     private val sharedUIMapper: SharedUIMapper,
     private val togglesProvider: TogglesProvider,
 ) : AbstractQuery() {
@@ -149,7 +145,8 @@ class HomeScreen(
                         ),
                     ),
                 )
-            )
+            ),
+            bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
 

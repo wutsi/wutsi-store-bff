@@ -61,10 +61,8 @@
         }
       } ]
     }, {
-      "type" : "Container",
-      "attributes" : {
-        "padding" : 10.0
-      },
+      "type" : "Center",
+      "attributes" : { },
       "children" : [ {
         "type" : "Text",
         "attributes" : {
@@ -88,7 +86,7 @@
           "type" : "ListItem",
           "attributes" : {
             "caption" : "Ray Sponsible",
-            "subCaption" : "05 May 2020",
+            "subCaption" : "05 May 2020 - Created",
             "trailing" : {
               "type" : "Text",
               "attributes" : {
@@ -123,7 +121,7 @@
           "type" : "ListItem",
           "attributes" : {
             "caption" : "John Smith",
-            "subCaption" : "05 Jun 2020",
+            "subCaption" : "05 Jun 2020 - Created",
             "trailing" : {
               "type" : "Text",
               "attributes" : {
@@ -167,5 +165,58 @@
       "foregroundColor" : "#000000"
     },
     "children" : [ ]
+  },
+  "bottomNavigationBar" : {
+    "type" : "BottomNavigationBar",
+    "attributes" : {
+      "background" : "#1D7EDF",
+      "selectedItemColor" : "#FFFFFF",
+      "unselectedItemColor" : "#FFFFFF"
+    },
+    "children" : [ {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e319",
+        "caption" : "Home"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "route:/~"
+      }
+    }, {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e491",
+        "caption" : "Me"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777"
+      }
+    }, {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e314",
+        "caption" : "Transactions"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "http://localhost:0/history"
+      }
+    }, {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e57f",
+        "caption" : "Settings"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "http://localhost:0/settings"
+      }
+    } ]
   }
 }

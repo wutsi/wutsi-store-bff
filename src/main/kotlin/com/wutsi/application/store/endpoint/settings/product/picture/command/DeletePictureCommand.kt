@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.settings.product.picture.command
 
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.flutter.sdui.Action
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/commands/delete-picture")
 class DeletePictureCommand(
     private val catalogApi: WutsiCatalogApi,
-    private val urlBuilder: URLBuilder
 ) : AbstractCommand() {
     @PostMapping
     fun index(

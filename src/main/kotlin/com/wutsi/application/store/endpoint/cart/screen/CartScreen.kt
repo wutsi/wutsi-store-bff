@@ -4,7 +4,6 @@ import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.ActionModel
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.CartItemListItem
 import com.wutsi.application.shared.ui.PriceSummaryCard
 import com.wutsi.application.shared.ui.ProfileListItem
@@ -37,7 +36,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/cart")
 class CartScreen(
-    private val urlBuilder: URLBuilder,
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
     private val cartApi: WutsiCartApi,

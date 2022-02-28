@@ -10,6 +10,7 @@ import com.wutsi.ecommerce.order.dto.OrderSummary
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
+import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.DropdownButton
@@ -43,6 +44,7 @@ abstract class AbstractOrderListScreen(
     protected abstract fun getOrders(request: FilterOrderRequest?): List<OrderSummary>
     protected abstract fun getAction(order: OrderSummary): Action
     protected abstract fun getAccountId(order: OrderSummary): Long
+    protected abstract fun showFilter(): Boolean
 
     @PostMapping
     fun index(
@@ -62,17 +64,19 @@ abstract class AbstractOrderListScreen(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 children = listOfNotNull(
-                    Container(
-                        padding = 10.0,
-                        child = DropdownButton(
-                            value = request?.status?.name ?: OrderStatus.READY.name,
-                            name = "status",
-                            children = getOrderStatusList().map { orderStatusWidget(it) },
-                            action = gotoUrl(getFilterUrl(), true)
+                    if (showFilter())
+                        Container(
+                            padding = 10.0,
+                            child = DropdownButton(
+                                value = request?.status?.name ?: OrderStatus.READY.name,
+                                name = "status",
+                                children = getOrderStatusList().map { orderStatusWidget(it) },
+                                action = gotoUrl(getFilterUrl(), true)
+                            )
                         )
-                    ),
-                    Container(
-                        padding = 10.0,
+                    else
+                        null,
+                    Center(
                         child = Text(
                             caption = getText(
                                 if (orders.size <= 1)
@@ -88,7 +92,8 @@ abstract class AbstractOrderListScreen(
                     else
                         Flexible(child = toListView(orders))
                 )
-            )
+            ),
+            bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
 
@@ -137,7 +142,7 @@ abstract class AbstractOrderListScreen(
         },
         trailing = Text(moneyFormat.format(order.totalPrice), bold = true, color = Theme.COLOR_PRIMARY),
         caption = account?.displayName ?: "",
-        subCaption = order.created.format(dateFormat),
+        subCaption = order.created.format(dateFormat) + " - " + getText("order.status.${order.status}"),
         action = getAction(order)
     )
 

@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.command
 
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.settings.product.profile.dto.UpdateProductAttributeRequest
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/commands/update-product-attribute")
 class UpdateProductAttributeCommand(
     private val catalogApi: WutsiCatalogApi,
-    private val urlBuilder: URLBuilder,
 ) : AbstractCommand() {
     @PostMapping
     fun index(

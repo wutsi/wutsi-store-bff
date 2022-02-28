@@ -2,10 +2,8 @@ package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.ActionModel
-import com.wutsi.application.shared.service.SecurityContext
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.OrderItemListItem
 import com.wutsi.application.shared.ui.PriceSummaryCard
 import com.wutsi.application.shared.ui.ProfileListItem
@@ -46,8 +44,6 @@ class CheckoutReviewScreen(
     private val catalogApi: WutsiCatalogApi,
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
-    private val urlBuilder: URLBuilder,
-    private val securityContext: SecurityContext,
 
     @Value("\${wutsi.application.login-url}") private val loginUrl: String
 ) : AbstractQuery() {

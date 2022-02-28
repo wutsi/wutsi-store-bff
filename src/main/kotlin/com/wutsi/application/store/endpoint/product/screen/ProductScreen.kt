@@ -3,9 +3,9 @@ package com.wutsi.application.store.endpoint.product.screen
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
+import com.wutsi.application.shared.service.StringUtil
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.TogglesProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.store.endpoint.AbstractQuery
@@ -51,7 +51,6 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/product")
 class ProductScreen(
-    private val urlBuilder: URLBuilder,
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
     private val cartApi: WutsiCartApi,
@@ -77,7 +76,7 @@ class ProductScreen(
             Container(
                 padding = 10.0,
                 child = Text(
-                    caption = product.title,
+                    caption = StringUtil.capitalizeFirstLetter(product.title),
                     size = Theme.TEXT_SIZE_LARGE,
                     bold = true
                 )
@@ -91,7 +90,7 @@ class ProductScreen(
                     viewportFraction = .9,
                     enableInfiniteScroll = false,
                     reverse = false,
-                    height = 300.0,
+                    height = 250.0,
                     children = product.pictures.map {
                         AspectRatio(
                             aspectRatio = 8.0 / 10.0,
@@ -248,7 +247,8 @@ class ProductScreen(
                 child = ListView(
                     children = children,
                 )
-            )
+            ),
+            bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
 

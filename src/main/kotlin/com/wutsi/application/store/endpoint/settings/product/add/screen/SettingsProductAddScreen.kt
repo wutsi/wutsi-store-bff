@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.product.add.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/settings/store/product/add")
 class SettingsProductAddScreen(
-    private val urlBuilder: URLBuilder,
     private val catalogApi: WutsiCatalogApi
 ) : AbstractQuery() {
     @PostMapping

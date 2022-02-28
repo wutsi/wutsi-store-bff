@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.settings.product.add.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/settings/store/product/editor")
 class SettingsProductEditorScreen(
-    private val urlBuilder: URLBuilder,
     private val tenantProvider: TenantProvider,
     private val catalogApi: WutsiCatalogApi
 ) : AbstractQuery() {

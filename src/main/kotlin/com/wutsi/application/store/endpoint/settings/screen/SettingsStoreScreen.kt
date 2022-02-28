@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.flutter.sdui.AppBar
@@ -23,9 +22,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/settings/store")
-class SettingsStoreScreen(
-    private val urlBuilder: URLBuilder,
-) : AbstractQuery() {
+class SettingsStoreScreen : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
         return Screen(

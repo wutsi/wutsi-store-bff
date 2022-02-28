@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.cart.command
 
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.cart.dto.UpdateCartRequest
 import com.wutsi.ecommerce.cart.WutsiCartApi
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/commands/update-cart")
 class UpdateCartCommand(
-    private val urlBuilder: URLBuilder,
     private val cartApi: WutsiCartApi
 ) : AbstractCommand() {
     @PostMapping

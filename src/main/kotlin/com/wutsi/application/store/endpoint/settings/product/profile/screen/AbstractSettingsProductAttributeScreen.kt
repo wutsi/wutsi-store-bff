@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 abstract class AbstractSettingsProductAttributeScreen(
-    protected val urlBuilder: URLBuilder,
     protected val catalogApi: WutsiCatalogApi,
 ) : AbstractQuery() {
     abstract fun getAttributeName(): String

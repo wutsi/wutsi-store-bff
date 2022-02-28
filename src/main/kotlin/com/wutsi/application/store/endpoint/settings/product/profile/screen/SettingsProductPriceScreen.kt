@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
@@ -14,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/settings/store/product/price")
 class SettingsProductPriceScreen(
-    urlBuilder: URLBuilder,
     catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
-) : AbstractSettingsProductAttributeScreen(urlBuilder, catalogApi) {
+) : AbstractSettingsProductAttributeScreen(catalogApi) {
     override fun getAttributeName() = "price"
 
     override fun getPageId() = Page.SETTINGS_STORE_PRODUCT_PRICE

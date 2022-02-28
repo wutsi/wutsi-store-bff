@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.checkout.command
 
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/commands/pay-order")
 class PayOrderCommand(
-    private val urlBuilder: URLBuilder,
     private val orderApi: WutsiOrderApi,
     private val paymentApi: WutsiPaymentApi,
     private val cartApi: WutsiCartApi,

@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.settings.product.add.command
 
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.settings.product.add.dto.AddProductRequest
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/commands/add-product")
 class AddProductCommand(
-    val urlBuilder: URLBuilder,
     val catalogApi: WutsiCatalogApi
 ) : AbstractCommand() {
     @PostMapping

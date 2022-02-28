@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -44,7 +43,6 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/settings/store/product")
 class SettingsProductScreen(
-    private val urlBuilder: URLBuilder,
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
 

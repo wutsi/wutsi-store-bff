@@ -1,551 +1,505 @@
 {
-  "type": "Screen",
-  "attributes": {
-    "id": "page.product",
-    "safe": false
+  "type" : "Screen",
+  "attributes" : {
+    "id" : "page.product",
+    "safe" : false
   },
-  "children": [
-    {
-      "type": "Container",
-      "attributes": {},
-      "children": [
-        {
-          "type": "ListView",
-          "attributes": {},
-          "children": [
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "Sample product",
-                    "bold": true,
-                    "size": 16.0
-                  },
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "CarouselSlider",
-              "attributes": {
-                "height": 300.0,
-                "viewportFraction": 0.9,
-                "enableInfiniteScroll": false,
-                "reverse": false
-              },
-              "children": [
-                {
-                  "type": "AspectRatio",
-                  "attributes": {
-                    "aspectRatio": 0.8
-                  },
-                  "children": [
-                    {
-                      "type": "Image",
-                      "attributes": {
-                        "url": "https://www.imag.com/1.png",
-                        "height": 300.0
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "type": "AspectRatio",
-                  "attributes": {
-                    "aspectRatio": 0.8
-                  },
-                  "children": [
-                    {
-                      "type": "Image",
-                      "attributes": {
-                        "url": "https://www.imag.com/2.png",
-                        "height": 300.0
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "type": "AspectRatio",
-                  "attributes": {
-                    "aspectRatio": 0.8
-                  },
-                  "children": [
-                    {
-                      "type": "Image",
-                      "attributes": {
-                        "url": "https://www.imag.com/3.png",
-                        "height": 300.0
-                      },
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "end"
-                  },
-                  "children": [
-                    {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "center"
-                      },
-                      "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 2.0,
-                            "width": 120.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "List Price:"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "10,000 CFA",
-                            "color": "#95A5A6",
-                            "size": 10.0,
-                            "decoration": "Strikethrough"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "center"
-                      },
-                      "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 2.0,
-                            "width": 120.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Deal Price:"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "7,000 CFA",
-                            "color": "#1D7EDF",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "center"
-                      },
-                      "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 2.0,
-                            "width": 120.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Savings:"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "30% off",
-                            "color": "#4CAF50"
-                          },
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "Summary of product"
-                  },
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {},
-                  "children": [
-                    {
-                      "type": "Row",
-                      "attributes": {},
-                      "children": [
-                        {
-                          "type": "Icon",
-                          "attributes": {
-                            "code": "e156",
-                            "color": "#4CAF50"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "In Stock"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Button",
-                      "attributes": {
-                        "caption": "Add to Cart",
-                        "padding": 10.0,
-                        "type": "Elevated"
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Command",
-                        "url": "http://localhost:0/commands/add-to-cart?product-id=1&merchant-id=77777"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "Product Details",
-                        "bold": true,
-                        "size": 18.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "This is a long description of the product"
-                      },
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {},
-              "children": [
-                {
-                  "type": "Row",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "mainAxisSize": "min",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "CircleAvatar",
-                      "attributes": {
-                        "radius": 24.0
-                      },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "RS",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {},
-                      "children": [
-                        {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "mainAxisSize": "min",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Ray Sponsible",
-                                "bold": true
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Marketing",
-                                "color": "#95A5A6"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Button",
-                              "attributes": {
-                                "caption": "Write to Merchant",
-                                "padding": 10.0,
-                                "type": "Outlined",
-                                "stretched": false
-                              },
-                              "children": [],
-                              "action": {
-                                "type": "Share",
-                                "url": "https://www.wutsi.me/product?id=$11"
-                              }
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "appBar": {
-    "type": "AppBar",
-    "attributes": {
-      "elevation": 0.0,
-      "backgroundColor": "#FFFFFF",
-      "foregroundColor": "#000000",
-      "actions": [
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 4.0
-          },
-          "children": [
-            {
-              "type": "CircleAvatar",
-              "attributes": {
-                "radius": 20.0,
-                "backgroundColor": "#e4edf7"
-              },
-              "children": [
-                {
-                  "type": "IconButton",
-                  "attributes": {
-                    "icon": "e153",
-                    "size": 20.0
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Navigate",
-                    "url": "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fproduct%3Fid%3D%2411"
-                  }
-                }
-              ]
-            }
-          ]
+  "children" : [ {
+    "type" : "Container",
+    "attributes" : { },
+    "children" : [ {
+      "type" : "ListView",
+      "attributes" : { },
+      "children" : [ {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 10.0
         },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 4.0
+        "children" : [ {
+          "type" : "Text",
+          "attributes" : {
+            "caption" : "Sample product",
+            "bold" : true,
+            "size" : 16.0
           },
-          "children": [
-            {
-              "type": "CircleAvatar",
-              "attributes": {
-                "radius": 20.0,
-                "backgroundColor": "#e4edf7"
-              },
-              "children": [
-                {
-                  "type": "IconButton",
-                  "attributes": {
-                    "icon": "ea47",
-                    "size": 20.0
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Share",
-                    "url": "https://www.wutsi.me/product?id=$11"
-                  }
-                }
-              ]
-            }
-          ]
+          "children" : [ ]
+        } ]
+      }, {
+        "type" : "CarouselSlider",
+        "attributes" : {
+          "height" : 250.0,
+          "viewportFraction" : 0.9,
+          "enableInfiniteScroll" : false,
+          "reverse" : false
         },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 4.0
+        "children" : [ {
+          "type" : "AspectRatio",
+          "attributes" : {
+            "aspectRatio" : 0.8
           },
-          "children": [
-            {
-              "type": "CircleAvatar",
-              "attributes": {
-                "radius": 20.0,
-                "backgroundColor": "#e4edf7"
+          "children" : [ {
+            "type" : "Image",
+            "attributes" : {
+              "url" : "https://www.imag.com/1.png",
+              "height" : 300.0
+            },
+            "children" : [ ]
+          } ]
+        }, {
+          "type" : "AspectRatio",
+          "attributes" : {
+            "aspectRatio" : 0.8
+          },
+          "children" : [ {
+            "type" : "Image",
+            "attributes" : {
+              "url" : "https://www.imag.com/2.png",
+              "height" : 300.0
+            },
+            "children" : [ ]
+          } ]
+        }, {
+          "type" : "AspectRatio",
+          "attributes" : {
+            "aspectRatio" : 0.8
+          },
+          "children" : [ {
+            "type" : "Image",
+            "attributes" : {
+              "url" : "https://www.imag.com/3.png",
+              "height" : 300.0
+            },
+            "children" : [ ]
+          } ]
+        } ]
+      }, {
+        "type" : "Divider",
+        "attributes" : {
+          "height" : 1.0,
+          "color" : "#8c8c8c"
+        },
+        "children" : [ ]
+      }, {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 10.0
+        },
+        "children" : [ {
+          "type" : "Column",
+          "attributes" : {
+            "mainAxisAlignment" : "start",
+            "crossAxisAlignment" : "end"
+          },
+          "children" : [ {
+            "type" : "Row",
+            "attributes" : {
+              "mainAxisAlignment" : "start",
+              "crossAxisAlignment" : "center"
+            },
+            "children" : [ {
+              "type" : "Container",
+              "attributes" : {
+                "padding" : 2.0,
+                "width" : 120.0
               },
-              "children": [
-                {
-                  "type": "Stack",
-                  "attributes": {},
-                  "children": [
-                    {
-                      "type": "IconButton",
-                      "attributes": {
-                        "icon": "f37f",
-                        "size": 20.0
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/cart?merchant-id=77777"
-                      }
-                    },
-                    {
-                      "type": "Positioned",
-                      "attributes": {
-                        "top": 6.0,
-                        "right": 6.0
-                      },
-                      "children": [
-                        {
-                          "type": "Badge",
-                          "attributes": {
-                            "caption": "2",
-                            "fontSize": 10.0,
-                            "padding": 3.0
-                          },
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
+              "children" : [ {
+                "type" : "Text",
+                "attributes" : {
+                  "caption" : "List Price:"
+                },
+                "children" : [ ]
+              } ]
+            }, {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "10,000 CFA",
+                "color" : "#95A5A6",
+                "size" : 10.0,
+                "decoration" : "Strikethrough"
+              },
+              "children" : [ ]
+            } ]
+          }, {
+            "type" : "Row",
+            "attributes" : {
+              "mainAxisAlignment" : "start",
+              "crossAxisAlignment" : "center"
+            },
+            "children" : [ {
+              "type" : "Container",
+              "attributes" : {
+                "padding" : 2.0,
+                "width" : 120.0
+              },
+              "children" : [ {
+                "type" : "Text",
+                "attributes" : {
+                  "caption" : "Deal Price:"
+                },
+                "children" : [ ]
+              } ]
+            }, {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "7,000 CFA",
+                "color" : "#1D7EDF",
+                "bold" : true,
+                "size" : 16.0
+              },
+              "children" : [ ]
+            } ]
+          }, {
+            "type" : "Row",
+            "attributes" : {
+              "mainAxisAlignment" : "start",
+              "crossAxisAlignment" : "center"
+            },
+            "children" : [ {
+              "type" : "Container",
+              "attributes" : {
+                "padding" : 2.0,
+                "width" : 120.0
+              },
+              "children" : [ {
+                "type" : "Text",
+                "attributes" : {
+                  "caption" : "Savings:"
+                },
+                "children" : [ ]
+              } ]
+            }, {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "30% off",
+                "color" : "#4CAF50"
+              },
+              "children" : [ ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 10.0
+        },
+        "children" : [ {
+          "type" : "Text",
+          "attributes" : {
+            "caption" : "Summary of product"
+          },
+          "children" : [ ]
+        } ]
+      }, {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 10.0
+        },
+        "children" : [ {
+          "type" : "Column",
+          "attributes" : { },
+          "children" : [ {
+            "type" : "Row",
+            "attributes" : { },
+            "children" : [ {
+              "type" : "Icon",
+              "attributes" : {
+                "code" : "e156",
+                "color" : "#4CAF50"
+              },
+              "children" : [ ]
+            }, {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "In Stock"
+              },
+              "children" : [ ]
+            } ]
+          }, {
+            "type" : "Button",
+            "attributes" : {
+              "caption" : "Add to Cart",
+              "padding" : 10.0,
+              "type" : "Elevated"
+            },
+            "children" : [ ],
+            "action" : {
+              "type" : "Command",
+              "url" : "http://localhost:0/commands/add-to-cart?product-id=1&merchant-id=77777"
             }
-          ]
-        }
-      ]
+          } ]
+        } ]
+      }, {
+        "type" : "Divider",
+        "attributes" : {
+          "height" : 1.0,
+          "color" : "#8c8c8c"
+        },
+        "children" : [ ]
+      }, {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 10.0
+        },
+        "children" : [ {
+          "type" : "Column",
+          "attributes" : {
+            "mainAxisAlignment" : "start",
+            "crossAxisAlignment" : "start"
+          },
+          "children" : [ {
+            "type" : "Text",
+            "attributes" : {
+              "caption" : "Product Details",
+              "bold" : true,
+              "size" : 18.0
+            },
+            "children" : [ ]
+          }, {
+            "type" : "Text",
+            "attributes" : {
+              "caption" : "This is a long description of the product"
+            },
+            "children" : [ ]
+          } ]
+        } ]
+      }, {
+        "type" : "Divider",
+        "attributes" : {
+          "color" : "#8c8c8c"
+        },
+        "children" : [ ]
+      }, {
+        "type" : "Container",
+        "attributes" : { },
+        "children" : [ {
+          "type" : "Row",
+          "attributes" : {
+            "mainAxisAlignment" : "start",
+            "mainAxisSize" : "min",
+            "crossAxisAlignment" : "start"
+          },
+          "children" : [ {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ ]
+          }, {
+            "type" : "CircleAvatar",
+            "attributes" : {
+              "radius" : 24.0
+            },
+            "children" : [ {
+              "type" : "Text",
+              "attributes" : {
+                "caption" : "RS",
+                "bold" : true,
+                "size" : 16.0
+              },
+              "children" : [ ]
+            } ]
+          }, {
+            "type" : "Container",
+            "attributes" : {
+              "padding" : 10.0
+            },
+            "children" : [ ]
+          }, {
+            "type" : "Container",
+            "attributes" : { },
+            "children" : [ {
+              "type" : "Column",
+              "attributes" : {
+                "mainAxisAlignment" : "start",
+                "mainAxisSize" : "min",
+                "crossAxisAlignment" : "start"
+              },
+              "children" : [ {
+                "type" : "Text",
+                "attributes" : {
+                  "caption" : "Ray Sponsible",
+                  "bold" : true
+                },
+                "children" : [ ]
+              }, {
+                "type" : "Text",
+                "attributes" : {
+                  "caption" : "Marketing",
+                  "color" : "#95A5A6"
+                },
+                "children" : [ ]
+              }, {
+                "type" : "Button",
+                "attributes" : {
+                  "caption" : "Write to Merchant",
+                  "padding" : 10.0,
+                  "type" : "Outlined",
+                  "stretched" : false
+                },
+                "children" : [ ],
+                "action" : {
+                  "type" : "Share",
+                  "url" : "https://www.wutsi.me/product?id=$11"
+                }
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
+    } ]
+  } ],
+  "appBar" : {
+    "type" : "AppBar",
+    "attributes" : {
+      "elevation" : 0.0,
+      "backgroundColor" : "#FFFFFF",
+      "foregroundColor" : "#000000",
+      "actions" : [ {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 4.0
+        },
+        "children" : [ {
+          "type" : "CircleAvatar",
+          "attributes" : {
+            "radius" : 20.0,
+            "backgroundColor" : "#e4edf7"
+          },
+          "children" : [ {
+            "type" : "IconButton",
+            "attributes" : {
+              "icon" : "e153",
+              "size" : 20.0
+            },
+            "children" : [ ],
+            "action" : {
+              "type" : "Navigate",
+              "url" : "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fproduct%3Fid%3D%2411"
+            }
+          } ]
+        } ]
+      }, {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 4.0
+        },
+        "children" : [ {
+          "type" : "CircleAvatar",
+          "attributes" : {
+            "radius" : 20.0,
+            "backgroundColor" : "#e4edf7"
+          },
+          "children" : [ {
+            "type" : "IconButton",
+            "attributes" : {
+              "icon" : "ea47",
+              "size" : 20.0
+            },
+            "children" : [ ],
+            "action" : {
+              "type" : "Share",
+              "url" : "https://www.wutsi.me/product?id=$11"
+            }
+          } ]
+        } ]
+      }, {
+        "type" : "Container",
+        "attributes" : {
+          "padding" : 4.0
+        },
+        "children" : [ {
+          "type" : "CircleAvatar",
+          "attributes" : {
+            "radius" : 20.0,
+            "backgroundColor" : "#e4edf7"
+          },
+          "children" : [ {
+            "type" : "Stack",
+            "attributes" : { },
+            "children" : [ {
+              "type" : "IconButton",
+              "attributes" : {
+                "icon" : "f37f",
+                "size" : 20.0
+              },
+              "children" : [ ],
+              "action" : {
+                "type" : "Route",
+                "url" : "http://localhost:0/cart?merchant-id=77777"
+              }
+            }, {
+              "type" : "Positioned",
+              "attributes" : {
+                "top" : 6.0,
+                "right" : 6.0
+              },
+              "children" : [ {
+                "type" : "Badge",
+                "attributes" : {
+                  "caption" : "2",
+                  "fontSize" : 10.0,
+                  "padding" : 3.0
+                },
+                "children" : [ ]
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
     },
-    "children": []
+    "children" : [ ]
+  },
+  "bottomNavigationBar" : {
+    "type" : "BottomNavigationBar",
+    "attributes" : {
+      "background" : "#1D7EDF",
+      "selectedItemColor" : "#FFFFFF",
+      "unselectedItemColor" : "#FFFFFF"
+    },
+    "children" : [ {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e319",
+        "caption" : "Home"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "route:/~"
+      }
+    }, {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e491",
+        "caption" : "Me"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777"
+      }
+    }, {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e314",
+        "caption" : "Transactions"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "http://localhost:0/history"
+      }
+    }, {
+      "type" : "BottomNavigationBarItem",
+      "attributes" : {
+        "icon" : "e57f",
+        "caption" : "Settings"
+      },
+      "children" : [ ],
+      "action" : {
+        "type" : "Route",
+        "url" : "http://localhost:0/settings"
+      }
+    } ]
   }
 }
