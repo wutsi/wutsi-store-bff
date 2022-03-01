@@ -30,7 +30,8 @@
     <klint.version>0.44.0</klint.version>
     <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
 
-    <wutsi-shared-ui.version>0.0.116</wutsi-shared-ui.version>
+    <wutsi-shared-ui.version>0.0.117</wutsi-shared-ui.version>
+    <wutsi-shipping.version>0.0.3</wutsi-shipping.version>
   </properties>
 
   <dependencies>
@@ -38,6 +39,11 @@
       <groupId>com.wutsi.application.shared</groupId>
       <artifactId>wutsi-shared-ui</artifactId>
       <version>${wutsi-shared-ui.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.wutsi.ecommerce.shipping</groupId>
+      <artifactId>wutsi-shipping-sdk-kotlin</artifactId>
+      <version>${wutsi-shipping.version}</version>
     </dependency>
 
     <dependency>

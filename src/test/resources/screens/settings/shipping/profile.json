@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.settings.store",
+    "id": "page.settings.store.shipping.profile",
     "safe": false
   },
   "children": [
@@ -12,15 +12,13 @@
         {
           "type": "Container",
           "attributes": {
-            "alignment": "CenterLeft",
             "padding": 10.0
           },
           "children": [
             {
               "type": "Text",
               "attributes": {
-                "caption": "Configure your Store",
-                "alignment": "Left"
+                "caption": "Deliver orders to customers abroad"
               },
               "children": []
             }
@@ -29,7 +27,7 @@
         {
           "type": "Divider",
           "attributes": {
-            "height": 2.0,
+            "height": 1.0,
             "color": "#8c8c8c"
           },
           "children": []
@@ -49,45 +47,27 @@
               },
               "children": [
                 {
-                  "type": "ListItem",
+                  "type": "ListItemSwitch",
                   "attributes": {
-                    "caption": "Products",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f"
-                      },
-                      "children": []
-                    },
-                    "leading": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "f37d"
-                      },
-                      "children": []
-                    }
+                    "caption": "Enable Shipping",
+                    "name": "value",
+                    "selected": true
                   },
                   "children": [],
                   "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/products"
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/disable-shipping?id=111"
                   }
                 },
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Shipping",
+                    "caption": "Message for Customers",
+                    "subCaption": "This is the message to display to customer",
                     "trailing": {
                       "type": "Icon",
                       "attributes": {
-                        "code": "e15f"
-                      },
-                      "children": []
-                    },
-                    "leading": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "f18e"
+                        "code": "e21a"
                       },
                       "children": []
                     }
@@ -95,7 +75,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/settings/store/shipping"
+                    "url": "/settings/store/shipping/attribute/message?id111"
                   }
                 }
               ]
@@ -108,7 +88,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Store",
+      "title": "Local Shipping",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

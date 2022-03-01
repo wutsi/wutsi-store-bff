@@ -10,6 +10,10 @@ import com.wutsi.ecommerce.catalog.dto.PictureSummary
 import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.entity.ProductType
+import com.wutsi.ecommerce.shipping.dto.Rate
+import com.wutsi.ecommerce.shipping.dto.Shipping
+import com.wutsi.ecommerce.shipping.dto.ShippingSummary
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.account.dto.Category
@@ -286,5 +290,21 @@ abstract class AbstractEndpointTest {
         ),
         timezoneId = "Africa/Douala",
         whatsapp = "+123766666666$id",
+    )
+
+    fun createShipping(type: ShippingType, enabled: Boolean = true, rates: List<Rate> = emptyList()) = Shipping(
+        id = 111,
+        accountId = 1111,
+        type = type.name,
+        message = "This is the message to display to customer",
+        enabled = enabled,
+        rates = rates
+    )
+
+    fun createShippingSummary(type: ShippingType, enabled: Boolean = true) = ShippingSummary(
+        id = 111,
+        accountId = 1111,
+        type = type.name,
+        enabled = enabled,
     )
 }

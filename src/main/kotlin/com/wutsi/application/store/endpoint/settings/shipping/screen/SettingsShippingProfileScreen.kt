@@ -1,8 +1,9 @@
-package com.wutsi.application.store.endpoint.settings.screen
+package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -10,60 +11,59 @@ import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.ListItem
+import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
-import com.wutsi.flutter.sdui.enums.Alignment
-import com.wutsi.flutter.sdui.enums.TextAlignment
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/settings/store")
-class SettingsStoreScreen : AbstractQuery() {
+@RequestMapping("/settings/store/shipping/profile")
+class SettingsShippingProfileScreen(
+    private val shippingApi: WutsiShippingApi
+) : AbstractQuery() {
     @PostMapping
-    fun index(): Widget {
+    fun index(@RequestParam id: Long): Widget {
+        val shipping = shippingApi.getShipping(id).shipping
+
         return Screen(
-            id = Page.SETTINGS_STORE,
+            id = Page.SETTINGS_STORE_SHIPPING_PROFILE,
             appBar = AppBar(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.settings.store.app-bar.title"),
+                title = getText("page.settings.shipping.${shipping.type}"),
             ),
+
             child = Column(
                 children = listOf(
                     Container(
                         padding = 10.0,
-                        alignment = Alignment.CenterLeft,
-                        child = Text(
-                            caption = getText("page.settings.store.message"),
-                            alignment = TextAlignment.Left
-                        )
+                        child = Text(getText("page.settings.shipping.${shipping.type}.description"))
                     ),
-                    Divider(color = Theme.COLOR_DIVIDER, height = 2.0),
+                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     Flexible(
                         child = ListView(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
                             children = listOf(
-                                ListItem(
-                                    caption = getText("page.settings.store.products"),
-                                    leading = Icon(code = Theme.ICON_SHOPPING_BAG),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/products")
+                                ListItemSwitch(
+                                    name = "value",
+                                    caption = getText("page.settings.shipping.enabled"),
+                                    selected = true,
+                                    action = executeCommand(
+                                        urlBuilder.build("commands/disable-shipping?id=$id")
                                     )
                                 ),
                                 ListItem(
-                                    caption = getText("page.settings.store.shipping"),
-                                    leading = Icon(code = Theme.ICON_SHIPPING),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/shipping")
-                                    )
+                                    caption = getText("page.settings.shipping.message"),
+                                    subCaption = shipping.message ?: "",
+                                    trailing = Icon(Theme.ICON_EDIT),
+                                    action = gotoUrl("/settings/store/shipping/attribute/message?id$id")
                                 ),
                             )
                         )

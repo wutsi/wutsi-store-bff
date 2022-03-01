@@ -28,4 +28,7 @@ object Page {
     const val SETTINGS_STORE_PRODUCT_SUB_CATEGORY = "page.settings.store.product.sub-category"
     const val SETTINGS_STORE_PRODUCT_TITLE = "page.settings.store.product.title"
     const val SETTINGS_STORE_PRODUCT_TYPE = "page.settings.store.product.type"
+    const val SETTINGS_STORE_SHIPPING = "page.settings.store.shipping"
+    const val SETTINGS_STORE_SHIPPING_PROFILE = "page.settings.store.shipping.profile"
+    const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_MESSAGE = "page.settings.store.shipping.attribute.message"
 }
