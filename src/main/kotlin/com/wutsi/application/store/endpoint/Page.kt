@@ -30,5 +30,7 @@ object Page {
     const val SETTINGS_STORE_PRODUCT_TYPE = "page.settings.store.product.type"
     const val SETTINGS_STORE_SHIPPING = "page.settings.store.shipping"
     const val SETTINGS_STORE_SHIPPING_PROFILE = "page.settings.store.shipping.profile"
+    const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_DELIVERY_TIME = "page.settings.store.shipping.attribute.delivery-time"
     const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_MESSAGE = "page.settings.store.shipping.attribute.message"
+    const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_RATE = "page.settings.store.shipping.attribute.rate"
 }

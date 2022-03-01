@@ -50,7 +50,6 @@
                 "enabled": true,
                 "readOnly": false,
                 "type": "Text",
-                "maxLines": 5,
                 "minLength": 0
               },
               "children": []
@@ -89,7 +88,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Message",
+      "title": "Message for Customers",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

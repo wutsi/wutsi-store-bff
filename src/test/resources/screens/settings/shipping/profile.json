@@ -49,7 +49,7 @@
                 {
                   "type": "ListItemSwitch",
                   "attributes": {
-                    "caption": "Enable Shipping",
+                    "caption": "Enabled",
                     "name": "value",
                     "selected": true
                   },
@@ -62,7 +62,7 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Message for Customers",
+                    "caption": "Message",
                     "subCaption": "This is the message to display to customer",
                     "trailing": {
                       "type": "Icon",
@@ -75,7 +75,45 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "/settings/store/shipping/attribute/message?id111"
+                    "url": "http://localhost:0/settings/store/shipping/attribute/message?id=111"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Delivery Time",
+                    "subCaption": "1 day",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e21a"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/attribute/delivery-time?id=111"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Rate",
+                    "subCaption": "150,000 CFA",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e21a"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/attribute/rate?id=111"
                   }
                 }
               ]

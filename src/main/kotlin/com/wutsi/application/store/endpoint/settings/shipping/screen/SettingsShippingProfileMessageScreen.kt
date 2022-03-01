@@ -15,6 +15,7 @@ class SettingsShippingProfileMessageScreen : AbstractSettingsShippingProfileAttr
 
     override fun getInputWidget(shipping: Shipping) = Input(
         name = "value",
-        value = shipping.message
+        value = shipping.message,
+        maxLines = 5
     )
 }

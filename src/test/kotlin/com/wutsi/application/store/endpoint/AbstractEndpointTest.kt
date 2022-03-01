@@ -298,6 +298,8 @@ abstract class AbstractEndpointTest {
         type = type.name,
         message = "This is the message to display to customer",
         enabled = enabled,
+        rate = 150000.0,
+        deliveryTime = 24,
         rates = rates
     )
 
@@ -306,5 +308,7 @@ abstract class AbstractEndpointTest {
         accountId = 1111,
         type = type.name,
         enabled = enabled,
+        rate = 150000.0,
+        deliveryTime = 24,
     )
 }

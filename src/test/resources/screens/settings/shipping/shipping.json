@@ -63,7 +63,14 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Local Shipping",
-                    "subCaption": "Deliver orders to customers abroad"
+                    "subCaption": "Deliver orders to customers abroad",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    }
                   },
                   "children": [],
                   "action": {
@@ -75,7 +82,14 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Email Shipping",
-                    "subCaption": "Deliver electronic products via email"
+                    "subCaption": "Deliver electronic products via email",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    }
                   },
                   "children": [],
                   "action": {

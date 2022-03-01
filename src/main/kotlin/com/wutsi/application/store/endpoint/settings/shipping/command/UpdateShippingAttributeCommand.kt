@@ -29,6 +29,6 @@ class UpdateShippingAttributeCommand(
                 value = request.value
             )
         )
-        return gotoUrl(urlBuilder.build("/settings/store/shipping/profile?id=$id"))
+        return gotoPreviousScreen()
     }
 }

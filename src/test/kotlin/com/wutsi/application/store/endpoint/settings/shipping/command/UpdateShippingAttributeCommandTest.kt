@@ -36,7 +36,7 @@ internal class UpdateShippingAttributeCommandTest : AbstractEndpointTest() {
         assertEquals(200, response.statusCodeValue)
 
         val action = response.body!!
-        assertEquals("http://localhost:0/settings/store/shipping/profile?id=111", action.url)
+        assertEquals("route:/..", action.url)
         assertEquals(ActionType.Route, action.type)
 
         verify(shippingApi).updateShippingAttribute(111, "foo", UpdateShippingAttributeRequest(request.value))

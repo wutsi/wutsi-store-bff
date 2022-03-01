@@ -10,6 +10,7 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Flexible
+import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
@@ -78,7 +79,8 @@ class SettingsShippingScreen(
             ListItem(
                 caption = getText("page.settings.shipping.$type"),
                 subCaption = getText("page.settings.shipping.$type.description"),
-                action = gotoUrl(urlBuilder.build("settings/store/shipping/profile?id=${shipping?.id}"))
+                action = gotoUrl(urlBuilder.build("settings/store/shipping/profile?id=${shipping?.id}")),
+                trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT)
             )
         } else {
             val cmd = shipping?.let { "commands/enable-attribute?name=enabled&id=${it.id}" }
