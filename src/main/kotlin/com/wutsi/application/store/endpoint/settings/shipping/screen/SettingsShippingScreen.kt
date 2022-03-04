@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/settings/store/shipping")
 class SettingsShippingScreen(
-    private val shippingApi: WutsiShippingApi
+    private val shippingApi: WutsiShippingApi,
+    private val togglesProvider: TogglesProvider,
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
@@ -46,7 +48,7 @@ class SettingsShippingScreen(
                         child = ListView(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
-                            children = listOf(
+                            children = listOfNotNull(
                                 listItem(
                                     ShippingType.LOCAL_PICKUP,
                                     shippings
@@ -55,14 +57,22 @@ class SettingsShippingScreen(
                                     ShippingType.LOCAL_DELIVERY,
                                     shippings
                                 ),
-                                listItem(
-                                    ShippingType.INTERNATIONAL_SHIPPING,
-                                    shippings
-                                ),
-                                listItem(
-                                    ShippingType.EMAIL_DELIVERY,
-                                    shippings
-                                )
+
+                                if (togglesProvider.isShippingInternationalEnabled())
+                                    listItem(
+                                        ShippingType.INTERNATIONAL_SHIPPING,
+                                        shippings
+                                    )
+                                else
+                                    null,
+
+                                if (togglesProvider.isShippingEmailEnabled())
+                                    listItem(
+                                        ShippingType.EMAIL_DELIVERY,
+                                        shippings
+                                    )
+                                else
+                                    null
                             )
                         )
                     )
@@ -77,8 +87,8 @@ class SettingsShippingScreen(
 
         return if (enabled) {
             ListItem(
-                caption = getText("page.settings.shipping.$type"),
-                subCaption = getText("page.settings.shipping.$type.description"),
+                caption = getText("shipping.type.$type"),
+                subCaption = getText("shipping.type.$type.description"),
                 action = gotoUrl(urlBuilder.build("settings/store/shipping/profile?id=${shipping?.id}")),
                 trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT)
             )
@@ -88,8 +98,8 @@ class SettingsShippingScreen(
 
             ListItemSwitch(
                 name = "value",
-                caption = getText("page.settings.shipping.$type"),
-                subCaption = getText("page.settings.shipping.$type.description"),
+                caption = getText("shipping.type.$type"),
+                subCaption = getText("shipping.type.$type.description"),
                 selected = false,
                 action = executeCommand(urlBuilder.build(cmd))
             )

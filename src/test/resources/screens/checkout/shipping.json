@@ -1,0 +1,89 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.delivery.method",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Container",
+          "attributes": {
+            "alignment": "Center",
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Select your delivery method",
+                "size": 16.0
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Divider",
+          "attributes": {
+            "height": 1.0,
+            "color": "#8c8c8c"
+          },
+          "children": []
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "RadioGroup",
+              "attributes": {
+                "name": "shippingId",
+                "separator": true,
+                "separatorColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Radio",
+                  "attributes": {
+                    "caption": "Local Pickup - 1,500 CFA",
+                    "value": "1"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Radio",
+                  "attributes": {
+                    "caption": "International Shipping - 15,000 CFA",
+                    "value": "2"
+                  },
+                  "children": []
+                }
+              ],
+              "action": {
+                "type": "Command",
+                "url": "http://localhost:0/commands/select-shipping-method?order-id=111"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Shipping",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

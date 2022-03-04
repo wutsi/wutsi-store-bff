@@ -1,0 +1,115 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.address",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {
+        "mainAxisAlignment": "center",
+        "crossAxisAlignment": "center"
+      },
+      "children": [
+        {
+          "type": "Container",
+          "attributes": {
+            "alignment": "Center",
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Select the shipping address",
+                "size": 16.0
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Divider",
+          "attributes": {
+            "height": 1.0,
+            "color": "#8c8c8c"
+          },
+          "children": []
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "RadioGroup",
+              "attributes": {
+                "name": "addressId",
+                "separator": true,
+                "separatorColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Radio",
+                  "attributes": {
+                    "caption": "Roger Sponsible",
+                    "subCaption": "180 Rue des Manguier, Bonnapriso\nYaounde, Cameroon",
+                    "value": "1"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Radio",
+                  "attributes": {
+                    "caption": "Milla Sponsible",
+                    "subCaption": "180 Rue des Manguier, Bonnapriso\nYaounde, Cameroon",
+                    "value": "2"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "Add New Address",
+                        "padding": 15.0,
+                        "type": "Outlined"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/checkout/address-country?order-id=111"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "action": {
+                "type": "Command",
+                "url": "http://localhost:0/commands/select-shipping-address?order-id=111"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Shipping",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

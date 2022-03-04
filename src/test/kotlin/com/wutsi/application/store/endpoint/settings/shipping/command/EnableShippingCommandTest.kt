@@ -4,6 +4,8 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.wutsi.application.shared.entity.CityEntity
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.CreateShippingRequest
@@ -12,6 +14,7 @@ import com.wutsi.ecommerce.shipping.dto.UpdateShippingAttributeRequest
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
+import com.wutsi.platform.account.dto.GetAccountResponse
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -26,9 +29,16 @@ internal class EnableShippingCommandTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var shippingApi: WutsiShippingApi
 
+    @MockBean
+    private lateinit var cityService: CityService
+
     @Test
     fun create() {
         doReturn(CreateShippingResponse(111)).whenever(shippingApi).createShipping(any())
+
+        val account = createAccount()
+        doReturn(GetAccountResponse(account)).whenever(accountApi).getAccount(any())
+        doReturn(CityEntity(country = "CM", id = 111)).whenever(cityService).get(any())
 
         val url = "http://localhost:$port/commands/enable-shipping?type=${ShippingType.INTERNATIONAL_SHIPPING}"
         val response = rest.postForEntity(url, null, Action::class.java)
@@ -41,7 +51,9 @@ internal class EnableShippingCommandTest : AbstractEndpointTest() {
 
         verify(shippingApi).createShipping(
             CreateShippingRequest(
-                type = ShippingType.INTERNATIONAL_SHIPPING.name
+                type = ShippingType.INTERNATIONAL_SHIPPING.name,
+                country = account.country,
+                cityId = account.cityId
             )
         )
     }

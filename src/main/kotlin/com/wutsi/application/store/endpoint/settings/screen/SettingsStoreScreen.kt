@@ -51,7 +51,7 @@ class SettingsStoreScreen : AbstractQuery() {
                             children = listOf(
                                 ListItem(
                                     caption = getText("page.settings.store.products"),
-                                    leading = Icon(code = Theme.ICON_SHOPPING_BAG),
+                                    leading = Icon(code = Theme.ICON_SHOPPING_BAG, color = Theme.COLOR_PRIMARY),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
                                         urlBuilder.build("/settings/store/products")
@@ -59,7 +59,7 @@ class SettingsStoreScreen : AbstractQuery() {
                                 ),
                                 ListItem(
                                     caption = getText("page.settings.store.shipping"),
-                                    leading = Icon(code = Theme.ICON_SHIPPING),
+                                    leading = Icon(code = Theme.ICON_SHIPPING, color = Theme.COLOR_PRIMARY),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
                                         urlBuilder.build("/settings/store/shipping")

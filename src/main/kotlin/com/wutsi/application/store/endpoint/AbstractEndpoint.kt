@@ -9,11 +9,13 @@ import com.wutsi.flutter.sdui.BottomNavigationBarItem
 import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.DialogType
+import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
 import java.net.URLEncoder
+import java.text.DecimalFormat
 
 abstract class AbstractEndpoint {
     @Autowired
@@ -102,4 +104,21 @@ abstract class AbstractEndpoint {
             ),
         )
     )
+
+    protected fun formatDeliveryTime(value: Int): String =
+        try {
+            getText("shipping.delivery-time.$value")
+        } catch (ex: Exception) {
+            val days = value / 12
+            if (days < 1)
+                getText("shipping.delivery-time.less-than-1d")
+            else
+                getText("shipping.delivery-time.n-days")
+        }
+
+    protected fun formatRate(rate: Double?, tenant: Tenant): String =
+        if (rate == null || rate == 0.0)
+            getText("label.free")
+        else
+            DecimalFormat(tenant.monetaryFormat).format(rate)
 }

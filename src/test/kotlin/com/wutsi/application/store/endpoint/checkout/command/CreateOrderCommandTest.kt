@@ -27,7 +27,7 @@ import org.springframework.boot.web.server.LocalServerPort
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class CreateOrderCommandTest : AbstractEndpointTest() {
     @LocalServerPort
-    public val port: Int = 0
+    val port: Int = 0
 
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
@@ -53,7 +53,7 @@ internal class CreateOrderCommandTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun cancel() {
+    fun create() {
         // GIVEN
         doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
 
@@ -76,7 +76,7 @@ internal class CreateOrderCommandTest : AbstractEndpointTest() {
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/review?order-id=555", action.url)
+        assertEquals("http://localhost:0/checkout/address?order-id=555", action.url)
     }
 
     @Test

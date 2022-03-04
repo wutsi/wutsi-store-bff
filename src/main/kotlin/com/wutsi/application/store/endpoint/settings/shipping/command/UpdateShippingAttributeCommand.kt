@@ -1,5 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.shipping.command
 
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.settings.shipping.dto.AttributeRequest
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/commands/update-shipping-attribute")
 class UpdateShippingAttributeCommand(
-    val shippingApi: WutsiShippingApi,
+    private val shippingApi: WutsiShippingApi,
+    private val cityService: CityService
 ) : AbstractCommand() {
     @PostMapping
     fun index(
@@ -29,6 +31,19 @@ class UpdateShippingAttributeCommand(
                 value = request.value
             )
         )
+
+        if (name == "city-id") {
+            val city = cityService.get(request.value.toLong())
+            if (city != null)
+                shippingApi.updateShippingAttribute(
+                    id,
+                    "country",
+                    UpdateShippingAttributeRequest(
+                        value = city.country
+                    )
+                )
+        }
+
         return gotoPreviousScreen()
     }
 }

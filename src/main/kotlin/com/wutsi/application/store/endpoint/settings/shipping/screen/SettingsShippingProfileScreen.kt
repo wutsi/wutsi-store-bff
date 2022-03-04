@@ -1,10 +1,13 @@
 package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.CityService
+import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -21,19 +24,20 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.text.DecimalFormat
 
 @RestController
 @RequestMapping("/settings/store/shipping/profile")
 class SettingsShippingProfileScreen(
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
+    private val sharedUIMapper: SharedUIMapper,
+    private val cityService: CityService,
 ) : AbstractQuery() {
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
         val shipping = shippingApi.getShipping(id).shipping
         val tenant = tenantProvider.get()
-        val fmt = DecimalFormat(tenant.monetaryFormat)
+        val city = cityService.get(shipping.cityId)
 
         return Screen(
             id = Page.SETTINGS_STORE_SHIPPING_PROFILE,
@@ -41,22 +45,21 @@ class SettingsShippingProfileScreen(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.settings.shipping.${shipping.type}"),
+                title = getText("shipping.type.${shipping.type}"),
             ),
 
             child = Column(
                 children = listOf(
                     Container(
                         padding = 10.0,
-                        child = Text(getText("page.settings.shipping.${shipping.type}.description"))
+                        child = Text(getText("shipping.type.${shipping.type}.description"))
                     ),
-
                     Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     Flexible(
                         child = ListView(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
-                            children = listOf(
+                            children = listOfNotNull(
                                 ListItemSwitch(
                                     name = "value",
                                     caption = getText("page.settings.shipping.attribute.enabled"),
@@ -65,14 +68,7 @@ class SettingsShippingProfileScreen(
                                         urlBuilder.build("commands/disable-shipping?id=$id")
                                     )
                                 ),
-                                ListItem(
-                                    caption = getText("page.settings.shipping.attribute.message"),
-                                    subCaption = shipping.message ?: "",
-                                    trailing = Icon(Theme.ICON_EDIT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/shipping/attribute/message?id=$id")
-                                    )
-                                ),
+
                                 ListItem(
                                     caption = getText("page.settings.shipping.attribute.delivery-time"),
                                     subCaption = shipping.deliveryTime?.let { formatDeliveryTime(it) },
@@ -81,14 +77,44 @@ class SettingsShippingProfileScreen(
                                         urlBuilder.build("/settings/store/shipping/attribute/delivery-time?id=$id")
                                     )
                                 ),
+
                                 ListItem(
                                     caption = getText("page.settings.shipping.attribute.rate"),
-                                    subCaption = shipping.rate?.let { fmt.format(it) },
+                                    subCaption = formatRate(shipping.rate, tenant),
                                     trailing = Icon(Theme.ICON_EDIT),
                                     action = gotoUrl(
                                         urlBuilder.build("/settings/store/shipping/attribute/rate?id=$id")
                                     )
                                 ),
+
+                                if (shipping.type == ShippingType.LOCAL_PICKUP.name || shipping.type == ShippingType.LOCAL_DELIVERY.name)
+                                    ListItem(
+                                        caption = getText("page.settings.shipping.attribute.city-id"),
+                                        subCaption = sharedUIMapper.toLocationText(city, shipping.country ?: ""),
+                                        trailing = Icon(Theme.ICON_EDIT),
+                                        action = gotoUrl(
+                                            urlBuilder.build("/settings/store/shipping/attribute/city-id?id=$id")
+                                        )
+                                    )
+                                else
+                                    null,
+
+                                ListItem(
+                                    caption = getText("page.settings.shipping.attribute.message"),
+                                    subCaption = shipping.message ?: "",
+                                    trailing = Icon(Theme.ICON_EDIT),
+                                    action = gotoUrl(
+                                        urlBuilder.build("/settings/store/shipping/attribute/message?id=$id")
+                                    )
+                                ),
+//                                ListItem(
+//                                    caption = getText("page.settings.shipping.attribute.country"),
+//                                    subCaption = shipping.country?.let { Locale("en", it).getDisplayCountry(locale) },
+//                                    trailing = Icon(Theme.ICON_EDIT),
+//                                    action = gotoUrl(
+//                                        urlBuilder.build("/settings/store/shipping/attribute/country?id=$id")
+//                                    )
+//                                ),
                             )
                         ),
                     )
@@ -96,15 +122,4 @@ class SettingsShippingProfileScreen(
             )
         ).toWidget()
     }
-
-    private fun formatDeliveryTime(value: Int): String =
-        try {
-            getText("shipping.delivery-time.$value")
-        } catch (ex: Exception) {
-            val days = value / 12
-            if (days < 1)
-                getText("shipping.delivery-time.less-than-1d")
-            else
-                getText("shipping.delivery-time.n-days")
-        }
 }

@@ -1,337 +1,494 @@
 {
-  "type" : "Screen",
-  "attributes" : {
-    "id" : "page.checkout.review",
-    "safe" : false
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.review",
+    "safe": false
   },
-  "children" : [ {
-    "type" : "SingleChildScrollView",
-    "attributes" : { },
-    "children" : [ {
-      "type" : "Column",
-      "attributes" : {
-        "mainAxisAlignment" : "start",
-        "crossAxisAlignment" : "start"
-      },
-      "children" : [ {
-        "type" : "Container",
-        "attributes" : {
-          "padding" : 10.0
-        },
-        "children" : [ {
-          "type" : "Column",
-          "attributes" : {
-            "mainAxisAlignment" : "start",
-            "crossAxisAlignment" : "start"
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Column",
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
           },
-          "children" : [ {
-            "type" : "Text",
-            "attributes" : {
-              "caption" : "Merchant",
-              "bold" : true,
-              "size" : 16.0
-            },
-            "children" : [ ]
-          }, {
-            "type" : "ListItem",
-            "attributes" : {
-              "caption" : "Ray Sponsible",
-              "subCaption" : "Marketing",
-              "padding" : 10.0,
-              "leading" : {
-                "type" : "CircleAvatar",
-                "attributes" : {
-                  "radius" : 24.0
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "RS",
-                    "bold" : true,
-                    "size" : 16.0
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
                   },
-                  "children" : [ ]
-                } ]
-              }
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Merchant",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Ray Sponsible",
+                        "subCaption": "Marketing",
+                        "padding": 10.0,
+                        "leading": {
+                          "type": "CircleAvatar",
+                          "attributes": {
+                            "radius": 24.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "RS",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
             },
-            "children" : [ ]
-          } ]
-        } ]
-      }, {
-        "type" : "Divider",
-        "attributes" : {
-          "height" : 1.0,
-          "color" : "#8c8c8c"
-        },
-        "children" : [ ]
-      }, {
-        "type" : "Container",
-        "attributes" : {
-          "padding" : 10.0
-        },
-        "children" : [ {
-          "type" : "Text",
-          "attributes" : {
-            "caption" : "Products",
-            "bold" : true,
-            "size" : 16.0
-          },
-          "children" : [ ]
-        } ]
-      }, {
-        "type" : "ListItem",
-        "attributes" : {
-          "caption" : "Item 1",
-          "subCaption" : "Quantity: 10",
-          "trailing" : {
-            "type" : "Column",
-            "attributes" : {
-              "mainAxisAlignment" : "start",
-              "crossAxisAlignment" : "end"
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
             },
-            "children" : [ {
-              "type" : "Text",
-              "attributes" : {
-                "caption" : "1,000 CFA",
-                "bold" : true
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
               },
-              "children" : [ ]
-            }, {
-              "type" : "Text",
-              "attributes" : {
-                "caption" : "1,500 CFA",
-                "size" : 10.0,
-                "decoration" : "Strikethrough"
-              },
-              "children" : [ ]
-            }, {
-              "type" : "Text",
-              "attributes" : {
-                "caption" : "(100 CFA each)",
-                "size" : 10.0
-              },
-              "children" : [ ]
-            } ]
-          },
-          "leading" : {
-            "type" : "Image",
-            "attributes" : {
-              "url" : "http://img.com/nopicture.png",
-              "width" : 48.0,
-              "height" : 48.8
-            },
-            "children" : [ ]
-          }
-        },
-        "children" : [ ]
-      }, {
-        "type" : "Divider",
-        "attributes" : {
-          "color" : "#8c8c8c"
-        },
-        "children" : [ ]
-      }, {
-        "type" : "ListItem",
-        "attributes" : {
-          "caption" : "Item 2",
-          "subCaption" : "Quantity: 1",
-          "trailing" : {
-            "type" : "Column",
-            "attributes" : {
-              "mainAxisAlignment" : "start",
-              "crossAxisAlignment" : "end"
-            },
-            "children" : [ {
-              "type" : "Text",
-              "attributes" : {
-                "caption" : "15,000 CFA",
-                "bold" : true
-              },
-              "children" : [ ]
-            } ]
-          },
-          "leading" : {
-            "type" : "Image",
-            "attributes" : {
-              "url" : "http://img.com/nopicture.png",
-              "width" : 48.0,
-              "height" : 48.8
-            },
-            "children" : [ ]
-          }
-        },
-        "children" : [ ]
-      }, {
-        "type" : "Divider",
-        "attributes" : {
-          "color" : "#8c8c8c"
-        },
-        "children" : [ ]
-      }, {
-        "type" : "Container",
-        "attributes" : {
-          "padding" : 10.0,
-          "margin" : 10.0,
-          "border" : 1.0,
-          "borderRadius" : 2.0,
-          "borderColor" : "#8c8c8c"
-        },
-        "children" : [ {
-          "type" : "Column",
-          "attributes" : {
-            "mainAxisAlignment" : "start",
-            "mainAxisSize" : "min"
-          },
-          "children" : [ {
-            "type" : "Row",
-            "attributes" : {
-              "mainAxisAlignment" : "spaceBetween"
-            },
-            "children" : [ {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ {
-                "type" : "Text",
-                "attributes" : {
-                  "caption" : "Sub Total - 2 products",
-                  "bold" : false
-                },
-                "children" : [ ]
-              } ]
-            }, {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ {
-                "type" : "Text",
-                "attributes" : {
-                  "caption" : "30,000 CFA",
-                  "bold" : false,
-                  "alignment" : "Right"
-                },
-                "children" : [ ]
-              } ]
-            } ]
-          }, {
-            "type" : "Row",
-            "attributes" : {
-              "mainAxisAlignment" : "spaceBetween"
-            },
-            "children" : [ {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ {
-                "type" : "Text",
-                "attributes" : {
-                  "caption" : "Savings",
-                  "bold" : false
-                },
-                "children" : [ ]
-              } ]
-            }, {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ {
-                "type" : "Text",
-                "attributes" : {
-                  "caption" : "-5,000 CFA",
-                  "color" : "#4CAF50",
-                  "bold" : false,
-                  "alignment" : "Right"
-                },
-                "children" : [ ]
-              } ]
-            } ]
-          }, {
-            "type" : "Container",
-            "attributes" : {
-              "background" : "#e4edf7"
-            },
-            "children" : [ {
-              "type" : "Row",
-              "attributes" : {
-                "mainAxisAlignment" : "spaceBetween"
-              },
-              "children" : [ {
-                "type" : "Container",
-                "attributes" : {
-                  "padding" : 10.0
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "Total",
-                    "bold" : true
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Products",
+                    "bold": true,
+                    "size": 16.0
                   },
-                  "children" : [ ]
-                } ]
-              }, {
-                "type" : "Container",
-                "attributes" : {
-                  "padding" : 10.0
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "25,000 CFA",
-                    "color" : "#1D7EDF",
-                    "bold" : true,
-                    "alignment" : "Right"
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "Item 1",
+                "subCaption": "Quantity: 10",
+                "trailing": {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "end"
                   },
-                  "children" : [ ]
-                } ]
-              } ]
-            } ]
-          }, {
-            "type" : "Container",
-            "attributes" : {
-              "padding" : 10.0
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "1,000 CFA",
+                        "bold": true
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "1,500 CFA",
+                        "size": 10.0,
+                        "decoration": "Strikethrough"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "(100 CFA each)",
+                        "size": 10.0
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                "leading": {
+                  "type": "Image",
+                  "attributes": {
+                    "url": "http://img.com/nopicture.png",
+                    "width": 48.0,
+                    "height": 48.8
+                  },
+                  "children": []
+                }
+              },
+              "children": []
             },
-            "children" : [ ]
-          }, {
-            "type" : "Button",
-            "attributes" : {
-              "caption" : "Pay 25,000 CFA",
-              "padding" : 15.0,
-              "type" : "Elevated"
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
             },
-            "children" : [ ],
-            "action" : {
-              "type" : "Route",
-              "url" : "https://wutsi-gateway-test.herokuapp.com/login/?phone=%2B12376666666677777&icon=e3ae&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
+            {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "Item 2",
+                "subCaption": "Quantity: 1",
+                "trailing": {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "end"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "15,000 CFA",
+                        "bold": true
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                "leading": {
+                  "type": "Image",
+                  "attributes": {
+                    "url": "http://img.com/nopicture.png",
+                    "width": 48.0,
+                    "height": 48.8
+                  },
+                  "children": []
+                }
+              },
+              "children": []
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Shipping",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Local Pickup - Expected delivery: 03 Jan 2020"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "This is the message to display to customer",
+                            "maxLines": 5
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Ship To:"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Ray Sponsible",
+                                "bold": true
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "180 Rue des Manguier, Bonnapriso",
+                                "maxLines": 3
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Cameroon"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderRadius": 2.0,
+                "borderColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min"
+                  },
+                  "children": [
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceBetween"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Sub Total - 2 products",
+                                "bold": false
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "30,000 CFA",
+                                "bold": false,
+                                "alignment": "Right"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceBetween"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Savings",
+                                "bold": false
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "-5,000 CFA",
+                                "color": "#4CAF50",
+                                "bold": false,
+                                "alignment": "Right"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "background": "#e4edf7"
+                      },
+                      "children": [
+                        {
+                          "type": "Row",
+                          "attributes": {
+                            "mainAxisAlignment": "spaceBetween"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Total",
+                                    "bold": true
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "25,000 CFA",
+                                    "color": "#1D7EDF",
+                                    "bold": true,
+                                    "alignment": "Right"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "Pay 25,000 CFA",
+                        "padding": 15.0,
+                        "type": "Elevated"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/login/?phone=%2B12376666666677777&icon=f197&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
-          } ]
-        } ]
-      } ]
-    } ]
-  } ],
-  "appBar" : {
-    "type" : "AppBar",
-    "attributes" : {
-      "title" : "Your Order",
-      "elevation" : 0.0,
-      "backgroundColor" : "#FFFFFF",
-      "foregroundColor" : "#000000",
-      "automaticallyImplyLeading" : false,
-      "leading" : {
-        "type" : "IconButton",
-        "attributes" : {
-          "icon" : "ef28"
-        },
-        "children" : [ ],
-        "action" : {
-          "type" : "Command",
-          "url" : "http://localhost:0/commands/cancel-order?order-id=111"
+          ]
         }
-      }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Your Order",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
     },
-    "children" : [ ]
+    "children": []
   }
 }

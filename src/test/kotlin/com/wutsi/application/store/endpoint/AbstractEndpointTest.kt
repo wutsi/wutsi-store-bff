@@ -10,7 +10,10 @@ import com.wutsi.ecommerce.catalog.dto.PictureSummary
 import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.entity.ProductType
-import com.wutsi.ecommerce.shipping.dto.Rate
+import com.wutsi.ecommerce.order.dto.Address
+import com.wutsi.ecommerce.order.dto.Order
+import com.wutsi.ecommerce.order.dto.OrderItem
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.ecommerce.shipping.dto.ShippingSummary
 import com.wutsi.ecommerce.shipping.entity.ShippingType
@@ -44,6 +47,8 @@ import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.client.RestTemplate
 import java.nio.charset.Charset
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import java.util.UUID
 import kotlin.test.assertEquals
 
@@ -174,8 +179,7 @@ abstract class AbstractEndpointTest {
         return rest
     }
 
-    protected fun assertEndpointEquals(expectedPath: String, url: String) {
-        val request = emptyMap<String, String>()
+    protected fun assertEndpointEquals(expectedPath: String, url: String, request: Map<String, Any> = emptyMap()) {
         val response = rest.postForEntity(url, request, Map::class.java)
 
         assertJsonEquals(expectedPath, response.body)
@@ -290,9 +294,10 @@ abstract class AbstractEndpointTest {
         ),
         timezoneId = "Africa/Douala",
         whatsapp = "+123766666666$id",
+        cityId = 2222L,
     )
 
-    fun createShipping(type: ShippingType, enabled: Boolean = true, rates: List<Rate> = emptyList()) = Shipping(
+    fun createShipping(type: ShippingType, enabled: Boolean = true) = Shipping(
         id = 111,
         accountId = 1111,
         type = type.name,
@@ -300,7 +305,8 @@ abstract class AbstractEndpointTest {
         enabled = enabled,
         rate = 150000.0,
         deliveryTime = 24,
-        rates = rates
+        cityId = 11111L,
+        country = "CM"
     )
 
     fun createShippingSummary(type: ShippingType, enabled: Boolean = true) = ShippingSummary(
@@ -310,5 +316,37 @@ abstract class AbstractEndpointTest {
         enabled = enabled,
         rate = 150000.0,
         deliveryTime = 24,
+        cityId = 11111L,
+        country = "CM"
+    )
+
+    fun createOrder(shippingAddress: Address? = createAddress()) = Order(
+        id = "111",
+        merchantId = 55L,
+        totalPrice = 25000.0,
+        subTotalPrice = 30000.0,
+        savingsAmount = 5000.0,
+        currency = "XAF",
+        status = OrderStatus.CREATED.name,
+        reservationId = 777L,
+        items = listOf(
+            OrderItem(productId = 1, quantity = 10, unitPrice = 100.0, unitComparablePrice = 150.0),
+            OrderItem(productId = 2, quantity = 1, unitPrice = 15000.0)
+        ),
+        shippingAddress = shippingAddress,
+        shippingId = 333,
+        expectedDelivered = OffsetDateTime.of(2020, 1, 3, 15, 0, 0, 0, ZoneOffset.UTC),
+        deliveryFees = 1000.0,
+        accountId = ACCOUNT_ID
+    )
+
+    fun createAddress(id: Long = 111L, firstName: String = "Ray") = Address(
+        id = id,
+        firstName = firstName,
+        lastName = "Sponsible",
+        country = "CM",
+        cityId = 1000,
+        street = "180 Rue des Manguier, Bonnapriso",
+        email = "ray.sponsible@gmail.com"
     )
 }

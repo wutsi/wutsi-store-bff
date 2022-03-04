@@ -13,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class SettingsShippingProfileMessageScreenTest : AbstractEndpointTest() {
+internal class SettingsShippingProfileCityScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
 
@@ -25,7 +25,7 @@ internal class SettingsShippingProfileMessageScreenTest : AbstractEndpointTest()
         val shipping = createShipping(ShippingType.LOCAL_PICKUP)
         doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
 
-        val url = "http://localhost:$port/settings/store/shipping/attribute/message?id=111"
-        assertEndpointEquals("/screens/settings/shipping/message.json", url)
+        val url = "http://localhost:$port/settings/store/shipping/attribute/city-id?id=111"
+        assertEndpointEquals("/screens/settings/shipping/city-id.json", url)
     }
 }

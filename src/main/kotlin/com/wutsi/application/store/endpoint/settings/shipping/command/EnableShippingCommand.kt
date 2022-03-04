@@ -22,9 +22,12 @@ class EnableShippingCommand(
         @RequestParam(required = false) type: ShippingType? = null,
     ): Action {
         if (id == null) {
+            val account = securityContext.currentAccount()
             val shippingId = shippingApi.createShipping(
                 CreateShippingRequest(
-                    type = type!!.name
+                    type = type!!.name,
+                    country = account.country,
+                    cityId = account.cityId
                 )
             ).id
             return gotoUrl(urlBuilder.build("/settings/store/shipping/profile?id=$shippingId"))

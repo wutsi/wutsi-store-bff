@@ -2,6 +2,7 @@ package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.ActionModel
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.OrderItemListItem
@@ -13,13 +14,14 @@ import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.Address
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
+import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
-import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.SingleChildScrollView
 import com.wutsi.flutter.sdui.Text
@@ -30,11 +32,14 @@ import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.text.DecimalFormat
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @RestController
 @RequestMapping("/checkout/review")
@@ -42,8 +47,10 @@ class CheckoutReviewScreen(
     private val orderApi: WutsiOrderApi,
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
+    private val shippingApi: WutsiShippingApi,
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
+    private val cityService: CityService,
 
     @Value("\${wutsi.application.login-url}") private val loginUrl: String
 ) : AbstractQuery() {
@@ -101,6 +108,29 @@ class CheckoutReviewScreen(
                 children.add(Divider(color = Theme.COLOR_DIVIDER))
             }
 
+        // Shipping
+        if (order.shippingId != null) {
+            children.addAll(
+                listOf(
+                    Container(
+                        padding = 10.0,
+                        child = Column(
+                            mainAxisAlignment = MainAxisAlignment.start,
+                            crossAxisAlignment = CrossAxisAlignment.start,
+                            children = listOf(
+                                Text(
+                                    caption = getText("page.checkout.review.shipping"),
+                                    bold = true,
+                                    size = Theme.TEXT_SIZE_LARGE
+                                ),
+                                toShippingWidget(order, tenant)
+                            )
+                        )
+                    ),
+                )
+            )
+        }
+
         // Price
         children.add(toPriceWidget(order, tenant))
 
@@ -112,13 +142,6 @@ class CheckoutReviewScreen(
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.checkout.review.app-bar.title"),
-                automaticallyImplyLeading = false,
-                leading = IconButton(
-                    icon = Theme.ICON_CANCEL,
-                    action = executeCommand(
-                        url = urlBuilder.build("commands/cancel-order?order-id=$orderId")
-                    )
-                )
             ),
             child = SingleChildScrollView(
                 child = Column(
@@ -148,6 +171,73 @@ class CheckoutReviewScreen(
             )
         )
     )
+
+    private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware {
+        val shipping = shippingApi.getShipping(order.shippingId!!).shipping
+        val locale = LocaleContextHolder.getLocale()
+
+        val children = mutableListOf<WidgetAware>()
+        children.addAll(
+            listOf(
+                Container(padding = 10.0),
+                Text(
+                    getText("shipping.type.${shipping.type}") +
+                        if (order.expectedDelivered != null)
+                            " - " + getText(
+                                key = "page.checkout.review.expected-delivery-date",
+                                args = arrayOf(
+                                    DateTimeFormatter.ofPattern(tenant.dateFormat, locale)
+                                        .format(order.expectedDelivered)
+                                )
+                            )
+                        else
+                            ""
+                ),
+            )
+        )
+
+        if (!shipping.message.isNullOrEmpty())
+            children.addAll(
+                listOf(
+                    Container(padding = 10.0),
+                    Text(shipping.message!!, maxLines = 5)
+                )
+            )
+
+        if (order.shippingAddress != null) {
+            children.addAll(
+                listOf(
+                    Container(padding = 10.0),
+                    Text(getText("page.checkout.review.ship-to") + ":"),
+                    toAddressWidget(order.shippingAddress!!)
+                )
+            )
+        }
+
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = children
+        )
+    }
+
+    private fun toAddressWidget(address: Address) = Column(
+        mainAxisAlignment = MainAxisAlignment.start,
+        crossAxisAlignment = CrossAxisAlignment.start,
+        children = listOfNotNull(
+            Text("${address.firstName} ${address.lastName}".trim(), bold = true),
+            address.street?.let { Text(it, maxLines = 3) },
+            Text(
+                address.cityId?.let { cityService.get(it) }
+                    ?.let { "${it.name}, ${getCountryDisplayName(it.country)}" }
+                    ?: getCountryDisplayName(address.country)
+            ),
+            address.zipCode?.let { Text(it) }
+        )
+    )
+
+    private fun getCountryDisplayName(country: String): String =
+        Locale("en", country).getDisplayCountry(LocaleContextHolder.getLocale())
 
     private fun getPaymentUrl(orderId: String): String {
         val me = accountApi.getAccount(securityContext.currentAccountId()).account

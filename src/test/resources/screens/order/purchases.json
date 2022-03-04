@@ -1,142 +1,159 @@
 {
-  "type" : "Screen",
-  "attributes" : {
-    "id" : "page.purchases",
-    "safe" : false
+  "type": "Screen",
+  "attributes": {
+    "id": "page.purchases",
+    "safe": false
   },
-  "children" : [ {
-    "type" : "Column",
-    "attributes" : {
-      "mainAxisAlignment" : "start",
-      "crossAxisAlignment" : "start"
-    },
-    "children" : [ {
-      "type" : "Center",
-      "attributes" : { },
-      "children" : [ {
-        "type" : "Text",
-        "attributes" : {
-          "caption" : "2 order(s)"
-        },
-        "children" : [ ]
-      } ]
-    }, {
-      "type" : "Flexible",
-      "attributes" : {
-        "flex" : 1,
-        "fit" : "Tight"
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {
+        "mainAxisAlignment": "start",
+        "crossAxisAlignment": "start"
       },
-      "children" : [ {
-        "type" : "ListView",
-        "attributes" : {
-          "separator" : true,
-          "separatorColor" : "#8c8c8c"
+      "children": [
+        {
+          "type": "Center",
+          "attributes": {},
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "2 order(s)"
+              },
+              "children": []
+            }
+          ]
         },
-        "children" : [ {
-          "type" : "ListItem",
-          "attributes" : {
-            "caption" : "",
-            "subCaption" : "05 May 2020 - Created",
-            "trailing" : {
-              "type" : "Text",
-              "attributes" : {
-                "caption" : "25,000 CFA",
-                "color" : "#1D7EDF",
-                "bold" : true
-              },
-              "children" : [ ]
-            }
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
           },
-          "children" : [ ],
-          "action" : {
-            "type" : "Route",
-            "url" : "http://localhost:0/order?id=111&hide-customer=true"
-          }
-        }, {
-          "type" : "ListItem",
-          "attributes" : {
-            "caption" : "",
-            "subCaption" : "05 Jun 2020 - Created",
-            "trailing" : {
-              "type" : "Text",
-              "attributes" : {
-                "caption" : "50,000 CFA",
-                "color" : "#1D7EDF",
-                "bold" : true
+          "children": [
+            {
+              "type": "ListView",
+              "attributes": {
+                "separator": true,
+                "separatorColor": "#8c8c8c"
               },
-              "children" : [ ]
+              "children": [
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "",
+                    "subCaption": "05 May 2020 - Created",
+                    "trailing": {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "25,000 CFA",
+                        "color": "#1D7EDF",
+                        "bold": true
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/order?id=111&hide-customer=true"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "",
+                    "subCaption": "05 Jun 2020 - Created",
+                    "trailing": {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "50,000 CFA",
+                        "color": "#1D7EDF",
+                        "bold": true
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/order?id=222&hide-customer=true"
+                  }
+                }
+              ]
             }
-          },
-          "children" : [ ],
-          "action" : {
-            "type" : "Route",
-            "url" : "http://localhost:0/order?id=222&hide-customer=true"
-          }
-        } ]
-      } ]
-    } ]
-  } ],
-  "appBar" : {
-    "type" : "AppBar",
-    "attributes" : {
-      "title" : "My Purchases",
-      "elevation" : 0.0,
-      "backgroundColor" : "#FFFFFF",
-      "foregroundColor" : "#000000"
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "My Purchases",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
     },
-    "children" : [ ]
+    "children": []
   },
-  "bottomNavigationBar" : {
-    "type" : "BottomNavigationBar",
-    "attributes" : {
-      "background" : "#1D7EDF",
-      "selectedItemColor" : "#FFFFFF",
-      "unselectedItemColor" : "#FFFFFF"
+  "bottomNavigationBar": {
+    "type": "BottomNavigationBar",
+    "attributes": {
+      "background": "#1D7EDF",
+      "selectedItemColor": "#FFFFFF",
+      "unselectedItemColor": "#FFFFFF"
     },
-    "children" : [ {
-      "type" : "BottomNavigationBarItem",
-      "attributes" : {
-        "icon" : "e319",
-        "caption" : "Home"
+    "children": [
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f107",
+          "caption": "Home"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "route:/~"
+        }
       },
-      "children" : [ ],
-      "action" : {
-        "type" : "Route",
-        "url" : "route:/~"
-      }
-    }, {
-      "type" : "BottomNavigationBarItem",
-      "attributes" : {
-        "icon" : "e491",
-        "caption" : "Me"
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f27b",
+          "caption": "Me"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777"
+        }
       },
-      "children" : [ ],
-      "action" : {
-        "type" : "Route",
-        "url" : "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777"
-      }
-    }, {
-      "type" : "BottomNavigationBarItem",
-      "attributes" : {
-        "icon" : "e314",
-        "caption" : "Transactions"
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "e314",
+          "caption": "Transactions"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "http://localhost:0/history"
+        }
       },
-      "children" : [ ],
-      "action" : {
-        "type" : "Route",
-        "url" : "http://localhost:0/history"
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f36e",
+          "caption": "Settings"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "http://localhost:0/settings"
+        }
       }
-    }, {
-      "type" : "BottomNavigationBarItem",
-      "attributes" : {
-        "icon" : "e57f",
-        "caption" : "Settings"
-      },
-      "children" : [ ],
-      "action" : {
-        "type" : "Route",
-        "url" : "http://localhost:0/settings"
-      }
-    } ]
+    ]
   }
 }
