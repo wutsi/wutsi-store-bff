@@ -20,6 +20,7 @@
               "type": "Text",
               "attributes": {
                 "caption": "Select your delivery method",
+                "color": "#1D7EDF",
                 "size": 16.0
               },
               "children": []

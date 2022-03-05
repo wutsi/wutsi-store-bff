@@ -10,7 +10,7 @@ abstract class AbstractCommand : AbstractEndpoint() {
     @Autowired
     private lateinit var mapper: ObjectMapper
 
-    protected fun getErrorText(ex: FeignException.Conflict): String {
+    protected fun getErrorText(ex: FeignException): String {
         try {
             val response = mapper.readValue(ex.contentUTF8(), ErrorResponse::class.java)
             val code = response.error.code

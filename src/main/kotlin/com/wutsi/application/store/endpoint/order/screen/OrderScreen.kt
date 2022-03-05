@@ -3,9 +3,11 @@ package com.wutsi.application.store.endpoint.order.screen
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
+import com.wutsi.application.shared.ui.AddressCard
 import com.wutsi.application.shared.ui.OrderItemListItem
 import com.wutsi.application.shared.ui.PriceSummaryCard
 import com.wutsi.application.shared.ui.ProfileListItem
+import com.wutsi.application.shared.ui.ShippingCard
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -14,6 +16,7 @@ import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
+import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -43,6 +46,7 @@ class OrderScreen(
     private val orderApi: WutsiOrderApi,
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
+    private val shippingApi: WutsiShippingApi,
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
@@ -87,6 +91,15 @@ class OrderScreen(
                 listOf(
                     Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     toAccountWidget(getText("page.order.customer"), accounts[order.accountId])
+                )
+            )
+
+        // Shipping Information
+        if (order.shippingId != null)
+            children.addAll(
+                listOf(
+                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+                    toShippingWidget(order, tenant)
                 )
             )
 
@@ -137,6 +150,41 @@ class OrderScreen(
             ),
             bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
+    }
+
+    private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware {
+        val shipping = shippingApi.getShipping(order.shippingId!!).shipping
+        val children = mutableListOf(
+            Container(padding = 10.0),
+            Container(
+                padding = 10.0,
+                child = Text(
+                    caption = getText("page.order.shipping", arrayOf(order.items.size.toString())),
+                    bold = true,
+                    size = Theme.TEXT_SIZE_LARGE
+                )
+            ),
+            ShippingCard(
+                model = sharedUIMapper.toShippingModel(order, shipping, tenant)
+            )
+        )
+        if (order.shippingAddress != null) {
+            children.addAll(
+                listOf(
+                    Container(padding = 10.0),
+                    Text(getText("page.order.ship-to") + ":", bold = true),
+                    AddressCard(
+                        model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
+                    )
+                )
+            )
+        }
+
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = children
+        )
     }
 
     private fun toAccountWidget(title: String, account: AccountSummary?) = account?.let {

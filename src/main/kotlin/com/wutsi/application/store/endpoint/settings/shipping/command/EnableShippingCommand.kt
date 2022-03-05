@@ -30,10 +30,14 @@ class EnableShippingCommand(
                     cityId = account.cityId
                 )
             ).id
-            return gotoUrl(urlBuilder.build("/settings/store/shipping/profile?id=$shippingId"))
+            return gotoUrl(
+                url = urlBuilder.build("/settings/store/shipping/profile?id=$shippingId")
+            )
         } else {
             shippingApi.updateShippingAttribute(id, "enabled", UpdateShippingAttributeRequest("true"))
-            return gotoUrl(urlBuilder.build("/settings/store/shipping/profile?id=$id"))
+            return gotoUrl(
+                url = urlBuilder.build("/settings/store/shipping/profile?id=$id")
+            )
         }
     }
 }

@@ -54,7 +54,8 @@ class CheckoutAddressCountryScreen : AbstractQuery() {
                                     alignment = Alignment.Center,
                                     child = Text(
                                         getText("page.checkout.address.country.message"),
-                                        size = Theme.TEXT_SIZE_LARGE
+                                        size = Theme.TEXT_SIZE_LARGE,
+                                        color = Theme.COLOR_PRIMARY
                                     )
                                 ),
                                 Container(

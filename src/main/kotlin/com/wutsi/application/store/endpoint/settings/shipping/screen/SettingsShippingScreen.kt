@@ -93,7 +93,7 @@ class SettingsShippingScreen(
                 trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT)
             )
         } else {
-            val cmd = shipping?.let { "commands/enable-attribute?name=enabled&id=${it.id}" }
+            val cmd = shipping?.let { "commands/enable-shipping?id=${it.id}" }
                 ?: "commands/enable-shipping?type=$type"
 
             ListItemSwitch(

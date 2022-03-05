@@ -50,7 +50,7 @@ class PayOrderCommand(
             return gotoUrl(
                 url = urlBuilder.build("/checkout/success?order-id=$orderId")
             )
-        } catch (ex: FeignException.Conflict) {
+        } catch (ex: FeignException) {
             logger.setException(ex)
             val error = getErrorText(ex)
             return gotoUrl(

@@ -14,7 +14,9 @@ import com.wutsi.flutter.sdui.Form
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.SingleChildScrollView
+import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
+import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
@@ -69,6 +71,15 @@ class CheckoutAddressEditorScreen(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
                     children = listOf(
+                        Container(
+                            padding = 10.0,
+                            alignment = Alignment.Center,
+                            child = Text(
+                                getText("page.checkout.address.editor.message"),
+                                size = Theme.TEXT_SIZE_LARGE,
+                                color = Theme.COLOR_PRIMARY
+                            )
+                        ),
                         Form(
                             children = listOf(
                                 Container(

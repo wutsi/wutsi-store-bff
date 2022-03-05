@@ -13,6 +13,7 @@ import com.wutsi.ecommerce.shipping.dto.Product
 import com.wutsi.ecommerce.shipping.dto.RateSummary
 import com.wutsi.ecommerce.shipping.dto.SearchRateRequest
 import com.wutsi.flutter.sdui.AppBar
+import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
@@ -78,7 +79,17 @@ class CheckoutShippingScreen(
                     toShippingRateWidget(order, rates, tenant)
                 else
                     listOf(
-                        Text(getText("page.checkout.shipping.none"))
+                        Center(
+                            child = Container(
+                                padding = 10.0,
+                                alignment = Alignment.Center,
+                                child = Text(
+                                    getText("page.checkout.shipping.none"),
+                                    size = Theme.TEXT_SIZE_LARGE,
+                                    color = Theme.COLOR_DANGER
+                                )
+                            )
+                        )
                     )
             )
         ).toWidget()
@@ -89,7 +100,13 @@ class CheckoutShippingScreen(
             Container(
                 padding = 10.0,
                 alignment = Alignment.Center,
-                child = Text(getText("page.checkout.shipping.message"), size = Theme.TEXT_SIZE_LARGE)
+                child = Text(
+                    getText(
+                        "page.checkout.shipping.message"
+                    ),
+                    size = Theme.TEXT_SIZE_LARGE,
+                    color = Theme.COLOR_PRIMARY
+                )
             ),
             Divider(height = 1.0, color = Theme.COLOR_DIVIDER),
             Flexible(

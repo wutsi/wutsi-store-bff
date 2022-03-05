@@ -229,11 +229,35 @@
                           "children": []
                         },
                         {
-                          "type": "Text",
+                          "type": "Column",
                           "attributes": {
-                            "caption": "Local Pickup - Expected delivery: 03 Jan 2020"
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
                           },
-                          "children": []
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Local Pickup - Expected delivery: 03 Jan 2020"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "This is the message to display to customer",
+                                "maxLines": 5
+                              },
+                              "children": []
+                            }
+                          ]
                         },
                         {
                           "type": "Container",
@@ -245,22 +269,8 @@
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "This is the message to display to customer",
-                            "maxLines": 5
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Ship To:"
+                            "caption": "Ship To:",
+                            "bold": true
                           },
                           "children": []
                         },
@@ -274,8 +284,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "Ray Sponsible",
-                                "bold": true
+                                "caption": "Ray Sponsible"
                               },
                               "children": []
                             },

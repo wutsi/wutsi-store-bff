@@ -17,6 +17,24 @@
           },
           "children": [
             {
+              "type": "Container",
+              "attributes": {
+                "alignment": "Center",
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Enter the address details where to ship the products",
+                    "color": "#1D7EDF",
+                    "size": 16.0
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
               "type": "Form",
               "attributes": {},
               "children": [

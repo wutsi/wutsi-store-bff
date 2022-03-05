@@ -23,6 +23,7 @@
               "type": "Text",
               "attributes": {
                 "caption": "Select the shipping address",
+                "color": "#1D7EDF",
                 "size": 16.0
               },
               "children": []
