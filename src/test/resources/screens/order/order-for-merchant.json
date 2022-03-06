@@ -452,6 +452,47 @@
                             {
                               "type": "Text",
                               "attributes": {
+                                "caption": "Delivery Fees",
+                                "bold": false
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "0 CFA",
+                                "bold": false,
+                                "alignment": "Right"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceBetween"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
                                 "caption": "Savings",
                                 "bold": false
                               },

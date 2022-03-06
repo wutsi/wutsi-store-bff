@@ -13,75 +13,33 @@
       },
       "children": [
         {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "DropdownButton",
-              "attributes": {
-                "name": "status",
-                "value": "READY"
-              },
-              "children": [
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "New",
-                    "enabled": true,
-                    "value": "READY"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "Processing",
-                    "enabled": true,
-                    "value": "PROCESSING"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "Completed",
-                    "enabled": true,
-                    "value": "COMPLETED"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "Cancelled",
-                    "enabled": true,
-                    "value": "CANCELLED"
-                  },
-                  "children": []
-                }
-              ],
-              "action": {
-                "type": "Route",
-                "url": "http://localhost:0/orders",
-                "replacement": true
-              }
-            }
-          ]
-        },
-        {
           "type": "Center",
           "attributes": {},
           "children": [
             {
-              "type": "Text",
+              "type": "Container",
               "attributes": {
-                "caption": "2 order(s)"
+                "padding": 10.0
               },
-              "children": []
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "2 order(s)"
+                  },
+                  "children": []
+                }
+              ]
             }
           ]
+        },
+        {
+          "type": "Divider",
+          "attributes": {
+            "height": 1.0,
+            "color": "#8c8c8c"
+          },
+          "children": []
         },
         {
           "type": "Flexible",

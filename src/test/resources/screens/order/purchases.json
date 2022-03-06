@@ -17,13 +17,29 @@
           "attributes": {},
           "children": [
             {
-              "type": "Text",
+              "type": "Container",
               "attributes": {
-                "caption": "2 order(s)"
+                "padding": 10.0
               },
-              "children": []
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "2 order(s)"
+                  },
+                  "children": []
+                }
+              ]
             }
           ]
+        },
+        {
+          "type": "Divider",
+          "attributes": {
+            "height": 1.0,
+            "color": "#8c8c8c"
+          },
+          "children": []
         },
         {
           "type": "Flexible",

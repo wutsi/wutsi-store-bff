@@ -13,7 +13,7 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
-import com.wutsi.flutter.sdui.DropdownButton
+import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.ListItem
@@ -44,7 +44,6 @@ abstract class AbstractOrderListScreen(
     protected abstract fun getOrders(request: FilterOrderRequest?): List<OrderSummary>
     protected abstract fun getAction(order: OrderSummary): Action
     protected abstract fun getAccountId(order: OrderSummary): Long
-    protected abstract fun showFilter(): Boolean
 
     @PostMapping
     fun index(
@@ -64,29 +63,21 @@ abstract class AbstractOrderListScreen(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 children = listOfNotNull(
-                    if (showFilter())
-                        Container(
-                            padding = 10.0,
-                            child = DropdownButton(
-                                value = request?.status?.name ?: OrderStatus.READY.name,
-                                name = "status",
-                                children = getOrderStatusList().map { orderStatusWidget(it) },
-                                action = gotoUrl(getFilterUrl(), true)
-                            )
-                        )
-                    else
-                        null,
                     Center(
-                        child = Text(
-                            caption = getText(
-                                if (orders.size <= 1)
-                                    "page.order.list.count-1"
-                                else
-                                    "page.order.list.count-n",
-                                arrayOf(orders.size.toString())
+                        child = Container(
+                            padding = 10.0,
+                            child = Text(
+                                caption = getText(
+                                    if (orders.size <= 1)
+                                        "page.order.list.count-1"
+                                    else
+                                        "page.order.list.count-n",
+                                    arrayOf(orders.size.toString())
+                                )
                             )
                         )
                     ),
+                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     if (orders.isEmpty())
                         null
                     else

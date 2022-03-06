@@ -215,19 +215,11 @@
                       "children": []
                     },
                     {
-                      "type": "Column",
+                      "type": "Container",
                       "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "start"
+                        "padding": 10.0
                       },
                       "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
                         {
                           "type": "Column",
                           "attributes": {
@@ -258,22 +250,23 @@
                               "children": []
                             }
                           ]
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Ship To:",
-                            "bold": true
-                          },
-                          "children": []
-                        },
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Ship To:",
+                        "bold": true
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
                         {
                           "type": "Column",
                           "attributes": {
@@ -360,6 +353,47 @@
                               "type": "Text",
                               "attributes": {
                                 "caption": "30,000 CFA",
+                                "bold": false,
+                                "alignment": "Right"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceBetween"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Delivery Fees",
+                                "bold": false
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "1,000 CFA",
                                 "bold": false,
                                 "alignment": "Right"
                               },

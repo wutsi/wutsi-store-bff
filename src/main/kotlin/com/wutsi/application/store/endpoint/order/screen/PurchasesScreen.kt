@@ -7,6 +7,7 @@ import com.wutsi.application.store.endpoint.order.dto.FilterOrderRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.OrderSummary
 import com.wutsi.ecommerce.order.dto.SearchOrderRequest
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.platform.account.WutsiAccountApi
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -28,6 +29,7 @@ class PurchasesScreen(
     override fun getOrders(request: FilterOrderRequest?) = orderApi.searchOrders(
         request = SearchOrderRequest(
             accountId = securityContext.currentAccountId(),
+            status = OrderStatus.values().filter { it != OrderStatus.CREATED }.map { it.name },
             limit = 100
         )
     ).orders
@@ -37,6 +39,4 @@ class PurchasesScreen(
     )
 
     override fun getAccountId(order: OrderSummary) = order.merchantId
-
-    override fun showFilter() = false
 }

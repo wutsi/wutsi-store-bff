@@ -153,37 +153,43 @@ class OrderScreen(
     }
 
     private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware {
+        // Shipping Info
         val shipping = shippingApi.getShipping(order.shippingId!!).shipping
         val children = mutableListOf(
-            Container(padding = 10.0),
+            Text(
+                caption = getText("page.order.shipping", arrayOf(order.items.size.toString())),
+                bold = true,
+                size = Theme.TEXT_SIZE_LARGE
+            ),
             Container(
                 padding = 10.0,
-                child = Text(
-                    caption = getText("page.order.shipping", arrayOf(order.items.size.toString())),
-                    bold = true,
-                    size = Theme.TEXT_SIZE_LARGE
+                child = ShippingCard(
+                    model = sharedUIMapper.toShippingModel(order, shipping, tenant)
                 )
             ),
-            ShippingCard(
-                model = sharedUIMapper.toShippingModel(order, shipping, tenant)
-            )
         )
-        if (order.shippingAddress != null) {
+
+        // Shipping Address
+        if (order.shippingAddress != null)
             children.addAll(
                 listOf(
-                    Container(padding = 10.0),
                     Text(getText("page.order.ship-to") + ":", bold = true),
-                    AddressCard(
-                        model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
+                    Container(
+                        padding = 10.0,
+                        child = AddressCard(
+                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
+                        )
                     )
                 )
             )
-        }
 
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = children
+        return Container(
+            padding = 10.0,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
+            )
         )
     }
 

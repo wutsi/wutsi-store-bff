@@ -35,7 +35,6 @@
                   "type": "ListItemSwitch",
                   "attributes": {
                     "caption": "Local Pickup",
-                    "subCaption": "Pick up orders in your store",
                     "name": "value",
                     "selected": false
                   },
@@ -49,7 +48,6 @@
                   "type": "ListItemSwitch",
                   "attributes": {
                     "caption": "Local Delivery",
-                    "subCaption": "Deliver orders to local customers",
                     "name": "value",
                     "selected": false
                   },

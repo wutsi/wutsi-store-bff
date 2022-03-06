@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -18,6 +19,7 @@ import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
+import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -27,11 +29,12 @@ import org.springframework.web.bind.annotation.RestController
 class SettingsShippingScreen(
     private val shippingApi: WutsiShippingApi,
     private val togglesProvider: TogglesProvider,
+    private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
         val shippings = shippingApi.listShipping().shippings
-
+        val tenant = tenantProvider.get()
         return Screen(
             id = Page.SETTINGS_STORE_SHIPPING,
             appBar = AppBar(
@@ -51,17 +54,20 @@ class SettingsShippingScreen(
                             children = listOfNotNull(
                                 listItem(
                                     ShippingType.LOCAL_PICKUP,
-                                    shippings
+                                    shippings,
+                                    tenant
                                 ),
                                 listItem(
                                     ShippingType.LOCAL_DELIVERY,
-                                    shippings
+                                    shippings,
+                                    tenant
                                 ),
 
                                 if (togglesProvider.isShippingInternationalEnabled())
                                     listItem(
                                         ShippingType.INTERNATIONAL_SHIPPING,
-                                        shippings
+                                        shippings,
+                                        tenant
                                     )
                                 else
                                     null,
@@ -69,7 +75,8 @@ class SettingsShippingScreen(
                                 if (togglesProvider.isShippingEmailEnabled())
                                     listItem(
                                         ShippingType.EMAIL_DELIVERY,
-                                        shippings
+                                        shippings,
+                                        tenant
                                     )
                                 else
                                     null
@@ -81,16 +88,18 @@ class SettingsShippingScreen(
         ).toWidget()
     }
 
-    private fun listItem(type: ShippingType, shippings: List<ShippingSummary>): WidgetAware {
+    private fun listItem(type: ShippingType, shippings: List<ShippingSummary>, tenant: Tenant): WidgetAware {
         val shipping = shippings.find { it.type == type.name }
         val enabled = shipping?.enabled ?: false
 
         return if (enabled) {
             ListItem(
                 caption = getText("shipping.type.$type"),
-                subCaption = getText("shipping.type.$type.description"),
+                subCaption = (shipping?.deliveryTime?.let { formatDeliveryTime(it) } ?: "") +
+                    " - " +
+                    formatRate(shipping?.rate, tenant),
                 action = gotoUrl(urlBuilder.build("settings/store/shipping/profile?id=${shipping?.id}")),
-                trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT)
+                trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
             )
         } else {
             val cmd = shipping?.let { "commands/enable-shipping?id=${it.id}" }
@@ -99,7 +108,6 @@ class SettingsShippingScreen(
             ListItemSwitch(
                 name = "value",
                 caption = getText("shipping.type.$type"),
-                subCaption = getText("shipping.type.$type.description"),
                 selected = false,
                 action = executeCommand(urlBuilder.build(cmd))
             )
