@@ -589,7 +589,7 @@
         "children": [],
         "action": {
           "type": "Route",
-          "url": "http://localhost:0/history"
+          "url": "https://wutsi-gateway-test.herokuapp.com/cash/history"
         }
       },
       {
@@ -601,7 +601,7 @@
         "children": [],
         "action": {
           "type": "Route",
-          "url": "http://localhost:0/settings"
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
         }
       }
     ]

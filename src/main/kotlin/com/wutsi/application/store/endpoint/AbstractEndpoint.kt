@@ -30,6 +30,9 @@ abstract class AbstractEndpoint {
     @Value("\${wutsi.application.shell-url}")
     protected lateinit var shellUrl: String
 
+    @Value("\${wutsi.application.cash-url}")
+    protected lateinit var cashUrl: String
+
     protected fun gotoUrl(
         url: String,
         replacement: Boolean? = null,
@@ -91,7 +94,7 @@ abstract class AbstractEndpoint {
                 caption = getText("page.home.bottom-nav-bar.transactions"),
                 action = Action(
                     type = ActionType.Route,
-                    url = urlBuilder.build("history")
+                    url = urlBuilder.build(cashUrl, "history")
                 )
             ),
             BottomNavigationBarItem(
@@ -99,7 +102,7 @@ abstract class AbstractEndpoint {
                 caption = getText("page.home.bottom-nav-bar.settings"),
                 action = Action(
                     type = ActionType.Route,
-                    url = urlBuilder.build("settings")
+                    url = urlBuilder.build(shellUrl, "settings")
                 )
             ),
         )
