@@ -10,6 +10,7 @@ import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.ListItem
+import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
@@ -63,6 +64,17 @@ class SettingsStoreScreen : AbstractQuery() {
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
                                         urlBuilder.build("/settings/store/shipping")
+                                    )
+                                ),
+                                Container(
+                                    padding = 20.0
+                                ),
+                                ListItemSwitch(
+                                    name = "value",
+                                    caption = getText("page.settings.store.enabled"),
+                                    selected = true,
+                                    action = executeCommand(
+                                        urlBuilder.build("/commands/disable-store")
                                     )
                                 ),
                             )

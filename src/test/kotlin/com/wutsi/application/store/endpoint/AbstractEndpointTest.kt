@@ -295,6 +295,7 @@ abstract class AbstractEndpointTest {
         timezoneId = "Africa/Douala",
         whatsapp = "+123766666666$id",
         cityId = 2222L,
+        hasStore = true
     )
 
     fun createShipping(type: ShippingType, enabled: Boolean = true) = Shipping(
