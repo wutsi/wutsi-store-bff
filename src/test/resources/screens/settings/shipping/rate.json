@@ -20,7 +20,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Enter an shipping rate"
+                "caption": "Enter the shipping rate"
               },
               "children": []
             }

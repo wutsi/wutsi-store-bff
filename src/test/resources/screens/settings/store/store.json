@@ -110,7 +110,7 @@
                 {
                   "type": "ListItemSwitch",
                   "attributes": {
-                    "caption": "Store",
+                    "caption": "My Store",
                     "name": "value",
                     "selected": true
                   },
