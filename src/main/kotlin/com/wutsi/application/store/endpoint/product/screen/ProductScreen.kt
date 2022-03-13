@@ -1,5 +1,6 @@
 package com.wutsi.application.store.endpoint.product.screen
 
+import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
@@ -47,6 +48,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.text.DecimalFormat
+import java.util.UUID
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/product")
@@ -63,7 +66,7 @@ class ProductScreen(
     }
 
     @PostMapping
-    fun index(@RequestParam id: Long): Widget {
+    fun index(@RequestParam id: Long, request: HttpServletRequest): Widget {
         val product = catalogApi.getProduct(id).product
         val merchant = accountApi.getAccount(product.accountId).account
         val tenant = tenantProvider.get()
@@ -187,69 +190,85 @@ class ProductScreen(
         children.add(Divider(color = Theme.COLOR_DIVIDER))
         children.add(toVendorWidget(merchant, whatsappUrl, productUrl))
 
-        // Screen
-        return Screen(
-            id = Page.PRODUCT,
-            appBar = AppBar(
-                elevation = 0.0,
-                backgroundColor = Theme.COLOR_WHITE,
-                foregroundColor = Theme.COLOR_BLACK,
-                actions = listOfNotNull(
-                    whatsappUrl?.let {
+        try {
+            // Screen
+            return Screen(
+                id = Page.PRODUCT,
+                appBar = AppBar(
+                    elevation = 0.0,
+                    backgroundColor = Theme.COLOR_WHITE,
+                    foregroundColor = Theme.COLOR_BLACK,
+                    actions = listOfNotNull(
+                        whatsappUrl?.let {
+                            Container(
+                                padding = 4.0,
+                                child = CircleAvatar(
+                                    radius = 20.0,
+                                    backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
+                                    child = IconButton(
+                                        icon = Theme.ICON_CHAT,
+                                        size = 20.0,
+                                        action = Action(
+                                            type = ActionType.Navigate,
+                                            url = it,
+                                        )
+                                    )
+                                ),
+                            )
+                        },
                         Container(
                             padding = 4.0,
                             child = CircleAvatar(
                                 radius = 20.0,
                                 backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
                                 child = IconButton(
-                                    icon = Theme.ICON_CHAT,
+                                    icon = Theme.ICON_SHARE,
                                     size = 20.0,
                                     action = Action(
-                                        type = ActionType.Navigate,
-                                        url = it,
+                                        type = ActionType.Share,
+                                        url = productUrl,
                                     )
-                                )
-                            ),
-                        )
-                    },
-                    Container(
-                        padding = 4.0,
-                        child = CircleAvatar(
-                            radius = 20.0,
-                            backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                            child = IconButton(
-                                icon = Theme.ICON_SHARE,
-                                size = 20.0,
-                                action = Action(
-                                    type = ActionType.Share,
-                                    url = productUrl,
-                                )
-                            ),
-                        )
-                    ),
-                    cart?.let {
-                        Container(
-                            padding = 4.0,
-                            child = CircleAvatar(
-                                radius = 20.0,
-                                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                                child = CartIcon(
-                                    productCount = it.products.size,
-                                    size = 20.0,
-                                    action = gotoUrl(urlBuilder.build("cart?merchant-id=${merchant.id}"))
                                 ),
                             )
-                        )
-                    }
-                )
-            ),
-            child = Container(
-                child = ListView(
-                    children = children,
-                )
-            ),
-            bottomNavigationBar = bottomNavigationBar()
-        ).toWidget()
+                        ),
+                        cart?.let {
+                            Container(
+                                padding = 4.0,
+                                child = CircleAvatar(
+                                    radius = 20.0,
+                                    backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
+                                    child = CartIcon(
+                                        productCount = it.products.size,
+                                        size = 20.0,
+                                        action = gotoUrl(urlBuilder.build("cart?merchant-id=${merchant.id}"))
+                                    ),
+                                )
+                            )
+                        }
+                    )
+                ),
+                child = Container(
+                    child = ListView(
+                        children = children,
+                    )
+                ),
+                bottomNavigationBar = bottomNavigationBar()
+            ).toWidget()
+        } finally {
+            track(product, request)
+        }
+    }
+
+    private fun track(product: Product, request: HttpServletRequest) {
+        track(
+            correlationId = UUID.randomUUID().toString(),
+            page = Page.PRODUCT,
+            event = EventType.VIEW,
+            productId = product.id,
+            merchantId = product.accountId,
+            value = null,
+            request = request
+        )
     }
 
     private fun toPriceWidget(product: Product, tenant: Tenant): WidgetAware {

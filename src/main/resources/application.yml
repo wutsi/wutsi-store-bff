@@ -47,6 +47,9 @@ wutsi:
   platform:
     security:
       type: jwt
+    stream:
+      name: ${wutsi.application.name}
+      type: local
     tracing:
       client-id: ${wutsi.application.name}
     storage:

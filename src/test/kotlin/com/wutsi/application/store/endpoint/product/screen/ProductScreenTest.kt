@@ -1,10 +1,17 @@
 package com.wutsi.application.store.endpoint.product.screen
 
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.wutsi.analytics.tracking.WutsiTrackingApi
+import com.wutsi.analytics.tracking.dto.PushTrackRequest
+import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.application.store.endpoint.Page
+import com.wutsi.application.store.endpoint.TrackingHttpRequestInterceptor
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.cart.dto.GetCartResponse
@@ -15,17 +22,24 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.web.server.LocalServerPort
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class ProductScreenTest : AbstractEndpointTest() {
     @LocalServerPort
-    public val port: Int = 0
+    val port: Int = 0
 
     @MockBean
     private lateinit var togglesProvider: TogglesProvider
 
     @MockBean
     private lateinit var cartApi: WutsiCartApi
+
+    @MockBean
+    private lateinit var trackingApi: WutsiTrackingApi
 
     private lateinit var url: String
 
@@ -34,6 +48,14 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         super.setUp()
 
         url = "http://localhost:$port/product?id=11"
+
+        rest.interceptors.add(
+            TrackingHttpRequestInterceptor(
+                userAgent = "Android",
+                referer = "https://www.google.com",
+                ip = "10.0.2.2"
+            )
+        )
     }
 
     @Test
@@ -42,6 +64,7 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
         assertEndpointEquals("/screens/product/product-with-image.json", url)
+        assertTrackPushed(product)
     }
 
     @Test
@@ -50,6 +73,7 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
         assertEndpointEquals("/screens/product/product-without-image.json", url)
+        assertTrackPushed(product)
     }
 
     @Test
@@ -68,5 +92,31 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
         assertEndpointEquals("/screens/product/product-with-cart-enabled.json", url)
+        assertTrackPushed(product)
+    }
+
+    private fun assertTrackPushed(product: com.wutsi.ecommerce.catalog.dto.Product) {
+        val request = argumentCaptor<PushTrackRequest>()
+        verify(trackingApi).push(request.capture())
+
+        val track = request.firstValue.track
+        assertEquals(ACCOUNT_ID.toString(), track.accountId)
+        assertEquals(product.accountId.toString(), track.merchantId)
+        assertEquals(TENANT_ID, track.tenantId)
+        assertEquals(DEVICE_ID, track.deviceId)
+        assertNotNull(track.correlationId)
+        assertEquals(product.id.toString(), track.productId)
+        assertEquals(Page.PRODUCT, track.page)
+        assertEquals(EventType.VIEW.name, track.event)
+        assertEquals("https://www.google.com", track.referer)
+        assertEquals("Android", track.ua)
+        assertEquals("10.0.2.2", track.ip)
+        assertFalse(track.bot)
+        assertNull(track.url)
+        assertNull(track.impressions)
+        assertNull(track.lat)
+        assertNull(track.long)
+        assertNull(track.url)
+        assertNull(track.value)
     }
 }

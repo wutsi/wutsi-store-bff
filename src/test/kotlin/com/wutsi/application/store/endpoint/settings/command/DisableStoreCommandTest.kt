@@ -1,10 +1,8 @@
 package com.wutsi.application.store.endpoint.settings.command
 
-import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.ecommerce.catalog.dto.CreateProductRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.account.dto.UpdateAccountAttributeRequest
 import org.junit.jupiter.api.Test
@@ -26,7 +24,6 @@ internal class DisableStoreCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<CreateProductRequest>()
         verify(accountApi).updateAccountAttribute(
             eq(ACCOUNT_ID),
             eq("has-store"),

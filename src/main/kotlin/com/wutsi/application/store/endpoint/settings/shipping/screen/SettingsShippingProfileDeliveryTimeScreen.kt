@@ -16,7 +16,7 @@ class SettingsShippingProfileDeliveryTimeScreen : AbstractSettingsShippingProfil
 
     override fun getInputWidget(shipping: Shipping) = DropdownButton(
         name = "value",
-        value = shipping.deliveryTime?.toString() ?: null,
+        value = shipping.deliveryTime?.toString(),
         children = DELIVERY_TIMES
             .map {
                 DropdownMenuItem(

@@ -8,3 +8,7 @@ wutsi:
       type: aws
       aws:
         bucket: prod-wutsi
+    stream:
+      type: rabbitmq
+      rabbitmq:
+        url: ${CLOUDAMQP_URL}

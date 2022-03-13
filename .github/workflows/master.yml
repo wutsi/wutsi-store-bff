@@ -34,12 +34,14 @@ jobs:
       - name: Heroku-Deploy-Test
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_TEST }}
+          CLOUDAMQP_URL: ${{secrets.CLOUDAMQP_URL_TEST}}
           HEROKU_APP: wutsi-store-bff-test
         run: |
           heroku apps | grep ${HEROKU_APP} && echo 'app: ${HEROKU_APP} exists' ||  heroku apps:create ${HEROKU_APP}
           heroku buildpacks:clear --app ${HEROKU_APP}
           heroku buildpacks:add heroku/jvm --app ${HEROKU_APP}
           heroku config:set --app ${HEROKU_APP} APP_PROFILE=test
+          heroku config:set --app ${HEROKU_APP} CLOUDAMQP_URL=${CLOUDAMQP_URL}
           heroku addons -a ${HEROKU_APP} | grep papertrail && echo 'addon: papertrail exists' ||  heroku addons:create papertrail -a ${HEROKU_APP}
           heroku deploy:jar target/wutsi-store-bff.jar --app ${HEROKU_APP}
           echo Health check....
@@ -49,12 +51,14 @@ jobs:
       - name: Heroku-Deploy-Prod
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PROD }}
+          CLOUDAMQP_URL: ${{secrets.CLOUDAMQP_URL_PROD}}
           HEROKU_APP: wutsi-store-bff-prod
         run: |
           heroku apps | grep ${HEROKU_APP} && echo 'app: ${HEROKU_APP} exists' ||  heroku apps:create ${HEROKU_APP}
           heroku buildpacks:clear --app ${HEROKU_APP}
           heroku buildpacks:add heroku/jvm --app ${HEROKU_APP}
           heroku config:set --app ${HEROKU_APP} APP_PROFILE=prod
+          heroku config:set --app ${HEROKU_APP} CLOUDAMQP_URL=${CLOUDAMQP_URL}
           heroku addons -a ${HEROKU_APP} | grep papertrail && echo 'addon: papertrail exists' ||  heroku addons:create papertrail -a ${HEROKU_APP}
           heroku deploy:jar target/wutsi-store-bff.jar --app ${HEROKU_APP}
           echo Health check....
