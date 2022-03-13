@@ -81,7 +81,6 @@ abstract class AbstractEndpoint {
         }
     }
 
-
     protected fun gotoUrl(
         url: String,
         replacement: Boolean? = null,
