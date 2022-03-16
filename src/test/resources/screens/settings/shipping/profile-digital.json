@@ -1,0 +1,136 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.store.shipping.profile",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Deliver orders to customers abroad"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Divider",
+          "attributes": {
+            "height": 1.0,
+            "color": "#8c8c8c"
+          },
+          "children": []
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "ListView",
+              "attributes": {
+                "separator": true,
+                "separatorColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "Enabled",
+                    "name": "value",
+                    "selected": true
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/disable-shipping?id=111"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Delivery Time",
+                    "subCaption": "1 day",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e21a"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/attribute/delivery-time?id=111"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Rate",
+                    "subCaption": "150,000 CFA",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e21a"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/attribute/rate?id=111"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Message",
+                    "subCaption": "This is the message to display to customer",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e21a"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/attribute/message?id=111"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "International Shipping",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

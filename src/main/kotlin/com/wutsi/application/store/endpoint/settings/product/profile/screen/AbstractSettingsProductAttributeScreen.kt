@@ -28,6 +28,8 @@ abstract class AbstractSettingsProductAttributeScreen(
 
     abstract fun getInputWidget(product: Product): WidgetAware
 
+    protected open fun showSubmitButton(): Boolean = true
+
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
         val product = catalogApi.getProduct(id).product
@@ -42,7 +44,7 @@ abstract class AbstractSettingsProductAttributeScreen(
                 title = getText("page.settings.store.product.attribute.$name"),
             ),
             child = Form(
-                children = listOf(
+                children = listOfNotNull(
                     Container(
                         padding = 10.0,
                         child = Text(
@@ -60,18 +62,22 @@ abstract class AbstractSettingsProductAttributeScreen(
                         padding = 10.0,
                         child = getInputWidget(product),
                     ),
-                    Container(
-                        padding = 10.0,
-                        child = Input(
-                            name = "submit",
-                            type = InputType.Submit,
-                            caption = getText("page.settings.store.product.attribute.button.submit"),
-                            action = Action(
-                                type = ActionType.Command,
-                                url = urlBuilder.build("commands/update-product-attribute?id=$id&name=$name")
-                            )
-                        ),
-                    ),
+
+                    if (showSubmitButton())
+                        Container(
+                            padding = 10.0,
+                            child = Input(
+                                name = "submit",
+                                type = InputType.Submit,
+                                caption = getText("page.settings.store.product.attribute.button.submit"),
+                                action = Action(
+                                    type = ActionType.Command,
+                                    url = urlBuilder.build("commands/update-product-attribute?id=$id&name=$name")
+                                )
+                            ),
+                        )
+                    else
+                        null,
                 )
             )
         ).toWidget()

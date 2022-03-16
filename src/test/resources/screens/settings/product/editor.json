@@ -107,7 +107,7 @@
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "Numeric Product",
+                        "caption": "Digital Product",
                         "enabled": true,
                         "value": "NUMERIC"
                       },

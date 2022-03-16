@@ -218,7 +218,7 @@ abstract class AbstractEndpointTest {
         emptyMap()
     )
 
-    protected fun createProduct(withThumbnail: Boolean = true) = Product(
+    protected fun createProduct(withThumbnail: Boolean = true, type: ProductType = ProductType.PHYSICAL) = Product(
         id = 1,
         title = "Sample product",
         summary = "Summary of product",
@@ -228,7 +228,7 @@ abstract class AbstractEndpointTest {
         visible = true,
         category = CategorySummary(id = 1, "Category 1"),
         subCategory = CategorySummary(id = 2, "Category 2"),
-        type = ProductType.PHYSICAL.name,
+        type = type.name,
         quantity = 30,
         maxOrder = 5,
         pictures = if (withThumbnail)

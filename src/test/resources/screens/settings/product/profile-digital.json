@@ -34,6 +34,57 @@
                       "attributes": {
                         "alignment": "Center",
                         "padding": 2.0,
+                        "border": 1.0,
+                        "borderColor": "#e4edf7",
+                        "height": 150.0,
+                        "width": 150.0,
+                        "backgroundImageUrl": "https://www.imag.com/3.png"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=3"
+                      }
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "alignment": "Center",
+                        "padding": 2.0,
+                        "border": 1.0,
+                        "borderColor": "#e4edf7",
+                        "height": 150.0,
+                        "width": 150.0,
+                        "backgroundImageUrl": "https://www.imag.com/1.png"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=1"
+                      }
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "alignment": "Center",
+                        "padding": 2.0,
+                        "border": 1.0,
+                        "borderColor": "#e4edf7",
+                        "height": 150.0,
+                        "width": 150.0,
+                        "backgroundImageUrl": "https://www.imag.com/2.png"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/picture?product-id=1&picture-id=2"
+                      }
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "alignment": "Center",
+                        "padding": 2.0,
                         "background": "#e4edf7",
                         "borderColor": "#95A5A6",
                         "height": 150.0,
@@ -191,7 +242,7 @@
                       "type": "ListItem",
                       "attributes": {
                         "caption": "Type",
-                        "subCaption": "Physical Product",
+                        "subCaption": "Digital Product",
                         "trailing": {
                           "type": "Icon",
                           "attributes": {
@@ -206,6 +257,26 @@
                       "action": {
                         "type": "Route",
                         "url": "http://localhost:0/settings/store/product/type?id=777"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Digital File",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e21a",
+                            "size": 24.0,
+                            "color": "#000000"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/settings/store/product/numeric-file-url?id=777"
                       }
                     },
                     {

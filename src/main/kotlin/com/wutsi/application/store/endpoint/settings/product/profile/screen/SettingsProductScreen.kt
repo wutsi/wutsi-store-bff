@@ -7,6 +7,7 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.PictureSummary
 import com.wutsi.ecommerce.catalog.dto.Product
+import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.net.URL
 import java.text.DecimalFormat
 
 @RestController
@@ -102,14 +104,22 @@ class SettingsProductScreen(
                                         urlBuilder.build("/settings/store/product/title?id=$id")
                                     ),
                                     item(
-                                        "page.settings.store.product.attribute.sub-category-id",
-                                        product.subCategory.title,
-                                        urlBuilder.build("/settings/store/product/sub-category-id?id=$id")
-                                    ),
-                                    item(
                                         "page.settings.store.product.attribute.type",
                                         getText("product.type." + product.type),
                                         urlBuilder.build("/settings/store/product/type?id=$id")
+                                    ),
+                                    if (product.type == ProductType.NUMERIC.name)
+                                        item(
+                                            "page.settings.store.product.attribute.numeric-file-url",
+                                            product.numericFileUrl?.let { getFileName(it) },
+                                            urlBuilder.build("/settings/store/product/numeric-file-url?id=$id")
+                                        )
+                                    else
+                                        null,
+                                    item(
+                                        "page.settings.store.product.attribute.sub-category-id",
+                                        product.subCategory.title,
+                                        urlBuilder.build("/settings/store/product/sub-category-id?id=$id")
                                     ),
                                     item(
                                         "page.settings.store.product.attribute.price",
@@ -162,6 +172,13 @@ class SettingsProductScreen(
             )
         ).toWidget()
     }
+
+    private fun getFileName(url: String): String? =
+        try {
+            URL(url).file
+        } catch (ex: Exception) {
+            null
+        }
 
     private fun item(caption: String, value: String?, url: String) = ListItem(
         caption = getText(caption),

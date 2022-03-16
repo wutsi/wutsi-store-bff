@@ -22,6 +22,7 @@ object Page {
     const val SETTINGS_STORE_PRODUCT_ADD = "page.settings.store.product.add"
     const val SETTINGS_STORE_PRODUCT_EDITOR = "page.settings.store.product.editor"
     const val SETTINGS_STORE_PRODUCT_DESCRIPTION = "page.settings.store.product.description"
+    const val SETTINGS_STORE_PRODUCT_FILE = "page.settings.store.product.file"
     const val SETTINGS_STORE_PRODUCT_PRICE = "page.settings.store.product.price"
     const val SETTINGS_STORE_PRODUCT_QUANTIY = "page.settings.store.product.quantity"
     const val SETTINGS_STORE_PRODUCT_MAX_ORDER = "page.settings.store.product.max-order"

@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.settings.store.product.type",
+    "id": "page.settings.store.product.file",
     "safe": false,
     "backgroundColor": "#FFFFFF"
   },
@@ -37,7 +37,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Select the type of product"
+                "caption": "Upload the file associated with your digital product"
               },
               "children": []
             }
@@ -50,33 +50,19 @@
           },
           "children": [
             {
-              "type": "DropdownButton",
+              "type": "Input",
               "attributes": {
                 "name": "value",
-                "value": "",
-                "hint": "Type (Required)",
-                "required": true
+                "hideText": false,
+                "required": false,
+                "caption": "Digital File",
+                "enabled": true,
+                "readOnly": false,
+                "type": "File",
+                "minLength": 0,
+                "uploadUrl": "http://localhost:0/commands/upload-product-file?product-id=0"
               },
-              "children": [
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "Physical Product",
-                    "enabled": true,
-                    "value": "PHYSICAL"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "Digital Product",
-                    "enabled": true,
-                    "value": "NUMERIC"
-                  },
-                  "children": []
-                }
-              ]
+              "children": []
             }
           ]
         },
@@ -101,7 +87,7 @@
               "children": [],
               "action": {
                 "type": "Command",
-                "url": "http://localhost:0/commands/update-product-attribute?id=777&name=type"
+                "url": "http://localhost:0/commands/update-product-attribute?id=777&name=numeric-file-url"
               }
             }
           ]
@@ -112,7 +98,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Type",
+      "title": "Digital File",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"
