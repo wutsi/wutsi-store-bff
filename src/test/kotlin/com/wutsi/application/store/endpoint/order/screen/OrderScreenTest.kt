@@ -11,6 +11,7 @@ import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
 import com.wutsi.ecommerce.order.entity.OrderStatus
+import com.wutsi.ecommerce.order.entity.PaymentStatus
 import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.SearchAccountResponse
 import org.junit.jupiter.api.BeforeEach
@@ -24,7 +25,7 @@ import java.time.ZoneOffset
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class OrderScreenTest : AbstractEndpointTest() {
     @LocalServerPort
-    public val port: Int = 0
+    val port: Int = 0
 
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
@@ -38,6 +39,8 @@ internal class OrderScreenTest : AbstractEndpointTest() {
         savingsAmount = 5000.0,
         currency = "XAF",
         status = OrderStatus.CREATED.name,
+        paymentStatus = PaymentStatus.PARTIALLY_PAID.name,
+        totalPaid = 20000.0,
         reservationId = 777L,
         created = OffsetDateTime.of(2020, 5, 5, 1, 1, 0, 0, ZoneOffset.UTC),
         items = listOf(

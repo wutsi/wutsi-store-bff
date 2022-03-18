@@ -65,7 +65,7 @@ class OrderScreen(
         // ID, Date
         val dateFormat = DateTimeFormatter.ofPattern(tenant.dateTimeFormat)
         children.addAll(
-            listOf(
+            listOfNotNull(
                 toRow(getText("page.order.order-id"), order.id),
                 toRow(getText("page.order.order-date"), order.created.format(dateFormat)),
                 toRow(getText("page.order.status"), getText("order.status.${order.status}")),
@@ -220,6 +220,7 @@ class OrderScreen(
 
     private fun toPriceWidget(order: Order, tenant: Tenant) = PriceSummaryCard(
         model = sharedUIMapper.toPriceSummaryModel(order, tenant),
+        showPaymentStatus = true
     )
 
     private fun toRow(name: String, value: String) = Row(

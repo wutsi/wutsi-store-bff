@@ -29,7 +29,8 @@ class PurchasesScreen(
     override fun getOrders(request: FilterOrderRequest?) = orderApi.searchOrders(
         request = SearchOrderRequest(
             accountId = securityContext.currentAccountId(),
-            status = OrderStatus.values().filter { it != OrderStatus.CREATED }.map { it.name },
+            status = OrderStatus.values().filter { it != OrderStatus.CREATED && it != OrderStatus.CANCELLED }
+                .map { it.name },
             limit = 100
         )
     ).orders
