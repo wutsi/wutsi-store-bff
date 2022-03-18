@@ -54,11 +54,21 @@
               },
               "children": [
                 {
-                  "type": "Text",
+                  "type": "Container",
                   "attributes": {
-                    "caption": "No shipping address found"
+                    "alignment": "Center",
+                    "padding": 10.0
                   },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "No shipping address found",
+                        "alignment": "Center"
+                      },
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "type": "Container",

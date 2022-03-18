@@ -22,6 +22,7 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.flutter.sdui.enums.TextAlignment
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -75,7 +76,14 @@ class CheckoutAddressScreen(
         val children = mutableListOf<WidgetAware>()
         if (addresses.isEmpty())
             children.add(
-                Text(getText("page.checkout.address.no-address"))
+                Container(
+                    padding = 10.0,
+                    alignment = Alignment.Center,
+                    child = Text(
+                        getText("page.checkout.address.no-address"),
+                        alignment = TextAlignment.Center
+                    )
+                )
             )
         else
             children.addAll(

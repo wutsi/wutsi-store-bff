@@ -72,7 +72,7 @@ class SettingsShippingScreen(
                                 else
                                     null,
 
-                                if (togglesProvider.isShippingEmailEnabled())
+                                if (togglesProvider.isDigitalProductEnabled())
                                     listItem(
                                         ShippingType.EMAIL_DELIVERY,
                                         shippings,

@@ -2,6 +2,7 @@ package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
+import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -47,6 +48,7 @@ import java.text.DecimalFormat
 class SettingsProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
+    private val togglesProvider: TogglesProvider,
 
     @Value("\${wutsi.store.pictures.max-width}") private val pictureMaxWidth: Int,
     @Value("\${wutsi.store.pictures.max-width}") private val pictureMaxHeight: Int,
@@ -103,12 +105,17 @@ class SettingsProductScreen(
                                         product.title,
                                         urlBuilder.build("/settings/store/product/title?id=$id")
                                     ),
-                                    item(
-                                        "page.settings.store.product.attribute.type",
-                                        getText("product.type." + product.type),
-                                        urlBuilder.build("/settings/store/product/type?id=$id")
-                                    ),
-                                    if (product.type == ProductType.NUMERIC.name)
+
+                                    if (togglesProvider.isDigitalProductEnabled())
+                                        item(
+                                            "page.settings.store.product.attribute.type",
+                                            getText("product.type." + product.type),
+                                            urlBuilder.build("/settings/store/product/type?id=$id")
+                                        )
+                                    else
+                                        null,
+
+                                    if (togglesProvider.isDigitalProductEnabled() && product.type == ProductType.NUMERIC.name)
                                         item(
                                             "page.settings.store.product.attribute.numeric-file-url",
                                             product.numericFileUrl?.let { getFileName(it) },
@@ -116,6 +123,7 @@ class SettingsProductScreen(
                                         )
                                     else
                                         null,
+
                                     item(
                                         "page.settings.store.product.attribute.sub-category-id",
                                         product.subCategory.title,
@@ -126,6 +134,7 @@ class SettingsProductScreen(
                                         price,
                                         urlBuilder.build("/settings/store/product/price?id=$id")
                                     ),
+
                                     if (product.price != null)
                                         item(
                                             "page.settings.store.product.attribute.comparable-price",
@@ -134,6 +143,7 @@ class SettingsProductScreen(
                                         )
                                     else
                                         null,
+
                                     item(
                                         "page.settings.store.product.attribute.summary",
                                         product.summary,
