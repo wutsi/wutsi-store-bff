@@ -56,6 +56,25 @@
                     "type": "Command",
                     "url": "http://localhost:0/commands/enable-shipping?type=LOCAL_DELIVERY"
                   }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Email Delivery",
+                    "subCaption": "1 day - 150,000 CFA",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/profile?id=111"
+                  }
                 }
               ]
             }
