@@ -14,6 +14,7 @@ import com.wutsi.ecommerce.order.dto.Address
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
 import com.wutsi.ecommerce.order.entity.OrderStatus
+import com.wutsi.ecommerce.shipping.dto.RateSummary
 import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.ecommerce.shipping.dto.ShippingSummary
 import com.wutsi.ecommerce.shipping.entity.ShippingType
@@ -312,15 +313,22 @@ abstract class AbstractEndpointTest {
         street = "3030 Linton"
     )
 
-    fun createShippingSummary(type: ShippingType, enabled: Boolean = true) = ShippingSummary(
+    fun createShippingSummary(type: ShippingType, enabled: Boolean = true, rate: Double = 150000.0) = ShippingSummary(
         id = 111,
         accountId = 1111,
         type = type.name,
         enabled = enabled,
-        rate = 150000.0,
+        rate = rate,
         deliveryTime = 24,
         cityId = 11111L,
         country = "CM"
+    )
+
+    fun createRateSummary(type: ShippingType, rate: Double = 150000.0) = RateSummary(
+        shippingId = 111,
+        shippingType = type.name,
+        rate = rate,
+        deliveryTime = 24,
     )
 
     fun createOrder(shippingAddress: Address? = createAddress()) = Order(

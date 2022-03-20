@@ -17,6 +17,9 @@ import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.cart.dto.GetCartResponse
 import com.wutsi.ecommerce.cart.dto.Product
 import com.wutsi.ecommerce.catalog.dto.GetProductResponse
+import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.SearchRateResponse
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -41,6 +44,9 @@ internal class ProductScreenTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var trackingApi: WutsiTrackingApi
 
+    @MockBean
+    private lateinit var shippingApi: WutsiShippingApi
+
     private lateinit var url: String
 
     @BeforeEach
@@ -56,6 +62,13 @@ internal class ProductScreenTest : AbstractEndpointTest() {
                 ip = "10.0.2.2"
             )
         )
+
+        val rates = listOf(
+            createRateSummary(ShippingType.LOCAL_PICKUP),
+            createRateSummary(ShippingType.LOCAL_DELIVERY, rate = 1000.0),
+            createRateSummary(ShippingType.INTERNATIONAL_SHIPPING, rate = 2000.0)
+        )
+        doReturn(SearchRateResponse(rates)).whenever(shippingApi).searchRate(any())
     }
 
     @Test

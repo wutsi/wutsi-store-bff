@@ -15,6 +15,9 @@ import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
+import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.SearchRateRequest
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.AspectRatio
@@ -57,6 +60,7 @@ class ProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
     private val cartApi: WutsiCartApi,
+    private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
     private val togglesProvider: TogglesProvider,
@@ -68,6 +72,7 @@ class ProductScreen(
     @PostMapping
     fun index(@RequestParam id: Long, request: HttpServletRequest): Widget {
         val product = catalogApi.getProduct(id).product
+        val account = securityContext.currentAccount()
         val merchant = accountApi.getAccount(product.accountId).account
         val tenant = tenantProvider.get()
         val cart = if (togglesProvider.isCartEnabled())
@@ -133,12 +138,15 @@ class ProductScreen(
                 padding = 10.0,
                 child = Column(
                     children = listOfNotNull(
+                        // Stock
                         Row(
                             children = listOf(
                                 if (product.quantity > 0)
-                                    Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS)
+                                    Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS, size = 16.0)
                                 else
-                                    Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER),
+                                    Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER, size = 16.0),
+
+                                Container(padding = 5.0),
 
                                 if (product.quantity > 0)
                                     Text(getText("page.product.in-stock"))
@@ -146,7 +154,23 @@ class ProductScreen(
                                     Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
                             )
                         ),
+
+                        // Shipping
+                        if (product.quantity > 0) // Padding Top
+                            Container(padding = 10.0)
+                        else
+                            null,
                         if (product.quantity > 0)
+                            toShippingWidget(account, product, tenant)
+                        else
+                            null,
+
+                        // Add to cart
+                        if (product.quantity > 0 && togglesProvider.isCartEnabled()) // Padding Top
+                            Container(padding = 10.0)
+                        else
+                            null,
+                        if (product.quantity > 0 && togglesProvider.isCartEnabled())
                             Button(
                                 padding = 10.0,
                                 caption = getText("page.product.button.add-to-cart"),
@@ -268,6 +292,83 @@ class ProductScreen(
             merchantId = product.accountId,
             value = null,
             request = request
+        )
+    }
+
+    private fun toShippingWidget(account: Account, product: Product, tenant: Tenant): WidgetAware {
+        // Find shipping rates
+        val rates = shippingApi.searchRate(
+            request = SearchRateRequest(
+                cityId = account.cityId,
+                country = account.country,
+                accountId = product.accountId,
+                products = listOf(
+                    com.wutsi.ecommerce.shipping.dto.Product(
+                        productId = product.id,
+                        productType = product.type
+                    )
+                )
+            )
+        ).rates
+        if (rates.isEmpty())
+            return Row(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = listOf(
+                    Icon(code = Theme.ICON_WARNING, size = 16.0, color = Theme.COLOR_DANGER),
+                    Container(padding = 5.0),
+                    Text(
+                        caption = getText("page.product.shipping-none"),
+                        color = Theme.COLOR_DANGER,
+                        bold = true
+                    )
+                )
+            )
+
+        // Show rates
+        val pickup = rates.find { it.shippingType == ShippingType.LOCAL_PICKUP.name }
+        val deliveries = rates.filter { it.shippingType != ShippingType.LOCAL_PICKUP.name }
+            .sortedByDescending { it.rate }
+
+        val children = mutableListOf<WidgetAware>()
+        if (pickup != null)
+            children.add(
+                Row(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = listOf(
+                        Icon(code = Theme.ICON_CHECK, size = 16.0, color = Theme.COLOR_SUCCESS),
+                        Container(padding = 5.0),
+                        Text(getText("page.product.shipping-pickup"))
+                    )
+                )
+            )
+
+        if (deliveries.isNotEmpty()) {
+            val delivery = deliveries[0]
+            val fees = if (delivery.rate == 0.0)
+                getText("label.free")
+            else
+                DecimalFormat(tenant.monetaryFormat).format(delivery.rate)
+            children.add(
+                Row(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = listOf(
+                        Icon(code = Theme.ICON_CHECK, size = 16.0, color = Theme.COLOR_SUCCESS),
+                        Container(padding = 5.0),
+                        Text(
+                            getText("page.product.shipping-available") + " - " + fees
+                        )
+                    )
+                )
+            )
+        }
+
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = children
         )
     }
 

@@ -191,7 +191,15 @@
                           "type": "Icon",
                           "attributes": {
                             "code": "e156",
+                            "size": 16.0,
                             "color": "#4CAF50"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 5.0
                           },
                           "children": []
                         },
@@ -205,17 +213,84 @@
                       ]
                     },
                     {
-                      "type": "Button",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "Add to Cart",
-                        "padding": 10.0,
-                        "type": "Elevated"
+                        "padding": 10.0
                       },
-                      "children": [],
-                      "action": {
-                        "type": "Command",
-                        "url": "http://localhost:0/commands/add-to-cart?product-id=1&merchant-id=77777"
-                      }
+                      "children": []
+                    },
+                    {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
+                      },
+                      "children": [
+                        {
+                          "type": "Row",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "Icon",
+                              "attributes": {
+                                "code": "e156",
+                                "size": 16.0,
+                                "color": "#4CAF50"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 5.0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Pickup the product in Store"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Row",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "Icon",
+                              "attributes": {
+                                "code": "e156",
+                                "size": 16.0,
+                                "color": "#4CAF50"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 5.0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Shipping - 2,000 CFA"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
