@@ -7,6 +7,7 @@ import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
@@ -70,7 +71,7 @@ class SettingsShippingProfileScreen(
                                 ),
 
                                 ListItem(
-                                    caption = getText("page.settings.shipping.attribute.delivery-time"),
+                                    caption = toCaption("delivery-time", shipping),
                                     subCaption = shipping.deliveryTime?.let { formatDeliveryTime(it) },
                                     trailing = Icon(Theme.ICON_EDIT),
                                     action = gotoUrl(
@@ -78,18 +79,33 @@ class SettingsShippingProfileScreen(
                                     )
                                 ),
 
-                                ListItem(
-                                    caption = getText("page.settings.shipping.attribute.rate"),
-                                    subCaption = formatRate(shipping.rate, tenant),
-                                    trailing = Icon(Theme.ICON_EDIT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/shipping/attribute/rate?id=$id")
+                                if (shipping.type != ShippingType.LOCAL_PICKUP.name && shipping.type != ShippingType.EMAIL_DELIVERY.name)
+                                    ListItem(
+                                        caption = toCaption("rate", shipping),
+                                        subCaption = formatRate(shipping.rate, tenant),
+                                        trailing = Icon(Theme.ICON_EDIT),
+                                        action = gotoUrl(
+                                            urlBuilder.build("/settings/store/shipping/attribute/rate?id=$id")
+                                        )
                                     )
-                                ),
+                                else
+                                    null,
+
+                                if (shipping.type == ShippingType.LOCAL_PICKUP.name)
+                                    ListItem(
+                                        caption = toCaption("street", shipping),
+                                        subCaption = shipping.street,
+                                        trailing = Icon(Theme.ICON_EDIT),
+                                        action = gotoUrl(
+                                            urlBuilder.build("/settings/store/shipping/attribute/street?id=$id")
+                                        )
+                                    )
+                                else
+                                    null,
 
                                 if (shipping.type == ShippingType.LOCAL_PICKUP.name || shipping.type == ShippingType.LOCAL_DELIVERY.name)
                                     ListItem(
-                                        caption = getText("page.settings.shipping.attribute.city-id"),
+                                        caption = toCaption("city-id", shipping),
                                         subCaption = sharedUIMapper.toLocationText(city, shipping.country ?: ""),
                                         trailing = Icon(Theme.ICON_EDIT),
                                         action = gotoUrl(
@@ -100,7 +116,7 @@ class SettingsShippingProfileScreen(
                                     null,
 
                                 ListItem(
-                                    caption = getText("page.settings.shipping.attribute.message"),
+                                    caption = toCaption("message", shipping),
                                     subCaption = shipping.message ?: "",
                                     trailing = Icon(Theme.ICON_EDIT),
                                     action = gotoUrl(
@@ -122,4 +138,11 @@ class SettingsShippingProfileScreen(
             )
         ).toWidget()
     }
+
+    private fun toCaption(name: String, shipping: Shipping): String =
+        try {
+            getText("page.settings.shipping.attribute.$name.${shipping.type}")
+        } catch (ex: Exception) {
+            getText("page.settings.shipping.attribute.$name")
+        }
 }

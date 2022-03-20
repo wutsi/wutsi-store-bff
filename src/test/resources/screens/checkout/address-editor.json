@@ -94,6 +94,7 @@
                       "type": "Input",
                       "attributes": {
                         "name": "street",
+                        "value": "3030 Linton",
                         "hideText": false,
                         "required": false,
                         "caption": "Street",

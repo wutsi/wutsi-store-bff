@@ -20,7 +20,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Enter the message to display to the customer during the chekout process"
+                "caption": "Enter shipping instructions for your customers"
               },
               "children": []
             }
@@ -89,7 +89,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Message",
+      "title": "Shipping Instructions",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

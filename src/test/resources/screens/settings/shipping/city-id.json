@@ -20,7 +20,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Select the default city for deliveries"
+                "caption": "Select the city where to pickup products"
               },
               "children": []
             }
@@ -1189,7 +1189,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "City",
+      "title": "Pickup Location",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

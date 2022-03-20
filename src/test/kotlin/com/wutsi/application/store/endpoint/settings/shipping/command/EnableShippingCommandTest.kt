@@ -53,7 +53,8 @@ internal class EnableShippingCommandTest : AbstractEndpointTest() {
             CreateShippingRequest(
                 type = ShippingType.INTERNATIONAL_SHIPPING.name,
                 country = account.country,
-                cityId = account.cityId
+                cityId = account.cityId,
+                street = account.street
             )
         )
     }

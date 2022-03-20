@@ -295,7 +295,8 @@ abstract class AbstractEndpointTest {
         timezoneId = "Africa/Douala",
         whatsapp = "+123766666666$id",
         cityId = 2222L,
-        hasStore = true
+        hasStore = true,
+        street = "3030 Linton",
     )
 
     fun createShipping(type: ShippingType, enabled: Boolean = true) = Shipping(
@@ -307,7 +308,8 @@ abstract class AbstractEndpointTest {
         rate = 150000.0,
         deliveryTime = 24,
         cityId = 11111L,
-        country = "CM"
+        country = "CM",
+        street = "3030 Linton"
     )
 
     fun createShippingSummary(type: ShippingType, enabled: Boolean = true) = ShippingSummary(

@@ -241,27 +241,6 @@
                     {
                       "type": "ListItem",
                       "attributes": {
-                        "caption": "Type",
-                        "subCaption": "Physical Product",
-                        "trailing": {
-                          "type": "Icon",
-                          "attributes": {
-                            "code": "e21a",
-                            "size": 24.0,
-                            "color": "#000000"
-                          },
-                          "children": []
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/settings/store/product/type?id=777"
-                      }
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
                         "caption": "Secondary Category",
                         "subCaption": "Category 2",
                         "trailing": {

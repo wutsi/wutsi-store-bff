@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
@@ -20,9 +21,11 @@ import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.platform.tenant.dto.Tenant
+import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.Locale
 
 @RestController
 @RequestMapping("/settings/store/shipping")
@@ -30,6 +33,7 @@ class SettingsShippingScreen(
     private val shippingApi: WutsiShippingApi,
     private val togglesProvider: TogglesProvider,
     private val tenantProvider: TenantProvider,
+    private val cityService: CityService
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
@@ -94,10 +98,9 @@ class SettingsShippingScreen(
 
         return if (enabled) {
             ListItem(
+                padding = 10.0,
                 caption = getText("shipping.type.$type"),
-                subCaption = (shipping?.deliveryTime?.let { formatDeliveryTime(it) } ?: "") +
-                    " - " +
-                    formatRate(shipping?.rate, tenant),
+                subCaption = toSubCaption(shipping, tenant),
                 action = gotoUrl(urlBuilder.build("settings/store/shipping/profile?id=${shipping?.id}")),
                 trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
             )
@@ -108,9 +111,30 @@ class SettingsShippingScreen(
             ListItemSwitch(
                 name = "value",
                 caption = getText("shipping.type.$type"),
+                subCaption = getText("shipping.type.$type.enable"),
                 selected = false,
                 action = executeCommand(urlBuilder.build(cmd))
             )
         }
+    }
+
+    private fun toSubCaption(shipping: ShippingSummary?, tenant: Tenant): String? {
+        if (shipping == null)
+            return null
+
+        val line1 = listOfNotNull(
+            shipping.deliveryTime?.let { formatDeliveryTime(it) },
+            formatRate(shipping.rate, tenant)
+        ).joinToString(separator = " - ")
+
+        val locale = LocaleContextHolder.getLocale()
+        val line2 =
+            if (shipping.type == ShippingType.LOCAL_PICKUP.name || shipping.type == ShippingType.LOCAL_DELIVERY.name)
+                cityService.get(shipping.cityId)
+                    ?.let { "${it.name} - " + Locale("en", it.country).getDisplayCountry(locale) }
+            else
+                null
+
+        return listOfNotNull(line1, line2).joinToString(separator = "\n")
     }
 }

@@ -2,10 +2,12 @@ package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
+import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.ListShippingResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -19,15 +21,36 @@ internal class SettingsShippingScreenTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var shippingApi: WutsiShippingApi
 
+    @MockBean
+    private lateinit var togglesProvider: TogglesProvider
+
+    @BeforeEach
+    override fun setUp() {
+        super.setUp()
+
+        val shippings = ShippingType.values().map { createShippingSummary(it) }
+        doReturn(ListShippingResponse(shippings)).whenever(shippingApi).listShipping()
+    }
+
     @Test
     fun index() {
-        val shippings = listOf(
-            createShippingSummary(ShippingType.INTERNATIONAL_SHIPPING),
-            createShippingSummary(ShippingType.EMAIL_DELIVERY)
-        )
-        doReturn(ListShippingResponse(shippings)).whenever(shippingApi).listShipping()
-
         val url = "http://localhost:$port/settings/store/shipping"
         assertEndpointEquals("/screens/settings/shipping/shipping.json", url)
+    }
+
+    @Test
+    fun digitalProductEnabled() {
+        doReturn(true).whenever(togglesProvider).isDigitalProductEnabled()
+
+        val url = "http://localhost:$port/settings/store/shipping"
+        assertEndpointEquals("/screens/settings/shipping/shipping-digital-product-enabled.json", url)
+    }
+
+    @Test
+    fun internationalShippingEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingInternationalEnabled()
+
+        val url = "http://localhost:$port/settings/store/shipping"
+        assertEndpointEquals("/screens/settings/shipping/shipping-international-enabled.json", url)
     }
 }

@@ -30,6 +30,20 @@ abstract class AbstractSettingsShippingProfileAttributeScreen : AbstractQuery() 
 
     abstract fun getInputWidget(shipping: Shipping): WidgetAware
 
+    private fun getTitle(name: String, shipping: Shipping): String =
+        try {
+            getText("page.settings.shipping.attribute.$name.${shipping.type}")
+        } catch (ex: Exception) {
+            getText("page.settings.shipping.attribute.$name")
+        }
+
+    private fun getDescription(name: String, shipping: Shipping): String =
+        try {
+            getText("page.settings.shipping.attribute.$name.description.${shipping.type}")
+        } catch (ex: Exception) {
+            getText("page.settings.shipping.attribute.$name.description")
+        }
+
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
         val shipping = shippingApi.getShipping(id).shipping
@@ -41,14 +55,14 @@ abstract class AbstractSettingsShippingProfileAttributeScreen : AbstractQuery() 
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.settings.shipping.attribute.$name"),
+                title = getTitle(name, shipping),
             ),
             child = Form(
                 children = listOf(
                     Container(
                         padding = 10.0,
                         alignment = Alignment.Center,
-                        child = Text(getText("page.settings.shipping.attribute.$name.description"))
+                        child = Text(getDescription(name, shipping))
                     ),
                     Container(
                         padding = 20.0

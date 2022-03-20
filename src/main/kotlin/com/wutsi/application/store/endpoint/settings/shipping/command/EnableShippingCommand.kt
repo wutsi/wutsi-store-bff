@@ -27,7 +27,8 @@ class EnableShippingCommand(
                 CreateShippingRequest(
                     type = type!!.name,
                     country = account.country,
-                    cityId = account.cityId
+                    cityId = account.cityId,
+                    street = account.street,
                 )
             ).id
             return gotoUrl(
