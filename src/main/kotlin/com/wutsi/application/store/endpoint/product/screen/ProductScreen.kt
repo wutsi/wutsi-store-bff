@@ -2,6 +2,7 @@ package com.wutsi.application.store.endpoint.product.screen
 
 import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.StringUtil
@@ -46,11 +47,13 @@ import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
 import org.slf4j.LoggerFactory
+import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.text.DecimalFormat
+import java.util.Locale
 import java.util.UUID
 import javax.servlet.http.HttpServletRequest
 
@@ -64,6 +67,7 @@ class ProductScreen(
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
     private val togglesProvider: TogglesProvider,
+    private val cityService: CityService
 ) : AbstractQuery() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(ProductScreen::class.java)
@@ -136,52 +140,7 @@ class ProductScreen(
         children.add(
             Container(
                 padding = 10.0,
-                child = Column(
-                    children = listOfNotNull(
-                        // Stock
-                        Row(
-                            children = listOf(
-                                if (product.quantity > 0)
-                                    Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS, size = 16.0)
-                                else
-                                    Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER, size = 16.0),
-
-                                Container(padding = 5.0),
-
-                                if (product.quantity > 0)
-                                    Text(getText("page.product.in-stock"))
-                                else
-                                    Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
-                            )
-                        ),
-
-                        // Shipping
-                        if (product.quantity > 0) // Padding Top
-                            Container(padding = 10.0)
-                        else
-                            null,
-                        if (product.quantity > 0)
-                            toShippingWidget(account, product, tenant)
-                        else
-                            null,
-
-                        // Add to cart
-                        if (product.quantity > 0 && togglesProvider.isCartEnabled()) // Padding Top
-                            Container(padding = 10.0)
-                        else
-                            null,
-                        if (product.quantity > 0 && togglesProvider.isCartEnabled())
-                            Button(
-                                padding = 10.0,
-                                caption = getText("page.product.button.add-to-cart"),
-                                action = executeCommand(
-                                    url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
-                                )
-                            )
-                        else
-                            null
-                    )
-                )
+                child = toStockWidget(account, merchant, product, tenant)
             )
         )
 
@@ -295,13 +254,62 @@ class ProductScreen(
         )
     }
 
-    private fun toShippingWidget(account: Account, product: Product, tenant: Tenant): WidgetAware {
+    private fun toStockWidget(account: Account, merchant: Account, product: Product, tenant: Tenant): WidgetAware {
+        val children = mutableListOf<WidgetAware>(
+            // Stock
+            Row(
+                children = listOf(
+                    if (product.quantity > 0)
+                        Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS, size = 16.0)
+                    else
+                        Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER, size = 16.0),
+
+                    Container(padding = 5.0),
+
+                    if (product.quantity > 0)
+                        Text(getText("page.product.in-stock"))
+                    else
+                        Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
+                )
+            )
+        )
+
+        if (product.quantity > 0) {
+            children.addAll(
+                listOf(
+                    Container(padding = 10.0),
+                    toShippingWidget(account, merchant, product, tenant)
+                )
+            )
+
+            if (togglesProvider.isCartEnabled()) {
+                children.addAll(
+                    listOf(
+                        Container(padding = 10.0),
+                        Button(
+                            padding = 10.0,
+                            caption = getText("page.product.button.add-to-cart"),
+                            action = executeCommand(
+                                url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+                            )
+                        )
+                    )
+                )
+            }
+        }
+
+        return Column(
+            children = children
+        )
+    }
+
+    private fun toShippingWidget(account: Account, merchant: Account, product: Product, tenant: Tenant): WidgetAware {
         // Find shipping rates
         val rates = shippingApi.searchRate(
             request = SearchRateRequest(
                 cityId = account.cityId,
                 country = account.country,
-                accountId = product.accountId,
+                accountId = merchant.id,
                 products = listOf(
                     com.wutsi.ecommerce.shipping.dto.Product(
                         productId = product.id,
@@ -310,7 +318,15 @@ class ProductScreen(
                 )
             )
         ).rates
-        if (rates.isEmpty())
+        if (rates.isEmpty()) {
+            val language = LocaleContextHolder.getLocale().language
+            var location = Locale(language, account.country).displayCountry
+            if (account.cityId != null) {
+                val city = cityService.get(account.cityId)
+                if (city != null)
+                    location = city.name + ", " + Locale(language, city.country).displayCountry
+            }
+
             return Row(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
@@ -318,12 +334,13 @@ class ProductScreen(
                     Icon(code = Theme.ICON_WARNING, size = 16.0, color = Theme.COLOR_DANGER),
                     Container(padding = 5.0),
                     Text(
-                        caption = getText("page.product.shipping-none"),
+                        caption = getText("page.product.shipping-none", arrayOf(location)),
                         color = Theme.COLOR_DANGER,
                         bold = true
                     )
                 )
             )
+        }
 
         // Show rates
         val pickup = rates.find { it.shippingType == ShippingType.LOCAL_PICKUP.name }

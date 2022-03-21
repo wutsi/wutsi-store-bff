@@ -279,97 +279,38 @@
                       "children": []
                     },
                     {
-                      "type": "Column",
+                      "type": "Row",
                       "attributes": {
                         "mainAxisAlignment": "start",
                         "crossAxisAlignment": "start"
                       },
                       "children": [
                         {
-                          "type": "Row",
+                          "type": "Icon",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
+                            "code": "e6cb",
+                            "size": 16.0,
+                            "color": "#8B0000"
                           },
-                          "children": [
-                            {
-                              "type": "Icon",
-                              "attributes": {
-                                "code": "e156",
-                                "size": 16.0,
-                                "color": "#4CAF50"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "padding": 5.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Pickup in Store"
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
                         },
                         {
-                          "type": "Row",
+                          "type": "Container",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
+                            "padding": 5.0
                           },
-                          "children": [
-                            {
-                              "type": "Icon",
-                              "attributes": {
-                                "code": "e156",
-                                "size": 16.0,
-                                "color": "#4CAF50"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "padding": 5.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Shipping - 2,000 CFA"
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "No shipping to Cameroon",
+                            "color": "#8B0000",
+                            "bold": true
+                          },
+                          "children": []
                         }
                       ]
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Button",
-                      "attributes": {
-                        "caption": "Add to Cart",
-                        "padding": 10.0,
-                        "type": "Elevated"
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Command",
-                        "url": "http://localhost:0/commands/add-to-cart?product-id=1&merchant-id=77777"
-                      }
                     }
                   ]
                 }
@@ -581,59 +522,6 @@
                     "type": "Share",
                     "url": "https://www.wutsi.me/product?id=$11"
                   }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 4.0
-          },
-          "children": [
-            {
-              "type": "CircleAvatar",
-              "attributes": {
-                "radius": 20.0,
-                "backgroundColor": "#e4edf7"
-              },
-              "children": [
-                {
-                  "type": "Stack",
-                  "attributes": {},
-                  "children": [
-                    {
-                      "type": "IconButton",
-                      "attributes": {
-                        "icon": "f37f",
-                        "size": 20.0
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/cart?merchant-id=77777"
-                      }
-                    },
-                    {
-                      "type": "Positioned",
-                      "attributes": {
-                        "top": 6.0,
-                        "right": 6.0
-                      },
-                      "children": [
-                        {
-                          "type": "Badge",
-                          "attributes": {
-                            "caption": "2",
-                            "fontSize": 10.0,
-                            "padding": 3.0
-                          },
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
                 }
               ]
             }

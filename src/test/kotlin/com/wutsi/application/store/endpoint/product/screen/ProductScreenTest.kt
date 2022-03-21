@@ -108,6 +108,17 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         assertTrackPushed(product)
     }
 
+    @Test
+    fun productNoShipping() {
+        doReturn(SearchRateResponse()).whenever(shippingApi).searchRate(any())
+
+        val product = createProduct(true)
+        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
+
+        assertEndpointEquals("/screens/product/product-no-shipping.json", url)
+        assertTrackPushed(product)
+    }
+
     private fun assertTrackPushed(product: com.wutsi.ecommerce.catalog.dto.Product) {
         val request = argumentCaptor<PushTrackRequest>()
         verify(trackingApi).push(request.capture())
