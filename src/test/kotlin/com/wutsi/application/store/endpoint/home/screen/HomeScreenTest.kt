@@ -10,6 +10,7 @@ import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.cart.dto.GetCartResponse
 import com.wutsi.ecommerce.cart.dto.Product
 import com.wutsi.ecommerce.catalog.dto.GetProductResponse
+import com.wutsi.ecommerce.catalog.dto.ListSectionResponse
 import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import com.wutsi.platform.account.dto.GetAccountResponse
 import org.junit.jupiter.api.BeforeEach
@@ -21,7 +22,7 @@ import org.springframework.boot.web.server.LocalServerPort
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class HomeScreenTest : AbstractEndpointTest() {
     @LocalServerPort
-    public val port: Int = 0
+    val port: Int = 0
 
     @MockBean
     private lateinit var togglesProvider: TogglesProvider
@@ -40,6 +41,13 @@ internal class HomeScreenTest : AbstractEndpointTest() {
             createProductSummary(4)
         )
         doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
+
+        val sections = listOf(
+            createSectionSummary(1, "Section 1", productCount = 10),
+            createSectionSummary(2, "Section 2", productCount = 12),
+            createSectionSummary(3, "Section 3", productCount = 3),
+        )
+        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections()
     }
 
     @Test
@@ -50,6 +58,8 @@ internal class HomeScreenTest : AbstractEndpointTest() {
 
     @Test
     fun otherCatalog() {
+        doReturn(ListSectionResponse()).whenever(catalogApi).listSections()
+
         val accountId = 9L
         val url = "http://localhost:$port?id=$accountId"
         val account = createAccount(accountId)

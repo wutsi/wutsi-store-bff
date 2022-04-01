@@ -375,9 +375,11 @@ abstract class AbstractEndpointTest {
         sortOrder = sortOrder,
     )
 
-    fun createSectionSummary(id: Long = 555L, title: String = "Deals", sortOrder: Int = 7) = SectionSummary(
-        id = id,
-        title = title,
-        sortOrder = sortOrder,
-    )
+    fun createSectionSummary(id: Long = 555L, title: String = "Deals", sortOrder: Int = 7, productCount: Int = 0) =
+        SectionSummary(
+            id = id,
+            title = title,
+            sortOrder = sortOrder,
+            productCount = productCount
+        )
 }

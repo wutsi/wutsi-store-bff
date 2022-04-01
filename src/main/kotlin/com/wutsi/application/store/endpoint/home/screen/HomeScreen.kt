@@ -16,6 +16,8 @@ import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
+import com.wutsi.flutter.sdui.Center
+import com.wutsi.flutter.sdui.Chip
 import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -64,7 +66,7 @@ class HomeScreen(
         children.add(ProfileListItem(model = sharedUIMapper.toAccountModel(merchant)))
 
         val tenant = tenantProvider.get()
-        children.add(toProductListWidget(merchant, tenant))
+        children.add(toContentWidget(merchant, tenant))
 
         val cart = if (togglesProvider.isCartEnabled())
             getCart(merchant)
@@ -145,7 +147,29 @@ class HomeScreen(
         val tenant = tenantProvider.get()
         val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
 
-        return toProductListWidget(merchant, tenant).toWidget()
+        return toContentWidget(merchant, tenant).toWidget()
+    }
+
+    private fun toContentWidget(
+        merchant: Account,
+        tenant: Tenant
+    ): WidgetAware {
+        val children = mutableListOf<WidgetAware>()
+        val sections = toSectionListWidget()
+        if (sections != null) {
+            children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
+            children.add(sections)
+        }
+
+        val products = toProductListWidget(merchant, tenant)
+        children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
+        children.add(products)
+
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = children
+        )
     }
 
     private fun toProductListWidget(
@@ -161,16 +185,11 @@ class HomeScreen(
 
         return Column(
             mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.center,
+            crossAxisAlignment = CrossAxisAlignment.start,
             children = listOf(
-                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                 Container(
                     padding = 10.0,
-                    alignment = Alignment.Center,
-                    child = Text(
-                        alignment = TextAlignment.Center,
-                        caption = getText("page.catalog.product-count", arrayOf(products.size.toString()))
-                    )
+                    child = Text(bold = true, caption = getText("page.catalog.browse-products"))
                 ),
                 Wrap(
                     children = products.map {
@@ -186,7 +205,56 @@ class HomeScreen(
                     },
                     direction = Axis.Horizontal,
                     spacing = 0.0
-                )
+                ),
+                Container(
+                    padding = 10.0,
+                    alignment = Alignment.Center,
+                    child = Center(
+                        child = Text(
+                            alignment = TextAlignment.Center,
+                            caption = getText("page.catalog.product-count", arrayOf(products.size.toString()))
+                        )
+                    )
+                ),
+            )
+        )
+    }
+
+    private fun toSectionListWidget(): WidgetAware? {
+        val sections = catalogApi.listSections().sections
+            .filter { it.productCount > 0 }
+            .sortedByDescending { it.productCount }
+            .take(5)
+        if (sections.isEmpty())
+            return null
+
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = listOf(
+                Container(
+                    alignment = Alignment.CenterLeft,
+                    padding = 10.0,
+                    child = Text(bold = true, caption = getText("page.catalog.browse-by-sections"))
+                ),
+                Center(
+                    child = Wrap(
+                        spacing = 10.0,
+                        direction = Axis.Horizontal,
+                        children = sections.map {
+                            Container(
+                                child = Chip(
+                                    caption = "${it.title} (${it.productCount})",
+                                    backgroundColor = Theme.COLOR_PRIMARY,
+                                    elevation = 5.0,
+                                ),
+                                action = gotoUrl(
+                                    url = urlBuilder.build("section?id=${it.id}")
+                                ),
+                            )
+                        }
+                    )
+                ),
             )
         )
     }

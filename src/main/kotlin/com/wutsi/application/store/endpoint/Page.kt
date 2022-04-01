@@ -3,6 +3,7 @@ package com.wutsi.application.store.endpoint
 object Page {
     const val CART = "page.cart"
     const val CATALOG = "page.catalog"
+    const val SECTION = "page.section"
     const val CHECKOUT_REVIEW = "page.checkout.review"
     const val CHECKOUT_PIN = "page.checkout.pin"
     const val CHECKOUT_SUCCESS = "page.checkout.success"
