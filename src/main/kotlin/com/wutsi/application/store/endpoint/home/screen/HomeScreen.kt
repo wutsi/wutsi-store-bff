@@ -13,24 +13,26 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
-import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
-import com.wutsi.flutter.sdui.Flexible
+import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.IconButton
-import com.wutsi.flutter.sdui.ListView
-import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
+import com.wutsi.flutter.sdui.SingleChildScrollView
+import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
+import com.wutsi.flutter.sdui.Wrap
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
@@ -56,19 +58,18 @@ class HomeScreen(
 
     @PostMapping
     fun index(@RequestParam(required = false) id: Long? = null): Widget {
+        val children = mutableListOf<WidgetAware>()
+
         val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
+        children.add(ProfileListItem(model = sharedUIMapper.toAccountModel(merchant)))
+
         val tenant = tenantProvider.get()
+        children.add(toProductListWidget(merchant, tenant))
+
         val cart = if (togglesProvider.isCartEnabled())
             getCart(merchant)
         else
             null
-        val products = catalogApi.searchProducts(
-            SearchProductRequest(
-                accountId = merchant.id,
-                limit = 100
-            )
-        ).products
-        val rows = toRows(products, 2)
 
         val profileUrl = "${tenant.webappUrl}/profile?id=$${merchant.id}"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, profileUrl)
@@ -128,22 +129,11 @@ class HomeScreen(
                     }
                 ),
             ),
-            child = Column(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.start,
-                children = listOf(
-                    ProfileListItem(model = sharedUIMapper.toAccountModel(merchant)),
-                    Flexible(
-                        child = ListView(
-                            children = rows.map {
-                                Container(
-                                    child = Row(
-                                        children = thumbnails(it, tenant),
-                                    )
-                                )
-                            }
-                        ),
-                    ),
+            child = SingleChildScrollView(
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = children
                 )
             ),
             bottomNavigationBar = bottomNavigationBar()
@@ -154,52 +144,52 @@ class HomeScreen(
     fun widget(@RequestParam(required = false) id: Long? = null): Widget {
         val tenant = tenantProvider.get()
         val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
+
+        return toProductListWidget(merchant, tenant).toWidget()
+    }
+
+    private fun toProductListWidget(
+        merchant: Account,
+        tenant: Tenant
+    ): WidgetAware {
         val products = catalogApi.searchProducts(
             SearchProductRequest(
+                limit = 100,
                 accountId = merchant.id,
-                limit = 100
             )
         ).products
-        val rows = toRows(products, 2)
 
-        return ListView(
-            children = rows.map {
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.center,
+            children = listOf(
+                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                 Container(
-                    child = Row(
-                        children = thumbnails(it, tenant),
+                    padding = 10.0,
+                    alignment = Alignment.Center,
+                    child = Text(
+                        alignment = TextAlignment.Center,
+                        caption = getText("page.catalog.product-count", arrayOf(products.size.toString()))
                     )
-                )
-            }
-        ).toWidget()
-    }
-
-    private fun toRows(products: List<ProductSummary>, size: Int): List<List<ProductSummary>> {
-        val rows = mutableListOf<List<ProductSummary>>()
-        var cur = mutableListOf<ProductSummary>()
-        products.forEach {
-            cur.add(it)
-            if (cur.size == size) {
-                rows.add(cur)
-                cur = mutableListOf()
-            }
-        }
-        if (cur.isNotEmpty())
-            rows.add(cur)
-        return rows
-    }
-
-    private fun thumbnails(products: List<ProductSummary>, tenant: Tenant): List<WidgetAware> =
-        products.map {
-            Flexible(
-                child = Container(
-                    alignment = Alignment.TopCenter,
-                    child = ProductCard(
-                        model = sharedUIMapper.toProductModel(it, tenant),
-                        action = gotoUrl(urlBuilder.build("/product?id=${it.id}"))
-                    )
+                ),
+                Wrap(
+                    children = products.map {
+                        Container(
+                            width = 180.0,
+                            child = ProductCard(
+                                model = sharedUIMapper.toProductModel(it, tenant),
+                                action = gotoUrl(
+                                    url = urlBuilder.build("/product?id=${it.id}")
+                                )
+                            )
+                        )
+                    },
+                    direction = Axis.Horizontal,
+                    spacing = 0.0
                 )
             )
-        }
+        )
+    }
 
     private fun getCart(merchant: Account): Cart? =
         try {
