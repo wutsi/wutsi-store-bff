@@ -75,7 +75,7 @@
                   "children": [],
                   "action": {
                     "type": "Command",
-                    "url": "commands/toggle-product-section?id=777&section-id=1"
+                    "url": "http://localhost:0/commands/toggle-product-section?id=777&section-id=1"
                   }
                 },
                 {
@@ -88,7 +88,7 @@
                   "children": [],
                   "action": {
                     "type": "Command",
-                    "url": "commands/toggle-product-section?id=777&section-id=2"
+                    "url": "http://localhost:0/commands/toggle-product-section?id=777&section-id=2"
                   }
                 },
                 {
@@ -101,7 +101,7 @@
                   "children": [],
                   "action": {
                     "type": "Command",
-                    "url": "commands/toggle-product-section?id=777&section-id=111"
+                    "url": "http://localhost:0/commands/toggle-product-section?id=777&section-id=111"
                   }
                 },
                 {
@@ -114,7 +114,7 @@
                   "children": [],
                   "action": {
                     "type": "Command",
-                    "url": "commands/toggle-product-section?id=777&section-id=112"
+                    "url": "http://localhost:0/commands/toggle-product-section?id=777&section-id=112"
                   }
                 }
               ]

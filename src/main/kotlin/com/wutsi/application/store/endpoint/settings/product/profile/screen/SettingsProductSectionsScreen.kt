@@ -64,7 +64,9 @@ class SettingsProductSectionsScreen(
                                     name = "value",
                                     caption = it.title,
                                     selected = isSelected(product.sections, it),
-                                    action = executeCommand("commands/toggle-product-section?id=$id&section-id=${it.id}")
+                                    action = executeCommand(
+                                        url = urlBuilder.build("commands/toggle-product-section?id=$id&section-id=${it.id}")
+                                    )
                                 )
                             }
                         )
