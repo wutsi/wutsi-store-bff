@@ -51,6 +51,14 @@ class SettingsStoreScreen : AbstractQuery() {
                             separatorColor = Theme.COLOR_DIVIDER,
                             children = listOf(
                                 ListItem(
+                                    caption = getText("page.settings.store.sections"),
+                                    leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_PRIMARY),
+                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                                    action = gotoUrl(
+                                        urlBuilder.build("/settings/store/sections")
+                                    )
+                                ),
+                                ListItem(
                                     caption = getText("page.settings.store.products"),
                                     leading = Icon(code = Theme.ICON_SHOPPING_BAG, color = Theme.COLOR_PRIMARY),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),

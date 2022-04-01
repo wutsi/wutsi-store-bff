@@ -1,0 +1,80 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.store.section.add",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Form",
+          "attributes": {},
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "title",
+                    "hideText": false,
+                    "required": true,
+                    "caption": "Title",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Text",
+                    "maxLength": 30,
+                    "minLength": 0
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "submit",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Submit",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Submit",
+                    "minLength": 0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/create-section"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Add Section",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

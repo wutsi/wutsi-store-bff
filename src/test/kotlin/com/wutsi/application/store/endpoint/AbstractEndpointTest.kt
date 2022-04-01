@@ -9,6 +9,8 @@ import com.wutsi.ecommerce.catalog.dto.CategorySummary
 import com.wutsi.ecommerce.catalog.dto.PictureSummary
 import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
+import com.wutsi.ecommerce.catalog.dto.Section
+import com.wutsi.ecommerce.catalog.dto.SectionSummary
 import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.ecommerce.order.dto.Address
 import com.wutsi.ecommerce.order.dto.Order
@@ -43,6 +45,7 @@ import feign.Request
 import feign.RequestTemplate
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
@@ -53,6 +56,7 @@ import java.time.ZoneOffset
 import java.util.UUID
 import kotlin.test.assertEquals
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class AbstractEndpointTest {
     companion object {
         const val DEVICE_ID = "0000-1111"
@@ -84,7 +88,7 @@ abstract class AbstractEndpointTest {
     lateinit var traceId: String
 
     @BeforeEach
-    open fun setUp() {
+    fun setUp() {
         traceId = UUID.randomUUID().toString()
         doReturn(DEVICE_ID).whenever(tracingContext).deviceId()
         doReturn(traceId).whenever(tracingContext).traceId()
@@ -255,7 +259,11 @@ abstract class AbstractEndpointTest {
                 url = "https://www.imag.com/3.png"
             )
         else
-            null
+            null,
+        sections = listOf(
+            createSectionSummary(1, "Yo", 1),
+            createSectionSummary(2, "Man", 2)
+        )
     )
 
     protected fun createProductSummary(id: Long) = ProductSummary(
@@ -359,5 +367,17 @@ abstract class AbstractEndpointTest {
         cityId = 1000,
         street = "180 Rue des Manguier, Bonnapriso",
         email = "ray.sponsible@gmail.com"
+    )
+
+    fun createSection(id: Long = 555L, title: String = "Deals", sortOrder: Int = 7) = Section(
+        id = id,
+        title = title,
+        sortOrder = sortOrder,
+    )
+
+    fun createSectionSummary(id: Long = 555L, title: String = "Deals", sortOrder: Int = 7) = SectionSummary(
+        id = id,
+        title = title,
+        sortOrder = sortOrder,
     )
 }

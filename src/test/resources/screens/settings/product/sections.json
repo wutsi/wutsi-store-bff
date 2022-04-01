@@ -1,0 +1,137 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.store.product.section",
+    "safe": false,
+    "backgroundColor": "#FFFFFF"
+  },
+  "children": [
+    {
+      "type": "Form",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Sample product",
+                "color": "#1D7EDF",
+                "bold": true
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "alignment": "Center",
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Select the sections associated with the product"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Divider",
+          "attributes": {
+            "height": 1.0,
+            "color": "#8c8c8c"
+          },
+          "children": []
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "ListView",
+              "attributes": {
+                "separator": true,
+                "separatorColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "Yo",
+                    "name": "value",
+                    "selected": true
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "commands/toggle-product-section?id=777&section-id=1"
+                  }
+                },
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "Man",
+                    "name": "value",
+                    "selected": true
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "commands/toggle-product-section?id=777&section-id=2"
+                  }
+                },
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "Section 111",
+                    "name": "value",
+                    "selected": false
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "commands/toggle-product-section?id=777&section-id=111"
+                  }
+                },
+                {
+                  "type": "ListItemSwitch",
+                  "attributes": {
+                    "caption": "Section 112",
+                    "name": "value",
+                    "selected": false
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "commands/toggle-product-section?id=777&section-id=112"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Sections",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

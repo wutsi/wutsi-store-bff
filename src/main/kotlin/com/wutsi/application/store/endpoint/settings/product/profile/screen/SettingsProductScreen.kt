@@ -125,6 +125,12 @@ class SettingsProductScreen(
                                         null,
 
                                     item(
+                                        "page.settings.store.product.attribute.sections",
+                                        product.sections.map { it.title }.joinToString(", "),
+                                        urlBuilder.build("/settings/store/product/sections?id=$id")
+                                    ),
+
+                                    item(
                                         "page.settings.store.product.attribute.sub-category-id",
                                         product.subCategory.title,
                                         urlBuilder.build("/settings/store/product/sub-category-id?id=$id")

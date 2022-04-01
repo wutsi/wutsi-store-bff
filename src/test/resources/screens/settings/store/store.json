@@ -51,6 +51,32 @@
                 {
                   "type": "ListItem",
                   "attributes": {
+                    "caption": "Sections",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    },
+                    "leading": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "ef37",
+                        "color": "#1D7EDF"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/sections"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
                     "caption": "Products",
                     "trailing": {
                       "type": "Icon",
