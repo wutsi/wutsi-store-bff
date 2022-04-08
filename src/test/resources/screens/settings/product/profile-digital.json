@@ -179,23 +179,6 @@
               ]
             },
             {
-              "type": "Container",
-              "attributes": {
-                "alignment": "CenterLeft",
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "Category: Category 1",
-                    "alignment": "Left"
-                  },
-                  "children": []
-                }
-              ]
-            },
-            {
               "type": "Divider",
               "attributes": {
                 "height": 1.0,
@@ -217,6 +200,19 @@
                     "separatorColor": "#8c8c8c"
                   },
                   "children": [
+                    {
+                      "type": "ListItemSwitch",
+                      "attributes": {
+                        "caption": "Published",
+                        "name": "value",
+                        "selected": false
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Command",
+                        "url": "http://localhost:0/commands/publish-product?id=777"
+                      }
+                    },
                     {
                       "type": "ListItem",
                       "attributes": {
@@ -303,8 +299,8 @@
                     {
                       "type": "ListItem",
                       "attributes": {
-                        "caption": "Secondary Category",
-                        "subCaption": "Category 2",
+                        "caption": "Category",
+                        "subCaption": "Category 1 > Category 2",
                         "trailing": {
                           "type": "Icon",
                           "attributes": {
@@ -445,20 +441,6 @@
                       "action": {
                         "type": "Route",
                         "url": "http://localhost:0/settings/store/product/description?id=777"
-                      }
-                    },
-                    {
-                      "type": "ListItemSwitch",
-                      "attributes": {
-                        "caption": "Visible",
-                        "subCaption": "Customers to see the product?",
-                        "name": "value",
-                        "selected": true
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Command",
-                        "url": "http://localhost:0/commands/update-product-attribute?id=777&name=visible"
                       }
                     }
                   ]

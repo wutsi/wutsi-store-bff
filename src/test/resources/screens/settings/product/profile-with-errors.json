@@ -128,6 +128,43 @@
               ]
             },
             {
+              "type": "Center",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0,
+                    "background": "#f8d7da"
+                  },
+                  "children": [
+                    {
+                      "type": "Column",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "The product must have title",
+                            "color": "#8B0000"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "The product must have at least 1 picture",
+                            "color": "#8B0000"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "type": "Divider",
               "attributes": {
                 "height": 1.0,

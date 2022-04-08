@@ -8,10 +8,12 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.PictureSummary
 import com.wutsi.ecommerce.catalog.dto.Product
+import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
+import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Dialog
@@ -34,7 +36,6 @@ import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.ImageSource
 import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
-import com.wutsi.flutter.sdui.enums.TextAlignment
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -61,7 +62,10 @@ class SettingsProductScreen(
     }
 
     @PostMapping
-    fun index(@RequestParam id: Long): Widget {
+    fun index(
+        @RequestParam id: Long,
+        @RequestParam(required = false) errors: Array<String>? = null
+    ): Widget {
         val product = catalogApi.getProduct(id).product
         val tenant = tenantProvider.get()
         val price = product.price?.let { DecimalFormat(tenant.monetaryFormat).format(it) }
@@ -79,20 +83,33 @@ class SettingsProductScreen(
                 child = Column(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
+                    children = listOfNotNull(
                         Container(
                             padding = 10.0,
                             height = IMAGE_HEIGHT + 2 * (10.0 + IMAGE_PADDING),
-                            child = pictureListView(product),
+                            child = toPictureListWidget(product),
                         ),
-                        Container(
-                            padding = 10.0,
-                            alignment = Alignment.CenterLeft,
-                            child = Text(
-                                alignment = TextAlignment.Left,
-                                caption = getText("page.settings.store.product.attribute.category") + ": ${product.category.title}",
-                            ),
-                        ),
+
+                        if (product.status == ProductStatus.DRAFT.name)
+                            Center(
+                                child = Container(
+                                    padding = 10.0,
+                                    margin = 10.0,
+                                    background = Theme.COLOR_WARNING_LIGHT,
+                                    child = Text(
+                                        caption = getText("product.status.${product.status}"),
+                                        color = Theme.COLOR_WARNING,
+                                    )
+                                )
+                            )
+                        else
+                            null,
+
+                        if (errors != null)
+                            toErrorWidget(errors)
+                        else
+                            null,
+
                         Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                         Flexible(
                             flex = 10,
@@ -100,14 +117,22 @@ class SettingsProductScreen(
                                 separatorColor = Theme.COLOR_DIVIDER,
                                 separator = true,
                                 children = listOfNotNull(
-                                    item(
+                                    ListItemSwitch(
+                                        caption = getText("page.settings.store.product.attribute.published"),
+                                        name = "value",
+                                        selected = product.status == ProductStatus.PUBLISHED.name,
+                                        action = Action(
+                                            type = ActionType.Command,
+                                            url = urlBuilder.build("commands/publish-product?id=$id")
+                                        )
+                                    ),
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.title",
                                         product.title,
                                         urlBuilder.build("/settings/store/product/title?id=$id")
                                     ),
-
                                     if (togglesProvider.isDigitalProductEnabled())
-                                        item(
+                                        toListItemWidget(
                                             "page.settings.store.product.attribute.type",
                                             getText("product.type." + product.type),
                                             urlBuilder.build("/settings/store/product/type?id=$id")
@@ -116,7 +141,7 @@ class SettingsProductScreen(
                                         null,
 
                                     if (togglesProvider.isDigitalProductEnabled() && product.type == ProductType.NUMERIC.name)
-                                        item(
+                                        toListItemWidget(
                                             "page.settings.store.product.attribute.numeric-file-url",
                                             product.numericFileUrl?.let { getFileName(it) },
                                             urlBuilder.build("/settings/store/product/numeric-file-url?id=$id")
@@ -124,25 +149,25 @@ class SettingsProductScreen(
                                     else
                                         null,
 
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.sections",
                                         product.sections.map { it.title }.joinToString(", "),
                                         urlBuilder.build("/settings/store/product/sections?id=$id")
                                     ),
 
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.sub-category-id",
-                                        product.subCategory.title,
+                                        "${product.category.title} > ${product.subCategory.title}",
                                         urlBuilder.build("/settings/store/product/sub-category-id?id=$id")
                                     ),
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.price",
                                         price,
                                         urlBuilder.build("/settings/store/product/price?id=$id")
                                     ),
 
                                     if (product.price != null)
-                                        item(
+                                        toListItemWidget(
                                             "page.settings.store.product.attribute.comparable-price",
                                             comparablePrice,
                                             urlBuilder.build("/settings/store/product/comparable-price?id=$id")
@@ -150,36 +175,26 @@ class SettingsProductScreen(
                                     else
                                         null,
 
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.summary",
                                         product.summary,
                                         urlBuilder.build("/settings/store/product/summary?id=$id")
                                     ),
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.quantity",
                                         product.quantity.toString(),
                                         urlBuilder.build("/settings/store/product/quantity?id=$id")
                                     ),
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.max-order",
                                         product.maxOrder?.toString(),
                                         urlBuilder.build("/settings/store/product/max-order?id=$id")
                                     ),
-                                    item(
+                                    toListItemWidget(
                                         "page.settings.store.product.attribute.description",
                                         description(product.description),
                                         urlBuilder.build("/settings/store/product/description?id=$id")
                                     ),
-                                    ListItemSwitch(
-                                        caption = getText("page.settings.store.product.attribute.visible"),
-                                        subCaption = getText("page.settings.store.product.attribute.visible.description"),
-                                        name = "value",
-                                        selected = product.visible,
-                                        action = Action(
-                                            type = ActionType.Command,
-                                            url = urlBuilder.build("commands/update-product-attribute?id=$id&name=visible")
-                                        )
-                                    )
                                 )
                             )
                         )
@@ -189,14 +204,23 @@ class SettingsProductScreen(
         ).toWidget()
     }
 
-    private fun getFileName(url: String): String? =
-        try {
-            URL(url).file
-        } catch (ex: Exception) {
-            null
-        }
+    private fun toErrorWidget(errors: Array<String>): WidgetAware =
+        Center(
+            child = Container(
+                padding = 10.0,
+                background = Theme.COLOR_DANGER_LIGHT,
+                child = Column(
+                    children = getErrorTexts(errors).map {
+                        Text(
+                            caption = it,
+                            color = Theme.COLOR_DANGER
+                        )
+                    }
+                )
+            )
+        )
 
-    private fun item(caption: String, value: String?, url: String) = ListItem(
+    private fun toListItemWidget(caption: String, value: String?, url: String) = ListItem(
         caption = getText(caption),
         subCaption = value,
         trailing = Icon(
@@ -210,26 +234,18 @@ class SettingsProductScreen(
         )
     )
 
-    private fun description(value: String?): String? =
-        if (value == null)
-            null
-        else if (value.length < 160)
-            value
-        else
-            value.substring(0, 160) + "..."
-
-    private fun pictureListView(product: Product): WidgetAware {
+    private fun toPictureListWidget(product: Product): WidgetAware {
         val images = mutableListOf<WidgetAware>()
 
         // Thumbnail as 1st image
         if (product.thumbnail != null)
-            images.add(listItem(product, product.thumbnail!!))
+            images.add(toPictureWidget(product, product.thumbnail!!))
 
         // Other pictures
         images.addAll(
             product.pictures
                 .filter { it.id != product.thumbnail?.id }
-                .map { listItem(product, it) }
+                .map { toPictureWidget(product, it) }
         )
 
         // Add button
@@ -262,7 +278,7 @@ class SettingsProductScreen(
         )
     }
 
-    private fun listItem(product: Product, picture: PictureSummary) = Container(
+    private fun toPictureWidget(product: Product, picture: PictureSummary) = Container(
         padding = IMAGE_PADDING,
         width = IMAGE_WIDTH,
         height = IMAGE_HEIGHT,
@@ -310,4 +326,28 @@ class SettingsProductScreen(
             ),
         )
     )
+
+    private fun getErrorTexts(errors: Array<String>): Set<String> =
+        errors.map {
+            try {
+                getText(it)
+            } catch (ex: Exception) {
+                getText("error.unexpected")
+            }
+        }.toSet()
+
+    private fun getFileName(url: String): String? =
+        try {
+            URL(url).file
+        } catch (ex: Exception) {
+            null
+        }
+
+    private fun description(value: String?): String? =
+        if (value == null)
+            null
+        else if (value.length < 160)
+            value
+        else
+            value.substring(0, 160) + "..."
 }

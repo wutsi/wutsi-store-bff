@@ -14,6 +14,7 @@ import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
+import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
@@ -180,6 +181,7 @@ class HomeScreen(
             SearchProductRequest(
                 limit = 100,
                 accountId = merchant.id,
+                status = ProductStatus.PUBLISHED.name
             )
         ).products
 
@@ -222,8 +224,8 @@ class HomeScreen(
 
     private fun toSectionListWidget(): WidgetAware? {
         val sections = catalogApi.listSections().sections
-            .filter { it.productCount > 0 }
-            .sortedByDescending { it.productCount }
+            .sortedByDescending { it.publishedProductCount }
+            .filter { it.publishedProductCount > 0 }
             .take(5)
         if (sections.isEmpty())
             return null
@@ -244,7 +246,7 @@ class HomeScreen(
                         children = sections.map {
                             Container(
                                 child = Chip(
-                                    caption = "${it.title} (${it.productCount})",
+                                    caption = it.title,
                                     backgroundColor = Theme.COLOR_PRIMARY,
                                     elevation = 5.0,
                                 ),

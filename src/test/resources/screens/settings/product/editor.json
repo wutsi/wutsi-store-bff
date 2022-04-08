@@ -46,14 +46,14 @@
                   "type": "DropdownButton",
                   "attributes": {
                     "name": "subCategoryId",
-                    "hint": "Secondary Category (required)",
+                    "hint": "Category (required)",
                     "required": true
                   },
                   "children": [
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "c1",
+                        "caption": "Foo > c1",
                         "enabled": true,
                         "value": "1"
                       },
@@ -62,7 +62,7 @@
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "c2",
+                        "caption": "Foo > c2",
                         "enabled": true,
                         "value": "2"
                       },
@@ -71,7 +71,7 @@
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "c3",
+                        "caption": "Foo > c3",
                         "enabled": true,
                         "value": "3"
                       },

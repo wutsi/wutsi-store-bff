@@ -101,7 +101,7 @@
                                   "attributes": {
                                     "elevation": 5.0,
                                     "backgroundColor": "#1D7EDF",
-                                    "caption": "Section 2 (12)"
+                                    "caption": "Section 2"
                                   },
                                   "children": []
                                 }
@@ -120,7 +120,7 @@
                                   "attributes": {
                                     "elevation": 5.0,
                                     "backgroundColor": "#1D7EDF",
-                                    "caption": "Section 1 (10)"
+                                    "caption": "Section 1"
                                   },
                                   "children": []
                                 }
@@ -139,7 +139,7 @@
                                   "attributes": {
                                     "elevation": 5.0,
                                     "backgroundColor": "#1D7EDF",
-                                    "caption": "Section 3 (3)"
+                                    "caption": "Section 3"
                                   },
                                   "children": []
                                 }

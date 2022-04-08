@@ -202,7 +202,11 @@ abstract class AbstractEndpointTest {
     protected fun getText(key: String, args: Array<Any?> = emptyArray()) =
         messages.getMessage(key, args, LocaleContextHolder.getLocale()) ?: key
 
-    protected fun createFeignException(errorCode: String, downstreamError: ErrorCode? = null) = FeignException.Conflict(
+    protected fun createFeignException(
+        errorCode: String,
+        downstreamError: ErrorCode? = null,
+        data: Map<String, Any> = emptyMap()
+    ) = FeignException.Conflict(
         "",
         Request.create(
             Request.HttpMethod.POST,
@@ -216,12 +220,16 @@ abstract class AbstractEndpointTest {
             {
                 "error":{
                     "code": "$errorCode",
-                    "downstreamCode": "$downstreamError"
+                    "downstreamCode": "$downstreamError",
+                    "data": ${toJsonString(data)}
                 }
             }
         """.trimIndent().toByteArray(),
         emptyMap()
     )
+
+    private fun toJsonString(data: Map<String, Any>): String =
+        ObjectMapper().writeValueAsString(data)
 
     protected fun createProduct(withThumbnail: Boolean = true, type: ProductType = ProductType.PHYSICAL) = Product(
         id = 1,
@@ -380,6 +388,7 @@ abstract class AbstractEndpointTest {
             id = id,
             title = title,
             sortOrder = sortOrder,
-            productCount = productCount
+            productCount = productCount,
+            publishedProductCount = productCount
         )
 }

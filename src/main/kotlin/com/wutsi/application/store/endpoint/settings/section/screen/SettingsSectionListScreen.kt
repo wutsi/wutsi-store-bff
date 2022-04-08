@@ -66,10 +66,6 @@ class SettingsSectionListScreen(
                             children = sections.map {
                                 ListItem(
                                     caption = it.title,
-                                    subCaption = getText(
-                                        "page.settings.store.section.list.product-count",
-                                        arrayOf(it.productCount)
-                                    ),
                                     trailing = Icon(Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
                                         url = urlBuilder.build("/settings/store/section/edit?id=${it.id}")

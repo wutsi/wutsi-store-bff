@@ -9,6 +9,7 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.catalog.dto.Section
+import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
@@ -63,7 +64,8 @@ class SectionScreen(
         val products = catalogApi.searchProducts(
             SearchProductRequest(
                 limit = 100,
-                sectionId = section.id
+                sectionId = section.id,
+                status = ProductStatus.PUBLISHED.name
             )
         ).products
 

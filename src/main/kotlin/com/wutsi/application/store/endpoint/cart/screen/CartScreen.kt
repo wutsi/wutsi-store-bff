@@ -14,6 +14,7 @@ import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
+import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -54,6 +55,7 @@ class CartScreen(
             catalogApi.searchProducts(
                 SearchProductRequest(
                     productIds = cart.products.map { it.productId },
+                    status = ProductStatus.PUBLISHED.name,
                     limit = cart.products.size
                 )
             ).products

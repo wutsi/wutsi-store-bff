@@ -4,6 +4,7 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.catalog.dto.SearchCategoryRequest
+import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.DropdownButton
 import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.WidgetAware
@@ -26,18 +27,22 @@ class SettingsProductSubCategoryScreen(
             )
         ).categories.sortedBy { it.title }
 
-        return DropdownButton(
-            name = "value",
-            value = product.subCategory.id.toString(),
-            required = true,
-            children = categories
-                .sortedBy { it.title }
-                .map {
-                    DropdownMenuItem(
-                        caption = it.title,
-                        value = it.id.toString(),
-                    )
-                }
+        return Column(
+            children = listOf(
+                DropdownButton(
+                    name = "value",
+                    value = product.subCategory.id.toString(),
+                    required = true,
+                    children = categories
+                        .sortedBy { it.title }
+                        .map {
+                            DropdownMenuItem(
+                                caption = "${product.category.title} > ${it.title}",
+                                value = it.id.toString(),
+                            )
+                        }
+                )
+            )
         )
     }
 }

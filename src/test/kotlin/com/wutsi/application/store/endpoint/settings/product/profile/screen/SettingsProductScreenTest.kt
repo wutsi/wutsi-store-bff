@@ -54,4 +54,14 @@ internal class SettingsProductScreenTest : AbstractEndpointTest() {
 
         assertEndpointEquals("/screens/settings/product/profile-no-thumbnail.json", url)
     }
+
+    @Test
+    fun error() {
+        val product = createProduct(false)
+        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
+
+        url =
+            "http://localhost:$port/settings/store/product?id=777&errors=error.product.publish.MISSING_TITLE,error.product.publish.MISSING_PICTURE"
+        assertEndpointEquals("/screens/settings/product/profile-with-errors.json", url)
+    }
 }

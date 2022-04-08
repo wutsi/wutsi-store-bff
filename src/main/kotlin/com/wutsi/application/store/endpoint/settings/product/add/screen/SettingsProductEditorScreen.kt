@@ -33,6 +33,7 @@ class SettingsProductEditorScreen(
     @PostMapping
     fun index(@RequestParam(name = "category-id") categoryId: Long): Widget {
         val tenant = tenantProvider.get()
+        val category = catalogApi.getCategory(categoryId).category
         val categories = catalogApi.searchCategories(
             request = SearchCategoryRequest(
                 parentId = categoryId
@@ -70,7 +71,7 @@ class SettingsProductEditorScreen(
                                     .sortedBy { it.title }
                                     .map {
                                         DropdownMenuItem(
-                                            caption = it.title,
+                                            caption = "${category.title} > ${it.title}",
                                             value = it.id.toString(),
                                         )
                                     }

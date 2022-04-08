@@ -50,7 +50,6 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Yo",
-                    "subCaption": "0 product(s)",
                     "trailing": {
                       "type": "Icon",
                       "attributes": {
@@ -69,7 +68,6 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Man",
-                    "subCaption": "0 product(s)",
                     "trailing": {
                       "type": "Icon",
                       "attributes": {

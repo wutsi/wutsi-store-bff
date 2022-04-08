@@ -37,7 +37,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Select the product secondary category"
+                "caption": "Select the product category"
               },
               "children": []
             }
@@ -50,39 +50,45 @@
           },
           "children": [
             {
-              "type": "DropdownButton",
-              "attributes": {
-                "name": "value",
-                "value": "2",
-                "required": true
-              },
+              "type": "Column",
+              "attributes": {},
               "children": [
                 {
-                  "type": "DropdownMenuItem",
+                  "type": "DropdownButton",
                   "attributes": {
-                    "caption": "c1",
-                    "enabled": true,
-                    "value": "1"
+                    "name": "value",
+                    "value": "2",
+                    "required": true
                   },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "c2",
-                    "enabled": true,
-                    "value": "2"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "DropdownMenuItem",
-                  "attributes": {
-                    "caption": "c3",
-                    "enabled": true,
-                    "value": "3"
-                  },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "c1 > c1",
+                        "enabled": true,
+                        "value": "1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "c1 > c2",
+                        "enabled": true,
+                        "value": "2"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "c1 > c3",
+                        "enabled": true,
+                        "value": "3"
+                      },
+                      "children": []
+                    }
+                  ]
                 }
               ]
             }
@@ -120,7 +126,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Secondary Category",
+      "title": "Category",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"
