@@ -8,7 +8,6 @@ import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
-import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -37,7 +36,6 @@ import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -51,10 +49,6 @@ class HomeScreen(
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
 ) : ProductActionProvider, AbstractQuery() {
-    companion object {
-        private val LOGGER = LoggerFactory.getLogger(HomeScreen::class.java)
-    }
-
     override fun getAction(product: ProductModel): Action =
         gotoUrl(
             url = urlBuilder.build("/product?id=${product.id}")
@@ -62,14 +56,8 @@ class HomeScreen(
 
     @PostMapping
     fun index(@RequestParam(required = false) id: Long? = null): Widget {
-        val children = mutableListOf<WidgetAware>()
-
-        val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
-        children.add(ProfileListItem(model = sharedUIMapper.toAccountModel(merchant)))
-
         val tenant = tenantProvider.get()
-        children.add(toContentWidget(merchant, tenant))
-
+        val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
         val cart = getCart(merchant)
         val profileUrl = "${tenant.webappUrl}/profile?id=$${merchant.id}"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, profileUrl)
@@ -129,13 +117,7 @@ class HomeScreen(
                     }
                 ),
             ),
-            child = SingleChildScrollView(
-                child = Column(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = children
-                )
-            ),
+            child = toContentWidget(merchant, tenant),
             bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
@@ -163,10 +145,12 @@ class HomeScreen(
         children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
         children.add(products)
 
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = children
+        return SingleChildScrollView(
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
+            )
         )
     }
 
@@ -182,11 +166,25 @@ class HomeScreen(
             )
         ).products
 
-        return ProductGridView(
-            spacing = 5.0,
-            productsPerRow = 2,
-            models = products.map { sharedUIMapper.toProductModel(it, tenant) },
-            actionProvider = this,
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = listOf(
+                Container(
+                    alignment = Alignment.CenterLeft,
+                    padding = 10.0,
+                    child = Text(bold = true, caption = getText("page.catalog.browse-products"))
+                ),
+                ProductGridView(
+                    spacing = 5.0,
+                    productsPerRow = 2,
+                    models = products.map { sharedUIMapper.toProductModel(it, tenant) },
+                    actionProvider = this,
+                ),
+                Center(
+                    child = Text(caption = getText("page.catalog.product-count", arrayOf(products.size)))
+                )
+            )
         )
     }
 

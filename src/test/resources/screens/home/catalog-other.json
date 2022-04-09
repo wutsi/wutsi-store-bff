@@ -17,28 +17,10 @@
           },
           "children": [
             {
-              "type": "ListItem",
+              "type": "Divider",
               "attributes": {
-                "caption": "Ray Sponsible",
-                "subCaption": "Marketing",
-                "padding": 10.0,
-                "leading": {
-                  "type": "CircleAvatar",
-                  "attributes": {
-                    "radius": 24.0
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "RS",
-                        "bold": true,
-                        "size": 16.0
-                      },
-                      "children": []
-                    }
-                  ]
-                }
+                "height": 1.0,
+                "color": "#8c8c8c"
               },
               "children": []
             },
@@ -50,12 +32,21 @@
               },
               "children": [
                 {
-                  "type": "Divider",
+                  "type": "Container",
                   "attributes": {
-                    "height": 1.0,
-                    "color": "#8c8c8c"
+                    "alignment": "CenterLeft",
+                    "padding": 10.0
                   },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Browse products",
+                        "bold": true
+                      },
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "type": "Column",
@@ -711,6 +702,19 @@
                           ]
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Center",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "4 product(s)"
+                      },
+                      "children": []
                     }
                   ]
                 }

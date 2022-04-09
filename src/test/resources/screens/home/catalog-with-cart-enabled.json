@@ -17,28 +17,10 @@
           },
           "children": [
             {
-              "type": "ListItem",
+              "type": "Divider",
               "attributes": {
-                "caption": "Ray Sponsible",
-                "subCaption": "Marketing",
-                "padding": 10.0,
-                "leading": {
-                  "type": "CircleAvatar",
-                  "attributes": {
-                    "radius": 24.0
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "RS",
-                        "bold": true,
-                        "size": 16.0
-                      },
-                      "children": []
-                    }
-                  ]
-                }
+                "height": 1.0,
+                "color": "#8c8c8c"
               },
               "children": []
             },
@@ -50,118 +32,127 @@
               },
               "children": [
                 {
-                  "type": "Divider",
+                  "type": "Container",
                   "attributes": {
-                    "height": 1.0,
-                    "color": "#8c8c8c"
-                  },
-                  "children": []
-                },
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
+                    "alignment": "CenterLeft",
+                    "padding": 10.0
                   },
                   "children": [
                     {
-                      "type": "Container",
+                      "type": "Text",
                       "attributes": {
-                        "alignment": "CenterLeft",
-                        "padding": 10.0
+                        "caption": "Browse by sections",
+                        "bold": true
                       },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Browse by sections",
-                            "bold": true
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Center",
-                      "attributes": {},
-                      "children": [
-                        {
-                          "type": "Wrap",
-                          "attributes": {
-                            "spacing": 10.0,
-                            "direction": "Horizontal"
-                          },
-                          "children": [
-                            {
-                              "type": "Container",
-                              "attributes": {},
-                              "children": [
-                                {
-                                  "type": "Chip",
-                                  "attributes": {
-                                    "elevation": 5.0,
-                                    "backgroundColor": "#1D7EDF",
-                                    "caption": "Section 2"
-                                  },
-                                  "children": []
-                                }
-                              ],
-                              "action": {
-                                "type": "Route",
-                                "url": "http://localhost:0/section?id=2"
-                              }
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {},
-                              "children": [
-                                {
-                                  "type": "Chip",
-                                  "attributes": {
-                                    "elevation": 5.0,
-                                    "backgroundColor": "#1D7EDF",
-                                    "caption": "Section 1"
-                                  },
-                                  "children": []
-                                }
-                              ],
-                              "action": {
-                                "type": "Route",
-                                "url": "http://localhost:0/section?id=1"
-                              }
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {},
-                              "children": [
-                                {
-                                  "type": "Chip",
-                                  "attributes": {
-                                    "elevation": 5.0,
-                                    "backgroundColor": "#1D7EDF",
-                                    "caption": "Section 3"
-                                  },
-                                  "children": []
-                                }
-                              ],
-                              "action": {
-                                "type": "Route",
-                                "url": "http://localhost:0/section?id=3"
-                              }
-                            }
-                          ]
-                        }
-                      ]
+                      "children": []
                     }
                   ]
                 },
                 {
-                  "type": "Divider",
+                  "type": "Center",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Wrap",
+                      "attributes": {
+                        "spacing": 10.0,
+                        "direction": "Horizontal"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "type": "Chip",
+                              "attributes": {
+                                "elevation": 5.0,
+                                "backgroundColor": "#1D7EDF",
+                                "caption": "Section 2"
+                              },
+                              "children": []
+                            }
+                          ],
+                          "action": {
+                            "type": "Route",
+                            "url": "http://localhost:0/section?id=2"
+                          }
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "type": "Chip",
+                              "attributes": {
+                                "elevation": 5.0,
+                                "backgroundColor": "#1D7EDF",
+                                "caption": "Section 1"
+                              },
+                              "children": []
+                            }
+                          ],
+                          "action": {
+                            "type": "Route",
+                            "url": "http://localhost:0/section?id=1"
+                          }
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "type": "Chip",
+                              "attributes": {
+                                "elevation": 5.0,
+                                "backgroundColor": "#1D7EDF",
+                                "caption": "Section 3"
+                              },
+                              "children": []
+                            }
+                          ],
+                          "action": {
+                            "type": "Route",
+                            "url": "http://localhost:0/section?id=3"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Column",
+              "attributes": {
+                "mainAxisAlignment": "start",
+                "crossAxisAlignment": "start"
+              },
+              "children": [
+                {
+                  "type": "Container",
                   "attributes": {
-                    "height": 1.0,
-                    "color": "#8c8c8c"
+                    "alignment": "CenterLeft",
+                    "padding": 10.0
                   },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Browse products",
+                        "bold": true
+                      },
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "type": "Column",
@@ -817,6 +808,19 @@
                           ]
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Center",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "4 product(s)"
+                      },
+                      "children": []
                     }
                   ]
                 }
