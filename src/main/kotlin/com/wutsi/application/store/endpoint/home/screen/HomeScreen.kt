@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.home.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.model.AccountModel
 import com.wutsi.application.shared.model.ProductModel
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
@@ -52,6 +53,11 @@ class HomeScreen(
     override fun getAction(product: ProductModel): Action =
         gotoUrl(
             url = urlBuilder.build("/product?id=${product.id}")
+        )
+
+    override fun getAction(model: AccountModel): Action? =
+        gotoUrl(
+            url = urlBuilder.build(shellUrl, "/profile?id=${model.id}")
         )
 
     @PostMapping

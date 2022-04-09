@@ -172,26 +172,47 @@
                               ]
                             },
                             {
-                              "type": "Row",
+                              "type": "Container",
                               "attributes": {
-                                "mainAxisAlignment": "end",
-                                "crossAxisAlignment": "end"
+                                "padding": 5.0
                               },
                               "children": [
                                 {
-                                  "type": "Container",
+                                  "type": "Row",
                                   "attributes": {
-                                    "padding": 5.0
+                                    "mainAxisAlignment": "end",
+                                    "crossAxisAlignment": "end"
                                   },
                                   "children": [
                                     {
                                       "type": "Text",
                                       "attributes": {
-                                        "caption": "Ray Sponsible",
-                                        "size": 10.0,
-                                        "alignment": "Right"
+                                        "caption": "By:",
+                                        "size": 10.0
                                       },
                                       "children": []
+                                    },
+                                    {
+                                      "type": "Container",
+                                      "attributes": {},
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Ray Sponsible",
+                                            "color": "#1D7EDF",
+                                            "size": 10.0,
+                                            "alignment": "Right",
+                                            "overflow": "Elipsis",
+                                            "decoration": "Underline"
+                                          },
+                                          "children": []
+                                        }
+                                      ],
+                                      "action": {
+                                        "type": "Route",
+                                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=11"
+                                      }
                                     }
                                   ]
                                 }
@@ -355,26 +376,47 @@
                               ]
                             },
                             {
-                              "type": "Row",
+                              "type": "Container",
                               "attributes": {
-                                "mainAxisAlignment": "end",
-                                "crossAxisAlignment": "end"
+                                "padding": 5.0
                               },
                               "children": [
                                 {
-                                  "type": "Container",
+                                  "type": "Row",
                                   "attributes": {
-                                    "padding": 5.0
+                                    "mainAxisAlignment": "end",
+                                    "crossAxisAlignment": "end"
                                   },
                                   "children": [
                                     {
                                       "type": "Text",
                                       "attributes": {
-                                        "caption": "Ray Sponsible",
-                                        "size": 10.0,
-                                        "alignment": "Right"
+                                        "caption": "By:",
+                                        "size": 10.0
                                       },
                                       "children": []
+                                    },
+                                    {
+                                      "type": "Container",
+                                      "attributes": {},
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Ray Sponsible",
+                                            "color": "#1D7EDF",
+                                            "size": 10.0,
+                                            "alignment": "Right",
+                                            "overflow": "Elipsis",
+                                            "decoration": "Underline"
+                                          },
+                                          "children": []
+                                        }
+                                      ],
+                                      "action": {
+                                        "type": "Route",
+                                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=11"
+                                      }
                                     }
                                   ]
                                 }
@@ -548,26 +590,47 @@
                               ]
                             },
                             {
-                              "type": "Row",
+                              "type": "Container",
                               "attributes": {
-                                "mainAxisAlignment": "end",
-                                "crossAxisAlignment": "end"
+                                "padding": 5.0
                               },
                               "children": [
                                 {
-                                  "type": "Container",
+                                  "type": "Row",
                                   "attributes": {
-                                    "padding": 5.0
+                                    "mainAxisAlignment": "end",
+                                    "crossAxisAlignment": "end"
                                   },
                                   "children": [
                                     {
                                       "type": "Text",
                                       "attributes": {
-                                        "caption": "Roger Milla",
-                                        "size": 10.0,
-                                        "alignment": "Right"
+                                        "caption": "By:",
+                                        "size": 10.0
                                       },
                                       "children": []
+                                    },
+                                    {
+                                      "type": "Container",
+                                      "attributes": {},
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Roger Milla",
+                                            "color": "#1D7EDF",
+                                            "size": 10.0,
+                                            "alignment": "Right",
+                                            "overflow": "Elipsis",
+                                            "decoration": "Underline"
+                                          },
+                                          "children": []
+                                        }
+                                      ],
+                                      "action": {
+                                        "type": "Route",
+                                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=12"
+                                      }
                                     }
                                   ]
                                 }
