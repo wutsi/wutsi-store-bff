@@ -43,7 +43,6 @@ import com.wutsi.flutter.sdui.enums.TextDecoration
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
-import org.slf4j.LoggerFactory
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -64,10 +63,6 @@ class ProductScreen(
     private val sharedUIMapper: SharedUIMapper,
     private val cityService: CityService
 ) : AbstractQuery() {
-    companion object {
-        private val LOGGER = LoggerFactory.getLogger(ProductScreen::class.java)
-    }
-
     @PostMapping
     fun index(@RequestParam id: Long, request: HttpServletRequest): Widget {
         val product = catalogApi.getProduct(id).product
@@ -160,7 +155,7 @@ class ProductScreen(
             )
 
         // Vendor
-        val productUrl = "${tenant.webappUrl}/product?id=$$id"
+        val productUrl = "${tenant.webappUrl}/product?id=$id"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, productUrl)
         children.add(Divider(color = Theme.COLOR_DIVIDER))
         children.add(toVendorWidget(merchant, whatsappUrl, productUrl))
@@ -473,7 +468,7 @@ class ProductScreen(
                                         padding = 10.0,
                                         caption = getText("page.product.write-to-merchant"),
                                         action = Action(
-                                            type = ActionType.Share,
+                                            type = ActionType.Navigate,
                                             url = productUrl,
                                         ),
                                     )
