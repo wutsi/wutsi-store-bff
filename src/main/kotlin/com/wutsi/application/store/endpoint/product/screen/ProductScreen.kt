@@ -469,7 +469,7 @@ class ProductScreen(
                                         caption = getText("page.product.write-to-merchant"),
                                         action = Action(
                                             type = ActionType.Navigate,
-                                            url = productUrl,
+                                            url = it,
                                         ),
                                     )
                                 }
