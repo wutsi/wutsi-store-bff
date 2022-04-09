@@ -9,11 +9,14 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.application.store.endpoint.settings.product.list.dto.FilterProductRequest
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
+import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.DropdownButton
+import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Screen
@@ -41,13 +44,11 @@ class SettingsProductListScreen(
     fun index(@RequestBody request: FilterProductRequest?): Widget {
         val tenant = tenantProvider.get()
         val accountId = securityContext.currentAccountId()
+        val status = request?.status ?: ProductStatus.PUBLISHED.name
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
                 accountId = accountId,
-                categoryIds = if (request?.categoryId == DEFAULT_CATEGORY_ID || request?.categoryId == null)
-                    emptyList()
-                else
-                    listOf(request.categoryId),
+                status = status,
                 limit = 100
             )
         ).products
@@ -71,6 +72,27 @@ class SettingsProductListScreen(
             ),
             child = Column(
                 children = listOf(
+                    Container(
+                        padding = 10.0,
+                        child = DropdownButton(
+                            name = "status",
+                            value = status,
+                            children = listOf(
+                                DropdownMenuItem(
+                                    caption = getText("product.status.PUBLISHED"),
+                                    value = ProductStatus.PUBLISHED.name
+                                ),
+                                DropdownMenuItem(
+                                    caption = getText("product.status.DRAFT"),
+                                    value = ProductStatus.DRAFT.name
+                                )
+                            ),
+                            action = gotoUrl(
+                                url = urlBuilder.build("/settings/store/products"),
+                                replacement = true
+                            )
+                        )
+                    ),
                     Container(
                         padding = 10.0,
                         child = Text(

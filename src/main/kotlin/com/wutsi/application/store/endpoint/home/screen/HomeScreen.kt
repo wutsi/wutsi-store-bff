@@ -1,12 +1,14 @@
 package com.wutsi.application.store.endpoint.home.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.model.ProductModel
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.shared.ui.CartIcon
-import com.wutsi.application.shared.ui.ProductCard
+import com.wutsi.application.shared.ui.ProductActionProvider
+import com.wutsi.application.shared.ui.ProductGridView
 import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -35,7 +37,6 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
-import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
@@ -54,10 +55,15 @@ class HomeScreen(
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
     private val togglesProvider: TogglesProvider,
-) : AbstractQuery() {
+) : ProductActionProvider, AbstractQuery() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(HomeScreen::class.java)
     }
+
+    override fun getAction(product: ProductModel): Action =
+        gotoUrl(
+            url = urlBuilder.build("/product?id=${product.id}")
+        )
 
     @PostMapping
     fun index(@RequestParam(required = false) id: Long? = null): Widget {
@@ -69,11 +75,7 @@ class HomeScreen(
         val tenant = tenantProvider.get()
         children.add(toContentWidget(merchant, tenant))
 
-        val cart = if (togglesProvider.isCartEnabled())
-            getCart(merchant)
-        else
-            null
-
+        val cart = getCart(merchant)
         val profileUrl = "${tenant.webappUrl}/profile?id=$${merchant.id}"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, profileUrl)
         return Screen(
@@ -185,40 +187,11 @@ class HomeScreen(
             )
         ).products
 
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = listOf(
-                Container(
-                    padding = 10.0,
-                    child = Text(bold = true, caption = getText("page.catalog.browse-products"))
-                ),
-                Wrap(
-                    children = products.map {
-                        Container(
-                            width = 180.0,
-                            child = ProductCard(
-                                model = sharedUIMapper.toProductModel(it, tenant),
-                                action = gotoUrl(
-                                    url = urlBuilder.build("/product?id=${it.id}")
-                                )
-                            )
-                        )
-                    },
-                    direction = Axis.Horizontal,
-                    spacing = 0.0
-                ),
-                Container(
-                    padding = 10.0,
-                    alignment = Alignment.Center,
-                    child = Center(
-                        child = Text(
-                            alignment = TextAlignment.Center,
-                            caption = getText("page.catalog.product-count", arrayOf(products.size.toString()))
-                        )
-                    )
-                ),
-            )
+        return ProductGridView(
+            spacing = 5.0,
+            productsPerRow = 2,
+            models = products.map { sharedUIMapper.toProductModel(it, tenant) },
+            actionProvider = this,
         )
     }
 
@@ -262,10 +235,13 @@ class HomeScreen(
     }
 
     private fun getCart(merchant: Account): Cart? =
-        try {
-            cartApi.getCart(merchant.id).cart
-        } catch (ex: Exception) {
-            LOGGER.warn("Unable to resolve the Cart for Merchant #${merchant.id}", ex)
+        if (togglesProvider.isCartEnabled())
+            try {
+                cartApi.getCart(merchant.id).cart
+            } catch (ex: Exception) {
+                LOGGER.warn("Unable to resolve the Cart for Merchant #${merchant.id}", ex)
+                null
+            }
+        else
             null
-        }
 }

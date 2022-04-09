@@ -22,6 +22,7 @@ import com.wutsi.ecommerce.shipping.dto.ShippingSummary
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
+import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.Category
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.account.dto.Phone
@@ -231,7 +232,11 @@ abstract class AbstractEndpointTest {
     private fun toJsonString(data: Map<String, Any>): String =
         ObjectMapper().writeValueAsString(data)
 
-    protected fun createProduct(withThumbnail: Boolean = true, type: ProductType = ProductType.PHYSICAL) = Product(
+    protected fun createProduct(
+        withThumbnail: Boolean = true,
+        type: ProductType = ProductType.PHYSICAL,
+        accountId: Long = ACCOUNT_ID
+    ) = Product(
         id = 1,
         title = "Sample product",
         summary = "Summary of product",
@@ -271,10 +276,11 @@ abstract class AbstractEndpointTest {
         sections = listOf(
             createSectionSummary(1, "Yo", 1),
             createSectionSummary(2, "Man", 2)
-        )
+        ),
+        accountId = accountId
     )
 
-    protected fun createProductSummary(id: Long) = ProductSummary(
+    protected fun createProductSummary(id: Long, accountId: Long = ACCOUNT_ID) = ProductSummary(
         id = id,
         title = "Sample product",
         summary = "Summary of product",
@@ -289,6 +295,7 @@ abstract class AbstractEndpointTest {
         type = ProductType.PHYSICAL.name,
         quantity = 30,
         maxOrder = 5,
+        accountId = accountId
     )
 
     protected fun createAccount(id: Long = ACCOUNT_ID) = Account(
@@ -314,6 +321,14 @@ abstract class AbstractEndpointTest {
         cityId = 2222L,
         hasStore = true,
         street = "3030 Linton",
+    )
+
+    protected fun createAccountSummary(id: Long = ACCOUNT_ID, displayName: String = "Ray Sponsible") = AccountSummary(
+        id = id,
+        displayName = displayName,
+        country = "CM",
+        language = "en",
+        status = "ACTIVE",
     )
 
     fun createShipping(type: ShippingType, enabled: Boolean = true) = Shipping(

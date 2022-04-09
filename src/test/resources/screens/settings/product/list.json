@@ -16,6 +16,46 @@
           },
           "children": [
             {
+              "type": "DropdownButton",
+              "attributes": {
+                "name": "status",
+                "value": "PUBLISHED"
+              },
+              "children": [
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Published",
+                    "enabled": true,
+                    "value": "PUBLISHED"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Draft",
+                    "enabled": true,
+                    "value": "DRAFT"
+                  },
+                  "children": []
+                }
+              ],
+              "action": {
+                "type": "Route",
+                "url": "http://localhost:0/settings/store/products",
+                "replacement": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
               "type": "Text",
               "attributes": {
                 "caption": "3 product(s)",
