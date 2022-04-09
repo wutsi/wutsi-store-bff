@@ -20,7 +20,7 @@
   <properties>
     <jacoco.threshold.line>0.92</jacoco.threshold.line>
     <jacoco.threshold.class>0.92</jacoco.threshold.class>
-    <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <jdk.version>11</jdk.version>
 
     <javax-validation.version>2.0.1.Final</javax-validation.version>
