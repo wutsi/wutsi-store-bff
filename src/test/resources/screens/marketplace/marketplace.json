@@ -10,54 +10,92 @@
       "attributes": {},
       "children": [
         {
-          "type": "Flexible",
+          "type": "Column",
           "attributes": {
-            "flex": 1,
-            "fit": "Tight"
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
           },
           "children": [
             {
-              "type": "ListView",
+              "type": "Center",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Browse products by category"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
               "attributes": {
-                "separator": true,
-                "separatorColor": "#8c8c8c"
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Flexible",
+              "attributes": {
+                "flex": 1,
+                "fit": "Tight"
               },
               "children": [
                 {
-                  "type": "ListItem",
+                  "type": "ListView",
                   "attributes": {
-                    "caption": "Cat 1",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e15f"
-                      },
-                      "children": []
-                    }
+                    "separator": true,
+                    "separatorColor": "#8c8c8c"
                   },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/marketplace/category?id=1"
-                  }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
-                    "caption": "Cat 2",
-                    "trailing": {
-                      "type": "Icon",
+                  "children": [
+                    {
+                      "type": "ListItem",
                       "attributes": {
-                        "code": "e15f"
+                        "caption": "Cat 1",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e15f"
+                          },
+                          "children": []
+                        }
                       },
-                      "children": []
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/marketplace/category?id=1"
+                      }
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Cat 2",
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e15f"
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "http://localhost:0/marketplace/category?id=2"
+                      }
                     }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/marketplace/category?id=2"
-                  }
+                  ]
                 }
               ]
             }
