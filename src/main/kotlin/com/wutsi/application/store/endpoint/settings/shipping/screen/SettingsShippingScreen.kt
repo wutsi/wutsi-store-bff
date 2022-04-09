@@ -3,7 +3,6 @@ package com.wutsi.application.store.endpoint.settings.shipping.screen
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
@@ -31,7 +30,6 @@ import java.util.Locale
 @RequestMapping("/settings/store/shipping")
 class SettingsShippingScreen(
     private val shippingApi: WutsiShippingApi,
-    private val togglesProvider: TogglesProvider,
     private val tenantProvider: TenantProvider,
     private val cityService: CityService
 ) : AbstractQuery() {

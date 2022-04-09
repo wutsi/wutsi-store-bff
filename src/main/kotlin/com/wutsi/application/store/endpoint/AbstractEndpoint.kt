@@ -6,13 +6,17 @@ import com.wutsi.analytics.tracking.dto.Track
 import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SecurityContext
+import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.shared.service.URLBuilder
+import com.wutsi.ecommerce.cart.WutsiCartApi
+import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.BottomNavigationBar
 import com.wutsi.flutter.sdui.BottomNavigationBarItem
 import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.DialogType
+import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.core.tracing.TracingContext
 import com.wutsi.platform.tenant.dto.Tenant
 import org.slf4j.LoggerFactory
@@ -39,6 +43,12 @@ abstract class AbstractEndpoint {
 
     @Autowired
     private lateinit var tracingContext: TracingContext
+
+    @Autowired
+    protected lateinit var togglesProvider: TogglesProvider
+
+    @Autowired
+    protected lateinit var cartApi: WutsiCartApi
 
     @Value("\${wutsi.application.shell-url}")
     protected lateinit var shellUrl: String
@@ -172,4 +182,14 @@ abstract class AbstractEndpoint {
             getText("label.free")
         else
             DecimalFormat(tenant.monetaryFormat).format(rate)
+
+    protected fun getCart(merchant: Account): Cart? =
+        if (merchant.business && togglesProvider.isCartEnabled() && merchant.hasStore)
+            try {
+                cartApi.getCart(merchant.id).cart
+            } catch (ex: Exception) {
+                null
+            }
+        else
+            null
 }

@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.checkout.command
 
 import com.wutsi.application.store.endpoint.AbstractCommand
-import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.flutter.sdui.Action
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController
 class PayOrderCommand(
     private val orderApi: WutsiOrderApi,
     private val paymentApi: WutsiPaymentApi,
-    private val cartApi: WutsiCartApi,
     private val logger: KVLogger,
 ) : AbstractCommand() {
     companion object {

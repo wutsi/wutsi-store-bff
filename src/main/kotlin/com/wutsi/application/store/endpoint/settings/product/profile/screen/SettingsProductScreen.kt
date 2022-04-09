@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -49,7 +48,6 @@ import java.text.DecimalFormat
 class SettingsProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
-    private val togglesProvider: TogglesProvider,
 
     @Value("\${wutsi.store.pictures.max-width}") private val pictureMaxWidth: Int,
     @Value("\${wutsi.store.pictures.max-width}") private val pictureMaxHeight: Int,

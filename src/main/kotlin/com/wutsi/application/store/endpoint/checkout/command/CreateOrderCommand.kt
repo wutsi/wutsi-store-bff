@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.checkout.command
 
 import com.wutsi.application.store.endpoint.AbstractCommand
-import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.CreateOrderItem
 import com.wutsi.ecommerce.order.dto.CreateOrderRequest
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/commands/create-order")
 class CreateOrderCommand(
-    private val cartApi: WutsiCartApi,
     private val orderApi: WutsiOrderApi,
     private val logger: KVLogger,
 ) : AbstractCommand() {

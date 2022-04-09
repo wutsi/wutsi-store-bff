@@ -7,13 +7,10 @@ import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.StringUtil
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.ecommerce.cart.WutsiCartApi
-import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
@@ -62,11 +59,9 @@ import javax.servlet.http.HttpServletRequest
 class ProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
-    private val cartApi: WutsiCartApi,
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
-    private val togglesProvider: TogglesProvider,
     private val cityService: CityService
 ) : AbstractQuery() {
     companion object {
@@ -79,10 +74,7 @@ class ProductScreen(
         val account = securityContext.currentAccount()
         val merchant = accountApi.getAccount(product.accountId).account
         val tenant = tenantProvider.get()
-        val cart = if (togglesProvider.isCartEnabled())
-            getCart(merchant)
-        else
-            null
+        val cart = getCart(merchant)
 
         val children = mutableListOf<WidgetAware>(
             Container(
@@ -501,12 +493,4 @@ class ProductScreen(
             value
         ),
     )
-
-    private fun getCart(merchant: Account): Cart? =
-        try {
-            cartApi.getCart(merchant.id).cart
-        } catch (ex: Exception) {
-            LOGGER.warn("Unable to resolve the Cart for Merchant #${merchant.id}", ex)
-            null
-        }
 }

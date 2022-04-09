@@ -5,15 +5,12 @@ import com.wutsi.application.shared.model.ProductModel
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
 import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.ecommerce.cart.WutsiCartApi
-import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.catalog.entity.ProductStatus
@@ -51,10 +48,8 @@ import org.springframework.web.bind.annotation.RestController
 class HomeScreen(
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
-    private val cartApi: WutsiCartApi,
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
-    private val togglesProvider: TogglesProvider,
 ) : ProductActionProvider, AbstractQuery() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(HomeScreen::class.java)
@@ -233,15 +228,4 @@ class HomeScreen(
             )
         )
     }
-
-    private fun getCart(merchant: Account): Cart? =
-        if (togglesProvider.isCartEnabled())
-            try {
-                cartApi.getCart(merchant.id).cart
-            } catch (ex: Exception) {
-                LOGGER.warn("Unable to resolve the Cart for Merchant #${merchant.id}", ex)
-                null
-            }
-        else
-            null
 }

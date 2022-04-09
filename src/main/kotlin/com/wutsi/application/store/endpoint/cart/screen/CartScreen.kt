@@ -9,7 +9,6 @@ import com.wutsi.application.shared.ui.PriceSummaryCard
 import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
@@ -39,7 +38,6 @@ import org.springframework.web.bind.annotation.RestController
 class CartScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
-    private val cartApi: WutsiCartApi,
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
 ) : AbstractQuery() {
