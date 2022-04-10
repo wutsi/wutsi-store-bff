@@ -34,6 +34,7 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
@@ -213,6 +214,7 @@ class HomeScreen(
         return Column(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
+            mainAxisSize = MainAxisSize.min,
             children = listOf(
                 Container(
                     alignment = Alignment.CenterLeft,
@@ -237,7 +239,7 @@ class HomeScreen(
                         }
                     )
                 ),
-            )
+            ),
         )
     }
 }
