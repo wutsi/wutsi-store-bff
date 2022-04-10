@@ -143,12 +143,11 @@ class HomeScreen(
         val children = mutableListOf<WidgetAware>()
         val sections = toSectionListWidget()
         if (sections != null) {
-            children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
             children.add(sections)
+            children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
         }
 
         val products = toProductListWidget(merchant, tenant)
-        children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
         children.add(products)
 
         return SingleChildScrollView(
@@ -172,25 +171,34 @@ class HomeScreen(
             )
         ).products
 
+        val children = mutableListOf<WidgetAware>()
+        if (products.isNotEmpty()) {
+            children.addAll(
+                listOf(
+                    Container(
+                        alignment = Alignment.CenterLeft,
+                        padding = 10.0,
+                        child = Text(bold = true, caption = getText("page.catalog.browse-products"))
+                    ),
+                    ProductGridView(
+                        spacing = 5.0,
+                        productsPerRow = 2,
+                        models = products.map { sharedUIMapper.toProductModel(it, tenant) },
+                        actionProvider = this,
+                    )
+                )
+            )
+        }
+        children.add(
+            Center(
+                child = Text(caption = getText("page.catalog.product-count", arrayOf(products.size)))
+            )
+        )
+
         return Column(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
-            children = listOf(
-                Container(
-                    alignment = Alignment.CenterLeft,
-                    padding = 10.0,
-                    child = Text(bold = true, caption = getText("page.catalog.browse-products"))
-                ),
-                ProductGridView(
-                    spacing = 5.0,
-                    productsPerRow = 2,
-                    models = products.map { sharedUIMapper.toProductModel(it, tenant) },
-                    actionProvider = this,
-                ),
-                Center(
-                    child = Text(caption = getText("page.catalog.product-count", arrayOf(products.size)))
-                )
-            )
+            children = children
         )
     }
 
