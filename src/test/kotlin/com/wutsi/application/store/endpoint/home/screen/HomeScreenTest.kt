@@ -51,6 +51,15 @@ internal class HomeScreenTest : AbstractEndpointTest() {
     }
 
     @Test
+    fun empty() {
+        doReturn(SearchProductResponse()).whenever(catalogApi).searchProducts(any())
+        doReturn(ListSectionResponse()).whenever(catalogApi).listSections(any())
+
+        val url = "http://localhost:$port"
+        assertEndpointEquals("/screens/home/catalog-empty.json", url)
+    }
+
+    @Test
     fun myCatalog() {
         val url = "http://localhost:$port"
         assertEndpointEquals("/screens/home/catalog-me.json", url)

@@ -171,6 +171,10 @@ class HomeScreen(
                 status = ProductStatus.PUBLISHED.name
             )
         ).products
+        if (products.isEmpty())
+            return Center(
+                child = Text(caption = getText("page.catalog.empty", arrayOf(products.size)))
+            )
 
         val children = mutableListOf<WidgetAware>()
         if (products.isNotEmpty()) {

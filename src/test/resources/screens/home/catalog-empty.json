@@ -1,0 +1,165 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.catalog",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Column",
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
+          },
+          "children": [
+            {
+              "type": "Center",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "The store is empty!"
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Store",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000",
+      "actions": [
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 4.0
+          },
+          "children": [
+            {
+              "type": "CircleAvatar",
+              "attributes": {
+                "radius": 20.0,
+                "backgroundColor": "#e4edf7"
+              },
+              "children": [
+                {
+                  "type": "IconButton",
+                  "attributes": {
+                    "icon": "ef42",
+                    "size": 20.0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Navigate",
+                    "url": "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fprofile%3Fid%3D%2477777"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 4.0
+          },
+          "children": [
+            {
+              "type": "CircleAvatar",
+              "attributes": {
+                "radius": 20.0,
+                "backgroundColor": "#e4edf7"
+              },
+              "children": [
+                {
+                  "type": "IconButton",
+                  "attributes": {
+                    "icon": "ea47",
+                    "size": 20.0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Share",
+                    "url": "https://www.wutsi.me/profile?id=$77777"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  "bottomNavigationBar": {
+    "type": "BottomNavigationBar",
+    "attributes": {
+      "background": "#1D7EDF",
+      "selectedItemColor": "#FFFFFF",
+      "unselectedItemColor": "#FFFFFF"
+    },
+    "children": [
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f107",
+          "caption": "Home"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "route:/~"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f27b",
+          "caption": "Me"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "e314",
+          "caption": "Transactions"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/cash/history"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f36e",
+          "caption": "Settings"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
+        }
+      }
+    ]
+  }
+}
