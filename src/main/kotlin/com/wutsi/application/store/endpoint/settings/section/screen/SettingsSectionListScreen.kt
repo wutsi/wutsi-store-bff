@@ -31,7 +31,7 @@ class SettingsSectionListScreen(
 ) : AbstractQuery() {
     @PostMapping
     fun index(@RequestBody request: FilterProductRequest?): Widget {
-        val sections = catalogApi.listSections().sections
+        val sections = catalogApi.listSections(securityContext.currentAccountId()).sections
         return Screen(
             id = Page.SETTINGS_STORE_SECTION_LIST,
             appBar = AppBar(

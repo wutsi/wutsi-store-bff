@@ -29,7 +29,7 @@ class SettingsProductSectionsScreen(
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
         val product = catalogApi.getProduct(id).product
-        val sections = catalogApi.listSections().sections
+        val sections = catalogApi.listSections(securityContext.currentAccountId()).sections
         return Screen(
             id = Page.SETTINGS_STORE_PRODUCT_SECTION,
             backgroundColor = Theme.COLOR_WHITE,

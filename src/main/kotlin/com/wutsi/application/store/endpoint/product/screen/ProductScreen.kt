@@ -158,7 +158,7 @@ class ProductScreen(
         val productUrl = "${tenant.webappUrl}/product?id=$id"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, productUrl)
         children.add(Divider(color = Theme.COLOR_DIVIDER))
-        children.add(toVendorWidget(merchant, whatsappUrl, productUrl))
+        children.add(toVendorWidget(merchant, whatsappUrl))
 
         try {
             // Screen
@@ -440,7 +440,7 @@ class ProductScreen(
         )
     }
 
-    private fun toVendorWidget(merchant: Account, whatsappUrl: String?, productUrl: String): WidgetAware =
+    private fun toVendorWidget(merchant: Account, whatsappUrl: String?): WidgetAware =
         Container(
             child = Row(
                 mainAxisAlignment = MainAxisAlignment.start,

@@ -47,7 +47,7 @@ internal class HomeScreenTest : AbstractEndpointTest() {
             createSectionSummary(2, "Section 2", productCount = 12),
             createSectionSummary(3, "Section 3", productCount = 3),
         )
-        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections()
+        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections(any())
     }
 
     @Test
@@ -58,7 +58,7 @@ internal class HomeScreenTest : AbstractEndpointTest() {
 
     @Test
     fun otherCatalog() {
-        doReturn(ListSectionResponse()).whenever(catalogApi).listSections()
+        doReturn(ListSectionResponse()).whenever(catalogApi).listSections(any())
 
         val accountId = 9L
         val url = "http://localhost:$port?id=$accountId"

@@ -32,9 +32,9 @@ class MarketplaceCategoryScreen(
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : ProductActionProvider, AbstractQuery() {
-    override fun getAction(product: ProductModel): Action =
+    override fun getAction(model: ProductModel): Action =
         gotoUrl(
-            url = urlBuilder.build("/product?id=${product.id}")
+            url = urlBuilder.build("/product?id=${model.id}")
         )
 
     override fun getAction(model: AccountModel): Action? =

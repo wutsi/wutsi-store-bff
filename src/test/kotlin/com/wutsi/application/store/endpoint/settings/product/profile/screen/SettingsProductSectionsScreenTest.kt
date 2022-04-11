@@ -27,7 +27,7 @@ internal class SettingsProductSectionsScreenTest : AbstractEndpointTest() {
                 createSectionSummary(112, "Section 112", 112),
             )
         )
-        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections()
+        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections(any())
 
         val url = "http://localhost:$port/settings/store/product/sections?id=777"
         assertEndpointEquals("/screens/settings/product/sections.json", url)
