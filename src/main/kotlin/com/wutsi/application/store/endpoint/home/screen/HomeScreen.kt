@@ -142,7 +142,7 @@ class HomeScreen(
         tenant: Tenant
     ): WidgetAware {
         val children = mutableListOf<WidgetAware>()
-        val sections = toSectionListWidget()
+        val sections = toSectionListWidget(merchant)
         if (sections != null) {
             children.add(sections)
             children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
@@ -203,8 +203,8 @@ class HomeScreen(
         )
     }
 
-    private fun toSectionListWidget(): WidgetAware? {
-        val sections = catalogApi.listSections(securityContext.currentAccountId()).sections
+    private fun toSectionListWidget(merchant: Account): WidgetAware? {
+        val sections = catalogApi.listSections(merchant.id).sections
             .sortedByDescending { it.publishedProductCount }
             .filter { it.publishedProductCount > 0 }
             .take(5)
