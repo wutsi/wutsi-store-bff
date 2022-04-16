@@ -499,7 +499,7 @@
                               "attributes": {
                                 "caption": "Write to Merchant",
                                 "padding": 10.0,
-                                "type": "Outlined",
+                                "type": "Elevated",
                                 "stretched": false
                               },
                               "children": [],

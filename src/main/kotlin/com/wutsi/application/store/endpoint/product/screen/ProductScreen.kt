@@ -32,7 +32,6 @@ import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
-import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisSize
@@ -419,7 +418,6 @@ class ProductScreen(
                                 merchant.category?.let { Text(it.title, color = Theme.COLOR_GRAY) },
                                 whatsappUrl?.let {
                                     Button(
-                                        type = ButtonType.Outlined,
                                         stretched = false,
                                         padding = 10.0,
                                         caption = getText("page.product.write-to-merchant"),
