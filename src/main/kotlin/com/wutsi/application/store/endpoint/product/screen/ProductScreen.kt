@@ -8,7 +8,6 @@ import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.StringUtil
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.Avatar
-import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -21,12 +20,10 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.AspectRatio
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.CarouselSlider
-import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Icon
-import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.Row
@@ -155,10 +152,10 @@ class ProductScreen(
             )
 
         // Vendor
-        val productUrl = "${tenant.webappUrl}/product?id=$id"
-        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, productUrl)
+        val shareUrl = "${tenant.webappUrl}/product?id=$id"
+        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
         children.add(Divider(color = Theme.COLOR_DIVIDER))
-        children.add(toVendorWidget(merchant, whatsappUrl))
+        children.add(toVendorWidget(product, merchant, whatsappUrl))
 
         try {
             // Screen
@@ -168,53 +165,12 @@ class ProductScreen(
                     elevation = 0.0,
                     backgroundColor = Theme.COLOR_WHITE,
                     foregroundColor = Theme.COLOR_BLACK,
-                    actions = listOfNotNull(
-                        whatsappUrl?.let {
-                            Container(
-                                padding = 4.0,
-                                child = CircleAvatar(
-                                    radius = 20.0,
-                                    backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                                    child = IconButton(
-                                        icon = Theme.ICON_CHAT,
-                                        size = 20.0,
-                                        action = Action(
-                                            type = ActionType.Navigate,
-                                            url = it,
-                                        )
-                                    )
-                                ),
-                            )
-                        },
-                        Container(
-                            padding = 4.0,
-                            child = CircleAvatar(
-                                radius = 20.0,
-                                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                                child = IconButton(
-                                    icon = Theme.ICON_SHARE,
-                                    size = 20.0,
-                                    action = Action(
-                                        type = ActionType.Share,
-                                        url = productUrl,
-                                    )
-                                ),
-                            )
-                        ),
-                        cart?.let {
-                            Container(
-                                padding = 4.0,
-                                child = CircleAvatar(
-                                    radius = 20.0,
-                                    backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                                    child = CartIcon(
-                                        productCount = it.products.size,
-                                        size = 20.0,
-                                        action = gotoUrl(urlBuilder.build("cart?merchant-id=${merchant.id}"))
-                                    ),
-                                )
-                            )
-                        }
+                    actions = titleBarActions(
+                        productId = id,
+                        merchantId = merchant.id,
+                        shareUrl = shareUrl,
+                        whatsappUrl = whatsappUrl,
+                        cart = cart
                     )
                 ),
                 child = Container(
@@ -440,7 +396,7 @@ class ProductScreen(
         )
     }
 
-    private fun toVendorWidget(merchant: Account, whatsappUrl: String?): WidgetAware =
+    private fun toVendorWidget(product: Product, merchant: Account, whatsappUrl: String?): WidgetAware =
         Container(
             child = Row(
                 mainAxisAlignment = MainAxisAlignment.start,
@@ -470,6 +426,8 @@ class ProductScreen(
                                         action = Action(
                                             type = ActionType.Navigate,
                                             url = it,
+                                            trackEvent = EventType.CHAT.name,
+                                            trackProductId = product.id.toString()
                                         ),
                                     )
                                 }

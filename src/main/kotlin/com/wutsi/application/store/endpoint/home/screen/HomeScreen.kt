@@ -6,7 +6,6 @@ import com.wutsi.application.shared.model.ProductModel
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
-import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
 import com.wutsi.application.store.endpoint.AbstractQuery
@@ -18,18 +17,15 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Chip
-import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
-import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.SingleChildScrollView
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.Wrap
-import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
@@ -66,8 +62,8 @@ class HomeScreen(
         val tenant = tenantProvider.get()
         val merchant = id?.let { accountApi.getAccount(id).account } ?: securityContext.currentAccount()
         val cart = getCart(merchant)
-        val profileUrl = "${tenant.webappUrl}/profile?id=$${merchant.id}"
-        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, profileUrl)
+        val shareUrl = "${tenant.webappUrl}/profile?id=$${merchant.id}"
+        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
         return Screen(
             id = Page.CATALOG,
             appBar = AppBar(
@@ -75,54 +71,13 @@ class HomeScreen(
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.catalog.app-bar.title"),
-                actions = listOfNotNull(
-                    whatsappUrl?.let {
-                        Container(
-                            padding = 4.0,
-                            child = CircleAvatar(
-                                radius = 20.0,
-                                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                                child = IconButton(
-                                    icon = Theme.ICON_CHAT,
-                                    size = 20.0,
-                                    action = Action(
-                                        type = ActionType.Navigate,
-                                        url = it,
-                                    )
-                                )
-                            ),
-                        )
-                    },
-                    Container(
-                        padding = 4.0,
-                        child = CircleAvatar(
-                            radius = 20.0,
-                            backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                            child = IconButton(
-                                icon = Theme.ICON_SHARE,
-                                size = 20.0,
-                                action = Action(
-                                    type = ActionType.Share,
-                                    url = profileUrl,
-                                )
-                            ),
-                        )
-                    ),
-                    cart?.let {
-                        Container(
-                            padding = 4.0,
-                            child = CircleAvatar(
-                                radius = 20.0,
-                                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                                child = CartIcon(
-                                    productCount = it.products.size,
-                                    size = 20.0,
-                                    action = gotoUrl(urlBuilder.build("cart?merchant-id=${merchant.id}"))
-                                ),
-                            )
-                        )
-                    }
-                ),
+                actions = titleBarActions(
+                    productId = null,
+                    merchantId = merchant.id,
+                    shareUrl = shareUrl,
+                    whatsappUrl = whatsappUrl,
+                    cart = cart
+                )
             ),
             child = toContentWidget(merchant, tenant),
             bottomNavigationBar = bottomNavigationBar()

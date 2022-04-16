@@ -426,7 +426,9 @@
                               "children": [],
                               "action": {
                                 "type": "Navigate",
-                                "url": "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fproduct%3Fid%3D11"
+                                "url": "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fproduct%3Fid%3D11",
+                                "trackEvent": "CHAT",
+                                "trackProductId": "1"
                               }
                             }
                           ]
@@ -471,7 +473,9 @@
                   "children": [],
                   "action": {
                     "type": "Navigate",
-                    "url": "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fproduct%3Fid%3D11"
+                    "url": "https://wa.me/12376666666677777?text=https%3A%2F%2Fwww.wutsi.me%2Fproduct%3Fid%3D11",
+                    "trackEvent": "CHAT",
+                    "trackProductId": "11"
                   }
                 }
               ]
@@ -500,7 +504,9 @@
                   "children": [],
                   "action": {
                     "type": "Share",
-                    "url": "https://www.wutsi.me/product?id=11"
+                    "url": "https://www.wutsi.me/product?id=11",
+                    "trackEvent": "SHARE",
+                    "trackProductId": "11"
                   }
                 }
               ]
