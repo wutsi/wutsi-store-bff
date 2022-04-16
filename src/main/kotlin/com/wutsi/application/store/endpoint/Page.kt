@@ -13,7 +13,7 @@ object Page {
     const val CHECKOUT_ADDRESS_COUNTRY = "page.checkout.address.country"
     const val CHECKOUT_ADDRESS_EDITOR = "page.checkout.address.editor"
     const val MARKETPLACE = "page.marketplace"
-    const val MARKETPLACE_CATEGORY = "page.marketplace"
+    const val MARKETPLACE_CATEGORY = "page.marketplace.category"
     const val ORDER = "page.order"
     const val PRODUCT = "page.product"
     const val PURCHASES = "page.purchases"

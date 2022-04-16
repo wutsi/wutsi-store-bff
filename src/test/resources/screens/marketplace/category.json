@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.marketplace",
+    "id": "page.marketplace.category",
     "safe": false
   },
   "children": [
