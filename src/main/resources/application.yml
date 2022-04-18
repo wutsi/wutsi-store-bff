@@ -45,6 +45,8 @@ wutsi:
     login-url: ${wutsi.application.gateway-url}/login
     shell-url: ${wutsi.application.gateway-url}/shell
   platform:
+    image:
+      type: none
     security:
       type: jwt
     stream:
