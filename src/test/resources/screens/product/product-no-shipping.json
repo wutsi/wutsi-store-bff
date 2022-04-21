@@ -260,37 +260,12 @@
               "children": [
                 {
                   "type": "Column",
-                  "attributes": {},
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min",
+                    "crossAxisAlignment": "start"
+                  },
                   "children": [
-                    {
-                      "type": "Row",
-                      "attributes": {},
-                      "children": [
-                        {
-                          "type": "Icon",
-                          "attributes": {
-                            "code": "e156",
-                            "size": 16.0,
-                            "color": "#4CAF50"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 5.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "In Stock"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
                     {
                       "type": "Container",
                       "attributes": {
@@ -327,6 +302,35 @@
                             "caption": "No shipping to Cameroon",
                             "color": "#8B0000",
                             "bold": true
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Row",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e156",
+                            "size": 16.0,
+                            "color": "#4CAF50"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 5.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "In Stock"
                           },
                           "children": []
                         }

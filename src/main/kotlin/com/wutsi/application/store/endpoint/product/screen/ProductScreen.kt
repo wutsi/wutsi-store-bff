@@ -201,7 +201,32 @@ class ProductScreen(
     }
 
     private fun toStockWidget(account: Account, merchant: Account, product: Product, tenant: Tenant): WidgetAware {
-        val children = mutableListOf<WidgetAware>(
+        val children = mutableListOf<WidgetAware>()
+
+        if (product.quantity > 0) {
+            if (togglesProvider.isCartEnabled()) {
+                children.addAll(
+                    listOf(
+                        Button(
+                            padding = 10.0,
+                            caption = getText("page.product.button.add-to-cart"),
+                            action = executeCommand(
+                                url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+                            )
+                        )
+                    )
+                )
+            }
+
+            children.addAll(
+                listOf(
+                    Container(padding = 10.0),
+                    toShippingWidget(account, merchant, product, tenant)
+                )
+            )
+        }
+
+        children.add(
             // Stock
             Row(
                 children = listOf(
@@ -220,32 +245,11 @@ class ProductScreen(
             )
         )
 
-        if (product.quantity > 0) {
-            children.addAll(
-                listOf(
-                    Container(padding = 10.0),
-                    toShippingWidget(account, merchant, product, tenant)
-                )
-            )
-
-            if (togglesProvider.isCartEnabled()) {
-                children.addAll(
-                    listOf(
-                        Container(padding = 10.0),
-                        Button(
-                            padding = 10.0,
-                            caption = getText("page.product.button.add-to-cart"),
-                            action = executeCommand(
-                                url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
-                            )
-                        )
-                    )
-                )
-            }
-        }
-
         return Column(
-            children = children
+            mainAxisSize = MainAxisSize.min,
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = children,
         )
     }
 
@@ -418,13 +422,4 @@ class ProductScreen(
                 ),
             )
         )
-
-    private fun toRow(name: WidgetAware, value: WidgetAware) = Row(
-        mainAxisAlignment = MainAxisAlignment.start,
-        crossAxisAlignment = CrossAxisAlignment.center,
-        children = listOf(
-            Container(child = name, padding = 2.0, width = 120.0),
-            value
-        ),
-    )
 }
