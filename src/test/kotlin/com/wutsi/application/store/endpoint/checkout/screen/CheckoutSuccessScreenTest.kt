@@ -59,38 +59,18 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
         assertEndpointEquals("/screens/checkout/success.json", url)
 
         val request = argumentCaptor<PushTrackRequest>()
-        verify(trackingApi, times(3)).push(request.capture())
+        verify(trackingApi, times(2)).push(request.capture())
 
-        val track0 = request.firstValue.track
-        assertEquals(ACCOUNT_ID.toString(), track0.accountId)
-        assertEquals(order.merchantId.toString(), track0.merchantId)
-        assertEquals(TENANT_ID, track0.tenantId)
-        assertEquals(DEVICE_ID, track0.deviceId)
-        assertNotNull(track0.correlationId)
-        assertNull(track0.productId)
-        assertEquals(Page.CHECKOUT_SUCCESS, track0.page)
-        assertEquals(EventType.ORDER.name, track0.event)
-        assertEquals("https://www.google.com", track0.referer)
-        assertEquals("Android", track0.ua)
-        assertEquals("10.0.2.2", track0.ip)
-        assertFalse(track0.bot)
-        assertNull(track0.url)
-        assertNull(track0.impressions)
-        assertNull(track0.lat)
-        assertNull(track0.long)
-        assertNull(track0.url)
-        assertEquals(order.totalPrice, track0.value)
-
-        val track1 = request.secondValue.track
+        val track1 = request.firstValue.track
         val item1 = order.items[0]
         assertEquals(ACCOUNT_ID.toString(), track1.accountId)
         assertEquals(order.merchantId.toString(), track1.merchantId)
         assertEquals(TENANT_ID, track1.tenantId)
         assertEquals(DEVICE_ID, track1.deviceId)
-        assertEquals(track0.correlationId, track1.correlationId)
+        assertNotNull(track1.correlationId)
         assertEquals(item1.productId.toString(), track1.productId)
         assertEquals(Page.CHECKOUT_SUCCESS, track1.page)
-        assertEquals(EventType.SALE.name, track1.event)
+        assertEquals(EventType.ORDER.name, track1.event)
         assertEquals("https://www.google.com", track1.referer)
         assertEquals("Android", track1.ua)
         assertEquals("10.0.2.2", track1.ip)
@@ -102,16 +82,16 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
         assertNull(track1.url)
         assertEquals(item1.unitPrice * item1.quantity, track1.value)
 
-        val track2 = request.thirdValue.track
+        val track2 = request.secondValue.track
         val item2 = order.items[1]
         assertEquals(ACCOUNT_ID.toString(), track2.accountId)
         assertEquals(order.merchantId.toString(), track2.merchantId)
         assertEquals(TENANT_ID, track2.tenantId)
         assertEquals(DEVICE_ID, track2.deviceId)
-        assertEquals(track0.correlationId, track2.correlationId)
+        assertEquals(track1.correlationId, track2.correlationId)
         assertEquals(item2.productId.toString(), track2.productId)
         assertEquals(Page.CHECKOUT_SUCCESS, track2.page)
-        assertEquals(EventType.SALE.name, track2.event)
+        assertEquals(EventType.ORDER.name, track2.event)
         assertEquals("https://www.google.com", track2.referer)
         assertEquals("Android", track2.ua)
         assertEquals("10.0.2.2", track2.ip)

@@ -105,21 +105,11 @@ class CheckoutSuccessScreen(
 
     private fun track(order: Order, request: HttpServletRequest) {
         val correlationId = UUID.randomUUID().toString()
-        track(
-            correlationId = correlationId,
-            page = Page.CHECKOUT_SUCCESS,
-            event = EventType.ORDER,
-            productId = null,
-            merchantId = order.merchantId,
-            value = order.totalPrice,
-            request = request
-        )
-
         order.items.forEach {
             track(
                 correlationId = correlationId,
                 page = Page.CHECKOUT_SUCCESS,
-                event = EventType.SALE,
+                event = EventType.ORDER,
                 productId = it.productId,
                 merchantId = order.merchantId,
                 value = it.unitPrice * it.quantity,
