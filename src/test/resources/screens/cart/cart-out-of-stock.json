@@ -1,309 +1,369 @@
 {
-  "type" : "Screen",
-  "attributes" : {
-    "id" : "page.cart",
-    "safe" : false
+  "type": "Screen",
+  "attributes": {
+    "id": "page.cart",
+    "safe": false
   },
-  "children" : [ {
-    "type" : "SingleChildScrollView",
-    "attributes" : { },
-    "children" : [ {
-      "type" : "Column",
-      "attributes" : {
-        "mainAxisAlignment" : "start",
-        "crossAxisAlignment" : "start"
-      },
-      "children" : [ {
-        "type" : "Container",
-        "attributes" : {
-          "padding" : 10.0
-        },
-        "children" : [ {
-          "type" : "Column",
-          "attributes" : {
-            "mainAxisAlignment" : "start",
-            "crossAxisAlignment" : "start"
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Column",
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
           },
-          "children" : [ {
-            "type" : "Text",
-            "attributes" : {
-              "caption" : "Merchant",
-              "bold" : true,
-              "size" : 16.0
-            },
-            "children" : [ ]
-          }, {
-            "type" : "ListItem",
-            "attributes" : {
-              "caption" : "Ray Sponsible",
-              "subCaption" : "Marketing",
-              "padding" : 10.0,
-              "leading" : {
-                "type" : "CircleAvatar",
-                "attributes" : {
-                  "radius" : 24.0
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "RS",
-                    "bold" : true,
-                    "size" : 16.0
-                  },
-                  "children" : [ ]
-                } ]
-              }
-            },
-            "children" : [ ]
-          } ]
-        } ]
-      }, {
-        "type" : "Divider",
-        "attributes" : {
-          "height" : 1.0,
-          "color" : "#8c8c8c"
-        },
-        "children" : [ ]
-      }, {
-        "type" : "Container",
-        "attributes" : {
-          "padding" : 10.0
-        },
-        "children" : [ {
-          "type" : "Text",
-          "attributes" : {
-            "caption" : "Products",
-            "bold" : true,
-            "size" : 16.0
-          },
-          "children" : [ ]
-        } ]
-      }, {
-        "type" : "Container",
-        "attributes" : { },
-        "children" : [ {
-          "type" : "Column",
-          "attributes" : {
-            "mainAxisAlignment" : "start",
-            "mainAxisSize" : "min",
-            "crossAxisAlignment" : "start"
-          },
-          "children" : [ {
-            "type" : "ListItem",
-            "attributes" : {
-              "caption" : "",
-              "trailing" : {
-                "type" : "Column",
-                "attributes" : {
-                  "mainAxisAlignment" : "start",
-                  "crossAxisAlignment" : "end"
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "500 CFA",
-                    "bold" : true
-                  },
-                  "children" : [ ]
-                }, {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "(100 CFA each)",
-                    "size" : 10.0
-                  },
-                  "children" : [ ]
-                } ]
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
               },
-              "leading" : {
-                "type" : "Image",
-                "attributes" : {
-                  "url" : "http://img.com/nopicture.png",
-                  "width" : 48.0,
-                  "height" : 48.8
-                },
-                "children" : [ ]
-              }
-            },
-            "children" : [ ]
-          }, {
-            "type" : "Row",
-            "attributes" : {
-              "mainAxisAlignment" : "start",
-              "crossAxisAlignment" : "center"
-            },
-            "children" : [ {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ ]
-            }, {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0,
-                "width" : 100.0
-              },
-              "children" : [ {
-                "type" : "Row",
-                "attributes" : { },
-                "children" : [ {
-                  "type" : "Icon",
-                  "attributes" : {
-                    "code" : "ef28",
-                    "color" : "#8B0000"
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
                   },
-                  "children" : [ ]
-                }, {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "shared-ui.cart-item-list.out-of-stock",
-                    "color" : "#8B0000",
-                    "size" : 10.0
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Merchant",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Ray Sponsible",
+                        "subCaption": "Marketing",
+                        "padding": 10.0,
+                        "leading": {
+                          "type": "CircleAvatar",
+                          "attributes": {
+                            "radius": 24.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "RS",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Products",
+                    "bold": true,
+                    "size": 16.0
                   },
-                  "children" : [ ]
-                } ]
-              } ]
-            }, {
-              "type" : "Button",
-              "attributes" : {
-                "caption" : "Remove",
-                "padding" : 10.0,
-                "type" : "Text",
-                "stretched" : false
-              },
-              "children" : [ ],
-              "action" : {
-                "type" : "Command",
-                "url" : "http://localhost:0/commands/remove-from-cart?merchant-id=0&product-id=1"
-              }
-            } ]
-          } ]
-        } ]
-      }, {
-        "type" : "Divider",
-        "attributes" : {
-          "color" : "#8c8c8c"
-        },
-        "children" : [ ]
-      }, {
-        "type" : "Container",
-        "attributes" : {
-          "padding" : 10.0,
-          "margin" : 10.0,
-          "border" : 1.0,
-          "borderRadius" : 2.0,
-          "borderColor" : "#8c8c8c"
-        },
-        "children" : [ {
-          "type" : "Column",
-          "attributes" : {
-            "mainAxisAlignment" : "start",
-            "mainAxisSize" : "min"
-          },
-          "children" : [ {
-            "type" : "Row",
-            "attributes" : {
-              "mainAxisAlignment" : "spaceBetween"
+                  "children": []
+                }
+              ]
             },
-            "children" : [ {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ {
-                "type" : "Text",
-                "attributes" : {
-                  "caption" : "Sub Total - 1 product",
-                  "bold" : false
-                },
-                "children" : [ ]
-              } ]
-            }, {
-              "type" : "Container",
-              "attributes" : {
-                "padding" : 10.0
-              },
-              "children" : [ {
-                "type" : "Text",
-                "attributes" : {
-                  "caption" : "500 CFA",
-                  "bold" : false,
-                  "alignment" : "Right"
-                },
-                "children" : [ ]
-              } ]
-            } ]
-          }, {
-            "type" : "Container",
-            "attributes" : {
-              "background" : "#e4edf7"
-            },
-            "children" : [ {
-              "type" : "Row",
-              "attributes" : {
-                "mainAxisAlignment" : "spaceBetween"
-              },
-              "children" : [ {
-                "type" : "Container",
-                "attributes" : {
-                  "padding" : 10.0
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "Total",
-                    "bold" : true
+            {
+              "type": "Container",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min",
+                    "crossAxisAlignment": "start"
                   },
-                  "children" : [ ]
-                } ]
-              }, {
-                "type" : "Container",
-                "attributes" : {
-                  "padding" : 10.0
-                },
-                "children" : [ {
-                  "type" : "Text",
-                  "attributes" : {
-                    "caption" : "500 CFA",
-                    "color" : "#1D7EDF",
-                    "bold" : true,
-                    "alignment" : "Right"
+                  "children": [
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "",
+                        "trailing": {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "end"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "500 CFA",
+                                "bold": true
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "(100 CFA each)",
+                                "size": 10.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        "leading": {
+                          "type": "Image",
+                          "attributes": {
+                            "url": "http://img.com/nopicture.png",
+                            "width": 48.0,
+                            "height": 48.8
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "center"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0,
+                            "width": 100.0
+                          },
+                          "children": [
+                            {
+                              "type": "Row",
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "type": "Icon",
+                                  "attributes": {
+                                    "code": "ef28",
+                                    "color": "#8B0000"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Out of stock",
+                                    "color": "#8B0000",
+                                    "size": 10.0
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Button",
+                          "attributes": {
+                            "caption": "Remove",
+                            "padding": 10.0,
+                            "type": "Text",
+                            "stretched": false
+                          },
+                          "children": [],
+                          "action": {
+                            "type": "Command",
+                            "url": "http://localhost:0/commands/remove-from-cart?merchant-id=0&product-id=1"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderRadius": 2.0,
+                "borderColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min"
                   },
-                  "children" : [ ]
-                } ]
-              } ]
-            } ]
-          }, {
-            "type" : "Container",
-            "attributes" : {
-              "padding" : 10.0
-            },
-            "children" : [ ]
-          }, {
-            "type" : "Button",
-            "attributes" : {
-              "caption" : "Finalize the Order",
-              "padding" : 15.0,
-              "type" : "Elevated"
-            },
-            "children" : [ ],
-            "action" : {
-              "type" : "Command",
-              "url" : "http://localhost:0/commands/create-order?merchant-id=0"
+                  "children": [
+                    {
+                      "type": "Row",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceBetween"
+                      },
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Sub Total - 1 product",
+                                "bold": false
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "500 CFA",
+                                "bold": false,
+                                "alignment": "Right"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "background": "#e4edf7"
+                      },
+                      "children": [
+                        {
+                          "type": "Row",
+                          "attributes": {
+                            "mainAxisAlignment": "spaceBetween"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Total",
+                                    "bold": true
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "500 CFA",
+                                    "color": "#1D7EDF",
+                                    "bold": true,
+                                    "alignment": "Right"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "Finalize the Order",
+                        "padding": 15.0,
+                        "type": "Elevated"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Command",
+                        "url": "http://localhost:0/commands/create-order?merchant-id=0"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
-          } ]
-        } ]
-      } ]
-    } ]
-  } ],
-  "appBar" : {
-    "type" : "AppBar",
-    "attributes" : {
-      "title" : "Your Cart",
-      "elevation" : 0.0,
-      "backgroundColor" : "#FFFFFF",
-      "foregroundColor" : "#000000"
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Your Cart",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
     },
-    "children" : [ ]
+    "children": []
   }
 }

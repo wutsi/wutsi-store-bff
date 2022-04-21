@@ -26,6 +26,7 @@ import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.ListView
+import com.wutsi.flutter.sdui.MoneyText
 import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
@@ -98,11 +99,20 @@ class ProductScreen(
                 )
             )
 
+        // Vendor
+        val shareUrl = "${tenant.webappUrl}/product?id=$id"
+        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
+        children.addAll(
+            listOf(
+                Divider(color = Theme.COLOR_DIVIDER),
+                toVendorWidget(product, merchant, whatsappUrl)
+            )
+        )
+
         // Price
         if (product.price != null)
             children.addAll(
                 listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     Container(
                         padding = 10.0,
                         child = toPriceWidget(product, tenant)
@@ -149,12 +159,6 @@ class ProductScreen(
                     ),
                 )
             )
-
-        // Vendor
-        val shareUrl = "${tenant.webappUrl}/product?id=$id"
-        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
-        children.add(Divider(color = Theme.COLOR_DIVIDER))
-        children.add(toVendorWidget(product, merchant, whatsappUrl))
 
         try {
             // Screen
@@ -339,58 +343,37 @@ class ProductScreen(
         val percent = (100.0 * savings / comparablePrice).toInt()
         val fmt = DecimalFormat(tenant.monetaryFormat)
 
+        children.add(
+            MoneyText(
+                currency = tenant.currency,
+                color = Theme.COLOR_PRIMARY,
+                valueFontSize = Theme.TEXT_SIZE_X_LARGE,
+                value = price,
+                numberFormat = tenant.numberFormat
+            ),
+        )
+
         if (savings > 0) {
-            children.addAll(
-                listOfNotNull(
-                    toRow(
-                        Text(getText("page.product.list-price")),
-                        Text(
-                            caption = fmt.format(comparablePrice),
-                            decoration = TextDecoration.Strikethrough,
-                            color = Theme.COLOR_GRAY,
-                            size = Theme.TEXT_SIZE_SMALL
-                        )
-                    ),
-                    toRow(
-                        Text(getText("page.product.price-with-savings")),
-                        Text(
-                            caption = fmt.format(price),
-                            color = Theme.COLOR_PRIMARY,
-                            size = Theme.TEXT_SIZE_LARGE,
-                            bold = true
-                        )
-                    ),
+            children.add(
+                Text(
+                    caption = fmt.format(comparablePrice),
+                    decoration = TextDecoration.Strikethrough,
+                    color = Theme.COLOR_GRAY,
+                    size = Theme.TEXT_SIZE_SMALL
                 )
             )
             if (percent >= 1)
                 children.add(
-                    toRow(
-                        Text(getText("page.product.savings")),
-                        Text(
-                            caption = getText("page.product.savings-percent", arrayOf(percent.toString())),
-                            color = Theme.COLOR_SUCCESS,
-                        )
+                    Text(
+                        caption = getText("page.product.savings-percent", arrayOf(percent.toString())),
+                        color = Theme.COLOR_SUCCESS,
                     )
                 )
-        } else {
-            children.addAll(
-                listOfNotNull(
-                    toRow(
-                        Text(getText("page.product.price")),
-                        Text(
-                            caption = fmt.format(price),
-                            color = Theme.COLOR_PRIMARY,
-                            size = Theme.TEXT_SIZE_LARGE,
-                            bold = true
-                        )
-                    ),
-                )
-            )
         }
 
         return Column(
             mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.end,
+            crossAxisAlignment = CrossAxisAlignment.start,
             children = children
         )
     }
