@@ -1220,163 +1220,6 @@
                                                         {
                                                           "type": "Image",
                                                           "attributes": {
-                                                            "url": "https://www.imag.com/3.png",
-                                                            "fit": "fitHeight"
-                                                          },
-                                                          "children": []
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "Positioned",
-                                              "attributes": {
-                                                "top": 5.0,
-                                                "left": 0.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Container",
-                                                  "attributes": {
-                                                    "padding": 4.0,
-                                                    "background": "#4CAF50"
-                                                  },
-                                                  "children": [
-                                                    {
-                                                      "type": "Text",
-                                                      "attributes": {
-                                                        "caption": "30%",
-                                                        "color": "#FFFFFF",
-                                                        "size": 10.0
-                                                      },
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "MoneyText",
-                                                  "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ],
-                              "action": {
-                                "type": "Route",
-                                "url": "http://localhost:0/product?id=3"
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Flexible",
-                          "attributes": {
-                            "flex": 1,
-                            "fit": "Tight"
-                          },
-                          "children": [
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "margin": 5.0,
-                                "border": 0.2,
-                                "borderColor": "#8c8c8c"
-                              },
-                              "children": [
-                                {
-                                  "type": "Column",
-                                  "attributes": {
-                                    "mainAxisAlignment": "start",
-                                    "crossAxisAlignment": "start"
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "background": "#e8e8e8"
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Stack",
-                                          "attributes": {},
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "AspectRatio",
-                                                  "attributes": {
-                                                    "aspectRatio": 1.3333333333333333
-                                                  },
-                                                  "children": [
-                                                    {
-                                                      "type": "Container",
-                                                      "attributes": {},
-                                                      "children": [
-                                                        {
-                                                          "type": "Image",
-                                                          "attributes": {
                                                             "url": "https://www.imag.com/4.png",
                                                             "fit": "fitHeight"
                                                           },
@@ -1482,8 +1325,187 @@
                               }
                             }
                           ]
+                        },
+                        {
+                          "type": "Flexible",
+                          "attributes": {
+                            "flex": 1,
+                            "fit": "Tight"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "margin": 5.0,
+                                "border": 0.2,
+                                "borderColor": "#8c8c8c"
+                              },
+                              "children": [
+                                {
+                                  "type": "Column",
+                                  "attributes": {
+                                    "mainAxisAlignment": "start",
+                                    "crossAxisAlignment": "start"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "background": "#e8e8e8"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Stack",
+                                          "attributes": {},
+                                          "children": [
+                                            {
+                                              "type": "Container",
+                                              "attributes": {
+                                                "padding": 5.0
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "AspectRatio",
+                                                  "attributes": {
+                                                    "aspectRatio": 1.3333333333333333
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Container",
+                                                      "attributes": {},
+                                                      "children": [
+                                                        {
+                                                          "type": "Image",
+                                                          "attributes": {
+                                                            "url": "https://www.imag.com/5.png",
+                                                            "fit": "fitHeight"
+                                                          },
+                                                          "children": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "Positioned",
+                                              "attributes": {
+                                                "top": 5.0,
+                                                "left": 0.0
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "Container",
+                                                  "attributes": {
+                                                    "padding": 4.0,
+                                                    "background": "#4CAF50"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "30%",
+                                                        "color": "#FFFFFF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "height": 78.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Column",
+                                          "attributes": {
+                                            "mainAxisAlignment": "spaceBetween",
+                                            "crossAxisAlignment": "start"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "Container",
+                                              "attributes": {
+                                                "padding": 5.0
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "Text",
+                                                  "attributes": {
+                                                    "caption": "Sample product",
+                                                    "overflow": "Elipsis",
+                                                    "maxLines": 2
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "Container",
+                                              "attributes": {
+                                                "padding": 5.0
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "MoneyText",
+                                                  "attributes": {
+                                                    "value": 7000.0,
+                                                    "color": "#1D7EDF",
+                                                    "currency": "XAF",
+                                                    "numberFormat": "#,###,##0",
+                                                    "valueFontSize": 16.0,
+                                                    "currencyFontSize": 10.0
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "action": {
+                                "type": "Route",
+                                "url": "http://localhost:0/product?id=5"
+                              }
+                            }
+                          ]
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "More products",
+                        "padding": 15.0,
+                        "type": "Elevated",
+                        "stretched": false
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777&tab=store"
+                      }
                     }
                   ]
                 }

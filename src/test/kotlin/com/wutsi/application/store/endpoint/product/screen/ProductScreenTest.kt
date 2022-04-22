@@ -75,9 +75,13 @@ internal class ProductScreenTest : AbstractEndpointTest() {
             createProductSummary(id = 1, accountId = 77, categoryId = 1, subCategoryId = 5),
             createProductSummary(id = 2, accountId = 77, subCategoryId = 2),
             createProductSummary(id = 3, accountId = 77, subCategoryId = 3),
-            createProductSummary(id = 3),
             createProductSummary(id = 4),
             createProductSummary(id = 5),
+            createProductSummary(id = 6),
+            createProductSummary(id = 7),
+            createProductSummary(id = 8),
+            createProductSummary(id = 9),
+            createProductSummary(id = 10),
         )
         doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
     }

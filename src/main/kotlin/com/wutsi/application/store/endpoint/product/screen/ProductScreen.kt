@@ -41,6 +41,7 @@ import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
+import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisSize
@@ -508,7 +509,7 @@ class ProductScreen(
         return Column(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
-            children = listOf(
+            children = listOfNotNull(
                 Divider(
                     height = 1.0,
                     color = Theme.COLOR_DIVIDER
@@ -523,7 +524,21 @@ class ProductScreen(
                     models = products.take(4)
                         .map { sharedUIMapper.toProductModel(it, tenant, null) },
                     actionProvider = this,
-                )
+                ),
+                if (products.size > 4)
+                    Container(
+                        padding = 10.0,
+                        child = Button(
+                            caption = getText("page.product.button.more-products"),
+                            stretched = false,
+                            type = ButtonType.Elevated,
+                            action = gotoUrl(
+                                url = urlBuilder.build(shellUrl, "/profile?id=${product.accountId}&tab=store")
+                            )
+                        )
+                    )
+                else
+                    null
             )
         )
     }
