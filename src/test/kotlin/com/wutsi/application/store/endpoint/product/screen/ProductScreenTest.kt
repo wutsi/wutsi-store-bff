@@ -17,6 +17,7 @@ import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.cart.dto.GetCartResponse
 import com.wutsi.ecommerce.cart.dto.Product
 import com.wutsi.ecommerce.catalog.dto.GetProductResponse
+import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.SearchRateResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
@@ -69,6 +70,16 @@ internal class ProductScreenTest : AbstractEndpointTest() {
             createRateSummary(ShippingType.INTERNATIONAL_SHIPPING, rate = 2000.0)
         )
         doReturn(SearchRateResponse(rates)).whenever(shippingApi).searchRate(any())
+
+        val products = listOf(
+            createProductSummary(id = 1, accountId = 77, categoryId = 1, subCategoryId = 5),
+            createProductSummary(id = 2, accountId = 77, subCategoryId = 2),
+            createProductSummary(id = 3, accountId = 77, subCategoryId = 3),
+            createProductSummary(id = 3),
+            createProductSummary(id = 4),
+            createProductSummary(id = 5),
+        )
+        doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
     }
 
     @Test

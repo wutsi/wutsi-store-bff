@@ -702,11 +702,19 @@
                   "attributes": {},
                   "children": [
                     {
-                      "type": "Text",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "4 product(s)"
+                        "padding": 10.0
                       },
-                      "children": []
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "4 product(s)"
+                          },
+                          "children": []
+                        }
+                      ]
                     }
                   ]
                 }

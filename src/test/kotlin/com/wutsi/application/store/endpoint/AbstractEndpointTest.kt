@@ -280,7 +280,12 @@ abstract class AbstractEndpointTest {
         accountId = accountId
     )
 
-    protected fun createProductSummary(id: Long, accountId: Long = ACCOUNT_ID) = ProductSummary(
+    protected fun createProductSummary(
+        id: Long,
+        accountId: Long = ACCOUNT_ID,
+        categoryId: Long = 1,
+        subCategoryId: Long = 2
+    ) = ProductSummary(
         id = id,
         title = "Sample product",
         summary = "Summary of product",
@@ -290,8 +295,8 @@ abstract class AbstractEndpointTest {
             id = 3,
             url = "https://www.imag.com/$id.png"
         ),
-        categoryId = 1,
-        subCategoryId = 2,
+        categoryId = categoryId,
+        subCategoryId = subCategoryId,
         type = ProductType.PHYSICAL.name,
         quantity = 30,
         maxOrder = 5,

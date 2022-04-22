@@ -2,16 +2,24 @@ package com.wutsi.application.store.endpoint.product.screen
 
 import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.model.AccountModel
+import com.wutsi.application.shared.model.ProductModel
 import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.StringUtil
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.Avatar
+import com.wutsi.application.shared.ui.ProductActionProvider
+import com.wutsi.application.shared.ui.ProductGridView
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
+import com.wutsi.ecommerce.catalog.dto.ProductSummary
+import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
+import com.wutsi.ecommerce.catalog.entity.ProductSort
+import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.SearchRateRequest
 import com.wutsi.ecommerce.shipping.entity.ShippingType
@@ -59,7 +67,17 @@ class ProductScreen(
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
     private val cityService: CityService
-) : AbstractQuery() {
+) : ProductActionProvider, AbstractQuery() {
+    override fun getAction(model: ProductModel): Action =
+        gotoUrl(
+            url = urlBuilder.build("/product?id=${model.id}")
+        )
+
+    override fun getAction(model: AccountModel): Action? =
+        gotoUrl(
+            url = urlBuilder.build(shellUrl, "/profile?id=${model.id}")
+        )
+
     @PostMapping
     fun index(@RequestParam id: Long, request: HttpServletRequest): Widget {
         val product = catalogApi.getProduct(id).product
@@ -160,6 +178,14 @@ class ProductScreen(
                 )
             )
 
+        val similar = toSimilarProductsWidget(product, tenant)
+        if (similar != null)
+            children.add(similar)
+
+        val others = toMerchantProductsWidget(product, tenant)
+        if (others != null)
+            children.add(others)
+
         try {
             // Screen
             return Screen(
@@ -203,6 +229,25 @@ class ProductScreen(
     private fun toStockWidget(account: Account, merchant: Account, product: Product, tenant: Tenant): WidgetAware {
         val children = mutableListOf<WidgetAware>()
 
+        children.add(
+            // Stock
+            Row(
+                children = listOf(
+                    if (product.quantity > 0)
+                        Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS, size = 16.0)
+                    else
+                        Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER, size = 16.0),
+
+                    Container(padding = 5.0),
+
+                    if (product.quantity > 0)
+                        Text(getText("page.product.in-stock"))
+                    else
+                        Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
+                )
+            )
+        )
+
         if (product.quantity > 0) {
             if (togglesProvider.isCartEnabled()) {
                 children.addAll(
@@ -225,25 +270,6 @@ class ProductScreen(
                 )
             )
         }
-
-        children.add(
-            // Stock
-            Row(
-                children = listOf(
-                    if (product.quantity > 0)
-                        Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS, size = 16.0)
-                    else
-                        Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER, size = 16.0),
-
-                    Container(padding = 5.0),
-
-                    if (product.quantity > 0)
-                        Text(getText("page.product.in-stock"))
-                    else
-                        Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
-                )
-            )
-        )
 
         return Column(
             mainAxisSize = MainAxisSize.min,
@@ -422,4 +448,83 @@ class ProductScreen(
                 ),
             )
         )
+
+    private fun toSimilarProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
+        // Get products
+        val products = catalogApi.searchProducts(
+            request = SearchProductRequest(
+                categoryIds = listOf(product.subCategoryId, product.categoryId),
+                status = ProductStatus.PUBLISHED.name,
+                sortBy = ProductSort.RECOMMENDED.name,
+                limit = 30
+            )
+        ).products.filter { it.id != product.id }
+
+        // Sort - ensure all products in the same sub-categories... and from other merchants
+        val xproducts = mutableListOf<ProductSummary>()
+        xproducts.addAll(products.filter { it.subCategoryId == product.subCategoryId && it.accountId != product.accountId })
+        xproducts.addAll(products.filter { it.subCategoryId != product.subCategoryId && it.accountId != product.accountId })
+        if (products.isEmpty())
+            return null
+
+        // Component
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = listOf(
+                Divider(
+                    height = 1.0,
+                    color = Theme.COLOR_DIVIDER
+                ),
+                Container(
+                    padding = 10.0,
+                    child = Text(getText("page.product.similar-products"), bold = true)
+                ),
+                ProductGridView(
+                    spacing = 5.0,
+                    productsPerRow = 2,
+                    models = xproducts.take(4)
+                        .map { sharedUIMapper.toProductModel(it, tenant, null) },
+                    actionProvider = this,
+                )
+            )
+        )
+    }
+
+    private fun toMerchantProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
+        // Get products
+        val products = catalogApi.searchProducts(
+            request = SearchProductRequest(
+                accountId = product.accountId,
+                status = ProductStatus.PUBLISHED.name,
+                sortBy = ProductSort.RECOMMENDED.name,
+                limit = 30
+            )
+        ).products.filter { it.id != product.id }
+        if (products.isEmpty())
+            return null
+
+        // Component
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = listOf(
+                Divider(
+                    height = 1.0,
+                    color = Theme.COLOR_DIVIDER
+                ),
+                Container(
+                    padding = 10.0,
+                    child = Text(getText("page.product.merchant-products"), bold = true)
+                ),
+                ProductGridView(
+                    spacing = 5.0,
+                    productsPerRow = 2,
+                    models = products.take(4)
+                        .map { sharedUIMapper.toProductModel(it, tenant, null) },
+                    actionProvider = this,
+                )
+            )
+        )
+    }
 }

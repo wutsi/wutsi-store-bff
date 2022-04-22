@@ -151,7 +151,10 @@ class HomeScreen(
         }
         children.add(
             Center(
-                child = Text(caption = getText("page.catalog.product-count", arrayOf(products.size)))
+                child = Container(
+                    padding = 10.0,
+                    child = Text(caption = getText("page.catalog.product-count", arrayOf(products.size)))
+                )
             )
         )
 
