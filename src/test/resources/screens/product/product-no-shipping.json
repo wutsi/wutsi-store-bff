@@ -515,58 +515,32 @@
                                                   ]
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
                                             },
                                             {
-                                              "type": "Container",
+                                              "type": "Positioned",
                                               "attributes": {
-                                                "padding": 5.0
+                                                "bottom": 5.0,
+                                                "left": 5.0
                                               },
                                               "children": [
                                                 {
-                                                  "type": "MoneyText",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
+                                                    "padding": 4.0,
+                                                    "background": "#FFFFFF",
+                                                    "borderRadius": 2.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -672,58 +646,32 @@
                                                   ]
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
                                             },
                                             {
-                                              "type": "Container",
+                                              "type": "Positioned",
                                               "attributes": {
-                                                "padding": 5.0
+                                                "bottom": 5.0,
+                                                "left": 5.0
                                               },
                                               "children": [
                                                 {
-                                                  "type": "MoneyText",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
+                                                    "padding": 4.0,
+                                                    "background": "#FFFFFF",
+                                                    "borderRadius": 2.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -881,58 +829,32 @@
                                                   ]
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
                                             },
                                             {
-                                              "type": "Container",
+                                              "type": "Positioned",
                                               "attributes": {
-                                                "padding": 5.0
+                                                "bottom": 5.0,
+                                                "left": 5.0
                                               },
                                               "children": [
                                                 {
-                                                  "type": "MoneyText",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
+                                                    "padding": 4.0,
+                                                    "background": "#FFFFFF",
+                                                    "borderRadius": 2.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -1038,58 +960,32 @@
                                                   ]
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
                                             },
                                             {
-                                              "type": "Container",
+                                              "type": "Positioned",
                                               "attributes": {
-                                                "padding": 5.0
+                                                "bottom": 5.0,
+                                                "left": 5.0
                                               },
                                               "children": [
                                                 {
-                                                  "type": "MoneyText",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
+                                                    "padding": 4.0,
+                                                    "background": "#FFFFFF",
+                                                    "borderRadius": 2.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -1205,58 +1101,32 @@
                                                   ]
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
                                             },
                                             {
-                                              "type": "Container",
+                                              "type": "Positioned",
                                               "attributes": {
-                                                "padding": 5.0
+                                                "bottom": 5.0,
+                                                "left": 5.0
                                               },
                                               "children": [
                                                 {
-                                                  "type": "MoneyText",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
+                                                    "padding": 4.0,
+                                                    "background": "#FFFFFF",
+                                                    "borderRadius": 2.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -1362,58 +1232,32 @@
                                                   ]
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "height": 78.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Column",
-                                          "attributes": {
-                                            "mainAxisAlignment": "spaceBetween",
-                                            "crossAxisAlignment": "start"
-                                          },
-                                          "children": [
-                                            {
-                                              "type": "Container",
-                                              "attributes": {
-                                                "padding": 5.0
-                                              },
-                                              "children": [
-                                                {
-                                                  "type": "Text",
-                                                  "attributes": {
-                                                    "caption": "Sample product",
-                                                    "overflow": "Elipsis",
-                                                    "maxLines": 2
-                                                  },
-                                                  "children": []
-                                                }
-                                              ]
                                             },
                                             {
-                                              "type": "Container",
+                                              "type": "Positioned",
                                               "attributes": {
-                                                "padding": 5.0
+                                                "bottom": 5.0,
+                                                "left": 5.0
                                               },
                                               "children": [
                                                 {
-                                                  "type": "MoneyText",
+                                                  "type": "Container",
                                                   "attributes": {
-                                                    "value": 7000.0,
-                                                    "color": "#1D7EDF",
-                                                    "currency": "XAF",
-                                                    "numberFormat": "#,###,##0",
-                                                    "valueFontSize": 16.0,
-                                                    "currencyFontSize": 10.0
+                                                    "padding": 4.0,
+                                                    "background": "#FFFFFF",
+                                                    "borderRadius": 2.0
                                                   },
-                                                  "children": []
+                                                  "children": [
+                                                    {
+                                                      "type": "Text",
+                                                      "attributes": {
+                                                        "caption": "7,000 CFA",
+                                                        "color": "#1D7EDF",
+                                                        "size": 10.0
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             }
@@ -1436,24 +1280,31 @@
                   ]
                 },
                 {
-                  "type": "Container",
-                  "attributes": {
-                    "padding": 10.0
-                  },
+                  "type": "Center",
+                  "attributes": {},
                   "children": [
                     {
-                      "type": "Button",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "More products",
-                        "padding": 15.0,
-                        "type": "Elevated",
-                        "stretched": false
+                        "alignment": "Center",
+                        "padding": 10.0
                       },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777&tab=store"
-                      }
+                      "children": [
+                        {
+                          "type": "Button",
+                          "attributes": {
+                            "caption": "More products",
+                            "padding": 15.0,
+                            "type": "Elevated",
+                            "stretched": false
+                          },
+                          "children": [],
+                          "action": {
+                            "type": "Route",
+                            "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777&tab=store"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }

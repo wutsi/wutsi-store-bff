@@ -11,6 +11,7 @@ import com.wutsi.application.shared.service.StringUtil
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.shared.ui.ProductActionProvider
+import com.wutsi.application.shared.ui.ProductCardType
 import com.wutsi.application.shared.ui.ProductGridView
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -28,6 +29,7 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.AspectRatio
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.CarouselSlider
+import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
@@ -41,6 +43,7 @@ import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
+import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.ButtonType
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
@@ -487,6 +490,7 @@ class ProductScreen(
                     models = xproducts.take(4)
                         .map { sharedUIMapper.toProductModel(it, tenant, null) },
                     actionProvider = this,
+                    type = ProductCardType.SUMMARY,
                 )
             )
         )
@@ -524,16 +528,20 @@ class ProductScreen(
                     models = products.take(4)
                         .map { sharedUIMapper.toProductModel(it, tenant, null) },
                     actionProvider = this,
+                    type = ProductCardType.SUMMARY,
                 ),
                 if (products.size > 4)
-                    Container(
-                        padding = 10.0,
-                        child = Button(
-                            caption = getText("page.product.button.more-products"),
-                            stretched = false,
-                            type = ButtonType.Elevated,
-                            action = gotoUrl(
-                                url = urlBuilder.build(shellUrl, "/profile?id=${product.accountId}&tab=store")
+                    Center(
+                        child = Container(
+                            padding = 10.0,
+                            alignment = Alignment.Center,
+                            child = Button(
+                                caption = getText("page.product.button.more-products"),
+                                stretched = false,
+                                type = ButtonType.Elevated,
+                                action = gotoUrl(
+                                    url = urlBuilder.build(shellUrl, "/profile?id=${product.accountId}&tab=store")
+                                )
                             )
                         )
                     )
