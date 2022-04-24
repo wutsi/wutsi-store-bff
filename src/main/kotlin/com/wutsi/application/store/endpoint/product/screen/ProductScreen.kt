@@ -4,7 +4,6 @@ import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.AccountModel
 import com.wutsi.application.shared.model.ProductModel
-import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.StringUtil
@@ -21,9 +20,6 @@ import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.catalog.entity.ProductSort
 import com.wutsi.ecommerce.catalog.entity.ProductStatus
-import com.wutsi.ecommerce.shipping.WutsiShippingApi
-import com.wutsi.ecommerce.shipping.dto.SearchRateRequest
-import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.AspectRatio
@@ -33,6 +29,7 @@ import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.ExpandablePanel
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.ListView
@@ -52,13 +49,11 @@ import com.wutsi.flutter.sdui.enums.TextDecoration
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
-import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.text.DecimalFormat
-import java.util.Locale
 import java.util.UUID
 import javax.servlet.http.HttpServletRequest
 
@@ -67,10 +62,8 @@ import javax.servlet.http.HttpServletRequest
 class ProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
-    private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
     private val sharedUIMapper: SharedUIMapper,
-    private val cityService: CityService
 ) : ProductActionProvider, AbstractQuery() {
     override fun getAction(model: ProductModel): Action =
         gotoUrl(
@@ -85,7 +78,6 @@ class ProductScreen(
     @PostMapping
     fun index(@RequestParam id: Long, request: HttpServletRequest): Widget {
         val product = catalogApi.getProduct(id).product
-        val account = securityContext.currentAccount()
         val merchant = accountApi.getAccount(product.accountId).account
         val tenant = tenantProvider.get()
         val cart = getCart(merchant)
@@ -103,59 +95,59 @@ class ProductScreen(
 
         // Pictures
         if (product.pictures.isNotEmpty())
-            children.add(
-                CarouselSlider(
-                    viewportFraction = .9,
-                    enableInfiniteScroll = false,
-                    reverse = false,
-                    height = 250.0,
-                    children = product.pictures.map {
-                        AspectRatio(
-                            aspectRatio = 8.0 / 10.0,
-                            child = Image(
-                                url = it.url,
-                                height = 300.0
-                            )
-                        )
-                    }
-                )
-            )
-
-        // Vendor
-        val shareUrl = "${tenant.webappUrl}/product?id=$id"
-        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
-        children.addAll(
-            listOf(
-                Divider(color = Theme.COLOR_DIVIDER),
-                toVendorWidget(product, merchant, whatsappUrl)
-            )
-        )
-
-        // Price
-        if (product.price != null)
             children.addAll(
                 listOf(
-                    Container(
-                        padding = 10.0,
-                        child = toPriceWidget(product, tenant)
-                    )
+                    CarouselSlider(
+                        viewportFraction = .9,
+                        enableInfiniteScroll = false,
+                        reverse = false,
+                        height = 250.0,
+                        children = product.pictures.map {
+                            AspectRatio(
+                                aspectRatio = 8.0 / 10.0,
+                                child = Image(
+                                    url = it.url,
+                                    height = 300.0
+                                )
+                            )
+                        }
+                    ),
+                    Divider(color = Theme.COLOR_DIVIDER)
                 )
             )
 
-        // Summary
-        if (!product.summary.isNullOrEmpty())
-            children.add(
-                Container(
-                    padding = 10.0,
-                    child = Text(product.summary!!)
-                )
-            )
-
-        // Stock
         children.add(
             Container(
                 padding = 10.0,
-                child = toStockWidget(account, merchant, product, tenant)
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    mainAxisSize = MainAxisSize.min,
+                    children = listOfNotNull(
+                        // Price
+                        if (product.price != null)
+                            toPriceWidget(product, tenant)
+                        else
+                            null,
+
+                        // Summary
+                        if (!product.summary.isNullOrEmpty())
+                            Column(
+                                children = listOf(
+                                    Text(product.summary!!),
+                                )
+                            )
+                        else
+                            null,
+
+                        // Availability
+                        Container(padding = 10.0),
+                        toAvailabilityWidget(product),
+
+                        // Cart
+                        toCartWidget(merchant, product),
+                    )
+                )
             )
         )
 
@@ -166,21 +158,23 @@ class ProductScreen(
                     Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
                     Container(
                         padding = 10.0,
-                        child = Column(
-                            mainAxisAlignment = MainAxisAlignment.start,
-                            crossAxisAlignment = CrossAxisAlignment.start,
-                            children = listOf(
-                                Text(
-                                    getText("page.product.product-details"),
-                                    size = Theme.TEXT_SIZE_X_LARGE,
-                                    bold = true
-                                ),
-                                Text(product.description!!)
-                            ),
+                        child = ExpandablePanel(
+                            header = getText("page.product.product-details"),
+                            expanded = Text(product.description!!),
                         )
-                    ),
+                    )
                 )
             )
+
+        // Vendor
+        val shareUrl = "${tenant.webappUrl}/product?id=$id"
+        val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
+        children.addAll(
+            listOf(
+                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+                toVendorWidget(product, merchant, whatsappUrl),
+            )
+        )
 
         val similar = toSimilarProductsWidget(product, tenant)
         if (similar != null)
@@ -230,144 +224,36 @@ class ProductScreen(
         )
     }
 
-    private fun toStockWidget(account: Account, merchant: Account, product: Product, tenant: Tenant): WidgetAware {
-        val children = mutableListOf<WidgetAware>()
+    private fun toCartWidget(merchant: Account, product: Product): WidgetAware? =
+        if (product.quantity > 0 && togglesProvider.isCartEnabled())
+            Button(
+                padding = 10.0,
+                caption = getText("page.product.button.add-to-cart"),
+                action = executeCommand(
+                    url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
+                )
+            )
+        else
+            null
 
-        children.add(
-            // Stock
-            Row(
-                children = listOf(
-                    if (product.quantity > 0)
-                        Icon(code = Theme.ICON_CHECK, color = Theme.COLOR_SUCCESS, size = 16.0)
+
+    private fun toAvailabilityWidget(product: Product): WidgetAware =
+        Row(
+            children = listOf(
+                Icon(
+                    code = if (product.quantity > 0) Theme.ICON_CHECK else Theme.ICON_CANCEL,
+                    color = if (product.quantity > 0) Theme.COLOR_SUCCESS else Theme.COLOR_DANGER,
+                    size = 16.0
+                ),
+                Container(padding = 5.0),
+                Text(
+                    caption = if (product.quantity > 0)
+                        getText("page.product.in-stock")
                     else
-                        Icon(code = Theme.ICON_CANCEL, color = Theme.COLOR_DANGER, size = 16.0),
-
-                    Container(padding = 5.0),
-
-                    if (product.quantity > 0)
-                        Text(getText("page.product.in-stock"))
-                    else
-                        Text(getText("page.product.out-of-stock"), color = Theme.COLOR_DANGER)
+                        getText("page.product.out-of-stock")
                 )
             )
         )
-
-        if (product.quantity > 0) {
-            if (togglesProvider.isCartEnabled()) {
-                children.addAll(
-                    listOf(
-                        Button(
-                            padding = 10.0,
-                            caption = getText("page.product.button.add-to-cart"),
-                            action = executeCommand(
-                                url = urlBuilder.build("commands/add-to-cart?product-id=${product.id}&merchant-id=${merchant.id}")
-                            )
-                        )
-                    )
-                )
-            }
-
-            children.addAll(
-                listOf(
-                    Container(padding = 10.0),
-                    toShippingWidget(account, merchant, product, tenant)
-                )
-            )
-        }
-
-        return Column(
-            mainAxisSize = MainAxisSize.min,
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = children,
-        )
-    }
-
-    private fun toShippingWidget(account: Account, merchant: Account, product: Product, tenant: Tenant): WidgetAware {
-        // Find shipping rates
-        val rates = shippingApi.searchRate(
-            request = SearchRateRequest(
-                cityId = account.cityId,
-                country = account.country,
-                accountId = merchant.id,
-                products = listOf(
-                    com.wutsi.ecommerce.shipping.dto.Product(
-                        productId = product.id,
-                        productType = product.type
-                    )
-                )
-            )
-        ).rates
-        if (rates.isEmpty()) {
-            val language = LocaleContextHolder.getLocale().language
-            var location = Locale(language, account.country).displayCountry
-            if (account.cityId != null) {
-                val city = cityService.get(account.cityId)
-                if (city != null)
-                    location = city.name + ", " + Locale(language, city.country).displayCountry
-            }
-
-            return Row(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.start,
-                children = listOf(
-                    Icon(code = Theme.ICON_WARNING, size = 16.0, color = Theme.COLOR_DANGER),
-                    Container(padding = 5.0),
-                    Text(
-                        caption = getText("page.product.shipping-none", arrayOf(location)),
-                        color = Theme.COLOR_DANGER,
-                        bold = true
-                    )
-                )
-            )
-        }
-
-        // Show rates
-        val pickup = rates.find { it.shippingType == ShippingType.LOCAL_PICKUP.name }
-        val deliveries = rates.filter { it.shippingType != ShippingType.LOCAL_PICKUP.name }
-            .sortedByDescending { it.rate }
-
-        val children = mutableListOf<WidgetAware>()
-        if (pickup != null)
-            children.add(
-                Row(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
-                        Icon(code = Theme.ICON_CHECK, size = 16.0, color = Theme.COLOR_SUCCESS),
-                        Container(padding = 5.0),
-                        Text(getText("page.product.shipping-pickup"))
-                    )
-                )
-            )
-
-        if (deliveries.isNotEmpty()) {
-            val delivery = deliveries[0]
-            val fees = if (delivery.rate == 0.0)
-                getText("label.free")
-            else
-                DecimalFormat(tenant.monetaryFormat).format(delivery.rate)
-            children.add(
-                Row(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
-                        Icon(code = Theme.ICON_CHECK, size = 16.0, color = Theme.COLOR_SUCCESS),
-                        Container(padding = 5.0),
-                        Text(
-                            getText("page.product.shipping-available") + " - " + fees
-                        )
-                    )
-                )
-            )
-        }
-
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = children
-        )
-    }
 
     private fun toPriceWidget(product: Product, tenant: Tenant): WidgetAware {
         val children = mutableListOf<WidgetAware>()
@@ -377,6 +263,7 @@ class ProductScreen(
         val percent = (100.0 * savings / comparablePrice).toInt()
         val fmt = DecimalFormat(tenant.monetaryFormat)
 
+        // Price
         children.add(
             MoneyText(
                 currency = tenant.currency,
@@ -414,12 +301,12 @@ class ProductScreen(
 
     private fun toVendorWidget(product: Product, merchant: Account, whatsappUrl: String?): WidgetAware =
         Container(
+            padding = 10.0,
             child = Row(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 mainAxisSize = MainAxisSize.min,
                 children = listOf(
-                    Container(padding = 10.0),
                     Avatar(
                         radius = 24.0,
                         model = sharedUIMapper.toAccountModel(merchant)
@@ -435,6 +322,7 @@ class ProductScreen(
                                 merchant.category?.let { Text(it.title, color = Theme.COLOR_GRAY) },
                                 whatsappUrl?.let {
                                     Button(
+                                        type = if (togglesProvider.isCartEnabled()) ButtonType.Outlined else ButtonType.Elevated,
                                         stretched = false,
                                         padding = 10.0,
                                         caption = getText("page.product.write-to-merchant"),

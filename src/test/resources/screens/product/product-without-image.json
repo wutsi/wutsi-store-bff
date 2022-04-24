@@ -31,15 +31,154 @@
               ]
             },
             {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "mainAxisSize": "min",
+                    "crossAxisAlignment": "start"
+                  },
+                  "children": [
+                    {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
+                      },
+                      "children": [
+                        {
+                          "type": "MoneyText",
+                          "attributes": {
+                            "value": 7000.0,
+                            "color": "#1D7EDF",
+                            "currency": "XAF",
+                            "numberFormat": "#,###,##0",
+                            "valueFontSize": 18.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "10,000 CFA",
+                            "color": "#95A5A6",
+                            "size": 10.0,
+                            "decoration": "Strikethrough"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "30% off",
+                            "color": "#4CAF50"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Summary of product"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Row",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e156",
+                            "size": 16.0,
+                            "color": "#4CAF50"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 5.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "In Stock"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "type": "Divider",
               "attributes": {
+                "height": 1.0,
                 "color": "#8c8c8c"
               },
               "children": []
             },
             {
               "type": "Container",
-              "attributes": {},
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "ExpandablePanel",
+                  "attributes": {
+                    "header": "Product Details"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "This is a long description of the product"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
               "children": [
                 {
                   "type": "Row",
@@ -49,13 +188,6 @@
                     "crossAxisAlignment": "start"
                   },
                   "children": [
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": []
-                    },
                     {
                       "type": "CircleAvatar",
                       "attributes": {
@@ -127,235 +259,6 @@
                           ]
                         }
                       ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "MoneyText",
-                      "attributes": {
-                        "value": 7000.0,
-                        "color": "#1D7EDF",
-                        "currency": "XAF",
-                        "numberFormat": "#,###,##0",
-                        "valueFontSize": 18.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "10,000 CFA",
-                        "color": "#95A5A6",
-                        "size": 10.0,
-                        "decoration": "Strikethrough"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "30% off",
-                        "color": "#4CAF50"
-                      },
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "Summary of product"
-                  },
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "mainAxisSize": "min",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Row",
-                      "attributes": {},
-                      "children": [
-                        {
-                          "type": "Icon",
-                          "attributes": {
-                            "code": "e156",
-                            "size": 16.0,
-                            "color": "#4CAF50"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 5.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "In Stock"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Column",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "start"
-                      },
-                      "children": [
-                        {
-                          "type": "Row",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Icon",
-                              "attributes": {
-                                "code": "e156",
-                                "size": 16.0,
-                                "color": "#4CAF50"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "padding": 5.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Pickup in Store"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Row",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Icon",
-                              "attributes": {
-                                "code": "e156",
-                                "size": 16.0,
-                                "color": "#4CAF50"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "padding": 5.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Shipping - 2,000 CFA"
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "Product Details",
-                        "bold": true,
-                        "size": 18.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "This is a long description of the product"
-                      },
-                      "children": []
                     }
                   ]
                 }
