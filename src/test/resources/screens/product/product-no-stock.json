@@ -175,9 +175,9 @@
                         {
                           "type": "Icon",
                           "attributes": {
-                            "code": "e156",
+                            "code": "ef28",
                             "size": 16.0,
-                            "color": "#4CAF50"
+                            "color": "#8B0000"
                           },
                           "children": []
                         },
@@ -191,7 +191,7 @@
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "In Stock"
+                            "caption": "Out of Stock"
                           },
                           "children": []
                         }

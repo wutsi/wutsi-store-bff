@@ -96,15 +96,6 @@ internal class ProductScreenTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun productWithoutImage() {
-        val product = createProduct(false)
-        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
-
-        assertEndpointEquals("/screens/product/product-without-image.json", url)
-        assertTrackPushed(product)
-    }
-
-    @Test
     fun productWithCartEnabled() {
         doReturn(true).whenever(togglesProvider).isCartEnabled()
 
@@ -124,13 +115,13 @@ internal class ProductScreenTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun productNoShipping() {
+    fun productNoStock() {
         doReturn(SearchRateResponse()).whenever(shippingApi).searchRate(any())
 
-        val product = createProduct(true)
+        val product = createProduct(true, quantity = 0)
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
-        assertEndpointEquals("/screens/product/product-no-shipping.json", url)
+        assertEndpointEquals("/screens/product/product-no-stock.json", url)
         assertTrackPushed(product)
     }
 

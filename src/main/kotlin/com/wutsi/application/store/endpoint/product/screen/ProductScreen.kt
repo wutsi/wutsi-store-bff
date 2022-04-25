@@ -155,13 +155,13 @@ class ProductScreen(
         if (!product.description.isNullOrEmpty())
             children.addAll(
                 listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    Container(
-                        padding = 10.0,
-                        child = ExpandablePanel(
-                            header = getText("page.product.product-details"),
-                            expanded = Text(product.description!!),
-                        )
+                    Divider(color = Theme.COLOR_DIVIDER),
+                    ExpandablePanel(
+                        header = getText("page.product.product-details"),
+                        expanded = Container(
+                            padding = 10.0,
+                            child = Text(product.description!!)
+                        ),
                     )
                 )
             )
@@ -171,18 +171,28 @@ class ProductScreen(
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
         children.addAll(
             listOf(
-                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+                Divider(color = Theme.COLOR_DIVIDER),
                 toVendorWidget(product, merchant, whatsappUrl),
             )
         )
 
         val similar = toSimilarProductsWidget(product, tenant)
         if (similar != null)
-            children.add(similar)
+            children.addAll(
+                listOf(
+                    Divider(color = Theme.COLOR_DIVIDER),
+                    similar
+                )
+            )
 
         val others = toMerchantProductsWidget(product, tenant)
         if (others != null)
-            children.add(others)
+            children.addAll(
+                listOf(
+                    Divider(color = Theme.COLOR_DIVIDER),
+                    others
+                )
+            )
 
         try {
             // Screen
@@ -355,8 +365,8 @@ class ProductScreen(
 
         // Sort - ensure all products in the same sub-categories... and from other merchants
         val tmp = mutableListOf<ProductSummary>()
-        tmp.addAll(products.filter { it.subCategoryId == product.subCategoryId })
-        tmp.addAll(products.filter { it.subCategoryId != product.subCategoryId })
+        tmp.addAll(products.filter { it.subCategoryId == product.subCategory.id })
+        tmp.addAll(products.filter { it.subCategoryId != product.subCategory.id })
         val xproducts = tmp.filter { it.accountId != product.accountId && it.id != product.id }
         if (xproducts.isEmpty())
             return null
@@ -366,10 +376,6 @@ class ProductScreen(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
             children = listOf(
-                Divider(
-                    height = 1.0,
-                    color = Theme.COLOR_DIVIDER
-                ),
                 Container(
                     padding = 10.0,
                     child = Text(getText("page.product.similar-products"), bold = true)
@@ -404,10 +410,6 @@ class ProductScreen(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
             children = listOfNotNull(
-                Divider(
-                    height = 1.0,
-                    color = Theme.COLOR_DIVIDER
-                ),
                 Container(
                     padding = 10.0,
                     child = Text(getText("page.product.merchant-products"), bold = true)

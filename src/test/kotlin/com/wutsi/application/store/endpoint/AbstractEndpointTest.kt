@@ -235,7 +235,8 @@ abstract class AbstractEndpointTest {
     protected fun createProduct(
         withThumbnail: Boolean = true,
         type: ProductType = ProductType.PHYSICAL,
-        accountId: Long = ACCOUNT_ID
+        accountId: Long = ACCOUNT_ID,
+        quantity: Int = 30
     ) = Product(
         id = 1,
         title = "Sample product",
@@ -247,7 +248,7 @@ abstract class AbstractEndpointTest {
         category = CategorySummary(id = 1, "Category 1"),
         subCategory = CategorySummary(id = 2, "Category 2"),
         type = type.name,
-        quantity = 30,
+        quantity = quantity,
         maxOrder = 5,
         pictures = if (withThumbnail)
             listOf(
