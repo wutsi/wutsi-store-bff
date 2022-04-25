@@ -344,19 +344,22 @@ class ProductScreen(
         // Get products
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
-                categoryIds = listOf(product.subCategoryId, product.categoryId),
+                categoryIds = listOf(product.category.id, product.subCategory.id),
                 status = ProductStatus.PUBLISHED.name,
                 sortBy = ProductSort.RECOMMENDED.name,
                 limit = 30
             )
-        ).products.filter { it.id != product.id && it.accountId != product.accountId }
+        ).products
         if (products.isEmpty())
             return null
 
         // Sort - ensure all products in the same sub-categories... and from other merchants
-        val xproducts = mutableListOf<ProductSummary>()
-        xproducts.addAll(products.filter { it.subCategoryId == product.subCategoryId })
-        xproducts.addAll(products.filter { it.subCategoryId != product.subCategoryId })
+        val tmp = mutableListOf<ProductSummary>()
+        tmp.addAll(products.filter { it.subCategoryId == product.subCategoryId })
+        tmp.addAll(products.filter { it.subCategoryId != product.subCategoryId })
+        val xproducts = tmp.filter { it.accountId != product.accountId && it.id != product.id }
+        if (xproducts.isEmpty())
+            return null
 
         // Component
         return Column(
@@ -424,8 +427,9 @@ class ProductScreen(
                             alignment = Alignment.Center,
                             child = Button(
                                 caption = getText("page.product.button.more-products"),
+                                padding = 10.0,
+                                type = ButtonType.Outlined,
                                 stretched = false,
-                                type = ButtonType.Elevated,
                                 action = gotoUrl(
                                     url = urlBuilder.build(shellUrl, "/profile?id=${product.accountId}&tab=store")
                                 )

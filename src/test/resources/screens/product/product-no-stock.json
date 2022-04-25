@@ -31,6 +31,72 @@
               ]
             },
             {
+              "type": "CarouselSlider",
+              "attributes": {
+                "height": 250.0,
+                "viewportFraction": 0.9,
+                "enableInfiniteScroll": false,
+                "reverse": false
+              },
+              "children": [
+                {
+                  "type": "AspectRatio",
+                  "attributes": {
+                    "aspectRatio": 0.8
+                  },
+                  "children": [
+                    {
+                      "type": "Image",
+                      "attributes": {
+                        "url": "https://www.imag.com/1.png",
+                        "height": 300.0
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "AspectRatio",
+                  "attributes": {
+                    "aspectRatio": 0.8
+                  },
+                  "children": [
+                    {
+                      "type": "Image",
+                      "attributes": {
+                        "url": "https://www.imag.com/2.png",
+                        "height": 300.0
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "AspectRatio",
+                  "attributes": {
+                    "aspectRatio": 0.8
+                  },
+                  "children": [
+                    {
+                      "type": "Image",
+                      "attributes": {
+                        "url": "https://www.imag.com/3.png",
+                        "height": 300.0
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
               "type": "Container",
               "attributes": {
                 "padding": 10.0
@@ -138,21 +204,20 @@
             {
               "type": "Divider",
               "attributes": {
-                "height": 1.0,
                 "color": "#8c8c8c"
               },
               "children": []
             },
             {
-              "type": "Container",
+              "type": "ExpandablePanel",
               "attributes": {
-                "padding": 10.0
+                "header": "Product Details"
               },
               "children": [
                 {
-                  "type": "ExpandablePanel",
+                  "type": "Container",
                   "attributes": {
-                    "header": "Product Details"
+                    "padding": 10.0
                   },
                   "children": [
                     {
@@ -169,7 +234,6 @@
             {
               "type": "Divider",
               "attributes": {
-                "height": 1.0,
                 "color": "#8c8c8c"
               },
               "children": []
@@ -265,20 +329,19 @@
               ]
             },
             {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
               "type": "Column",
               "attributes": {
                 "mainAxisAlignment": "start",
                 "crossAxisAlignment": "start"
               },
               "children": [
-                {
-                  "type": "Divider",
-                  "attributes": {
-                    "height": 1.0,
-                    "color": "#8c8c8c"
-                  },
-                  "children": []
-                },
                 {
                   "type": "Container",
                   "attributes": {
@@ -579,20 +642,19 @@
               ]
             },
             {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
               "type": "Column",
               "attributes": {
                 "mainAxisAlignment": "start",
                 "crossAxisAlignment": "start"
               },
               "children": [
-                {
-                  "type": "Divider",
-                  "attributes": {
-                    "height": 1.0,
-                    "color": "#8c8c8c"
-                  },
-                  "children": []
-                },
                 {
                   "type": "Container",
                   "attributes": {
@@ -1176,9 +1238,9 @@
                         {
                           "type": "Button",
                           "attributes": {
-                            "caption": "More products",
-                            "padding": 15.0,
-                            "type": "Elevated",
+                            "caption": "More products...",
+                            "padding": 10.0,
+                            "type": "Outlined",
                             "stretched": false
                           },
                           "children": [],
