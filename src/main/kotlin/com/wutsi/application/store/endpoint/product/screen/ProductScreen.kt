@@ -236,7 +236,6 @@ class ProductScreen(
         else
             null
 
-
     private fun toAvailabilityWidget(product: Product): WidgetAware =
         Row(
             children = listOf(
@@ -350,14 +349,14 @@ class ProductScreen(
                 sortBy = ProductSort.RECOMMENDED.name,
                 limit = 30
             )
-        ).products.filter { it.id != product.id }
+        ).products.filter { it.id != product.id && it.accountId != product.accountId }
+        if (products.isEmpty())
+            return null
 
         // Sort - ensure all products in the same sub-categories... and from other merchants
         val xproducts = mutableListOf<ProductSummary>()
-        xproducts.addAll(products.filter { it.subCategoryId == product.subCategoryId && it.accountId != product.accountId })
-        xproducts.addAll(products.filter { it.subCategoryId != product.subCategoryId && it.accountId != product.accountId })
-        if (products.isEmpty())
-            return null
+        xproducts.addAll(products.filter { it.subCategoryId == product.subCategoryId })
+        xproducts.addAll(products.filter { it.subCategoryId != product.subCategoryId })
 
         // Component
         return Column(
