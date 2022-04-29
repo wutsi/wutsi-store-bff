@@ -27,7 +27,6 @@ internal class SettingsStoreScreenTest : AbstractEndpointTest() {
         assertEndpointEquals("/screens/settings/store/store.json", url)
     }
 
-
     @Test
     fun shippingEnabled() {
         doReturn(true).whenever(togglesProvider).isShippingEnabled()

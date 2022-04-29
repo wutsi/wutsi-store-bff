@@ -79,7 +79,6 @@ internal class CreateOrderCommandTest : AbstractEndpointTest() {
         assertEquals("http://localhost:0/checkout/review?order-id=555", action.url)
     }
 
-
     @Test
     fun createShippingEnabled() {
         // GIVEN
