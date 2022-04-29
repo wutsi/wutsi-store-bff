@@ -65,7 +65,7 @@ class SettingsShippingScreen(
                                     tenant
                                 ),
 
-                                if (togglesProvider.isShippingInternationalEnabled())
+                                if (togglesProvider.isInternationalShippingEnabled())
                                     listItem(
                                         ShippingType.INTERNATIONAL_SHIPPING,
                                         shippings,

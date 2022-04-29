@@ -1,12 +1,8 @@
 package com.wutsi.application.store.endpoint.settings.screen
 
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.ecommerce.catalog.dto.PictureSummary
-import com.wutsi.ecommerce.catalog.dto.ProductSummary
-import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -15,7 +11,7 @@ import org.springframework.boot.web.server.LocalServerPort
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class SettingsStoreScreenTest : AbstractEndpointTest() {
     @LocalServerPort
-    public val port: Int = 0
+    val port: Int = 0
 
     private lateinit var url: String
 
@@ -28,11 +24,14 @@ internal class SettingsStoreScreenTest : AbstractEndpointTest() {
 
     @Test
     fun index() {
-        val product1 = ProductSummary(id = 1, title = "1", summary = "Short description of product1")
-        val product2 = ProductSummary(id = 2, title = "2")
-        val product3 = ProductSummary(id = 3, title = "3", thumbnail = PictureSummary(url = "http://u.com/1.png"))
-        doReturn(SearchProductResponse(listOf(product1, product2, product3))).whenever(catalogApi).searchProducts(any())
-
         assertEndpointEquals("/screens/settings/store/store.json", url)
+    }
+
+
+    @Test
+    fun shippingEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingEnabled()
+
+        assertEndpointEquals("/screens/settings/store/store-shipping-enabled.json", url)
     }
 }

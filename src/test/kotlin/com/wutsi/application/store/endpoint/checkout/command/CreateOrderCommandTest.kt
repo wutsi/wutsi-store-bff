@@ -76,6 +76,35 @@ internal class CreateOrderCommandTest : AbstractEndpointTest() {
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/checkout/review?order-id=555", action.url)
+    }
+
+
+    @Test
+    fun createShippingEnabled() {
+        // GIVEN
+        doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
+        doReturn(true).whenever(togglesProvider).isShippingEnabled()
+
+        doReturn(CreateOrderResponse("555")).whenever(orderApi).createOrder(any())
+
+        // WHEN
+        val response = rest.postForEntity(url, null, Action::class.java)
+
+        // THEN
+        assertEquals(200, response.statusCodeValue)
+
+        val request = argumentCaptor<CreateOrderRequest>()
+        verify(orderApi).createOrder(request.capture())
+        assertEquals(111L, request.firstValue.merchantId)
+        assertEquals(2, request.firstValue.items.size)
+        assertEquals(cart.products[0].productId, request.firstValue.items[0].productId)
+        assertEquals(cart.products[0].quantity, request.firstValue.items[0].quantity)
+        assertEquals(cart.products[1].productId, request.firstValue.items[1].productId)
+        assertEquals(cart.products[1].quantity, request.firstValue.items[1].quantity)
+
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/address?order-id=555", action.url)
     }
 

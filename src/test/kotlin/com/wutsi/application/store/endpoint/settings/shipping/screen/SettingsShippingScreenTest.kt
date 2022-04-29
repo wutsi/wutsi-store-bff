@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.ListShippingResponse
@@ -20,9 +19,6 @@ internal class SettingsShippingScreenTest : AbstractEndpointTest() {
 
     @MockBean
     private lateinit var shippingApi: WutsiShippingApi
-
-    @MockBean
-    private lateinit var togglesProvider: TogglesProvider
 
     @BeforeEach
     override fun setUp() {
@@ -48,7 +44,7 @@ internal class SettingsShippingScreenTest : AbstractEndpointTest() {
 
     @Test
     fun internationalShippingEnabled() {
-        doReturn(true).whenever(togglesProvider).isShippingInternationalEnabled()
+        doReturn(true).whenever(togglesProvider).isInternationalShippingEnabled()
 
         val url = "http://localhost:$port/settings/store/shipping"
         assertEndpointEquals("/screens/settings/shipping/shipping-international-enabled.json", url)

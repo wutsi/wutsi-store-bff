@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
+import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.CategorySummary
 import com.wutsi.ecommerce.catalog.dto.PictureSummary
@@ -80,6 +81,9 @@ abstract class AbstractEndpointTest {
 
     @MockBean
     protected lateinit var catalogApi: WutsiCatalogApi
+
+    @MockBean
+    protected lateinit var togglesProvider: TogglesProvider
 
     @Autowired
     private lateinit var messages: MessageSource

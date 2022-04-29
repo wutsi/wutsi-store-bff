@@ -7,14 +7,12 @@ import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.order.dto.FilterOrderRequest
 import com.wutsi.ecommerce.order.dto.OrderSummary
-import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
-import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListView
@@ -88,15 +86,6 @@ abstract class AbstractOrderListScreen(
         ).toWidget()
     }
 
-    protected fun getDefaultOrderStatus(): OrderStatus = getOrderStatusList()[0]
-
-    private fun getOrderStatusList() = listOf(
-        OrderStatus.READY,
-        OrderStatus.PROCESSING,
-        OrderStatus.COMPLETED,
-        OrderStatus.CANCELLED,
-    )
-
     private fun toListView(orders: List<OrderSummary>): WidgetAware {
         val accountIds = orders.map { getAccountId(it) }.toSet()
         val accounts = accountApi.searchAccount(
@@ -135,10 +124,5 @@ abstract class AbstractOrderListScreen(
         caption = account?.displayName ?: "",
         subCaption = order.created.format(dateFormat) + " - " + getText("order.status.${order.status}"),
         action = getAction(order)
-    )
-
-    private fun orderStatusWidget(status: OrderStatus) = DropdownMenuItem(
-        value = status.name,
-        caption = getText("order.status.$status")
     )
 }

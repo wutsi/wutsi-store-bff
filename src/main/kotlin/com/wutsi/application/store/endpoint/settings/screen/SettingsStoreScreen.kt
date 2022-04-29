@@ -49,7 +49,7 @@ class SettingsStoreScreen : AbstractQuery() {
                         child = ListView(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
-                            children = listOf(
+                            children = listOfNotNull(
                                 ListItem(
                                     caption = getText("page.settings.store.sections"),
                                     leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_PRIMARY),
@@ -66,14 +66,19 @@ class SettingsStoreScreen : AbstractQuery() {
                                         urlBuilder.build("/settings/store/products")
                                     )
                                 ),
-                                ListItem(
-                                    caption = getText("page.settings.store.shipping"),
-                                    leading = Icon(code = Theme.ICON_SHIPPING, color = Theme.COLOR_PRIMARY),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("/settings/store/shipping")
+
+                                if (togglesProvider.isShippingEnabled())
+                                    ListItem(
+                                        caption = getText("page.settings.store.shipping"),
+                                        leading = Icon(code = Theme.ICON_SHIPPING, color = Theme.COLOR_PRIMARY),
+                                        trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                                        action = gotoUrl(
+                                            urlBuilder.build("/settings/store/shipping")
+                                        )
                                     )
-                                ),
+                                else
+                                    null,
+
                                 Container(
                                     padding = 20.0
                                 ),

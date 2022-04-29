@@ -35,10 +35,18 @@ class CreateOrderCommand(
                     }
                 )
             ).id
+
+            val shippingEnabled = togglesProvider.isShippingEnabled()
             logger.add("order_id", orderId)
-            return gotoUrl(
-                url = urlBuilder.build("checkout/address?order-id=$orderId")
-            )
+            logger.add("shipping_enabled", shippingEnabled)
+            return if (shippingEnabled)
+                gotoUrl(
+                    url = urlBuilder.build("checkout/address?order-id=$orderId")
+                )
+            else
+                gotoUrl(
+                    url = urlBuilder.build("checkout/review?order-id=$orderId")
+                )
         } catch (ex: FeignException.Conflict) {
             logger.setException(ex)
             return showError(getErrorText(ex))

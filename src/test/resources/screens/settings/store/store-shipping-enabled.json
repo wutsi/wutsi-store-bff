@@ -101,6 +101,32 @@
                   }
                 },
                 {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Shipping",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    },
+                    "leading": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "f18e",
+                        "color": "#1D7EDF"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping"
+                  }
+                },
+                {
                   "type": "Container",
                   "attributes": {
                     "padding": 20.0

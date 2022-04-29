@@ -8,7 +8,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.analytics.tracking.WutsiTrackingApi
 import com.wutsi.analytics.tracking.dto.PushTrackRequest
 import com.wutsi.analytics.tracking.entity.EventType
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.application.store.endpoint.TrackingHttpRequestInterceptor
@@ -35,9 +34,6 @@ import kotlin.test.assertNull
 internal class ProductScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
-
-    @MockBean
-    private lateinit var togglesProvider: TogglesProvider
 
     @MockBean
     private lateinit var cartApi: WutsiCartApi

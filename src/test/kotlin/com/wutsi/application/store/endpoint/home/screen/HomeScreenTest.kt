@@ -3,7 +3,6 @@ package com.wutsi.application.store.endpoint.home.screen
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
@@ -23,9 +22,6 @@ import org.springframework.boot.web.server.LocalServerPort
 internal class HomeScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
-
-    @MockBean
-    private lateinit var togglesProvider: TogglesProvider
 
     @MockBean
     private lateinit var cartApi: WutsiCartApi
