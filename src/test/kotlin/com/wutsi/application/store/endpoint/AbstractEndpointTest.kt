@@ -51,6 +51,13 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
+import org.springframework.http.ContentDisposition
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
+import org.springframework.http.MediaType
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestTemplate
 import java.nio.charset.Charset
 import java.time.OffsetDateTime
@@ -156,6 +163,33 @@ abstract class AbstractEndpointTest {
         doReturn(GetAccountResponse(account)).whenever(accountApi).getAccount(any())
 
         rest = createResTemplate()
+    }
+
+    protected fun uploadTo(url: String, filename: String) {
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.MULTIPART_FORM_DATA
+
+        // This nested HttpEntiy is important to create the correct
+        // Content-Disposition entry with metadata "name" and "filename"
+        val fileMap = LinkedMultiValueMap<String, String>()
+        val contentDisposition = ContentDisposition
+            .builder("form-data")
+            .name("file")
+            .filename(filename)
+            .build()
+        fileMap.add(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString())
+        val fileEntity = HttpEntity<ByteArray>("test".toByteArray(), fileMap)
+
+        val body = LinkedMultiValueMap<String, Any>()
+        body.add("file", fileEntity)
+
+        val requestEntity = HttpEntity<MultiValueMap<String, Any>>(body, headers)
+        rest.exchange(
+            url,
+            HttpMethod.POST,
+            requestEntity,
+            Any::class.java
+        )
     }
 
     private fun createResTemplate(

@@ -8,15 +8,17 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.ecommerce.catalog.dto.AddPictureRequest
+import com.wutsi.ecommerce.catalog.dto.UpdateProductAttributeRequest
 import com.wutsi.platform.core.storage.StorageService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.web.server.LocalServerPort
 import java.net.URL
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-internal class UploadPictureCommandTest : AbstractEndpointTest() {
+internal class UploadNumericFileCommandTest : AbstractEndpointTest() {
     @MockBean
     lateinit var storageService: StorageService
 
@@ -31,26 +33,26 @@ internal class UploadPictureCommandTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/commands/upload-picture?id=$productId"
+        url = "http://localhost:$port/commands/upload-numeric-file?id=$productId"
     }
 
     @Test
     fun upload() {
         // GIVEN
-        val fileUrl = URL("http://www.wutsi.com/asset/1/toto.png")
+        val fileUrl = URL("http://www.wutsi.com/asset/1/toto.zip")
         doReturn(fileUrl).whenever(storageService).store(any(), any(), anyOrNull(), anyOrNull(), anyOrNull())
 
         // WHEN
-        uploadTo(url, "toto.png")
+        uploadTo(url, "file.zip")
 
         // THEN
         val path = argumentCaptor<String>()
-        verify(storageService).store(path.capture(), any(), eq("image/png"), anyOrNull(), anyOrNull())
-        kotlin.test.assertTrue(path.firstValue.startsWith("product/$productId/pictures/"))
-        kotlin.test.assertTrue(path.firstValue.endsWith("toto.png"))
+        verify(storageService).store(path.capture(), any(), eq("application/zip"), anyOrNull(), anyOrNull())
+        assertTrue(path.firstValue.startsWith("product/$productId/files/"))
+        assertTrue(path.firstValue.endsWith("file.zip"))
 
-        val req = argumentCaptor<AddPictureRequest>()
-        verify(catalogApi).addPicture(eq(productId), req.capture())
-        kotlin.test.assertEquals(fileUrl.toString(), req.firstValue.url)
+        val req = argumentCaptor<UpdateProductAttributeRequest>()
+        verify(catalogApi).updateProductAttribute(eq(productId), eq("numeric-file-url"), req.capture())
+        assertEquals(fileUrl.toString(), req.firstValue.value)
     }
 }
