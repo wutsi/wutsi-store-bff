@@ -52,7 +52,7 @@
             {
               "type": "Input",
               "attributes": {
-                "name": "value",
+                "name": "file",
                 "hideText": false,
                 "required": false,
                 "caption": "Digital File",
@@ -63,32 +63,6 @@
                 "uploadUrl": "http://localhost:0/commands/upload-product-file?product-id=0"
               },
               "children": []
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "Input",
-              "attributes": {
-                "name": "submit",
-                "hideText": false,
-                "required": false,
-                "caption": "Submit",
-                "enabled": true,
-                "readOnly": false,
-                "type": "Submit",
-                "minLength": 0
-              },
-              "children": [],
-              "action": {
-                "type": "Command",
-                "url": "http://localhost:0/commands/update-product-attribute?id=777&name=numeric-file-url"
-              }
             }
           ]
         }

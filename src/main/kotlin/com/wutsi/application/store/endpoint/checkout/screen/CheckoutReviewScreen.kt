@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.ActionModel
-import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.AddressCard
@@ -48,7 +47,6 @@ class CheckoutReviewScreen(
     private val shippingApi: WutsiShippingApi,
     private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
-    private val cityService: CityService,
 
     @Value("\${wutsi.application.login-url}") private val loginUrl: String
 ) : AbstractQuery() {

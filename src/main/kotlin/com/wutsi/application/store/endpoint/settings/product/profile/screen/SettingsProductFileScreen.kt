@@ -18,8 +18,10 @@ class SettingsProductFileScreen(
 
     override fun getPageId() = Page.SETTINGS_STORE_PRODUCT_FILE
 
+    override fun showSubmitButton() = false
+
     override fun getInputWidget(product: Product): WidgetAware = Input(
-        name = "value",
+        name = "file",
         type = InputType.File,
         caption = getText("page.settings.store.product.attribute.${getAttributeName()}"),
         uploadUrl = urlBuilder.build("commands/upload-product-file?product-id=${product.id}"),
