@@ -187,7 +187,7 @@
                                     {
                                       "type": "Container",
                                       "attributes": {
-                                        "background": "#e8e8e8"
+                                        "background": "#FFFFFF"
                                       },
                                       "children": [
                                         {
@@ -344,7 +344,7 @@
                                     {
                                       "type": "Container",
                                       "attributes": {
-                                        "background": "#e8e8e8"
+                                        "background": "#FFFFFF"
                                       },
                                       "children": [
                                         {
@@ -511,7 +511,7 @@
                                     {
                                       "type": "Container",
                                       "attributes": {
-                                        "background": "#e8e8e8"
+                                        "background": "#FFFFFF"
                                       },
                                       "children": [
                                         {
@@ -668,7 +668,7 @@
                                     {
                                       "type": "Container",
                                       "attributes": {
-                                        "background": "#e8e8e8"
+                                        "background": "#FFFFFF"
                                       },
                                       "children": [
                                         {

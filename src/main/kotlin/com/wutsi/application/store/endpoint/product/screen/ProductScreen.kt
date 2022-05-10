@@ -176,21 +176,21 @@ class ProductScreen(
             )
         )
 
-        val similar = toSimilarProductsWidget(product, tenant)
-        if (similar != null)
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER),
-                    similar
-                )
-            )
-
         val others = toMerchantProductsWidget(product, tenant)
         if (others != null)
             children.addAll(
                 listOf(
                     Divider(color = Theme.COLOR_DIVIDER),
                     others
+                )
+            )
+
+        val similar = toSimilarProductsWidget(product, tenant)
+        if (similar != null)
+            children.addAll(
+                listOf(
+                    Divider(color = Theme.COLOR_DIVIDER),
+                    similar
                 )
             )
 
