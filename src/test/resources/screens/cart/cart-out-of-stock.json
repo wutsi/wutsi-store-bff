@@ -42,7 +42,7 @@
                       "type": "ListItem",
                       "attributes": {
                         "caption": "Ray Sponsible",
-                        "subCaption": "Marketing",
+                        "subCaption": "Business Account - Marketing",
                         "padding": 10.0,
                         "leading": {
                           "type": "CircleAvatar",

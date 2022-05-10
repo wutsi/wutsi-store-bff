@@ -50,19 +50,25 @@
           },
           "children": [
             {
-              "type": "Input",
-              "attributes": {
-                "name": "file",
-                "hideText": false,
-                "required": false,
-                "caption": "Digital File",
-                "enabled": true,
-                "readOnly": false,
-                "type": "File",
-                "minLength": 0,
-                "uploadUrl": "http://localhost:0/commands/upload-product-file?product-id=0"
-              },
-              "children": []
+              "type": "Column",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "file",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Digital File",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "File",
+                    "minLength": 0,
+                    "uploadUrl": "http://localhost:0/commands/upload-product-file?product-id=0"
+                  },
+                  "children": []
+                }
+              ]
             }
           ]
         }

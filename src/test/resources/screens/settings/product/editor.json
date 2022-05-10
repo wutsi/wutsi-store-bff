@@ -46,7 +46,7 @@
                   "type": "DropdownButton",
                   "attributes": {
                     "name": "subCategoryId",
-                    "hint": "Category (required)",
+                    "hint": "Category (Required)",
                     "required": true
                   },
                   "children": [
@@ -91,6 +91,7 @@
                   "type": "DropdownButton",
                   "attributes": {
                     "name": "type",
+                    "value": "PHYSICAL",
                     "hint": "Type (Required)",
                     "required": true
                   },
@@ -128,8 +129,8 @@
                   "attributes": {
                     "name": "summary",
                     "hideText": false,
-                    "required": false,
-                    "caption": "Summary",
+                    "required": true,
+                    "caption": "Summary (Required)",
                     "enabled": true,
                     "readOnly": false,
                     "type": "Text",

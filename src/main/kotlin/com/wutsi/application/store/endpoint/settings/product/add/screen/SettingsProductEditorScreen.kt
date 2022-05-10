@@ -6,6 +6,7 @@ import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchCategoryRequest
+import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Container
@@ -82,16 +83,16 @@ class SettingsProductEditorScreen(
                             child = DropdownButton(
                                 name = "type",
                                 hint = getText("page.settings.store.product.editor.type"),
-                                value = null,
+                                value = ProductType.PHYSICAL.name,
                                 required = true,
                                 children = listOf(
                                     DropdownMenuItem(
                                         caption = getText("product.type.PHYSICAL"),
-                                        value = "PHYSICAL",
+                                        value = ProductType.PHYSICAL.name,
                                     ),
                                     DropdownMenuItem(
                                         caption = getText("product.type.NUMERIC"),
-                                        value = "NUMERIC",
+                                        value = ProductType.NUMERIC.name,
                                     ),
                                 )
                             )
@@ -101,7 +102,8 @@ class SettingsProductEditorScreen(
                             child = Input(
                                 name = "summary",
                                 maxLength = 160,
-                                caption = getText("page.settings.store.product.editor.summary")
+                                caption = getText("page.settings.store.product.editor.summary"),
+                                required = true
                             )
                         ),
                         Container(

@@ -40,7 +40,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.net.URL
 import java.text.DecimalFormat
 
 @RestController
@@ -333,13 +332,6 @@ class SettingsProductScreen(
                 getText("error.unexpected")
             }
         }.toSet()
-
-    private fun getFileName(url: String): String? =
-        try {
-            URL(url).file
-        } catch (ex: Exception) {
-            null
-        }
 
     private fun description(value: String?): String? =
         if (value == null)

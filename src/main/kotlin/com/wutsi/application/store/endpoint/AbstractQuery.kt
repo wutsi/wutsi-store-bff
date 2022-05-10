@@ -10,8 +10,24 @@ import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
+import java.net.URL
 
 abstract class AbstractQuery : AbstractEndpoint() {
+    protected fun getFileName(url: String?): String? {
+        url ?: return null
+
+        try {
+            val file = URL(url).file
+            val i = file.lastIndexOf("/")
+            return if (i >= 0)
+                file.substring(i + 1)
+            else
+                file
+        } catch (ex: Exception) {
+            return null
+        }
+    }
+
     protected fun titleBarActions(
         productId: Long?,
         merchantId: Long,

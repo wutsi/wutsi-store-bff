@@ -21,6 +21,7 @@ class SettingsProductSummaryScreen(
         name = "value",
         value = product.summary,
         maxLength = 160,
-        caption = getText("page.settings.store.product.attribute.${getAttributeName()}")
+        caption = getText("page.settings.store.product.attribute.${getAttributeName()}"),
+        required = true
     )
 }

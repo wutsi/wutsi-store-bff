@@ -218,6 +218,7 @@
                       "type": "ListItem",
                       "attributes": {
                         "caption": "Ray Sponsible",
+                        "subCaption": "Business Account",
                         "iconRight": "e15f",
                         "padding": 10.0,
                         "trailing": {

@@ -79,7 +79,8 @@
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "Marketing",
+                            "caption": "Business Account",
+                            "color": "#95A5A6",
                             "alignment": "Center"
                           },
                           "children": []
