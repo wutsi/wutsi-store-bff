@@ -53,7 +53,7 @@
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "Foo > c1",
+                        "caption": "c1",
                         "enabled": true,
                         "value": "1"
                       },
@@ -62,7 +62,7 @@
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "Foo > c2",
+                        "caption": "c2",
                         "enabled": true,
                         "value": "2"
                       },
@@ -71,7 +71,7 @@
                     {
                       "type": "DropdownMenuItem",
                       "attributes": {
-                        "caption": "Foo > c3",
+                        "caption": "c3",
                         "enabled": true,
                         "value": "3"
                       },

@@ -72,7 +72,7 @@ class SettingsProductEditorScreen(
                                     .sortedBy { it.title }
                                     .map {
                                         DropdownMenuItem(
-                                            caption = "${category.title} > ${it.title}",
+                                            caption = it.title,
                                             value = it.id.toString(),
                                         )
                                     }
