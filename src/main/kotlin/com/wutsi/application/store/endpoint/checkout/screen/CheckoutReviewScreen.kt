@@ -138,7 +138,7 @@ class CheckoutReviewScreen(
 
     private fun toPriceWidget(order: Order, tenant: Tenant) = PriceSummaryCard(
         model = sharedUIMapper.toPriceSummaryModel(order, tenant),
-        action = if (togglesProvider.isPaymentEnabled())
+        action = if (togglesProvider.isOrderPaymentEnabled())
             ActionModel(
                 caption = getText(
                     "page.checkout.review.button.pay",

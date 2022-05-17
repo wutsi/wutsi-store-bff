@@ -54,7 +54,7 @@ internal class CheckoutReviewScreenTest : AbstractEndpointTest() {
 
     @Test
     fun paymentEnabled() {
-        doReturn(true).whenever(togglesProvider).isPaymentEnabled()
+        doReturn(true).whenever(togglesProvider).isOrderPaymentEnabled()
 
         val url = "http://localhost:$port/checkout/review?order-id=111"
         assertEndpointEquals("/screens/checkout/review-payment-enabled.json", url)

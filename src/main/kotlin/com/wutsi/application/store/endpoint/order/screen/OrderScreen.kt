@@ -218,7 +218,7 @@ class OrderScreen(
 
     private fun toPriceWidget(order: Order, tenant: Tenant) = PriceSummaryCard(
         model = sharedUIMapper.toPriceSummaryModel(order, tenant),
-        showPaymentStatus = togglesProvider.isPaymentEnabled(),
+        showPaymentStatus = togglesProvider.isOrderPaymentEnabled(),
     )
 
     private fun toRow(name: String, value: String) = Row(

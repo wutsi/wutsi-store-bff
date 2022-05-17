@@ -82,7 +82,7 @@ internal class OrderScreenTest : AbstractEndpointTest() {
 
     @Test
     fun paymentEnabled() {
-        doReturn(true).whenever(togglesProvider).isPaymentEnabled()
+        doReturn(true).whenever(togglesProvider).isOrderPaymentEnabled()
 
         val url = "http://localhost:$port/order?id=111&hide-merchant=true"
         assertEndpointEquals("/screens/order/order-payment-enabled.json", url)
