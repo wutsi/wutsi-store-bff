@@ -154,7 +154,7 @@ class CheckoutReviewScreen(
             ActionModel(
                 caption = getText("page.checkout.review.button.submit"),
                 action = gotoUrl(
-                    url = urlBuilder.build(loginUrl, "commands/submit-order?order-id=${order.id}")
+                    url = urlBuilder.build("commands/submit-order?order-id=${order.id}")
                 )
             )
     )

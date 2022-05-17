@@ -512,7 +512,7 @@
                       "children": [],
                       "action": {
                         "type": "Route",
-                        "url": "https://wutsi-gateway-test.herokuapp.com/login/commands/submit-order?order-id=111"
+                        "url": "http://localhost:0/commands/submit-order?order-id=111"
                       }
                     }
                   ]
