@@ -11,6 +11,7 @@ import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.GetShippingResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -36,13 +37,26 @@ internal class CheckoutReviewScreenTest : AbstractEndpointTest() {
 
     private val shipping = createShipping(ShippingType.LOCAL_PICKUP)
 
-    @Test
-    fun index() {
+    @BeforeEach
+    override fun setUp() {
+        super.setUp()
+
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
         doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
         doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
+    }
 
+    @Test
+    fun index() {
         val url = "http://localhost:$port/checkout/review?order-id=111"
         assertEndpointEquals("/screens/checkout/review.json", url)
+    }
+
+    @Test
+    fun paymentEnabled() {
+        doReturn(true).whenever(togglesProvider).isPaymentEnabled()
+
+        val url = "http://localhost:$port/checkout/review?order-id=111"
+        assertEndpointEquals("/screens/checkout/review-payment-enabled.json", url)
     }
 }

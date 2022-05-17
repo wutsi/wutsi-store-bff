@@ -138,17 +138,25 @@ class CheckoutReviewScreen(
 
     private fun toPriceWidget(order: Order, tenant: Tenant) = PriceSummaryCard(
         model = sharedUIMapper.toPriceSummaryModel(order, tenant),
-        action = ActionModel(
-            caption = getText(
-                "page.checkout.review.button.pay",
-                arrayOf(
-                    DecimalFormat(tenant.monetaryFormat).format(order.totalPrice)
+        action = if (togglesProvider.isPaymentEnabled())
+            ActionModel(
+                caption = getText(
+                    "page.checkout.review.button.pay",
+                    arrayOf(
+                        DecimalFormat(tenant.monetaryFormat).format(order.totalPrice)
+                    )
+                ),
+                action = gotoUrl(
+                    url = urlBuilder.build(loginUrl, getPaymentUrl(order.id))
                 )
-            ),
-            action = gotoUrl(
-                url = urlBuilder.build(loginUrl, getPaymentUrl(order.id))
             )
-        )
+        else
+            ActionModel(
+                caption = getText("page.checkout.review.button.submit"),
+                action = gotoUrl(
+                    url = urlBuilder.build(loginUrl, "commands/submit-order?order-id=${order.id}")
+                )
+            )
     )
 
     private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware {

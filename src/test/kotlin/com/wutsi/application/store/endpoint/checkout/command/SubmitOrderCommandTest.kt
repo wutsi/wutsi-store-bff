@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.checkout.command
 
 import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.never
@@ -16,21 +15,16 @@ import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.platform.payment.WutsiPaymentApi
-import com.wutsi.platform.payment.core.ErrorCode
-import com.wutsi.platform.payment.dto.CreateTransferRequest
-import com.wutsi.platform.payment.dto.CreateTransferResponse
-import com.wutsi.platform.payment.error.ErrorURN
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.web.server.LocalServerPort
 import java.net.URLEncoder
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class PayOrderCommandTest : AbstractEndpointTest() {
+internal class SubmitOrderCommandTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
 
@@ -58,7 +52,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/commands/pay-order?order-id=111"
+        url = "http://localhost:$port/commands/submit-order?order-id=111"
     }
 
     @Test
@@ -66,21 +60,11 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        doReturn(CreateTransferResponse("xxx")).whenever(paymentApi).createTransfer(any())
-
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
 
         // THEN
         assertEquals(200, response.statusCodeValue)
-
-        val request = argumentCaptor<CreateTransferRequest>()
-        verify(paymentApi).createTransfer(request.capture())
-        assertEquals(order.id, request.firstValue.orderId)
-        assertEquals(order.currency, request.firstValue.currency)
-        assertEquals(order.merchantId, request.firstValue.recipientId)
-        assertEquals(order.totalPrice, request.firstValue.amount)
-        assertNull(request.firstValue.description)
 
         verify(cartApi).emptyCart(order.merchantId)
         verify(orderApi).submitOrder("111")
@@ -91,35 +75,12 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun paymentError() {
-        // GIVEN
-        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
-
-        val ex = createFeignException(ErrorURN.TRANSACTION_FAILED.urn, downstreamError = ErrorCode.NOT_ENOUGH_FUNDS)
-        doThrow(ex).whenever(paymentApi).createTransfer(any())
-
-        // WHEN
-        val response = rest.postForEntity(url, null, Action::class.java)
-
-        // THEN
-        assertEquals(200, response.statusCodeValue)
-
-        val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
-        val action = response.body!!
-        assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
-
-        verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).submitOrder(any())
-    }
-
-    @Test
     fun unexpectedError() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        val ex = createFeignException(ErrorURN.TRANSACTION_FAILED.urn, downstreamError = ErrorCode.UNEXPECTED_ERROR)
-        doThrow(ex).whenever(paymentApi).createTransfer(any())
+        val ex = createFeignException(com.wutsi.ecommerce.order.error.ErrorURN.ILLEGAL_STATUS.urn)
+        doThrow(ex).whenever(orderApi).submitOrder(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
@@ -127,12 +88,11 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
-        val message = URLEncoder.encode(getText("error.payment"), "utf-8")
+        val message = URLEncoder.encode(getText("error.unexpected"), "utf-8")
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
 
         verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).submitOrder(any())
     }
 }

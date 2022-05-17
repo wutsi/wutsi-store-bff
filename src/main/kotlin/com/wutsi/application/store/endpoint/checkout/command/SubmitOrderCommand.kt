@@ -5,8 +5,6 @@ import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.core.logging.KVLogger
-import com.wutsi.platform.payment.WutsiPaymentApi
-import com.wutsi.platform.payment.dto.CreateTransferRequest
 import feign.FeignException
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/commands/pay-order")
-class PayOrderCommand(
+@RequestMapping("/commands/submit-order")
+class SubmitOrderCommand(
     private val orderApi: WutsiOrderApi,
-    private val paymentApi: WutsiPaymentApi,
     private val logger: KVLogger,
 ) : AbstractCommand() {
     companion object {
-        private val LOGGER = LoggerFactory.getLogger(PayOrderCommand::class.java)
+        private val LOGGER = LoggerFactory.getLogger(SubmitOrderCommand::class.java)
     }
 
     @PostMapping
@@ -30,19 +27,8 @@ class PayOrderCommand(
         @RequestParam(name = "order-id") orderId: String,
     ): Action {
         try {
-            // Pay
-            val order = orderApi.getOrder(orderId).order
-            val id = paymentApi.createTransfer(
-                request = CreateTransferRequest(
-                    recipientId = order.merchantId,
-                    amount = order.totalPrice,
-                    currency = order.currency,
-                    orderId = order.id
-                )
-            ).id
-            logger.add("transaction_id", id)
-
             // Submit the order
+            val order = orderApi.getOrder(orderId).order
             orderApi.submitOrder(orderId)
 
             // Empty the cart

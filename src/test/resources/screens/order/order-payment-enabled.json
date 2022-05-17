@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.checkout.review",
+    "id": "page.order",
     "safe": false
   },
   "children": [
@@ -16,6 +16,182 @@
             "crossAxisAlignment": "start"
           },
           "children": [
+            {
+              "type": "Row",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 1,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Order ID",
+                            "bold": true
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 2,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "111",
+                            "size": 10.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Row",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 1,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Order Date",
+                            "bold": true
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 2,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "05 May 2020, 01:01",
+                            "size": 10.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Row",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 1,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Status",
+                            "bold": true
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 2,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Created",
+                            "size": 10.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
             {
               "type": "Container",
               "attributes": {
@@ -32,7 +208,7 @@
                     {
                       "type": "Text",
                       "attributes": {
-                        "caption": "Merchant",
+                        "caption": "Customer",
                         "bold": true,
                         "size": 16.0
                       },
@@ -42,8 +218,16 @@
                       "type": "ListItem",
                       "attributes": {
                         "caption": "Ray Sponsible",
-                        "subCaption": "Business Account - Marketing",
+                        "subCaption": "Business Account",
+                        "iconRight": "e15f",
                         "padding": 10.0,
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e15f"
+                          },
+                          "children": []
+                        },
                         "leading": {
                           "type": "CircleAvatar",
                           "attributes": {
@@ -62,7 +246,11 @@
                           ]
                         }
                       },
-                      "children": []
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=1"
+                      }
                     }
                   ]
                 }
@@ -195,118 +383,6 @@
             {
               "type": "Container",
               "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "Shipping",
-                        "bold": true,
-                        "size": 16.0
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": [
-                        {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Local Pickup - Expected delivery: 03 Jan 2020"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "padding": 10.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "This is the message to display to customer",
-                                "maxLines": 5
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "Ship To:",
-                        "bold": true
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": [
-                        {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Ray Sponsible"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "180 Rue des Manguier, Bonnapriso",
-                                "maxLines": 3
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Cameroon"
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Container",
-              "attributes": {
                 "padding": 10.0,
                 "margin": 10.0,
                 "border": 1.0,
@@ -393,7 +469,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "1,000 CFA",
+                                "caption": "0 CFA",
                                 "bold": false,
                                 "alignment": "Right"
                               },
@@ -498,22 +574,100 @@
                     {
                       "type": "Container",
                       "attributes": {
-                        "padding": 10.0
+                        "background": "#e4edf7"
                       },
-                      "children": []
+                      "children": [
+                        {
+                          "type": "Row",
+                          "attributes": {
+                            "mainAxisAlignment": "spaceBetween"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Total Paid",
+                                    "bold": true
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "20,000 CFA",
+                                    "bold": true,
+                                    "alignment": "Right"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
-                      "type": "Button",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "Submit to Merchant",
-                        "padding": 15.0,
-                        "type": "Elevated"
+                        "background": "#e4edf7"
                       },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "https://wutsi-gateway-test.herokuapp.com/login/commands/submit-order?order-id=111"
-                      }
+                      "children": [
+                        {
+                          "type": "Row",
+                          "attributes": {
+                            "mainAxisAlignment": "spaceBetween"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Balance",
+                                    "bold": true
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "-5,000 CFA",
+                                    "bold": true,
+                                    "alignment": "Right"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -527,11 +681,69 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Your Order",
+      "title": "Order",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"
     },
     "children": []
+  },
+  "bottomNavigationBar": {
+    "type": "BottomNavigationBar",
+    "attributes": {
+      "background": "#1D7EDF",
+      "selectedItemColor": "#FFFFFF",
+      "unselectedItemColor": "#FFFFFF"
+    },
+    "children": [
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f107",
+          "caption": "Home"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "route:/~"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f27b",
+          "caption": "Me"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "e314",
+          "caption": "Transactions"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/cash/history"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f36e",
+          "caption": "Settings"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
+        }
+      }
+    ]
   }
 }
