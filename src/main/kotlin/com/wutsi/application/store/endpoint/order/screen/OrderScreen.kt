@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.order.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.AddressCard
 import com.wutsi.application.shared.ui.OrderItemListItem
@@ -47,7 +46,6 @@ class OrderScreen(
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
     private val shippingApi: WutsiShippingApi,
-    private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
 

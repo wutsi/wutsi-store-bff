@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.ui.ProfileCard
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -35,7 +34,6 @@ import javax.servlet.http.HttpServletRequest
 class CheckoutSuccessScreen(
     private val orderApi: WutsiOrderApi,
     private val accountApi: WutsiAccountApi,
-    private val sharedUIMapper: SharedUIMapper
 ) : AbstractQuery() {
     @PostMapping
     fun index(

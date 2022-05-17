@@ -3,7 +3,6 @@ package com.wutsi.application.store.endpoint.home.screen
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.AccountModel
 import com.wutsi.application.shared.model.ProductModel
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController
 class SectionScreen(
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
-    private val sharedUIMapper: SharedUIMapper,
 ) : ProductActionProvider, AbstractQuery() {
     override fun getAction(model: ProductModel): Action =
         gotoUrl(

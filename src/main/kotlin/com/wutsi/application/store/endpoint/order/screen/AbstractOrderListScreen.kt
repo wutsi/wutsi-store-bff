@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.order.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.store.endpoint.AbstractQuery
@@ -34,7 +33,6 @@ import java.time.format.DateTimeFormatter
 abstract class AbstractOrderListScreen(
     private val accountApi: WutsiAccountApi,
     private val tenantProvider: TenantProvider,
-    private val sharedUIMapper: SharedUIMapper,
 ) : AbstractQuery() {
     protected abstract fun getPageId(): String
     protected abstract fun getFilterUrl(): String

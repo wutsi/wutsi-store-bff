@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.cart.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.ActionModel
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.CartItemListItem
 import com.wutsi.application.shared.ui.PriceSummaryCard
@@ -39,7 +38,6 @@ class CartScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
     private val tenantProvider: TenantProvider,
-    private val sharedUIMapper: SharedUIMapper,
 ) : AbstractQuery() {
 
     @PostMapping

@@ -2,7 +2,6 @@ package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.CityService
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -31,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController
 class SettingsShippingProfileScreen(
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
-    private val sharedUIMapper: SharedUIMapper,
     private val cityService: CityService,
 ) : AbstractQuery() {
     @PostMapping

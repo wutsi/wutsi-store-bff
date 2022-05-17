@@ -4,7 +4,6 @@ import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.AccountModel
 import com.wutsi.application.shared.model.ProductModel
 import com.wutsi.application.shared.service.PhoneUtil
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
@@ -45,7 +44,6 @@ class HomeScreen(
     private val accountApi: WutsiAccountApi,
     private val catalogApi: WutsiCatalogApi,
     private val tenantProvider: TenantProvider,
-    private val sharedUIMapper: SharedUIMapper,
 ) : ProductActionProvider, AbstractQuery() {
     override fun getAction(model: ProductModel): Action =
         gotoUrl(

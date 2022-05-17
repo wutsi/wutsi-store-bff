@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.product.list.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProductListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
@@ -33,7 +32,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/settings/store/products")
 class SettingsProductListScreen(
     private val catalogApi: WutsiCatalogApi,
-    private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     companion object {

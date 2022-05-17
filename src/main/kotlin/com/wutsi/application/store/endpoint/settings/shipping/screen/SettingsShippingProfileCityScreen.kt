@@ -1,8 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.service.CityService
-import com.wutsi.application.shared.service.SharedUIMapper
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.flutter.sdui.DropdownMenuItem
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/settings/store/shipping/attribute/city-id")
 class SettingsShippingProfileCityScreen(
     private val cityService: CityService,
-    private val sharedUIMapper: SharedUIMapper,
-    private val tenantProvider: TenantProvider
 ) : AbstractSettingsShippingProfileAttributeScreen() {
     override fun getAttributeName() = "city-id"
 

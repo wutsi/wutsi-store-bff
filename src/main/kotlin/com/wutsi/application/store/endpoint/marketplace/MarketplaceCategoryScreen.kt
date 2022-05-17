@@ -3,7 +3,6 @@ package com.wutsi.application.store.endpoint.marketplace
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.AccountModel
 import com.wutsi.application.shared.model.ProductModel
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController
 class MarketplaceCategoryScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
-    private val sharedUIMapper: SharedUIMapper,
     private val tenantProvider: TenantProvider,
 ) : ProductActionProvider, AbstractQuery() {
     override fun getAction(model: ProductModel): Action =

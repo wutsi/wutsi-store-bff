@@ -1,6 +1,5 @@
 package com.wutsi.application.store.endpoint.order.screen
 
-import com.wutsi.application.shared.service.SharedUIMapper
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.application.store.endpoint.order.dto.FilterOrderRequest
@@ -17,9 +16,8 @@ import org.springframework.web.bind.annotation.RestController
 class OrdersScreen(
     accountApi: WutsiAccountApi,
     tenantProvider: TenantProvider,
-    sharedUIMapper: SharedUIMapper,
     private val orderApi: WutsiOrderApi,
-) : AbstractOrderListScreen(accountApi, tenantProvider, sharedUIMapper) {
+) : AbstractOrderListScreen(accountApi, tenantProvider) {
     override fun getPageId() = Page.ORDER
 
     override fun getFilterUrl() = urlBuilder.build("/orders")
