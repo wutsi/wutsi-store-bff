@@ -35,7 +35,7 @@ class SaveShippingAddressCommand(
         )
 
         return gotoUrl(
-            urlBuilder.build("/checkout/shipping?order-id=$orderId")
+            urlBuilder.build("checkout/shipping?order-id=$orderId")
         )
     }
 }

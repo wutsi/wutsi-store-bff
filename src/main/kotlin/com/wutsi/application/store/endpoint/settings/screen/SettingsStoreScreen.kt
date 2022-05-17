@@ -55,7 +55,7 @@ class SettingsStoreScreen : AbstractQuery() {
                                     leading = Icon(code = Theme.ICON_CATEGORY, color = Theme.COLOR_PRIMARY),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
-                                        urlBuilder.build("/settings/store/sections")
+                                        urlBuilder.build("settings/store/sections")
                                     )
                                 ),
                                 ListItem(
@@ -63,7 +63,7 @@ class SettingsStoreScreen : AbstractQuery() {
                                     leading = Icon(code = Theme.ICON_SHOPPING_BAG, color = Theme.COLOR_PRIMARY),
                                     trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                     action = gotoUrl(
-                                        urlBuilder.build("/settings/store/products")
+                                        urlBuilder.build("settings/store/products")
                                     )
                                 ),
 
@@ -73,11 +73,20 @@ class SettingsStoreScreen : AbstractQuery() {
                                         leading = Icon(code = Theme.ICON_SHIPPING, color = Theme.COLOR_PRIMARY),
                                         trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
                                         action = gotoUrl(
-                                            urlBuilder.build("/settings/store/shipping")
+                                            urlBuilder.build("settings/store/shipping")
                                         )
                                     )
                                 else
                                     null,
+
+                                ListItem(
+                                    caption = getText("page.settings.store.orders"),
+                                    leading = Icon(code = Theme.ICON_ORDERS, color = Theme.COLOR_PRIMARY),
+                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                                    action = gotoUrl(
+                                        urlBuilder.build("orders")
+                                    )
+                                ),
 
                                 Container(
                                     padding = 20.0

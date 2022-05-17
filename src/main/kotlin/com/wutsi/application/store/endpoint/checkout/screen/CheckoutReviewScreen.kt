@@ -153,7 +153,7 @@ class CheckoutReviewScreen(
         else
             ActionModel(
                 caption = getText("page.checkout.review.button.submit"),
-                action = gotoUrl(
+                action = executeCommand(
                     url = urlBuilder.build("commands/submit-order?order-id=${order.id}")
                 )
             )

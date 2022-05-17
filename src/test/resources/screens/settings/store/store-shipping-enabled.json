@@ -127,6 +127,32 @@
                   }
                 },
                 {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Orders",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    },
+                    "leading": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "f37a",
+                        "color": "#1D7EDF"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/orders"
+                  }
+                },
+                {
                   "type": "Container",
                   "attributes": {
                     "padding": 20.0

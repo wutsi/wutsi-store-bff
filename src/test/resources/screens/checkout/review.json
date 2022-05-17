@@ -511,7 +511,7 @@
                       },
                       "children": [],
                       "action": {
-                        "type": "Route",
+                        "type": "Command",
                         "url": "http://localhost:0/commands/submit-order?order-id=111"
                       }
                     }

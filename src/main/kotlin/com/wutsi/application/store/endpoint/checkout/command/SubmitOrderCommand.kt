@@ -35,13 +35,13 @@ class SubmitOrderCommand(
             emptyCart(order)
 
             return gotoUrl(
-                url = urlBuilder.build("/checkout/success?order-id=$orderId")
+                url = urlBuilder.build("checkout/success?order-id=$orderId")
             )
         } catch (ex: FeignException) {
             logger.setException(ex)
             val error = getErrorText(ex)
             return gotoUrl(
-                url = urlBuilder.build("/checkout/success?order-id=$orderId&error=" + encodeURLParam(error))
+                url = urlBuilder.build("checkout/success?order-id=$orderId&error=" + encodeURLParam(error))
             )
         }
     }
