@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/order")
-class OrderScreen(
+@RequestMapping("/me/order")
+class MyOrderScreen(
     orderApi: WutsiOrderApi,
     accountApi: WutsiAccountApi,
     catalogApi: WutsiCatalogApi,
     shippingApi: WutsiShippingApi,
     tenantProvider: TenantProvider,
 ) : AbstractOrderScreen(orderApi, accountApi, catalogApi, shippingApi, tenantProvider) {
-    override fun getPageId() = Page.ORDER
-    override fun showMerchantInfo() = false
+    override fun getPageId() = Page.MY_ORDER
+    override fun showMerchantInfo() = true
 }

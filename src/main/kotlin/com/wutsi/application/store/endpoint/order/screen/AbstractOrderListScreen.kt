@@ -35,7 +35,6 @@ abstract class AbstractOrderListScreen(
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     protected abstract fun getPageId(): String
-    protected abstract fun getFilterUrl(): String
     protected abstract fun getTitle(): String
     protected abstract fun getOrders(request: FilterOrderRequest?): List<OrderSummary>
     protected abstract fun getAction(order: OrderSummary): Action

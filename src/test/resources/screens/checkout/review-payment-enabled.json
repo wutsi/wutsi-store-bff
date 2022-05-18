@@ -228,15 +228,6 @@
                             "size": 14.0
                           },
                           "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "This is the message to display to customer",
-                            "size": 14.0,
-                            "maxLines": 5
-                          },
-                          "children": []
                         }
                       ]
                     },

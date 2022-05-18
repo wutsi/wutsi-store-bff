@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/orders")
-class OrdersScreen(
+@RequestMapping("/me/orders")
+class MyOrdersScreen(
     accountApi: WutsiAccountApi,
     tenantProvider: TenantProvider,
     private val orderApi: WutsiOrderApi,
 ) : AbstractOrderListScreen(accountApi, tenantProvider) {
-    override fun getPageId() = Page.ORDERS
+    override fun getPageId() = Page.MY_ORDERS
 
-    override fun getTitle() = getText("page.orders.app-bar.title")
+    override fun getTitle() = getText("page.my-orders.app-bar.title")
 
     override fun getOrders(request: FilterOrderRequest?) = orderApi.searchOrders(
         request = SearchOrderRequest(
-            merchantId = securityContext.currentAccountId(),
+            accountId = securityContext.currentAccountId(),
             status = OrderStatus.values().filter { it != OrderStatus.CREATED && it != OrderStatus.CANCELLED }
                 .map { it.name },
-            limit = 100,
+            limit = 30,
         )
     ).orders
 
     override fun getAction(order: OrderSummary) = gotoUrl(
-        url = urlBuilder.build("/order?id=${order.id}")
+        url = urlBuilder.build("/me/order?id=${order.id}")
     )
 
-    override fun getAccountId(order: OrderSummary) = order.accountId
+    override fun getAccountId(order: OrderSummary) = order.merchantId
 }

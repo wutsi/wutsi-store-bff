@@ -21,7 +21,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class OrderScreenTest : AbstractEndpointTest() {
+internal class MyOrderScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
 
@@ -36,7 +36,7 @@ internal class OrderScreenTest : AbstractEndpointTest() {
         subTotalPrice = 30000.0,
         savingsAmount = 5000.0,
         currency = "XAF",
-        status = OrderStatus.READY.name,
+        status = OrderStatus.COMPLETED.name,
         paymentStatus = PaymentStatus.PARTIALLY_PAID.name,
         totalPaid = 20000.0,
         reservationId = 777L,
@@ -61,16 +61,8 @@ internal class OrderScreenTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun order() {
-        val url = "http://localhost:$port/order?id=111"
-        assertEndpointEquals("/screens/order/order.json", url)
-    }
-
-    @Test
-    fun paymentEnabled() {
-        doReturn(true).whenever(togglesProvider).isOrderPaymentEnabled()
-
-        val url = "http://localhost:$port/order?id=111"
-        assertEndpointEquals("/screens/order/order-payment-enabled.json", url)
+    fun myOrder() {
+        val url = "http://localhost:$port/me/order?id=111"
+        assertEndpointEquals("/screens/order/my-order.json", url)
     }
 }

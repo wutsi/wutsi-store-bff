@@ -7,7 +7,7 @@
     {
       "type": "Screen",
       "attributes": {
-        "id": "page.order",
+        "id": "page.my-order",
         "safe": false,
         "backgroundColor": "#FFFFFF"
       },
@@ -24,6 +24,108 @@
                   "type": "Column",
                   "attributes": {},
                   "children": [
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "center",
+                            "crossAxisAlignment": "center"
+                          },
+                          "children": [
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "Center",
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "CircleAvatar",
+                                  "attributes": {
+                                    "radius": 32.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "RS",
+                                        "bold": true,
+                                        "size": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "Center"
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Ray Sponsible",
+                                    "color": "#1D7EDF",
+                                    "bold": true,
+                                    "size": 16.0,
+                                    "alignment": "Center"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "Center",
+                                "padding": 10.0
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Business Account",
+                                    "color": "#95A5A6",
+                                    "alignment": "Center"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "alignment": "Center"
+                              },
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "+1 2376666666677777",
+                                    "bold": true,
+                                    "alignment": "Center"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "color": "#8c8c8c"
+                      },
+                      "children": []
+                    },
                     {
                       "type": "Container",
                       "attributes": {
@@ -224,7 +326,8 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "Sent"
+                                            "caption": "Completed",
+                                            "color": "#4CAF50"
                                           },
                                           "children": []
                                         }
@@ -478,104 +581,6 @@
                                           "attributes": {
                                             "caption": "25,000 CFA",
                                             "color": "#1D7EDF",
-                                            "bold": true,
-                                            "alignment": "Right"
-                                          },
-                                          "children": []
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "background": "#e4edf7"
-                              },
-                              "children": [
-                                {
-                                  "type": "Row",
-                                  "attributes": {
-                                    "mainAxisAlignment": "spaceBetween"
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "padding": 10.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Text",
-                                          "attributes": {
-                                            "caption": "Total Paid",
-                                            "bold": true
-                                          },
-                                          "children": []
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "padding": 10.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Text",
-                                          "attributes": {
-                                            "caption": "20,000 CFA",
-                                            "bold": true,
-                                            "alignment": "Right"
-                                          },
-                                          "children": []
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "background": "#e4edf7"
-                              },
-                              "children": [
-                                {
-                                  "type": "Row",
-                                  "attributes": {
-                                    "mainAxisAlignment": "spaceBetween"
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "padding": 10.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Text",
-                                          "attributes": {
-                                            "caption": "Balance",
-                                            "bold": true
-                                          },
-                                          "children": []
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "padding": 10.0
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "Text",
-                                          "attributes": {
-                                            "caption": "-5,000 CFA",
                                             "bold": true,
                                             "alignment": "Right"
                                           },

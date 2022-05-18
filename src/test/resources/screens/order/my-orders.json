@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.orders",
+    "id": "page.my-orders",
     "safe": false
   },
   "children": [
@@ -90,14 +90,14 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/order?id=111"
+                    "url": "http://localhost:0/me/order?id=111"
                   }
                 },
                 {
                   "type": "ListItem",
                   "attributes": {
                     "caption": "John Smith",
-                    "subCaption": "05 Jun 2020 - Sent",
+                    "subCaption": "05 Jun 2020 - Processing",
                     "trailing": {
                       "type": "Text",
                       "attributes": {
@@ -128,7 +128,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/order?id=222"
+                    "url": "http://localhost:0/me/order?id=222"
                   }
                 }
               ]
@@ -141,7 +141,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Customer Orders",
+      "title": "My Orders",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

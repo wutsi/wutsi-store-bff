@@ -19,7 +19,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class OrdersScreenTest : AbstractEndpointTest() {
+internal class MyOrdersScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
 
@@ -43,35 +43,35 @@ internal class OrdersScreenTest : AbstractEndpointTest() {
         ),
         OrderSummary(
             id = "222",
-            merchantId = 55L,
+            merchantId = 66L,
             accountId = 222L,
             totalPrice = 50000.0,
             subTotalPrice = 30000.0,
             savingsAmount = 5000.0,
             currency = "XAF",
-            status = OrderStatus.READY.name,
+            status = OrderStatus.PROCESSING.name,
             reservationId = 777L,
             created = OffsetDateTime.of(2020, 6, 5, 1, 1, 0, 0, ZoneOffset.UTC),
         ),
     )
 
-    private val customers = listOf(
-        AccountSummary(id = 111L, displayName = "Ray Sponsible"),
-        AccountSummary(id = 222L, displayName = "John Smith")
+    private val merchants = listOf(
+        AccountSummary(id = 55L, displayName = "Ray Sponsible", business = true),
+        AccountSummary(id = 66L, displayName = "John Smith", business = true)
     )
 
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/orders"
+        url = "http://localhost:$port/me/orders"
     }
 
     @Test
     fun index() {
         doReturn(SearchOrderResponse(orders)).whenever(orderApi).searchOrders(any())
-        doReturn(SearchAccountResponse(customers)).whenever(accountApi).searchAccount(any())
+        doReturn(SearchAccountResponse(merchants)).whenever(accountApi).searchAccount(any())
 
-        assertEndpointEquals("/screens/order/orders.json", url)
+        assertEndpointEquals("/screens/order/my-orders.json", url)
     }
 }
