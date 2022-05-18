@@ -215,41 +215,28 @@
                       "children": []
                     },
                     {
-                      "type": "Container",
+                      "type": "Column",
                       "attributes": {
-                        "padding": 10.0
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
                       },
                       "children": [
                         {
-                          "type": "Column",
+                          "type": "Text",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
+                            "caption": "Local Pickup - Expected delivery: 03 Jan 2020",
+                            "size": 14.0
                           },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Local Pickup - Expected delivery: 03 Jan 2020"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "padding": 10.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "This is the message to display to customer",
-                                "maxLines": 5
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "This is the message to display to customer",
+                            "size": 14.0,
+                            "maxLines": 5
+                          },
+                          "children": []
                         }
                       ]
                     },
@@ -262,41 +249,37 @@
                       "children": []
                     },
                     {
-                      "type": "Container",
+                      "type": "Column",
                       "attributes": {
-                        "padding": 10.0
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
                       },
                       "children": [
                         {
-                          "type": "Column",
+                          "type": "Text",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
+                            "caption": "Ray Sponsible",
+                            "bold": true,
+                            "size": 14.0
                           },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Ray Sponsible"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "180 Rue des Manguier, Bonnapriso",
-                                "maxLines": 3
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Cameroon"
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "180 Rue des Manguier, Bonnapriso",
+                            "size": 14.0,
+                            "maxLines": 3
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Cameroon",
+                            "size": 14.0
+                          },
+                          "children": []
                         }
                       ]
                     }

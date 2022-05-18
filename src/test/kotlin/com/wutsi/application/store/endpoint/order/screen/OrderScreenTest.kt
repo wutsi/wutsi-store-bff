@@ -69,15 +69,9 @@ internal class OrderScreenTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun orderForMerchant() {
+    fun order() {
         val url = "http://localhost:$port/order?id=111&hide-merchant=true"
-        assertEndpointEquals("/screens/order/order-for-merchant.json", url)
-    }
-
-    @Test
-    fun orderForCustomer() {
-        val url = "http://localhost:$port/order?id=111&hide-customer=true"
-        assertEndpointEquals("/screens/order/order-for-customer.json", url)
+        assertEndpointEquals("/screens/order/order.json", url)
     }
 
     @Test

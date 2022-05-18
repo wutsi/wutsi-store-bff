@@ -5,7 +5,6 @@ import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.AddressCard
 import com.wutsi.application.shared.ui.OrderItemListItem
 import com.wutsi.application.shared.ui.PriceSummaryCard
-import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.shared.ui.ShippingCard
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -27,8 +26,10 @@ import com.wutsi.flutter.sdui.SingleChildScrollView
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
+import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.flutter.sdui.enums.TextDecoration
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.SearchAccountRequest
@@ -50,13 +51,15 @@ class OrderScreen(
 ) : AbstractQuery() {
 
     @PostMapping
-    fun index(
-        @RequestParam(name = "id") id: String,
-        @RequestParam(name = "hide-merchant", required = false) hideMerchant: Boolean = false,
-        @RequestParam(name = "hide-customer", required = false) hideCustomer: Boolean = false
-    ): Widget {
+    fun index(@RequestParam(name = "id") id: String): Widget {
         val tenant = tenantProvider.get()
         val order = orderApi.getOrder(id).order
+        val accounts = accountApi.searchAccount(
+            request = SearchAccountRequest(
+                ids = listOf(order.merchantId, order.accountId),
+                limit = 2
+            )
+        ).accounts.associateBy { it.id }
 
         val children = mutableListOf<WidgetAware?>()
 
@@ -67,39 +70,37 @@ class OrderScreen(
                 toRow(getText("page.order.order-id"), order.id),
                 toRow(getText("page.order.order-date"), order.created.format(dateFormat)),
                 toRow(getText("page.order.status"), getText("order.status.${order.status}")),
+                toRow(getText("page.order.customer"), toAccountWidget(accounts[order.accountId])),
+
+                if (order.shippingId != null)
+                    toRow(
+                        getText("page.order.shipping"),
+                        ShippingCard(
+                            model = sharedUIMapper.toShippingModel(
+                                order = order,
+                                shipping = shippingApi.getShipping(order.shippingId!!).shipping,
+                                tenant = tenant,
+                            ),
+                            textSize = Theme.TEXT_SIZE_SMALL,
+                            showShoppingInstructions = false,
+                            showExpectedDeliveryDate = false
+                        )
+                    )
+                else
+                    null,
+
+                if (order.shippingId != null && order.shippingAddress != null)
+                    toRow(
+                        getText("page.order.ship-to"),
+                        AddressCard(
+                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!),
+                            textSize = Theme.TEXT_SIZE_SMALL
+                        ),
+                    )
+                else
+                    null
             )
         )
-
-        // Merchant
-        val accounts = accountApi.searchAccount(
-            request = SearchAccountRequest(
-                ids = listOf(order.merchantId, order.accountId),
-                limit = 2
-            )
-        ).accounts.associateBy { it.id }
-        if (!hideMerchant)
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    toAccountWidget(getText("page.order.merchant"), accounts[order.merchantId]),
-                )
-            )
-        if (!hideCustomer)
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    toAccountWidget(getText("page.order.customer"), accounts[order.accountId])
-                )
-            )
-
-        // Shipping Information
-        if (order.shippingId != null)
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    toShippingWidget(order, tenant)
-                )
-            )
 
         // Products
         val products: Map<Long, ProductSummary> = catalogApi.searchProducts(
@@ -108,16 +109,13 @@ class OrderScreen(
                 limit = order.items.size
             )
         ).products.associateBy { it.id }
-        children.addAll(
-            listOf(
-                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                Container(
-                    padding = 10.0,
-                    child = Text(
-                        caption = getText("page.order.products", arrayOf(order.items.size.toString())),
-                        bold = true,
-                        size = Theme.TEXT_SIZE_LARGE
-                    )
+        children.add(
+            Container(
+                padding = 10.0,
+                child = Text(
+                    caption = getText("page.order.products", arrayOf(order.items.size.toString())),
+                    bold = true,
+                    size = Theme.TEXT_SIZE_LARGE
                 )
             )
         )
@@ -151,64 +149,21 @@ class OrderScreen(
     }
 
     private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware {
-        // Shipping Info
         val shipping = shippingApi.getShipping(order.shippingId!!).shipping
-        val children = mutableListOf(
-            Text(
-                caption = getText("page.order.shipping", arrayOf(order.items.size.toString())),
-                bold = true,
-                size = Theme.TEXT_SIZE_LARGE
-            ),
-            Container(
-                padding = 10.0,
-                child = ShippingCard(
-                    model = sharedUIMapper.toShippingModel(order, shipping, tenant)
-                )
-            ),
-        )
-
-        // Shipping Address
-        if (order.shippingAddress != null)
-            children.addAll(
-                listOf(
-                    Text(getText("page.order.ship-to") + ":", bold = true),
-                    Container(
-                        padding = 10.0,
-                        child = AddressCard(
-                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
-                        )
-                    )
-                )
-            )
-
-        return Container(
-            padding = 10.0,
-            child = Column(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.start,
-                children = children
-            )
+        return ShippingCard(
+            model = sharedUIMapper.toShippingModel(order, shipping, tenant)
         )
     }
 
-    private fun toAccountWidget(title: String, account: AccountSummary?) = account?.let {
+    private fun toAccountWidget(account: AccountSummary?) = account?.let {
         Container(
-            padding = 10.0,
-            child = Column(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.start,
-                children = listOf(
-                    Text(
-                        caption = title,
-                        bold = true,
-                        size = Theme.TEXT_SIZE_LARGE
-                    ),
-                    ProfileListItem(
-                        model = sharedUIMapper.toAccountModel(it),
-                        action = gotoUrl(urlBuilder.build(shellUrl, "/profile?id=${account.id}"))
-                    )
-                ),
-            )
+            child = Text(
+                caption = it.displayName ?: "",
+                color = Theme.COLOR_PRIMARY,
+                decoration = TextDecoration.Underline,
+                size = Theme.TEXT_SIZE_SMALL
+            ),
+            action = gotoUrl(urlBuilder.build(shellUrl, "/profile?id=${account.id}"))
         )
     }
 
@@ -221,22 +176,32 @@ class OrderScreen(
         showPaymentStatus = togglesProvider.isOrderPaymentEnabled(),
     )
 
-    private fun toRow(name: String, value: String) = Row(
-        children = listOf(
-            Flexible(
-                flex = 1,
-                child = Container(
-                    padding = 10.0,
-                    child = Text(name, bold = true)
-                )
-            ),
-            Flexible(
-                flex = 2,
-                child = Container(
-                    padding = 10.0,
-                    child = Text(value, size = Theme.TEXT_SIZE_SMALL)
-                )
+    private fun toRow(name: String, value: String): WidgetAware =
+        toRow(name, Text(value, size = Theme.TEXT_SIZE_SMALL))
+
+    private fun toRow(name: String, value: WidgetAware?): WidgetAware =
+        Column(
+            children = listOf(
+                Row(
+                    children = listOf(
+                        Flexible(
+                            flex = 1,
+                            child = Container(
+                                alignment = Alignment.TopLeft,
+                                padding = 5.0,
+                                child = Text(name, bold = true, size = Theme.TEXT_SIZE_SMALL),
+                            )
+                        ),
+                        Flexible(
+                            flex = 3,
+                            child = Container(
+                                padding = 5.0,
+                                child = value
+                            )
+                        )
+                    )
+                ),
+                Divider(color = Theme.COLOR_DIVIDER, height = 1.0)
             )
         )
-    )
 }

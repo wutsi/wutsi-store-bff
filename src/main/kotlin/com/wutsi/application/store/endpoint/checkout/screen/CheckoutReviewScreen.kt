@@ -62,7 +62,7 @@ class CheckoutReviewScreen(
         ).products.associateBy { it.id }
 
         // Merchant
-        val children = mutableListOf<WidgetAware>(
+        val children = mutableListOf<WidgetAware?>(
             Container(
                 padding = 10.0,
                 child = Column(
@@ -104,11 +104,7 @@ class CheckoutReviewScreen(
 
         // Shipping
         if (order.shippingId != null)
-            children.addAll(
-                listOf(
-                    toShippingWidget(order, tenant),
-                )
-            )
+            children.add(toShippingWidget(order, tenant))
 
         // Price
         children.add(toPriceWidget(order, tenant))
@@ -126,7 +122,7 @@ class CheckoutReviewScreen(
                 child = Column(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
-                    children = children
+                    children = children.filterNotNull()
                 )
             )
         ).toWidget()
@@ -159,45 +155,48 @@ class CheckoutReviewScreen(
             )
     )
 
-    private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware {
-        // Shipping Info
+    private fun toShippingWidget(order: Order, tenant: Tenant): WidgetAware? {
+        if (order.shippingId == null)
+            return null
+
+        // Shipping method
+        val children = mutableListOf<WidgetAware>()
         val shipping = shippingApi.getShipping(order.shippingId!!).shipping
-        val children = mutableListOf(
-            Text(
-                caption = getText("page.order.shipping", arrayOf(order.items.size.toString())),
-                bold = true,
-                size = Theme.TEXT_SIZE_LARGE
-            ),
-            Container(
-                padding = 10.0,
-                child = ShippingCard(
+        children.addAll(
+            listOf(
+                Text(
+                    caption = getText("page.checkout.review.shipping", arrayOf(order.items.size.toString())),
+                    bold = true,
+                    size = Theme.TEXT_SIZE_LARGE
+                ),
+                ShippingCard(
                     model = sharedUIMapper.toShippingModel(order, shipping, tenant)
                 )
-            ),
+            )
         )
 
         // Shipping Address
         if (order.shippingAddress != null)
             children.addAll(
                 listOf(
-                    Text(getText("page.order.ship-to") + ":", bold = true),
-                    Container(
-                        padding = 10.0,
-                        child = AddressCard(
-                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
-                        )
+                    Text(getText("page.checkout.review.ship-to") + ":", bold = true),
+                    AddressCard(
+                        model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
                     )
                 )
             )
 
-        return Container(
-            padding = 10.0,
-            child = Column(
-                mainAxisAlignment = MainAxisAlignment.start,
-                crossAxisAlignment = CrossAxisAlignment.start,
-                children = children
+        return if (children == null)
+            null
+        else
+            Container(
+                padding = 10.0,
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = children
+                )
             )
-        )
     }
 
     private fun getPaymentUrl(orderId: String): String {
