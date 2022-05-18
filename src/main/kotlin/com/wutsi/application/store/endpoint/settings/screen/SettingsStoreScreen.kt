@@ -93,7 +93,7 @@ class SettingsStoreScreen : AbstractQuery() {
                                 ),
                                 ListItemSwitch(
                                     name = "value",
-                                    caption = getText("page.settings.store.enabled"),
+                                    caption = getText("page.settings.store.deactivate"),
                                     selected = true,
                                     action = executeCommand(
                                         urlBuilder.build("/commands/disable-store")

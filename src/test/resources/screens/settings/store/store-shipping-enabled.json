@@ -162,7 +162,7 @@
                 {
                   "type": "ListItemSwitch",
                   "attributes": {
-                    "caption": "My Store",
+                    "caption": "Deactivate your Store",
                     "name": "value",
                     "selected": true
                   },
