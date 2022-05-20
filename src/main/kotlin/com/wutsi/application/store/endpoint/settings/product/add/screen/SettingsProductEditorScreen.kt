@@ -34,7 +34,6 @@ class SettingsProductEditorScreen(
     @PostMapping
     fun index(@RequestParam(name = "category-id") categoryId: Long): Widget {
         val tenant = tenantProvider.get()
-        val category = catalogApi.getCategory(categoryId).category
         val categories = catalogApi.searchCategories(
             request = SearchCategoryRequest(
                 parentId = categoryId

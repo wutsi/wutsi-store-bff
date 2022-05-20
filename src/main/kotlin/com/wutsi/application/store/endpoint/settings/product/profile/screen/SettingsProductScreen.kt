@@ -25,7 +25,6 @@ import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListItemSwitch
 import com.wutsi.flutter.sdui.ListView
 import com.wutsi.flutter.sdui.MoneyText
-import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.TabBar
 import com.wutsi.flutter.sdui.TabBarView
@@ -236,53 +235,38 @@ class SettingsProductScreen(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
             children = listOf(
-                Row(
-                    mainAxisAlignment = MainAxisAlignment.center,
-                    crossAxisAlignment = CrossAxisAlignment.center,
-                    children = listOf(
-                        Flexible(
-                            flex = 2,
-                            child = toStatWidget(
-                                "page.settings.store.product.stats-sales",
-                                product.overallMetrics.totalSales.toDouble(),
-                                tenant,
-                                money = true,
-                                color = Theme.COLOR_PRIMARY,
-                                valueSize = 40.0
-                            )
-                        ),
-                        Flexible(
-                            flex = 1,
-                            child = toStatWidget(
-                                "page.settings.store.product.stats-conversion",
-                                product.overallMetrics.conversion * 100.0,
-                                tenant,
-                                percent = true,
-                                valueSize = 40.0
-                            )
-                        ),
+                Flexible(
+                    child = toStatWidget(
+                        "page.settings.store.product.stats-sales",
+                        product.overallMetrics.totalSales.toDouble(),
+                        tenant,
+                        money = true,
+                        color = Theme.COLOR_PRIMARY,
+                        valueSize = 40.0
                     )
                 ),
-                Row(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
-                        Flexible(
-                            child = toStatWidget(
-                                "page.settings.store.product.stats-views",
-                                product.overallMetrics.totalViews.toDouble(),
-                                tenant,
-                            )
-                        ),
-                        Flexible(
-                            child = toStatWidget(
-                                "page.settings.store.product.stats-orders",
-                                product.overallMetrics.totalOrders.toDouble(),
-                                tenant,
-                            )
-                        ),
+                Flexible(
+                    child = toStatWidget(
+                        "page.settings.store.product.stats-views",
+                        product.overallMetrics.totalViews.toDouble(),
+                        tenant,
                     )
-                )
+                ),
+                Flexible(
+                    child = toStatWidget(
+                        "page.settings.store.product.stats-orders",
+                        product.overallMetrics.totalOrders.toDouble(),
+                        tenant,
+                    )
+                ),
+                Flexible(
+                    child = toStatWidget(
+                        "page.settings.store.product.stats-conversion",
+                        product.overallMetrics.conversion * 100.0,
+                        tenant,
+                        percent = true,
+                    )
+                ),
             )
         )
 

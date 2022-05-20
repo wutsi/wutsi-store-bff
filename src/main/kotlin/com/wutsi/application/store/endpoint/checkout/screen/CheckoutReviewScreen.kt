@@ -187,17 +187,14 @@ class CheckoutReviewScreen(
                 )
             )
 
-        return if (children == null)
-            null
-        else
-            Container(
-                padding = 10.0,
-                child = Column(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = children
-                )
+        return Container(
+            padding = 10.0,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
             )
+        )
     }
 
     private fun getPaymentUrl(orderId: String): String {

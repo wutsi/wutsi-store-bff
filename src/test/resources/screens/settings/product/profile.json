@@ -429,113 +429,51 @@
               },
               "children": [
                 {
-                  "type": "Row",
+                  "type": "Flexible",
                   "attributes": {
-                    "mainAxisAlignment": "center",
-                    "crossAxisAlignment": "center"
+                    "flex": 1,
+                    "fit": "Tight"
                   },
                   "children": [
                     {
-                      "type": "Flexible",
+                      "type": "Container",
                       "attributes": {
-                        "flex": 2,
-                        "fit": "Tight"
+                        "padding": 10.0,
+                        "margin": 10.0,
+                        "border": 1.0,
+                        "borderColor": "#8c8c8c"
                       },
                       "children": [
                         {
-                          "type": "Container",
+                          "type": "Column",
                           "attributes": {
-                            "padding": 10.0,
-                            "margin": 10.0,
-                            "border": 1.0,
-                            "borderColor": "#8c8c8c"
+                            "mainAxisAlignment": "center",
+                            "crossAxisAlignment": "center"
                           },
                           "children": [
                             {
-                              "type": "Column",
+                              "type": "MoneyText",
                               "attributes": {
-                                "mainAxisAlignment": "center",
-                                "crossAxisAlignment": "center"
+                                "value": 0.0,
+                                "color": "#1D7EDF",
+                                "currency": "FCFA",
+                                "numberFormat": "#,###,##0",
+                                "valueFontSize": 40.0
                               },
-                              "children": [
-                                {
-                                  "type": "MoneyText",
-                                  "attributes": {
-                                    "value": 0.0,
-                                    "color": "#1D7EDF",
-                                    "currency": "FCFA",
-                                    "numberFormat": "#,###,##0",
-                                    "valueFontSize": 40.0
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "Center",
-                                  "attributes": {},
-                                  "children": [
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "SALES",
-                                        "size": 10.0,
-                                        "alignment": "Center"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Flexible",
-                      "attributes": {
-                        "flex": 1,
-                        "fit": "Tight"
-                      },
-                      "children": [
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0,
-                            "margin": 10.0,
-                            "border": 1.0,
-                            "borderColor": "#8c8c8c"
-                          },
-                          "children": [
+                              "children": []
+                            },
                             {
-                              "type": "Column",
-                              "attributes": {
-                                "mainAxisAlignment": "center",
-                                "crossAxisAlignment": "center"
-                              },
+                              "type": "Center",
+                              "attributes": {},
                               "children": [
                                 {
                                   "type": "Text",
                                   "attributes": {
-                                    "caption": "0.00",
-                                    "color": "#000000",
-                                    "size": 40.0
+                                    "caption": "SALES",
+                                    "size": 10.0,
+                                    "alignment": "Center"
                                   },
                                   "children": []
-                                },
-                                {
-                                  "type": "Center",
-                                  "attributes": {},
-                                  "children": [
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "CONVERSION",
-                                        "size": 10.0,
-                                        "alignment": "Center"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
                                 }
                               ]
                             }
@@ -546,111 +484,155 @@
                   ]
                 },
                 {
-                  "type": "Row",
+                  "type": "Flexible",
                   "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
+                    "flex": 1,
+                    "fit": "Tight"
                   },
                   "children": [
                     {
-                      "type": "Flexible",
+                      "type": "Container",
                       "attributes": {
-                        "flex": 1,
-                        "fit": "Tight"
+                        "padding": 10.0,
+                        "margin": 10.0,
+                        "border": 1.0,
+                        "borderColor": "#8c8c8c"
                       },
                       "children": [
                         {
-                          "type": "Container",
+                          "type": "Column",
                           "attributes": {
-                            "padding": 10.0,
-                            "margin": 10.0,
-                            "border": 1.0,
-                            "borderColor": "#8c8c8c"
+                            "mainAxisAlignment": "center",
+                            "crossAxisAlignment": "center"
                           },
                           "children": [
                             {
-                              "type": "Column",
+                              "type": "Text",
                               "attributes": {
-                                "mainAxisAlignment": "center",
-                                "crossAxisAlignment": "center"
+                                "caption": "0",
+                                "color": "#000000",
+                                "size": 30.0
                               },
+                              "children": []
+                            },
+                            {
+                              "type": "Center",
+                              "attributes": {},
                               "children": [
                                 {
                                   "type": "Text",
                                   "attributes": {
-                                    "caption": "0",
-                                    "color": "#000000",
-                                    "size": 30.0
+                                    "caption": "VIEWS",
+                                    "size": 10.0,
+                                    "alignment": "Center"
                                   },
                                   "children": []
-                                },
-                                {
-                                  "type": "Center",
-                                  "attributes": {},
-                                  "children": [
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "VIEWS",
-                                        "size": 10.0,
-                                        "alignment": "Center"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
                                 }
                               ]
                             }
                           ]
                         }
                       ]
-                    },
+                    }
+                  ]
+                },
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 1,
+                    "fit": "Tight"
+                  },
+                  "children": [
                     {
-                      "type": "Flexible",
+                      "type": "Container",
                       "attributes": {
-                        "flex": 1,
-                        "fit": "Tight"
+                        "padding": 10.0,
+                        "margin": 10.0,
+                        "border": 1.0,
+                        "borderColor": "#8c8c8c"
                       },
                       "children": [
                         {
-                          "type": "Container",
+                          "type": "Column",
                           "attributes": {
-                            "padding": 10.0,
-                            "margin": 10.0,
-                            "border": 1.0,
-                            "borderColor": "#8c8c8c"
+                            "mainAxisAlignment": "center",
+                            "crossAxisAlignment": "center"
                           },
                           "children": [
                             {
-                              "type": "Column",
+                              "type": "Text",
                               "attributes": {
-                                "mainAxisAlignment": "center",
-                                "crossAxisAlignment": "center"
+                                "caption": "0",
+                                "color": "#000000",
+                                "size": 30.0
                               },
+                              "children": []
+                            },
+                            {
+                              "type": "Center",
+                              "attributes": {},
                               "children": [
                                 {
                                   "type": "Text",
                                   "attributes": {
-                                    "caption": "0",
-                                    "color": "#000000",
-                                    "size": 30.0
+                                    "caption": "ORDERS",
+                                    "size": 10.0,
+                                    "alignment": "Center"
                                   },
                                   "children": []
-                                },
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Flexible",
+                  "attributes": {
+                    "flex": 1,
+                    "fit": "Tight"
+                  },
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0,
+                        "margin": 10.0,
+                        "border": 1.0,
+                        "borderColor": "#8c8c8c"
+                      },
+                      "children": [
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "center",
+                            "crossAxisAlignment": "center"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "0.00",
+                                "color": "#000000",
+                                "size": 30.0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Center",
+                              "attributes": {},
+                              "children": [
                                 {
-                                  "type": "Center",
-                                  "attributes": {},
-                                  "children": [
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "ORDERS",
-                                        "size": 10.0,
-                                        "alignment": "Center"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "CONVERSION",
+                                    "size": 10.0,
+                                    "alignment": "Center"
+                                  },
+                                  "children": []
                                 }
                               ]
                             }
