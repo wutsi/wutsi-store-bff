@@ -96,7 +96,8 @@ class CheckoutReviewScreen(
                 )
             )
         )
-        order.items.map { toItemWidget(it, products[it.productId]!!, tenant) }
+        order.items
+            .map { toItemWidget(it, products[it.productId]!!, tenant) }
             .forEach {
                 children.add(it)
                 children.add(Divider(color = Theme.COLOR_DIVIDER))
