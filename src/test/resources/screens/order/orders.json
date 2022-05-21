@@ -141,7 +141,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Customer Orders",
+      "title": "Orders",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

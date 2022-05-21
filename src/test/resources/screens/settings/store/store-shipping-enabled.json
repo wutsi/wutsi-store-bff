@@ -129,7 +129,7 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Customer Orders",
+                    "caption": "Orders",
                     "trailing": {
                       "type": "Icon",
                       "attributes": {
