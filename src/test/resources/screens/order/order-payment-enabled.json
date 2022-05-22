@@ -1,7 +1,7 @@
 {
   "type": "DefaultTabController",
   "attributes": {
-    "length": 1
+    "length": 2
   },
   "children": [
     {
@@ -594,6 +594,13 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "DynamicWidget",
+              "attributes": {
+                "url": "http://localhost:0/order/qr-code-widget?id=111"
+              },
+              "children": []
             }
           ]
         }
@@ -613,6 +620,14 @@
                 "type": "Text",
                 "attributes": {
                   "caption": "PRODUCTS",
+                  "bold": true
+                },
+                "children": []
+              },
+              {
+                "type": "Text",
+                "attributes": {
+                  "caption": "QR CODE",
                   "bold": true
                 },
                 "children": []

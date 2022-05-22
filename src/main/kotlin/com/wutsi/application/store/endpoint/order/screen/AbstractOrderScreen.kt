@@ -22,6 +22,7 @@ import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.DefaultTabController
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.DynamicWidget
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
@@ -65,6 +66,8 @@ abstract class AbstractOrderScreen(
                     Text(getText("page.order.tab.shipping").uppercase(), bold = true)
                 else
                     null,
+
+                Text(getText("page.order.tab.qr-code").uppercase(), bold = true),
             )
         )
         val tabViews = TabBarView(
@@ -75,6 +78,8 @@ abstract class AbstractOrderScreen(
                     shippingTab(order, tenant)
                 else
                     null,
+
+                qrCodeTab(order)
             )
         )
 
@@ -233,6 +238,10 @@ abstract class AbstractOrderScreen(
             )
         )
     }
+
+    private fun qrCodeTab(order: Order) = DynamicWidget(
+        url = urlBuilder.build("order/qr-code-widget?id=${order.id}")
+    )
 
     private fun toItemWidget(item: OrderItem, product: ProductSummary, tenant: Tenant) = OrderItemListItem(
         model = sharedUIMapper.toOrderItemModel(item, product, tenant)
