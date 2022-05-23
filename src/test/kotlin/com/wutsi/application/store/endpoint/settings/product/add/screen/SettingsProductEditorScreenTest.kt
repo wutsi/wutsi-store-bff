@@ -16,7 +16,7 @@ import org.springframework.boot.web.server.LocalServerPort
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class SettingsProductEditorScreenTest : AbstractEndpointTest() {
     @LocalServerPort
-    public val port: Int = 0
+    val port: Int = 0
 
     private lateinit var url: String
 
@@ -40,4 +40,11 @@ internal class SettingsProductEditorScreenTest : AbstractEndpointTest() {
 
     @Test
     fun index() = assertEndpointEquals("/screens/settings/product/editor.json", url)
+
+    @Test
+    fun `digital product enabled`() {
+        doReturn(true).whenever(togglesProvider).isDigitalProductEnabled()
+
+        assertEndpointEquals("/screens/settings/product/editor-digital-product-enabled.json", url)
+    }
 }

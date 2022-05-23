@@ -88,6 +88,43 @@
               },
               "children": [
                 {
+                  "type": "DropdownButton",
+                  "attributes": {
+                    "name": "type",
+                    "value": "PHYSICAL",
+                    "hint": "Type (Required)",
+                    "required": true
+                  },
+                  "children": [
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "Physical Product",
+                        "enabled": true,
+                        "value": "PHYSICAL"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "Digital Product",
+                        "enabled": true,
+                        "value": "NUMERIC"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
                   "type": "Input",
                   "attributes": {
                     "name": "summary",

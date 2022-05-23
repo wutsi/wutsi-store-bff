@@ -50,7 +50,7 @@ class SettingsProductEditorScreen(
             ),
             child = SingleChildScrollView(
                 child = Form(
-                    children = listOf(
+                    children = listOfNotNull(
                         Container(
                             padding = 10.0,
                             child = Input(
@@ -77,25 +77,30 @@ class SettingsProductEditorScreen(
                                     }
                             )
                         ),
-                        Container(
-                            padding = 10.0,
-                            child = DropdownButton(
-                                name = "type",
-                                hint = getText("page.settings.store.product.editor.type"),
-                                value = ProductType.PHYSICAL.name,
-                                required = true,
-                                children = listOf(
-                                    DropdownMenuItem(
-                                        caption = getText("product.type.PHYSICAL"),
-                                        value = ProductType.PHYSICAL.name,
-                                    ),
-                                    DropdownMenuItem(
-                                        caption = getText("product.type.NUMERIC"),
-                                        value = ProductType.NUMERIC.name,
-                                    ),
+
+                        if (togglesProvider.isDigitalProductEnabled())
+                            Container(
+                                padding = 10.0,
+                                child = DropdownButton(
+                                    name = "type",
+                                    hint = getText("page.settings.store.product.editor.type"),
+                                    value = ProductType.PHYSICAL.name,
+                                    required = true,
+                                    children = listOf(
+                                        DropdownMenuItem(
+                                            caption = getText("product.type.PHYSICAL"),
+                                            value = ProductType.PHYSICAL.name,
+                                        ),
+                                        DropdownMenuItem(
+                                            caption = getText("product.type.NUMERIC"),
+                                            value = ProductType.NUMERIC.name,
+                                        ),
+                                    )
                                 )
                             )
-                        ),
+                        else
+                            null,
+
                         Container(
                             padding = 10.0,
                             child = Input(
@@ -112,7 +117,8 @@ class SettingsProductEditorScreen(
                                 maxLength = 10,
                                 caption = getText("page.settings.store.product.editor.price"),
                                 type = InputType.Number,
-                                suffix = tenant.currencySymbol
+                                suffix = tenant.currencySymbol,
+                                required = true
                             )
                         ),
                         Divider(color = Theme.COLOR_DIVIDER),
