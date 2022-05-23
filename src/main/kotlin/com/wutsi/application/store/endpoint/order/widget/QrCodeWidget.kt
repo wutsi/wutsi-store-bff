@@ -25,12 +25,12 @@ class QrCodeWidget(
 ) : AbstractQuery() {
     @PostMapping
     fun index(
-        @RequestParam id: Long
+        @RequestParam id: String
     ): Widget {
         val token = qrApi.encode(
             EncodeQRCodeRequest(
                 type = EntityType.ORDER.name,
-                id = id.toString(),
+                id = id,
             )
         ).token
         val imageUrl = qrService.imageUrl(token)
