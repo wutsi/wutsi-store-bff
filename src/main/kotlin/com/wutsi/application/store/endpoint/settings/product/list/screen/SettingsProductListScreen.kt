@@ -8,6 +8,7 @@ import com.wutsi.application.store.endpoint.Page
 import com.wutsi.application.store.endpoint.settings.product.list.dto.FilterProductRequest
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
+import com.wutsi.ecommerce.catalog.entity.ProductSort
 import com.wutsi.ecommerce.catalog.entity.ProductStatus
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
@@ -35,19 +36,20 @@ class SettingsProductListScreen(
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     companion object {
-        const val DEFAULT_CATEGORY_ID = -1L
+        const val MAX_PRODUCTS = 50
     }
 
     @PostMapping
     fun index(@RequestBody request: FilterProductRequest?): Widget {
         val tenant = tenantProvider.get()
         val accountId = securityContext.currentAccountId()
-        val status = request?.status ?: ProductStatus.PUBLISHED.name
+        val status = request?.status
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
                 accountId = accountId,
                 status = status,
-                limit = 100
+                sortBy = ProductSort.TITLE.name,
+                limit = MAX_PRODUCTS,
             )
         ).products
 
@@ -74,8 +76,12 @@ class SettingsProductListScreen(
                         padding = 10.0,
                         child = DropdownButton(
                             name = "status",
-                            value = status,
+                            value = status ?: "",
                             children = listOf(
+                                DropdownMenuItem(
+                                    caption = getText("page.settings.store.product.list.all-products"),
+                                    value = ""
+                                ),
                                 DropdownMenuItem(
                                     caption = getText("product.status.PUBLISHED"),
                                     value = ProductStatus.PUBLISHED.name
@@ -108,7 +114,8 @@ class SettingsProductListScreen(
                                     model = sharedUIMapper.toProductModel(it, tenant),
                                     action = gotoUrl(
                                         url = urlBuilder.build("/settings/store/product?id=${it.id}")
-                                    )
+                                    ),
+                                    showStatus = true
                                 )
                             }
                         )

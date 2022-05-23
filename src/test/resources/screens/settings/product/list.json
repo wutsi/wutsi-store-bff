@@ -19,9 +19,18 @@
               "type": "DropdownButton",
               "attributes": {
                 "name": "status",
-                "value": "PUBLISHED"
+                "value": ""
               },
               "children": [
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "All Products",
+                    "enabled": true,
+                    "value": ""
+                  },
+                  "children": []
+                },
                 {
                   "type": "DropdownMenuItem",
                   "attributes": {
@@ -90,6 +99,7 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "1",
+                    "subCaption": "product.status.",
                     "padding": 10.0,
                     "leading": {
                       "type": "Image",
@@ -111,6 +121,7 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "2",
+                    "subCaption": "product.status.",
                     "padding": 10.0,
                     "leading": {
                       "type": "Image",
@@ -132,6 +143,7 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "3",
+                    "subCaption": "product.status.",
                     "padding": 10.0,
                     "leading": {
                       "type": "Image",

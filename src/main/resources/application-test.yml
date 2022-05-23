@@ -7,6 +7,8 @@ wutsi:
       image-kit:
         origin-url: "https://s3.amazonaws.com/int-wutsi"
         endpoint-url: "https://ik.imagekit.io/cx8qxsgz4d"
+    security:
+      api-key: ${API_KEY}
     storage:
       type: aws
       aws:

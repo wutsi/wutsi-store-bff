@@ -79,21 +79,12 @@ class SettingsStoreScreen : AbstractQuery() {
                                 else
                                     null,
 
-                                ListItem(
-                                    caption = getText("page.settings.store.orders"),
-                                    leading = Icon(code = Theme.ICON_ORDERS, color = Theme.COLOR_PRIMARY),
-                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
-                                    action = gotoUrl(
-                                        urlBuilder.build("orders")
-                                    )
-                                ),
-
                                 Container(
                                     padding = 20.0
                                 ),
                                 ListItemSwitch(
                                     name = "value",
-                                    caption = getText("page.settings.store.deactivate"),
+                                    caption = getText("page.settings.store.active"),
                                     selected = true,
                                     action = executeCommand(
                                         urlBuilder.build("/commands/disable-store")

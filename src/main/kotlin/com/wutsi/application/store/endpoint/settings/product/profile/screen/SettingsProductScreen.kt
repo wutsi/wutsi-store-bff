@@ -123,9 +123,18 @@ class SettingsProductScreen(
                                 padding = 10.0,
                                 margin = 10.0,
                                 background = Theme.COLOR_WARNING_LIGHT,
-                                child = Text(
-                                    caption = getText("product.status.${product.status}"),
-                                    color = Theme.COLOR_WARNING,
+                                border = 1.0,
+                                borderColor = Theme.COLOR_WARNING,
+                                borderRadius = 5.0,
+                                child = Column(
+                                    mainAxisAlignment = MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment = CrossAxisAlignment.start,
+                                    children = listOf(
+                                        Text(
+                                            caption = getText("page.settings.store.product.draft"),
+                                            color = Theme.COLOR_WARNING,
+                                        )
+                                    )
                                 )
                             )
                         )
@@ -144,15 +153,6 @@ class SettingsProductScreen(
                             separatorColor = Theme.COLOR_DIVIDER,
                             separator = true,
                             children = listOfNotNull(
-                                ListItemSwitch(
-                                    caption = getText("page.settings.store.product.attribute.published"),
-                                    name = "value",
-                                    selected = product.status == ProductStatus.PUBLISHED.name,
-                                    action = Action(
-                                        type = ActionType.Command,
-                                        url = urlBuilder.build("commands/publish-product?id=${product.id}")
-                                    )
-                                ),
                                 toListItemWidget(
                                     "page.settings.store.product.attribute.title",
                                     product.title,
@@ -221,6 +221,15 @@ class SettingsProductScreen(
                                     "page.settings.store.product.attribute.description",
                                     description(product.description),
                                     urlBuilder.build("/settings/store/product/description?id=${product.id}")
+                                ),
+                                ListItemSwitch(
+                                    caption = getText("page.settings.store.product.publish"),
+                                    name = "value",
+                                    selected = product.status == ProductStatus.PUBLISHED.name,
+                                    action = Action(
+                                        type = ActionType.Command,
+                                        url = urlBuilder.build("commands/publish-product?id=${product.id}")
+                                    )
                                 ),
                             )
                         )
@@ -299,7 +308,7 @@ class SettingsProductScreen(
                     else
                         Text(
                             caption = if (percent)
-                                DecimalFormat("0.00").format(value)
+                                DecimalFormat("0.00%").format(value)
                             else
                                 DecimalFormat(tenant.numberFormat).format(value),
                             size = valueSize,

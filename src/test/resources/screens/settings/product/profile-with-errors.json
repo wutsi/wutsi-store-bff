@@ -198,19 +198,6 @@
                           },
                           "children": [
                             {
-                              "type": "ListItemSwitch",
-                              "attributes": {
-                                "caption": "Published",
-                                "name": "value",
-                                "selected": false
-                              },
-                              "children": [],
-                              "action": {
-                                "type": "Command",
-                                "url": "http://localhost:0/commands/publish-product?id=1"
-                              }
-                            },
-                            {
                               "type": "ListItem",
                               "attributes": {
                                 "caption": "Titre",
@@ -397,6 +384,19 @@
                               "action": {
                                 "type": "Route",
                                 "url": "http://localhost:0/settings/store/product/description?id=1"
+                              }
+                            },
+                            {
+                              "type": "ListItemSwitch",
+                              "attributes": {
+                                "caption": "Published Online",
+                                "name": "value",
+                                "selected": false
+                              },
+                              "children": [],
+                              "action": {
+                                "type": "Command",
+                                "url": "http://localhost:0/commands/publish-product?id=1"
                               }
                             }
                           ]
@@ -601,7 +601,7 @@
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "0.00",
+                                "caption": "0.00%",
                                 "color": "#000000",
                                 "size": 30.0
                               },
