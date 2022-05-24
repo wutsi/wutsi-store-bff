@@ -6,95 +6,69 @@
   },
   "children": [
     {
-      "type": "Column",
-      "attributes": {
-        "mainAxisAlignment": "center",
-        "crossAxisAlignment": "center"
-      },
+      "type": "SingleChildScrollView",
+      "attributes": {},
       "children": [
         {
-          "type": "Container",
+          "type": "Column",
           "attributes": {
-            "alignment": "Center",
-            "padding": 10.0
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
           },
           "children": [
             {
-              "type": "Text",
+              "type": "Container",
               "attributes": {
-                "caption": "Select the shipping address",
-                "color": "#1D7EDF",
-                "size": 16.0
-              },
-              "children": []
-            }
-          ]
-        },
-        {
-          "type": "Divider",
-          "attributes": {
-            "height": 1.0,
-            "color": "#8c8c8c"
-          },
-          "children": []
-        },
-        {
-          "type": "Flexible",
-          "attributes": {
-            "flex": 1,
-            "fit": "Tight"
-          },
-          "children": [
-            {
-              "type": "RadioGroup",
-              "attributes": {
-                "name": "addressId",
-                "separator": true,
-                "separatorColor": "#8c8c8c"
+                "alignment": "Center",
+                "padding": 10.0
               },
               "children": [
                 {
-                  "type": "Container",
+                  "type": "Text",
                   "attributes": {
-                    "alignment": "Center",
-                    "padding": 10.0
+                    "caption": "Select the shipping address",
+                    "size": 16.0
                   },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "No shipping address found",
-                        "alignment": "Center"
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "type": "Container",
-                  "attributes": {
-                    "padding": 10.0
-                  },
-                  "children": [
-                    {
-                      "type": "Button",
-                      "attributes": {
-                        "caption": "Add New Address",
-                        "padding": 15.0,
-                        "type": "Outlined"
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/checkout/address-country?order-id=111"
-                      }
-                    }
-                  ]
+                  "children": []
                 }
-              ],
+              ]
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "alignment": "Center",
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "No shipping address found",
+                    "alignment": "Center"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Button",
+              "attributes": {
+                "caption": "Add New Address",
+                "padding": 15.0,
+                "type": "Elevated"
+              },
+              "children": [],
               "action": {
-                "type": "Command",
-                "url": "http://localhost:0/commands/select-shipping-address?order-id=111"
+                "type": "Route",
+                "url": "http://localhost:0/checkout/address-country?order-id=111"
               }
             }
           ]

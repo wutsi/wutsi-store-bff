@@ -54,18 +54,25 @@ class SettingsShippingScreen(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
                             children = listOfNotNull(
-                                listItem(
-                                    ShippingType.LOCAL_PICKUP,
-                                    shippings,
-                                    tenant
-                                ),
-                                listItem(
-                                    ShippingType.LOCAL_DELIVERY,
-                                    shippings,
-                                    tenant
-                                ),
+                                if (togglesProvider.isShippingLocalPickupEnabled())
+                                    listItem(
+                                        ShippingType.LOCAL_PICKUP,
+                                        shippings,
+                                        tenant
+                                    )
+                                else
+                                    null,
 
-                                if (togglesProvider.isInternationalShippingEnabled())
+                                if (togglesProvider.isShippingLocalDeliveryEnabled())
+                                    listItem(
+                                        ShippingType.LOCAL_DELIVERY,
+                                        shippings,
+                                        tenant
+                                    )
+                                else
+                                    null,
+
+                                if (togglesProvider.isShippingInternationalDeliveryEnabled())
                                     listItem(
                                         ShippingType.INTERNATIONAL_SHIPPING,
                                         shippings,
@@ -74,7 +81,7 @@ class SettingsShippingScreen(
                                 else
                                     null,
 
-                                if (togglesProvider.isDigitalProductEnabled())
+                                if (togglesProvider.isShippingEmailDeliveryEnabled())
                                     listItem(
                                         ShippingType.EMAIL_DELIVERY,
                                         shippings,

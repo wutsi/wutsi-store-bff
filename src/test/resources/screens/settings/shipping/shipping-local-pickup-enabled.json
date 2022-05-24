@@ -30,7 +30,28 @@
                 "separator": true,
                 "separatorColor": "#8c8c8c"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Local Pickup",
+                    "subCaption": "1 day - 150,000 CFA",
+                    "padding": 10.0,
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/profile?id=111"
+                  }
+                }
+              ]
             }
           ]
         }

@@ -35,18 +35,34 @@ internal class SettingsShippingScreenTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun digitalProductEnabled() {
-        doReturn(true).whenever(togglesProvider).isDigitalProductEnabled()
+    fun emailDeliveryEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingEmailDeliveryEnabled()
 
         val url = "http://localhost:$port/settings/store/shipping"
-        assertEndpointEquals("/screens/settings/shipping/shipping-digital-product-enabled.json", url)
+        assertEndpointEquals("/screens/settings/shipping/shipping-email-delivery-enabled.json", url)
     }
 
     @Test
-    fun internationalShippingEnabled() {
-        doReturn(true).whenever(togglesProvider).isInternationalShippingEnabled()
+    fun internationalDeliveryEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingInternationalDeliveryEnabled()
 
         val url = "http://localhost:$port/settings/store/shipping"
-        assertEndpointEquals("/screens/settings/shipping/shipping-international-enabled.json", url)
+        assertEndpointEquals("/screens/settings/shipping/shipping-international-delivery-enabled.json", url)
+    }
+
+    @Test
+    fun localPickupEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingLocalPickupEnabled()
+
+        val url = "http://localhost:$port/settings/store/shipping"
+        assertEndpointEquals("/screens/settings/shipping/shipping-local-pickup-enabled.json", url)
+    }
+
+    @Test
+    fun localDeliveryEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingLocalDeliveryEnabled()
+
+        val url = "http://localhost:$port/settings/store/shipping"
+        assertEndpointEquals("/screens/settings/shipping/shipping-local-delivery-enabled.json", url)
     }
 }

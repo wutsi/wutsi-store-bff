@@ -17,14 +17,13 @@ import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
-import com.wutsi.flutter.sdui.Flexible
-import com.wutsi.flutter.sdui.Radio
-import com.wutsi.flutter.sdui.RadioGroup
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
+import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -45,6 +44,7 @@ class CheckoutShippingScreen(
         @RequestParam(name = "order-id") orderId: String
     ): Widget {
         val tenant = tenantProvider.get()
+        val account = securityContext.currentAccount()
         val order = orderApi.getOrder(orderId).order
         val products = catalogApi.searchProducts(
             SearchProductRequest(
@@ -54,13 +54,14 @@ class CheckoutShippingScreen(
         ).products
         val rates = shippingApi.searchRate(
             SearchRateRequest(
-                country = order.shippingAddress?.country ?: securityContext.currentAccount().country,
-                cityId = order.shippingAddress?.cityId,
+                country = account.country,
+                cityId = account.cityId,
                 accountId = order.merchantId,
                 products = products.map {
                     Product(
                         productId = it.id,
-                        productType = it.type
+                        productType = it.type,
+                        quantity = it.quantity
                     )
                 }
             )
@@ -75,6 +76,8 @@ class CheckoutShippingScreen(
                 title = getText("page.checkout.shipping.app-bar.title"),
             ),
             child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
                 children = if (rates.isNotEmpty())
                     toShippingRateWidget(order, rates, tenant)
                 else
@@ -101,42 +104,49 @@ class CheckoutShippingScreen(
                 padding = 10.0,
                 alignment = Alignment.Center,
                 child = Text(
-                    getText(
-                        "page.checkout.shipping.message"
-                    ),
+                    getText("page.checkout.shipping.message"),
                     size = Theme.TEXT_SIZE_LARGE,
-                    color = Theme.COLOR_PRIMARY
                 )
             ),
             Divider(height = 1.0, color = Theme.COLOR_DIVIDER),
-            Flexible(
-                child = RadioGroup(
-                    name = "shippingId",
-                    separatorColor = Theme.COLOR_DIVIDER,
-                    separator = true,
-                    value = null,
-                    children = rates.map {
-                        Radio(
-                            caption = getText("shipping.type.${it.shippingType}") + " - " +
-                                formatRate(it.rate, tenant),
-                            subCaption = it.deliveryTime?.let {
-                                getText(
-                                    "page.checkout.shipping.delivery-delay",
-                                    arrayOf(formatDeliveryTime(it))
-                                )
-                            },
-                            value = it.shippingId.toString()
-                        )
-                    },
-                    action = executeCommand(
-                        urlBuilder.build(
-                            "commands/select-shipping-method?order-id=${order.id}"
-                        )
-                    ),
-                )
-            )
         )
 
+        children.addAll(
+            rates.map {
+                Container(
+                    alignment = Alignment.TopLeft,
+                    borderRadius = 4.0,
+                    border = 1.0,
+                    borderColor = Theme.COLOR_DIVIDER,
+                    padding = 10.0,
+                    margin = 10.0,
+                    width = Double.MAX_VALUE, /* Full width */
+                    child = Column(
+                        mainAxisAlignment = MainAxisAlignment.start,
+                        crossAxisAlignment = CrossAxisAlignment.start,
+                        children = listOfNotNull(
+                            Text(
+                                caption = getText("shipping.type.${it.shippingType}") +
+                                    " - " +
+                                    formatRate(it.rate, tenant),
+                                bold = true
+                            ),
+                            it.deliveryTime?.let {
+                                Text(
+                                    caption = getText(
+                                        key = "page.checkout.shipping.delivery-delay",
+                                        args = arrayOf(formatDeliveryTime(it))
+                                    )
+                                )
+                            }
+                        )
+                    ),
+                    action = executeCommand(
+                        urlBuilder.build("commands/select-shipping-method?order-id=${order.id}&shipping-id=${it.shippingId}")
+                    ),
+                )
+            }
+        )
         return children
     }
 }
