@@ -1,7 +1,7 @@
 {
   "type": "DefaultTabController",
   "attributes": {
-    "length": 2
+    "length": 3
   },
   "children": [
     {
@@ -270,7 +270,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "05 May 2020, 01:01"
+                                            "caption": "14 Apr. 2022, 00:00"
                                           },
                                           "children": []
                                         }
@@ -326,8 +326,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "Completed",
-                                            "color": "#4CAF50"
+                                            "caption": "New"
                                           },
                                           "children": []
                                         }
@@ -515,6 +514,47 @@
                                     {
                                       "type": "Text",
                                       "attributes": {
+                                        "caption": "Delivery Fees",
+                                        "bold": false
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 10.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "1,000 CFA",
+                                        "bold": false,
+                                        "alignment": "Right"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Row",
+                              "attributes": {
+                                "mainAxisAlignment": "spaceBetween"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 10.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
                                         "caption": "Savings",
                                         "bold": false
                                       },
@@ -601,6 +641,136 @@
               ]
             },
             {
+              "type": "SingleChildScrollView",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Shipping Method",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Local Pickup",
+                                "size": 14.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Pickup Address",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "3030 Linton"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Yaounde, Cameroon"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Shipping To",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Ray Sponsible",
+                                "bold": true,
+                                "size": 14.0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "180 Rue des Manguier, Bonnapriso",
+                                "size": 14.0,
+                                "maxLines": 3
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Yaounde, Cameroon",
+                                "size": 14.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "type": "DynamicWidget",
               "attributes": {
                 "url": "http://localhost:0/order/qr-code-widget?id=111"
@@ -625,6 +795,14 @@
                 "type": "Text",
                 "attributes": {
                   "caption": "PRODUCTS",
+                  "bold": true
+                },
+                "children": []
+              },
+              {
+                "type": "Text",
+                "attributes": {
+                  "caption": "SHIPPING",
                   "bold": true
                 },
                 "children": []

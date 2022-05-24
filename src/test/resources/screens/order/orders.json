@@ -58,29 +58,31 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Ray Sponsible",
-                    "subCaption": "05 May 2020 - Completed",
+                    "caption": "Order #111",
+                    "subCaption": "Completed",
                     "trailing": {
-                      "type": "Text",
+                      "type": "Column",
                       "attributes": {
-                        "caption": "25,000 CFA",
-                        "color": "#1D7EDF",
-                        "bold": true
-                      },
-                      "children": []
-                    },
-                    "leading": {
-                      "type": "CircleAvatar",
-                      "attributes": {
-                        "radius": 24.0
+                        "mainAxisAlignment": "start",
+                        "mainAxisSize": "min",
+                        "crossAxisAlignment": "end"
                       },
                       "children": [
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "RS",
+                            "caption": "25,000 CFA",
+                            "color": "#1D7EDF",
                             "bold": true,
-                            "size": 16.0
+                            "size": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "05 May 2020",
+                            "size": 10.0
                           },
                           "children": []
                         }
@@ -96,29 +98,31 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "John Smith",
-                    "subCaption": "05 Jun 2020 - Sent",
+                    "caption": "Order #222",
+                    "subCaption": "Sent",
                     "trailing": {
-                      "type": "Text",
+                      "type": "Column",
                       "attributes": {
-                        "caption": "50,000 CFA",
-                        "color": "#1D7EDF",
-                        "bold": true
-                      },
-                      "children": []
-                    },
-                    "leading": {
-                      "type": "CircleAvatar",
-                      "attributes": {
-                        "radius": 24.0
+                        "mainAxisAlignment": "start",
+                        "mainAxisSize": "min",
+                        "crossAxisAlignment": "end"
                       },
                       "children": [
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "JS",
+                            "caption": "50,000 CFA",
+                            "color": "#1D7EDF",
                             "bold": true,
-                            "size": 16.0
+                            "size": 10.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "05 Jun 2020",
+                            "size": 10.0
                           },
                           "children": []
                         }

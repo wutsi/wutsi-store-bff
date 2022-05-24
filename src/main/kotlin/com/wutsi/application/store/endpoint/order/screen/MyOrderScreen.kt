@@ -1,5 +1,6 @@
 package com.wutsi.application.store.endpoint.order.screen
 
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -17,7 +18,8 @@ class MyOrderScreen(
     catalogApi: WutsiCatalogApi,
     shippingApi: WutsiShippingApi,
     tenantProvider: TenantProvider,
-) : AbstractOrderScreen(orderApi, accountApi, catalogApi, shippingApi, tenantProvider) {
+    cityService: CityService
+) : AbstractOrderScreen(orderApi, accountApi, catalogApi, shippingApi, tenantProvider, cityService) {
     override fun getPageId() = Page.MY_ORDER
     override fun showMerchantInfo() = true
 }

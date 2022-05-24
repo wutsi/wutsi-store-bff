@@ -21,9 +21,11 @@ import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.SearchAccountRequest
+import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -38,12 +40,13 @@ abstract class AbstractOrderListScreen(
     protected abstract fun getTitle(): String
     protected abstract fun getOrders(request: FilterOrderRequest?): List<OrderSummary>
     protected abstract fun getAction(order: OrderSummary): Action
-    protected abstract fun getAccountId(order: OrderSummary): Long
+    protected abstract fun getAccountId(order: OrderSummary): Long?
 
     @PostMapping
     fun index(
         @RequestBody(required = false) request: FilterOrderRequest? = null
     ): Widget {
+        val tenant = tenantProvider.get()
         val orders = getOrders(request)
 
         return Screen(
@@ -76,15 +79,15 @@ abstract class AbstractOrderListScreen(
                     if (orders.isEmpty())
                         null
                     else
-                        Flexible(child = toListView(orders))
+                        Flexible(child = toListView(orders, tenant))
                 )
             ),
             bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
 
-    private fun toListView(orders: List<OrderSummary>): WidgetAware {
-        val accountIds = orders.map { getAccountId(it) }.toSet()
+    private fun toListView(orders: List<OrderSummary>, tenant: Tenant): WidgetAware {
+        val accountIds = orders.flatMap { listOf(it.merchantId, it.accountId) }.toSet()
         val accounts = accountApi.searchAccount(
             SearchAccountRequest(
                 ids = accountIds.toList(),
@@ -92,34 +95,46 @@ abstract class AbstractOrderListScreen(
             )
         ).accounts.associateBy { it.id }
 
-        val tenant = tenantProvider.get()
-        val moneyFormat = DecimalFormat(tenant.monetaryFormat)
-        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateFormat, LocaleContextHolder.getLocale())
-
         return ListView(
             separatorColor = Theme.COLOR_DIVIDER,
             separator = true,
             children = orders.map {
-                toOrderListItem(it, accounts[getAccountId(it)], moneyFormat, dateFormat)
+                toOrderWidget(it, accounts, tenant)
             }
         )
     }
 
-    private fun toOrderListItem(
-        order: OrderSummary,
-        account: AccountSummary?,
-        moneyFormat: DecimalFormat,
-        dateFormat: DateTimeFormatter,
-    ) = ListItem(
-        leading = account?.let {
-            Avatar(
-                model = sharedUIMapper.toAccountModel(it),
-                radius = 24.0
-            )
-        },
-        trailing = Text(moneyFormat.format(order.totalPrice), bold = true, color = Theme.COLOR_PRIMARY),
-        caption = account?.displayName ?: "",
-        subCaption = order.created.format(dateFormat) + " - " + getText("order.status.${order.status}"),
-        action = getAction(order)
-    )
+    private fun toOrderWidget(order: OrderSummary, accounts: Map<Long, AccountSummary>, tenant: Tenant): WidgetAware {
+        val moneyFormat = DecimalFormat(tenant.monetaryFormat)
+        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateFormat, LocaleContextHolder.getLocale())
+        val merchant = getAccountId(order)?.let { accounts[it] }
+        return ListItem(
+            leading = merchant?.let {
+                Avatar(
+                    model = sharedUIMapper.toAccountModel(it),
+                    radius = 24.0
+                )
+            },
+            trailing = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.end,
+                mainAxisSize = MainAxisSize.min,
+                children = listOf(
+                    Text(
+                        caption = moneyFormat.format(order.totalPrice),
+                        bold = true,
+                        color = Theme.COLOR_PRIMARY,
+                        size = Theme.TEXT_SIZE_SMALL
+                    ),
+                    Text(
+                        caption = order.created.format(dateFormat),
+                        size = Theme.TEXT_SIZE_SMALL
+                    )
+                ),
+            ),
+            caption = getText("page.order.number", arrayOf(order.id.takeLast(4))),
+            subCaption = getText("order.status.${order.status}"),
+            action = getAction(order),
+        )
+    }
 }

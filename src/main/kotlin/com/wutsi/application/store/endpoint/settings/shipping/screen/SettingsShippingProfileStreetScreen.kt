@@ -16,6 +16,6 @@ class SettingsShippingProfileStreetScreen : AbstractSettingsShippingProfileAttri
     override fun getInputWidget(shipping: Shipping) = Input(
         name = "value",
         value = shipping.street,
-        maxLength = 160,
+        maxLines = 3
     )
 }

@@ -60,6 +60,7 @@ import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestTemplate
 import java.nio.charset.Charset
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.util.UUID
@@ -406,7 +407,7 @@ abstract class AbstractEndpointTest {
         deliveryTime = 24,
     )
 
-    fun createOrder(shippingAddress: Address? = createAddress()) = Order(
+    fun createOrder(shippingAddress: Address? = createAddress(), shippingId: Long? = 333) = Order(
         id = "111",
         merchantId = 55L,
         totalPrice = 25000.0,
@@ -420,10 +421,11 @@ abstract class AbstractEndpointTest {
             OrderItem(productId = 2, quantity = 1, unitPrice = 15000.0)
         ),
         shippingAddress = shippingAddress,
-        shippingId = 333,
+        shippingId = shippingId,
         expectedDelivered = OffsetDateTime.of(2020, 1, 3, 15, 0, 0, 0, ZoneOffset.UTC),
         deliveryFees = 1000.0,
-        accountId = ACCOUNT_ID
+        accountId = ACCOUNT_ID,
+        created = OffsetDateTime.of(LocalDateTime.of(2022, 4, 14, 0, 0, 0, 0), ZoneOffset.UTC)
     )
 
     fun createAddress(id: Long = 111L, firstName: String = "Ray") = Address(

@@ -35,5 +35,5 @@ class OrdersScreen(
         url = urlBuilder.build("/order?id=${order.id}")
     )
 
-    override fun getAccountId(order: OrderSummary) = order.accountId
+    override fun getAccountId(order: OrderSummary) = null
 }

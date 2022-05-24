@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.order.screen
 
 import com.wutsi.application.shared.Theme
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.AddressCard
 import com.wutsi.application.shared.ui.OrderItemListItem
@@ -17,6 +18,7 @@ import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -37,9 +39,11 @@ import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.flutter.sdui.enums.TextDecoration
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.tenant.dto.Tenant
+import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 abstract class AbstractOrderScreen(
     private val orderApi: WutsiOrderApi,
@@ -47,6 +51,7 @@ abstract class AbstractOrderScreen(
     private val catalogApi: WutsiCatalogApi,
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
+    private val cityService: CityService,
 ) : AbstractQuery() {
     protected abstract fun getPageId(): String
     protected abstract fun showMerchantInfo(): Boolean
@@ -204,15 +209,33 @@ abstract class AbstractOrderScreen(
             )
         )
 
+        // Pickup Location
+        if (shipping.type == ShippingType.LOCAL_PICKUP.name) {
+            val city = shipping.cityId?.let { cityService.get(it) }
+            children.addAll(
+                listOfNotNull(
+                    Container(padding = 10.0),
+                    Text(getText("page.order.shipping.pickup-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
+                    shipping.street?.let { Text(it) },
+                    city?.let {
+                        Text(
+                            "${city.name}, " +
+                                Locale("en", city.country).getDisplayCountry(LocaleContextHolder.getLocale())
+                        )
+                    }
+                )
+            )
+        }
+
         // Shipping Address
         if (order.shippingAddress != null)
             children.addAll(
-                listOf(
+                listOfNotNull(
                     Container(padding = 10.0),
                     Text(getText("page.order.shipping-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                    AddressCard(
-                        model = sharedUIMapper.toAddressModel(order.shippingAddress!!),
-                    )
+                    order.shippingAddress?.let {
+                        AddressCard(model = sharedUIMapper.toAddressModel(it))
+                    }
                 )
             )
 
