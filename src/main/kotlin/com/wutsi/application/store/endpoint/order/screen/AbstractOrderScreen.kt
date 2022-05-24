@@ -108,7 +108,7 @@ abstract class AbstractOrderScreen(
 
     private fun productsTab(order: Order, tenant: Tenant): WidgetAware {
         val customer = accountApi.getAccount(order.accountId).account
-        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateTimeFormat)
+        val dateFormat = DateTimeFormatter.ofPattern(tenant.dateTimeFormat, LocaleContextHolder.getLocale())
         val children = mutableListOf<WidgetAware>()
 
         // Merchant
