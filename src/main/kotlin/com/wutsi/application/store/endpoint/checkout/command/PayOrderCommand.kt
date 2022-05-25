@@ -2,7 +2,9 @@ package com.wutsi.application.store.endpoint.checkout.command
 
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.ChangeStatusRequest
 import com.wutsi.ecommerce.order.dto.Order
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.core.logging.KVLogger
 import com.wutsi.platform.payment.WutsiPaymentApi
@@ -42,8 +44,8 @@ class PayOrderCommand(
             ).id
             logger.add("transaction_id", id)
 
-            // Submit the order
-            orderApi.submitOrder(orderId)
+            // Open the order
+            orderApi.changeStatus(orderId, ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
             // Empty the cart
             emptyCart(order)

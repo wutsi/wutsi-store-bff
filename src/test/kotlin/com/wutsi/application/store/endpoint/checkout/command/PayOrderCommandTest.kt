@@ -10,6 +10,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.ChangeStatusRequest
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.entity.OrderStatus
@@ -83,7 +84,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertNull(request.firstValue.description)
 
         verify(cartApi).emptyCart(order.merchantId)
-        verify(orderApi).submitOrder("111")
+        verify(orderApi).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -110,7 +111,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
 
         verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).submitOrder(any())
+        verify(orderApi, never()).changeStatus(any(), any())
     }
 
     @Test
@@ -133,6 +134,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
 
         verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).submitOrder(any())
+        verify(orderApi, never()).changeStatus(any(), any())
     }
 }

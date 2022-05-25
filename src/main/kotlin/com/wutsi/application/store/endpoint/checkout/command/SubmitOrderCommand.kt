@@ -2,7 +2,9 @@ package com.wutsi.application.store.endpoint.checkout.command
 
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.ChangeStatusRequest
 import com.wutsi.ecommerce.order.dto.Order
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.core.logging.KVLogger
 import feign.FeignException
@@ -27,11 +29,11 @@ class SubmitOrderCommand(
         @RequestParam(name = "order-id") orderId: String,
     ): Action {
         try {
-            // Submit the order
-            val order = orderApi.getOrder(orderId).order
-            orderApi.submitOrder(orderId)
+            // Open the order
+            orderApi.changeStatus(orderId, ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
             // Empty the cart
+            val order = orderApi.getOrder(orderId).order
             emptyCart(order)
 
             return gotoUrl(

@@ -59,7 +59,7 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Order #111",
-                    "subCaption": "Completed",
+                    "subCaption": "Done",
                     "trailing": {
                       "type": "Column",
                       "attributes": {
@@ -99,7 +99,7 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Order #222",
-                    "subCaption": "Sent",
+                    "subCaption": "Opened",
                     "trailing": {
                       "type": "Column",
                       "attributes": {

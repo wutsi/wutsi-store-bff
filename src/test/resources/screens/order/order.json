@@ -224,7 +224,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "Sent"
+                                            "caption": "Opened"
                                           },
                                           "children": []
                                         }

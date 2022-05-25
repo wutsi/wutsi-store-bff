@@ -36,7 +36,7 @@ internal class OrderScreenTest : AbstractEndpointTest() {
         subTotalPrice = 30000.0,
         savingsAmount = 5000.0,
         currency = "XAF",
-        status = OrderStatus.READY.name,
+        status = OrderStatus.OPENED.name,
         paymentStatus = PaymentStatus.PARTIALLY_PAID.name,
         totalPaid = 20000.0,
         reservationId = 777L,

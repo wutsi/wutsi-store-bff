@@ -159,9 +159,9 @@ abstract class AbstractOrderScreen(
                             getText("page.order.status"),
                             Text(
                                 getText("order.status.${order.status}"),
-                                color = if (OrderStatus.COMPLETED.name == order.status)
+                                color = if (OrderStatus.DONE.name == order.status)
                                     Theme.COLOR_SUCCESS
-                                else if (OrderStatus.CANCELLED.name == order.status || OrderStatus.RETURNED.name == order.status)
+                                else if (OrderStatus.CANCELLED.name == order.status)
                                     Theme.COLOR_DANGER
                                 else
                                     null

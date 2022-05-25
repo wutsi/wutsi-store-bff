@@ -9,6 +9,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.ChangeStatusRequest
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.entity.OrderStatus
@@ -67,7 +68,7 @@ internal class SubmitOrderCommandTest : AbstractEndpointTest() {
         assertEquals(200, response.statusCodeValue)
 
         verify(cartApi).emptyCart(order.merchantId)
-        verify(orderApi).submitOrder("111")
+        verify(orderApi).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -80,7 +81,7 @@ internal class SubmitOrderCommandTest : AbstractEndpointTest() {
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
         val ex = createFeignException(com.wutsi.ecommerce.order.error.ErrorURN.ILLEGAL_STATUS.urn)
-        doThrow(ex).whenever(orderApi).submitOrder(any())
+        doThrow(ex).whenever(orderApi).changeStatus(any(), any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
