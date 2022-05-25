@@ -34,8 +34,8 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Local Pickup",
-                    "subCaption": "Customers pickup their orders from a location in your region\n1 day - 150,000 CFA",
+                    "caption": "In-Store Pickup",
+                    "subCaption": "Customers pickup their orders in your store\n1 day - 150,000 CFA",
                     "padding": 10.0,
                     "trailing": {
                       "type": "Icon",

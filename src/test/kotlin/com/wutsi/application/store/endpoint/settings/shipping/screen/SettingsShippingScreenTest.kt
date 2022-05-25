@@ -65,4 +65,12 @@ internal class SettingsShippingScreenTest : AbstractEndpointTest() {
         val url = "http://localhost:$port/settings/store/shipping"
         assertEndpointEquals("/screens/settings/shipping/shipping-local-delivery-enabled.json", url)
     }
+
+    @Test
+    fun inStorePickupEnabled() {
+        doReturn(true).whenever(togglesProvider).isShippingInStorePickup()
+
+        val url = "http://localhost:$port/settings/store/shipping"
+        assertEndpointEquals("/screens/settings/shipping/shipping-in-store-pickup-enabled.json", url)
+    }
 }

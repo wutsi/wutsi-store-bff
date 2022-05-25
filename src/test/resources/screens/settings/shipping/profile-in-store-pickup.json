@@ -18,7 +18,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Deliver orders to customers via email. This option is suitable for digital products"
+                "caption": "Customers pickup their orders in your store"
               },
               "children": []
             }
@@ -81,6 +81,25 @@
                 {
                   "type": "ListItem",
                   "attributes": {
+                    "caption": "Rate",
+                    "subCaption": "150,000 CFA",
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e21a"
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/settings/store/shipping/attribute/rate?id=111"
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
                     "caption": "Shipping Instructions",
                     "subCaption": "This is the message to display to customer",
                     "trailing": {
@@ -107,7 +126,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Email Delivery",
+      "title": "In-Store Pickup",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

@@ -12,7 +12,6 @@ import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.GetShippingResponse
-import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -63,7 +62,7 @@ internal class MyOrderScreenTest : AbstractEndpointTest() {
         val city = CityEntity(id = 111, name = "Yaounde", country = "CM")
         doReturn(city).whenever(cityService).get(any())
 
-        val shipping = createShipping(ShippingType.LOCAL_PICKUP, city.id)
+        val shipping = createShipping(ShippingType.LOCAL_PICKUP, cityId = city.id)
         doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
 
         val order = createOrder(shippingId = shipping.id)
@@ -74,13 +73,17 @@ internal class MyOrderScreenTest : AbstractEndpointTest() {
         assertEndpointEquals("/screens/order/my-order-local-pickup.json", url)
     }
 
-    private fun createShipping(type: ShippingType, cityId: Long) = Shipping(
-        id = 1111,
-        type = type.name,
-        cityId = cityId,
-        street = "3030 Linton",
-        rate = 0.0,
-        currency = "XAF",
-        deliveryTime = 24
-    )
+    @Test
+    fun `in-store pickup`() {
+        // GIVEN
+        val shipping = createShipping(ShippingType.LOCAL_PICKUP)
+        doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
+
+        val order = createOrder(shippingId = shipping.id)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        // WHEN
+        val url = "http://localhost:$port/me/order?id=111"
+        assertEndpointEquals("/screens/order/my-order-store-pickup.json", url)
+    }
 }

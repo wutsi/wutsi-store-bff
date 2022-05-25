@@ -77,37 +77,13 @@ class SettingsShippingProfileScreen(
                                     )
                                 ),
 
-                                if (shipping.type != ShippingType.LOCAL_PICKUP.name && shipping.type != ShippingType.EMAIL_DELIVERY.name)
+                                if (!isFree(shipping))
                                     ListItem(
                                         caption = toCaption("rate", shipping),
                                         subCaption = formatRate(shipping.rate, tenant),
                                         trailing = Icon(Theme.ICON_EDIT),
                                         action = gotoUrl(
                                             urlBuilder.build("/settings/store/shipping/attribute/rate?id=$id")
-                                        )
-                                    )
-                                else
-                                    null,
-
-                                if (shipping.type == ShippingType.LOCAL_PICKUP.name)
-                                    ListItem(
-                                        caption = toCaption("street", shipping),
-                                        subCaption = shipping.street,
-                                        trailing = Icon(Theme.ICON_EDIT),
-                                        action = gotoUrl(
-                                            urlBuilder.build("/settings/store/shipping/attribute/street?id=$id")
-                                        )
-                                    )
-                                else
-                                    null,
-
-                                if (shipping.type == ShippingType.LOCAL_PICKUP.name || shipping.type == ShippingType.LOCAL_DELIVERY.name)
-                                    ListItem(
-                                        caption = toCaption("city-id", shipping),
-                                        subCaption = sharedUIMapper.toLocationText(city, shipping.country ?: ""),
-                                        trailing = Icon(Theme.ICON_EDIT),
-                                        action = gotoUrl(
-                                            urlBuilder.build("/settings/store/shipping/attribute/city-id?id=$id")
                                         )
                                     )
                                 else
@@ -121,14 +97,6 @@ class SettingsShippingProfileScreen(
                                         urlBuilder.build("/settings/store/shipping/attribute/message?id=$id")
                                     )
                                 ),
-//                                ListItem(
-//                                    caption = getText("page.settings.shipping.attribute.country"),
-//                                    subCaption = shipping.country?.let { Locale("en", it).getDisplayCountry(locale) },
-//                                    trailing = Icon(Theme.ICON_EDIT),
-//                                    action = gotoUrl(
-//                                        urlBuilder.build("/settings/store/shipping/attribute/country?id=$id")
-//                                    )
-//                                ),
                             )
                         ),
                     )
@@ -136,6 +104,11 @@ class SettingsShippingProfileScreen(
             )
         ).toWidget()
     }
+
+    private fun isFree(shipping: Shipping): Boolean =
+        shipping.type == ShippingType.LOCAL_PICKUP.name ||
+            shipping.type == ShippingType.LOCAL_DELIVERY.name ||
+            shipping.type == ShippingType.EMAIL_DELIVERY.name
 
     private fun toCaption(name: String, shipping: Shipping): String =
         try {

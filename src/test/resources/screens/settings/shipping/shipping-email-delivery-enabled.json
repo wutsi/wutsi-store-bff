@@ -35,7 +35,7 @@
                   "type": "ListItem",
                   "attributes": {
                     "caption": "Email Delivery",
-                    "subCaption": "1 day - 150,000 CFA",
+                    "subCaption": "Deliver orders to customers via email. This option is suitable for digital products\n1 day - 150,000 CFA",
                     "padding": 10.0,
                     "trailing": {
                       "type": "Icon",

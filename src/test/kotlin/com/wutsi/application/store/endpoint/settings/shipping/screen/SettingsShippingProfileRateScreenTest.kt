@@ -22,7 +22,7 @@ internal class SettingsShippingProfileRateScreenTest : AbstractEndpointTest() {
 
     @Test
     fun index() {
-        val shipping = createShipping(ShippingType.LOCAL_PICKUP)
+        val shipping = createShipping(ShippingType.LOCAL_PICKUP, cityId = 11111L)
         doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
 
         val url = "http://localhost:$port/settings/store/shipping/attribute/rate?id=111"

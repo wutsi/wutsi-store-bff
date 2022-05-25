@@ -18,7 +18,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Customer pickup products in your store"
+                "caption": "Customers pickup their orders from a location in your region"
               },
               "children": []
             }
@@ -76,44 +76,6 @@
                   "action": {
                     "type": "Route",
                     "url": "http://localhost:0/settings/store/shipping/attribute/delivery-time?id=111"
-                  }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
-                    "caption": "Pickup Address",
-                    "subCaption": "3030 Linton",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e21a"
-                      },
-                      "children": []
-                    }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/shipping/attribute/street?id=111"
-                  }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
-                    "caption": "Pickup Location",
-                    "subCaption": "Yaounde, Cameroon",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e21a"
-                      },
-                      "children": []
-                    }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/shipping/attribute/city-id?id=111"
                   }
                 },
                 {

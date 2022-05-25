@@ -18,7 +18,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Deliver products to local customers"
+                "caption": "Deliver orders to customers in your region"
               },
               "children": []
             }
@@ -76,44 +76,6 @@
                   "action": {
                     "type": "Route",
                     "url": "http://localhost:0/settings/store/shipping/attribute/delivery-time?id=111"
-                  }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
-                    "caption": "Rate",
-                    "subCaption": "150,000 CFA",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e21a"
-                      },
-                      "children": []
-                    }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/shipping/attribute/rate?id=111"
-                  }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
-                    "caption": "Delivery City",
-                    "subCaption": "Yaounde, Cameroon",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e21a"
-                      },
-                      "children": []
-                    }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/shipping/attribute/city-id?id=111"
                   }
                 },
                 {

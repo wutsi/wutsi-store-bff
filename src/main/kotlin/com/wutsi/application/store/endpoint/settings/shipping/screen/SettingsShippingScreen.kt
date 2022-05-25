@@ -20,11 +20,9 @@ import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.platform.tenant.dto.Tenant
-import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.Locale
 
 @RestController
 @RequestMapping("/settings/store/shipping")
@@ -54,6 +52,15 @@ class SettingsShippingScreen(
                             separator = true,
                             separatorColor = Theme.COLOR_DIVIDER,
                             children = listOfNotNull(
+                                if (togglesProvider.isShippingInStorePickup())
+                                    listItem(
+                                        ShippingType.IN_STORE_PICKUP,
+                                        shippings,
+                                        tenant
+                                    )
+                                else
+                                    null,
+
                                 if (togglesProvider.isShippingLocalPickupEnabled())
                                     listItem(
                                         ShippingType.LOCAL_PICKUP,
@@ -116,7 +123,7 @@ class SettingsShippingScreen(
             ListItemSwitch(
                 name = "value",
                 caption = getText("shipping.type.$type"),
-                subCaption = getText("shipping.type.$type.enable"),
+                subCaption = getText("shipping.type.$type.description"),
                 selected = false,
                 action = executeCommand(urlBuilder.build(cmd))
             )
@@ -127,18 +134,12 @@ class SettingsShippingScreen(
         if (shipping == null)
             return null
 
-        val line1 = listOfNotNull(
+        val line1 = getText("shipping.type.${shipping.type}.description")
+
+        val line2 = listOfNotNull(
             shipping.deliveryTime?.let { formatDeliveryTime(it) },
             formatRate(shipping.rate, tenant)
         ).joinToString(separator = " - ")
-
-        val locale = LocaleContextHolder.getLocale()
-        val line2 =
-            if (shipping.type == ShippingType.LOCAL_PICKUP.name || shipping.type == ShippingType.LOCAL_DELIVERY.name)
-                cityService.get(shipping.cityId)
-                    ?.let { "${it.name} - " + Locale("en", it.country).getDisplayCountry(locale) }
-            else
-                null
 
         return listOfNotNull(line1, line2).joinToString(separator = "\n")
     }

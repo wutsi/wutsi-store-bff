@@ -376,7 +376,7 @@ abstract class AbstractEndpointTest {
         status = "ACTIVE",
     )
 
-    fun createShipping(type: ShippingType, enabled: Boolean = true) = Shipping(
+    fun createShipping(type: ShippingType, enabled: Boolean = true, cityId: Long? = null) = Shipping(
         id = 111,
         accountId = 1111,
         type = type.name,
@@ -384,7 +384,7 @@ abstract class AbstractEndpointTest {
         enabled = enabled,
         rate = 150000.0,
         deliveryTime = 24,
-        cityId = 11111L,
+        cityId = cityId,
         country = "CM",
         street = "3030 Linton"
     )

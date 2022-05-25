@@ -35,7 +35,7 @@ internal class CheckoutReviewScreenTest : AbstractEndpointTest() {
         ProductSummary(id = 2, title = "Item 2"),
     )
 
-    private val shipping = createShipping(ShippingType.LOCAL_PICKUP)
+    private val shipping = createShipping(ShippingType.LOCAL_PICKUP, cityId = 11111L)
 
     @BeforeEach
     override fun setUp() {

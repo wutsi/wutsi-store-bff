@@ -60,4 +60,13 @@ internal class SettingsShippingProfileScreenTest : AbstractEndpointTest() {
         val url = "http://localhost:$port/settings/store/shipping/profile?id=111"
         assertEndpointEquals("/screens/settings/shipping/profile-email-delivery.json", url)
     }
+
+    @Test
+    fun inStorePickup() {
+        val shipping = createShipping(ShippingType.IN_STORE_PICKUP)
+        doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
+
+        val url = "http://localhost:$port/settings/store/shipping/profile?id=111"
+        assertEndpointEquals("/screens/settings/shipping/profile-in-store-pickup.json", url)
+    }
 }
