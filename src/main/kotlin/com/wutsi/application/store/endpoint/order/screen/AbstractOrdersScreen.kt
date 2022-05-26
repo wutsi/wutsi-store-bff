@@ -6,6 +6,7 @@ import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.order.dto.FilterOrderRequest
 import com.wutsi.ecommerce.order.dto.OrderSummary
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
@@ -32,10 +33,14 @@ import org.springframework.web.bind.annotation.RequestBody
 import java.text.DecimalFormat
 import java.time.format.DateTimeFormatter
 
-abstract class AbstractOrderListScreen(
+abstract class AbstractOrdersScreen(
     private val accountApi: WutsiAccountApi,
     private val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
+    companion object {
+        const val MAX_ORDERS = 100
+    }
+
     protected abstract fun getPageId(): String
     protected abstract fun getTitle(): String
     protected abstract fun getOrders(request: FilterOrderRequest?): List<OrderSummary>
@@ -137,4 +142,7 @@ abstract class AbstractOrderListScreen(
             action = getAction(order),
         )
     }
+
+    protected fun getOrderStatusList(): List<OrderStatus> =
+        OrderStatus.values().filter { it != OrderStatus.CREATED && it != OrderStatus.EXPIRED }
 }

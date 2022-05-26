@@ -15,6 +15,8 @@ object Page {
     const val MARKETPLACE = "page.marketplace"
     const val MARKETPLACE_CATEGORY = "page.marketplace.category"
     const val ORDER = "page.order"
+    const val ORDER_CLOSE = "page.order.close"
+    const val ORDER_CANCEL = "page.order.cancel"
     const val ORDERS = "page.orders"
     const val PRODUCT = "page.product"
     const val MY_ORDER = "page.my-order"

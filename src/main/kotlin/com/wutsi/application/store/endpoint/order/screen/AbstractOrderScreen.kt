@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.order.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.AddressCard
 import com.wutsi.application.shared.ui.OrderItemListItem
@@ -49,10 +48,11 @@ abstract class AbstractOrderScreen(
     private val catalogApi: WutsiCatalogApi,
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
-    private val cityService: CityService,
 ) : AbstractQuery() {
     protected abstract fun getPageId(): String
     protected abstract fun showMerchantInfo(): Boolean
+    protected abstract fun getAppBarAction(order: Order): WidgetAware?
+
     protected open fun getPageTitle(order: Order): String =
         getText("page.order.app-bar.title", arrayOf(order.id.uppercase().takeLast(4)))
 
@@ -97,6 +97,9 @@ abstract class AbstractOrderScreen(
                     foregroundColor = Theme.COLOR_WHITE,
                     bottom = tabs,
                     title = getPageTitle(order),
+                    actions = getAppBarAction(order)?.let {
+                        listOf(it)
+                    }
                 ),
                 child = tabViews,
                 bottomNavigationBar = bottomNavigationBar()
