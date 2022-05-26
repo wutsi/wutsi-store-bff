@@ -4,14 +4,12 @@ import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.application.store.service.ShippingService
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
-import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
-import com.wutsi.ecommerce.shipping.dto.Product
 import com.wutsi.ecommerce.shipping.dto.RateSummary
-import com.wutsi.ecommerce.shipping.dto.SearchRateRequest
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
@@ -36,36 +34,19 @@ class CheckoutShippingScreen(
     private val shippingApi: WutsiShippingApi,
     private val orderApi: WutsiOrderApi,
     private val catalogApi: WutsiCatalogApi,
-    private val tenantProvider: TenantProvider
+    private val tenantProvider: TenantProvider,
+    private val service: ShippingService,
 ) : AbstractQuery() {
 
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String
     ): Widget {
+        // Get shipping rates
         val tenant = tenantProvider.get()
         val account = securityContext.currentAccount()
         val order = orderApi.getOrder(orderId).order
-        val products = catalogApi.searchProducts(
-            SearchProductRequest(
-                productIds = order.items.map { it.productId },
-                limit = order.items.size
-            )
-        ).products
-        val rates = shippingApi.searchRate(
-            SearchRateRequest(
-                country = account.country,
-                cityId = account.cityId,
-                accountId = order.merchantId,
-                products = products.map {
-                    Product(
-                        productId = it.id,
-                        productType = it.type,
-                        quantity = it.quantity
-                    )
-                }
-            )
-        ).rates
+        val rates = service.findShippingRates(account, order)
 
         return Screen(
             id = Page.CHECKOUT_DELIVERY_METHOD,

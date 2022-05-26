@@ -7,10 +7,12 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.application.store.service.ShippingService
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.SetShippingMethodRequest
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
-import com.wutsi.ecommerce.shipping.dto.GetShippingResponse
+import com.wutsi.ecommerce.shipping.dto.RateSummary
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
@@ -31,11 +33,22 @@ internal class SelectShippingMethodCommandTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
 
+    @MockBean
+    private lateinit var service: ShippingService
+
     @Test
     fun select() {
         // GIVEN
-        val shipping = createShipping(ShippingType.LOCAL_PICKUP)
-        doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
+        val order = createOrder()
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val rate = RateSummary(
+            shippingId = 555,
+            shippingType = ShippingType.LOCAL_PICKUP.name,
+            rate = 1500.0,
+            currency = "XAF"
+        )
+        doReturn(rate).whenever(service).findShippingRate(any(), any(), any())
 
         // WHEN
         val url = "http://localhost:$port/commands/select-shipping-method?order-id=111&shipping-id=555"
@@ -46,7 +59,9 @@ internal class SelectShippingMethodCommandTest : AbstractEndpointTest() {
 
         val req = argumentCaptor<SetShippingMethodRequest>()
         verify(orderApi).setShippingMethod(eq("111"), req.capture())
-        assertEquals(555, req.firstValue.shippingId)
+        assertEquals(rate.shippingId, req.firstValue.shippingId)
+        assertEquals(rate.deliveryTime, req.firstValue.deliveryTime)
+        assertEquals(rate.rate, req.firstValue.deliveryFees)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)

@@ -4,14 +4,10 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.ecommerce.catalog.dto.ProductSummary
-import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
-import com.wutsi.ecommerce.catalog.entity.ProductType
+import com.wutsi.application.store.service.ShippingService
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
-import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.RateSummary
-import com.wutsi.ecommerce.shipping.dto.SearchRateResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -28,7 +24,7 @@ internal class CheckoutShippingScreenTest : AbstractEndpointTest() {
     private lateinit var orderApi: WutsiOrderApi
 
     @MockBean
-    private lateinit var shippingApi: WutsiShippingApi
+    private lateinit var service: ShippingService
 
     @BeforeEach
     override fun setUp() {
@@ -36,9 +32,6 @@ internal class CheckoutShippingScreenTest : AbstractEndpointTest() {
 
         val order = createOrder()
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
-
-        val products = order.items.map { ProductSummary(id = it.productId, type = ProductType.PHYSICAL.name) }
-        doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
 
         val rates = listOf(
             RateSummary(
@@ -54,7 +47,7 @@ internal class CheckoutShippingScreenTest : AbstractEndpointTest() {
                 currency = "XAF"
             )
         )
-        doReturn(SearchRateResponse(rates)).whenever(shippingApi).searchRate(any())
+        doReturn(rates).whenever(service).findShippingRates(any(), any())
     }
 
     @Test
