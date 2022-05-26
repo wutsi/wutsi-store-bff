@@ -11,148 +11,152 @@
       "attributes": {},
       "children": [
         {
-          "type": "Flexible",
+          "type": "Container",
           "attributes": {
-            "flex": 1,
-            "fit": "Tight"
+            "padding": 10.0
+          },
+          "children": []
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "alignment": "Center",
+            "padding": 10.0
           },
           "children": [
             {
-              "type": "Column",
+              "type": "Text",
               "attributes": {
-                "mainAxisAlignment": "start",
-                "crossAxisAlignment": "start"
+                "caption": "The order will not be processed or ship to the customer.",
+                "size": 16.0
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": []
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "alignment": "CenterLeft",
+            "padding": 10.0,
+            "width": 1.7976931348623157E308
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "Reason (Required)"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "DropdownButton",
+              "attributes": {
+                "name": "reason",
+                "required": true
               },
               "children": [
                 {
-                  "type": "Container",
+                  "type": "DropdownMenuItem",
                   "attributes": {
-                    "alignment": "Center",
-                    "padding": 10.0
+                    "caption": "Change of mind",
+                    "enabled": true,
+                    "value": "change_of_mind"
                   },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "The order will not be processed or ship to the customer.",
-                        "size": 16.0
-                      },
-                      "children": []
-                    }
-                  ]
+                  "children": []
                 },
                 {
-                  "type": "Container",
+                  "type": "DropdownMenuItem",
                   "attributes": {
-                    "alignment": "CenterLeft",
-                    "padding": 10.0
+                    "caption": "High shipping costs",
+                    "enabled": true,
+                    "value": "high_shipping_costs"
                   },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "Reason (Required)"
-                      },
-                      "children": []
-                    }
-                  ]
+                  "children": []
                 },
                 {
-                  "type": "Container",
+                  "type": "DropdownMenuItem",
                   "attributes": {
-                    "padding": 10.0
+                    "caption": "Long delivery times",
+                    "enabled": true,
+                    "value": "long_delivery_times"
                   },
-                  "children": [
-                    {
-                      "type": "DropdownButton",
-                      "attributes": {
-                        "name": "reason",
-                        "required": true
-                      },
-                      "children": [
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "Change of mind",
-                            "enabled": true,
-                            "value": "change_of_mind"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "High shipping costs",
-                            "enabled": true,
-                            "value": "high_shipping_costs"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "Long delivery times",
-                            "enabled": true,
-                            "value": "long_delivery_times"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "High service charges",
-                            "enabled": true,
-                            "value": "high_service_charges"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "Payment failure",
-                            "enabled": true,
-                            "value": "payment_failure"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "Other",
-                            "enabled": true,
-                            "value": "other"
-                          },
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
+                  "children": []
                 },
                 {
-                  "type": "Container",
+                  "type": "DropdownMenuItem",
                   "attributes": {
-                    "padding": 10.0
+                    "caption": "High service charges",
+                    "enabled": true,
+                    "value": "high_service_charges"
                   },
-                  "children": [
-                    {
-                      "type": "Input",
-                      "attributes": {
-                        "name": "comment",
-                        "hideText": false,
-                        "required": false,
-                        "caption": "Enter more details",
-                        "enabled": true,
-                        "readOnly": false,
-                        "type": "Text",
-                        "minLength": 0
-                      },
-                      "children": []
-                    }
-                  ]
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Payment failure",
+                    "enabled": true,
+                    "value": "payment_failure"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Other",
+                    "enabled": true,
+                    "value": "other"
+                  },
+                  "children": []
                 }
               ]
             }
           ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Input",
+              "attributes": {
+                "name": "comment",
+                "hideText": false,
+                "required": false,
+                "caption": "Enter more details",
+                "enabled": true,
+                "readOnly": false,
+                "type": "Text",
+                "minLength": 0
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": []
         },
         {
           "type": "Container",

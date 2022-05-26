@@ -203,9 +203,12 @@ abstract class AbstractOrderScreen(
         children.addAll(
             listOf(
                 Text(getText("page.order.shipping-method"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                ShippingCard(
-                    model = sharedUIMapper.toShippingModel(order, shipping, tenant),
-                    showExpectedDeliveryDate = false
+                Container(
+                    padding = 5.0,
+                    child = ShippingCard(
+                        model = sharedUIMapper.toShippingModel(order, shipping, tenant),
+                        showExpectedDeliveryDate = false
+                    )
                 )
             )
         )
@@ -234,9 +237,10 @@ abstract class AbstractOrderScreen(
                 listOfNotNull(
                     Container(padding = 10.0),
                     Text(getText("page.order.shipping-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                    order.shippingAddress?.let {
-                        AddressCard(model = sharedUIMapper.toAddressModel(it))
-                    }
+                    Container(
+                        padding = 5.0,
+                        child = AddressCard(model = sharedUIMapper.toAddressModel(order.shippingAddress!!))
+                    )
                 )
             )
 
@@ -246,7 +250,10 @@ abstract class AbstractOrderScreen(
                 listOf(
                     Container(padding = 10.0),
                     Text(getText("page.order.shipping-instructions"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                    Text(shipping.message!!)
+                    Container(
+                        padding = 5.0,
+                        child = Text(shipping.message!!)
+                    )
                 )
             )
 

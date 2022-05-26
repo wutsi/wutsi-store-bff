@@ -546,7 +546,7 @@
                               {
                                 "type": "Button",
                                 "attributes": {
-                                  "caption": "Close",
+                                  "caption": "Complete the Order",
                                   "padding": 15.0,
                                   "type": "Elevated"
                                 },
@@ -559,7 +559,7 @@
                               {
                                 "type": "Button",
                                 "attributes": {
-                                  "caption": "Cancel",
+                                  "caption": "Cancel the Order",
                                   "padding": 15.0,
                                   "type": "Outlined"
                                 },

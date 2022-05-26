@@ -57,26 +57,12 @@ internal class MyOrderScreenTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun `local pickup`() {
+    fun `in-store pickup`() {
         // GIVEN
         val city = CityEntity(id = 111, name = "Yaounde", country = "CM")
         doReturn(city).whenever(cityService).get(any())
 
-        val shipping = createShipping(ShippingType.LOCAL_PICKUP, cityId = city.id)
-        doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
-
-        val order = createOrder(shippingId = shipping.id)
-        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
-
-        // WHEN
-        val url = "http://localhost:$port/me/order?id=111"
-        assertEndpointEquals("/screens/order/my-order-local-pickup.json", url)
-    }
-
-    @Test
-    fun `in-store pickup`() {
-        // GIVEN
-        val shipping = createShipping(ShippingType.LOCAL_PICKUP)
+        val shipping = createShipping(ShippingType.IN_STORE_PICKUP, cityId = city.id)
         doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
 
         val order = createOrder(shippingId = shipping.id)

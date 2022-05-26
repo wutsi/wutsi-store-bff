@@ -667,19 +667,27 @@
                           "children": []
                         },
                         {
-                          "type": "Column",
+                          "type": "Container",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
+                            "padding": 5.0
                           },
                           "children": [
                             {
-                              "type": "Text",
+                              "type": "Column",
                               "attributes": {
-                                "caption": "Local Pickup",
-                                "size": 14.0
+                                "mainAxisAlignment": "start",
+                                "crossAxisAlignment": "start"
                               },
-                              "children": []
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "In-Store Pickup",
+                                    "size": 14.0
+                                  },
+                                  "children": []
+                                }
+                              ]
                             }
                           ]
                         },
@@ -693,44 +701,52 @@
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "Shipping To",
+                            "caption": "Ship To",
                             "bold": true,
                             "size": 16.0
                           },
                           "children": []
                         },
                         {
-                          "type": "Column",
+                          "type": "Container",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
+                            "padding": 5.0
                           },
                           "children": [
                             {
-                              "type": "Text",
+                              "type": "Column",
                               "attributes": {
-                                "caption": "Ray Sponsible",
-                                "bold": true,
-                                "size": 14.0
+                                "mainAxisAlignment": "start",
+                                "crossAxisAlignment": "start"
                               },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "180 Rue des Manguier, Bonnapriso",
-                                "size": 14.0,
-                                "maxLines": 3
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Cameroon",
-                                "size": 14.0
-                              },
-                              "children": []
+                              "children": [
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Ray Sponsible",
+                                    "bold": true,
+                                    "size": 14.0
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "180 Rue des Manguier, Bonnapriso",
+                                    "size": 14.0,
+                                    "maxLines": 3
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "Text",
+                                  "attributes": {
+                                    "caption": "Yaounde, Cameroon",
+                                    "size": 14.0
+                                  },
+                                  "children": []
+                                }
+                              ]
                             }
                           ]
                         },
@@ -751,11 +767,19 @@
                           "children": []
                         },
                         {
-                          "type": "Text",
+                          "type": "Container",
                           "attributes": {
-                            "caption": "This is the message to display to customer"
+                            "padding": 5.0
                           },
-                          "children": []
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "This is the message to display to customer"
+                              },
+                              "children": []
+                            }
+                          ]
                         }
                       ]
                     }

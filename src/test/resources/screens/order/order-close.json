@@ -14,34 +14,25 @@
       },
       "children": [
         {
-          "type": "Flexible",
+          "type": "Container",
           "attributes": {
-            "flex": 1,
-            "fit": "Tight"
+            "padding": 30.0
+          },
+          "children": []
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
           },
           "children": [
             {
-              "type": "Center",
-              "attributes": {},
-              "children": [
-                {
-                  "type": "Container",
-                  "attributes": {
-                    "alignment": "Center",
-                    "padding": 10.0
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "The order is completed and ready for shipping.",
-                        "size": 16.0
-                      },
-                      "children": []
-                    }
-                  ]
-                }
-              ]
+              "type": "Text",
+              "attributes": {
+                "caption": "The order is completed and ready for shipping.",
+                "size": 16.0
+              },
+              "children": []
             }
           ]
         },
@@ -52,9 +43,32 @@
           },
           "children": [
             {
+              "type": "Text",
+              "attributes": {
+                "caption": "A SMS notification will be sent to customer in inform him that his order is available in store for pickup.",
+                "color": "#1D7EDF"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": []
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
               "type": "Button",
               "attributes": {
-                "caption": "Close the Order",
+                "caption": "Complete the Order",
                 "padding": 15.0,
                 "type": "Elevated"
               },
