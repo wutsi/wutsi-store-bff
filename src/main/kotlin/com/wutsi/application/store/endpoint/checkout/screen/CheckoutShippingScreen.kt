@@ -112,6 +112,11 @@ class CheckoutShippingScreen(
                                     formatRate(it.rate, tenant),
                                 bold = true
                             ),
+                            Text(
+                                caption = getText("shipping.type.${it.shippingType}.description"),
+                                size = Theme.TEXT_SIZE_SMALL
+                            ),
+                            Container(padding = 10.0),
                             it.deliveryTime?.let {
                                 Text(
                                     caption = getText(

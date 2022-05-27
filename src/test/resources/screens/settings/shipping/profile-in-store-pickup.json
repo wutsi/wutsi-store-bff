@@ -81,25 +81,6 @@
                 {
                   "type": "ListItem",
                   "attributes": {
-                    "caption": "Rate",
-                    "subCaption": "150,000 CFA",
-                    "trailing": {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e21a"
-                      },
-                      "children": []
-                    }
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/settings/store/shipping/attribute/rate?id=111"
-                  }
-                },
-                {
-                  "type": "ListItem",
-                  "attributes": {
                     "caption": "Shipping Instructions",
                     "subCaption": "This is the message to display to customer",
                     "trailing": {

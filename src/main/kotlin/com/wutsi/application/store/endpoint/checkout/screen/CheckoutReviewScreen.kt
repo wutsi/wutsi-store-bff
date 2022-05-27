@@ -170,8 +170,11 @@ class CheckoutReviewScreen(
                     bold = true,
                     size = Theme.TEXT_SIZE_LARGE
                 ),
-                ShippingCard(
-                    model = sharedUIMapper.toShippingModel(order, shipping, tenant)
+                Container(
+                    padding = 5.0,
+                    child = ShippingCard(
+                        model = sharedUIMapper.toShippingModel(order, shipping, tenant)
+                    )
                 )
             )
         )
@@ -180,9 +183,13 @@ class CheckoutReviewScreen(
         if (order.shippingAddress != null)
             children.addAll(
                 listOf(
+                    Container(padding = 10.0),
                     Text(getText("page.checkout.review.ship-to") + ":", bold = true),
-                    AddressCard(
-                        model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
+                    Container(
+                        padding = 5.0,
+                        child = AddressCard(
+                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
+                        )
                     )
                 )
             )

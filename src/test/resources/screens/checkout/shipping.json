@@ -63,6 +63,21 @@
                     "bold": true
                   },
                   "children": []
+                },
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Customers pickup their orders from a location in your region",
+                    "size": 10.0
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": []
                 }
               ]
             }
@@ -96,6 +111,21 @@
                   "attributes": {
                     "caption": "International Shipping - 15,000 CFA",
                     "bold": true
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Deliver orders to customers abroad",
+                    "size": 10.0
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
                   },
                   "children": []
                 }

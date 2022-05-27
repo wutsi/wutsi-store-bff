@@ -108,7 +108,8 @@ class SettingsShippingProfileScreen(
     private fun isFree(shipping: Shipping): Boolean =
         shipping.type == ShippingType.LOCAL_PICKUP.name ||
             shipping.type == ShippingType.LOCAL_DELIVERY.name ||
-            shipping.type == ShippingType.EMAIL_DELIVERY.name
+            shipping.type == ShippingType.EMAIL_DELIVERY.name ||
+            shipping.type == ShippingType.IN_STORE_PICKUP.name
 
     private fun toCaption(name: String, shipping: Shipping): String =
         try {

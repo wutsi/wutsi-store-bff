@@ -97,23 +97,6 @@
                                   "children": []
                                 }
                               ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "alignment": "Center"
-                              },
-                              "children": [
-                                {
-                                  "type": "Text",
-                                  "attributes": {
-                                    "caption": "+1 2376666666677777",
-                                    "bold": true,
-                                    "alignment": "Center"
-                                  },
-                                  "children": []
-                                }
-                              ]
                             }
                           ]
                         }
