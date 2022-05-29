@@ -8,6 +8,8 @@ import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.Shipping
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.CircleAvatar
@@ -34,8 +36,8 @@ class OrderScreen(
     override fun getPageId() = Page.ORDER
     override fun showMerchantInfo() = false
 
-    override fun getAppBarAction(order: Order): WidgetAware? {
-        val buttons = getAppBarButtons(order)
+    override fun getAppBarAction(order: Order, shipping: Shipping?): WidgetAware? {
+        val buttons = getAppBarButtons(order, shipping)
         if (buttons.isEmpty())
             return null
 
@@ -59,19 +61,38 @@ class OrderScreen(
         )
     }
 
-    private fun getAppBarButtons(order: Order): List<WidgetAware> =
+    private fun getAppBarButtons(order: Order, shipping: Shipping?): List<WidgetAware> {
+        val children = mutableListOf<WidgetAware>()
         if (order.status == OrderStatus.OPENED.name)
-            listOf(
+            children.add(
                 Button(
                     caption = getText("page.order.button.close"),
                     action = gotoUrl(urlBuilder.build("/order/close?id=${order.id}"))
                 ),
+            )
+        else if (isAvailableForInStorePickup(order, shipping))
+            children.add(
+                Button(
+                    caption = getText("page.order.button.pickup"),
+                    action = gotoUrl(urlBuilder.build("/order/pickup?id=${order.id}"))
+                )
+            )
+
+        if (order.status != OrderStatus.EXPIRED.name && order.status != OrderStatus.CANCELLED.name && order.status != OrderStatus.DELIVERED.name)
+            children.add(
                 Button(
                     type = ButtonType.Outlined,
                     caption = getText("page.order.button.cancel"),
                     action = gotoUrl(urlBuilder.build("/order/cancel?id=${order.id}"))
                 )
             )
-        else
-            emptyList()
+
+        return children
+    }
+
+    private fun isAvailableForInStorePickup(order: Order, shipping: Shipping?): Boolean =
+        togglesProvider.isShippingInStorePickup() &&
+            shipping != null &&
+            shipping.type == ShippingType.IN_STORE_PICKUP.name &&
+            order.status == OrderStatus.READY_FOR_PICKUP.name
 }

@@ -12,6 +12,9 @@ import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.order.entity.PaymentStatus
+import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.GetShippingResponse
+import com.wutsi.ecommerce.shipping.entity.ShippingType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -27,6 +30,9 @@ internal class OrderScreenTest : AbstractEndpointTest() {
 
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
+
+    @MockBean
+    private lateinit var shippingApi: WutsiShippingApi
 
     private val order = Order(
         id = "111",
@@ -72,5 +78,22 @@ internal class OrderScreenTest : AbstractEndpointTest() {
 
         val url = "http://localhost:$port/order?id=111"
         assertEndpointEquals("/screens/order/order-payment-enabled.json", url)
+    }
+
+    @Test
+    fun `in-store pickup`() {
+        // GIVEN
+        doReturn(true).whenever(togglesProvider).isShippingEnabled()
+        doReturn(true).whenever(togglesProvider).isShippingInStorePickup()
+
+        val shipping = createShipping(ShippingType.IN_STORE_PICKUP)
+        doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
+
+        val order = createOrder(shippingId = shipping.id, status = OrderStatus.READY_FOR_PICKUP)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        // WHEN
+        val url = "http://localhost:$port/order?id=111"
+        assertEndpointEquals("/screens/order/order-store-pickup.json", url)
     }
 }

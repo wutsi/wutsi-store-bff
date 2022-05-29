@@ -61,7 +61,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 1,
+                                    "flex": 2,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -87,7 +87,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 3,
+                                    "flex": 5,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -129,7 +129,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 1,
+                                    "flex": 2,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -155,7 +155,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 3,
+                                    "flex": 5,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -185,7 +185,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 1,
+                                    "flex": 2,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -198,7 +198,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "Status",
+                                            "caption": "Order Status",
                                             "bold": true,
                                             "size": 10.0
                                           },
@@ -211,7 +211,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 3,
+                                    "flex": 5,
                                     "fit": "Tight"
                                   },
                                   "children": [

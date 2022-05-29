@@ -17,6 +17,7 @@ object Page {
     const val ORDER = "page.order"
     const val ORDER_CLOSE = "page.order.close"
     const val ORDER_CANCEL = "page.order.cancel"
+    const val ORDER_PICKUP = "page.order.pickup"
     const val ORDERS = "page.orders"
     const val PRODUCT = "page.product"
     const val MY_ORDER = "page.my-order"

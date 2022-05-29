@@ -10,6 +10,7 @@ import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.GetShippingResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
@@ -59,13 +60,16 @@ internal class MyOrderScreenTest : AbstractEndpointTest() {
     @Test
     fun `in-store pickup`() {
         // GIVEN
+        doReturn(true).whenever(togglesProvider).isShippingEnabled()
+        doReturn(true).whenever(togglesProvider).isShippingInStorePickup()
+
         val city = CityEntity(id = 111, name = "Yaounde", country = "CM")
         doReturn(city).whenever(cityService).get(any())
 
-        val shipping = createShipping(ShippingType.IN_STORE_PICKUP, cityId = city.id)
+        val shipping = createShipping(ShippingType.IN_STORE_PICKUP)
         doReturn(GetShippingResponse(shipping)).whenever(shippingApi).getShipping(any())
 
-        val order = createOrder(shippingId = shipping.id)
+        val order = createOrder(shippingId = shipping.id, status = OrderStatus.READY_FOR_PICKUP)
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
         // WHEN

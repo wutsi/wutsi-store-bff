@@ -17,6 +17,7 @@ import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -51,7 +52,7 @@ abstract class AbstractOrderScreen(
 ) : AbstractQuery() {
     protected abstract fun getPageId(): String
     protected abstract fun showMerchantInfo(): Boolean
-    protected abstract fun getAppBarAction(order: Order): WidgetAware?
+    protected abstract fun getAppBarAction(order: Order, shipping: Shipping?): WidgetAware?
 
     protected open fun getPageTitle(order: Order): String =
         getText("page.order.app-bar.title", arrayOf(order.id.uppercase().takeLast(4)))
@@ -60,12 +61,16 @@ abstract class AbstractOrderScreen(
     fun index(@RequestParam(name = "id") id: String): Widget {
         val tenant = tenantProvider.get()
         val order = orderApi.getOrder(id).order
+        val shipping = if (togglesProvider.isShippingEnabled() && order.shippingId != null)
+            shippingApi.getShipping(order.shippingId!!).shipping
+        else
+            null
 
         val tabs = TabBar(
             tabs = listOfNotNull(
                 Text(getText("page.order.tab.products").uppercase(), bold = true),
 
-                if (order.shippingId != null)
+                if (shipping != null)
                     Text(getText("page.order.tab.shipping").uppercase(), bold = true)
                 else
                     null,
@@ -77,8 +82,8 @@ abstract class AbstractOrderScreen(
             children = listOfNotNull(
                 productsTab(order, tenant),
 
-                if (order.shippingId != null)
-                    shippingTab(order, tenant)
+                if (shipping != null)
+                    shippingTab(order, shipping, tenant)
                 else
                     null,
 
@@ -97,7 +102,7 @@ abstract class AbstractOrderScreen(
                     foregroundColor = Theme.COLOR_WHITE,
                     bottom = tabs,
                     title = getPageTitle(order),
-                    actions = getAppBarAction(order)?.let {
+                    actions = getAppBarAction(order, shipping)?.let {
                         listOf(it)
                     }
                 ),
@@ -135,7 +140,7 @@ abstract class AbstractOrderScreen(
                 child = Column(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
+                    children = listOfNotNull(
                         Text(
                             getText("page.order.number", arrayOf(order.id)),
                             size = Theme.TEXT_SIZE_SMALL
@@ -159,8 +164,8 @@ abstract class AbstractOrderScreen(
                         toRow(
                             getText("page.order.status"),
                             Text(
-                                getText("order.status.${order.status}"),
-                                color = if (OrderStatus.DONE.name == order.status)
+                                caption = getText("order.status.${order.status}"),
+                                color = if (OrderStatus.DELIVERED.name == order.status)
                                     Theme.COLOR_SUCCESS
                                 else if (OrderStatus.CANCELLED.name == order.status)
                                     Theme.COLOR_DANGER
@@ -195,8 +200,7 @@ abstract class AbstractOrderScreen(
         )
     }
 
-    private fun shippingTab(order: Order, tenant: Tenant): WidgetAware {
-        val shipping = shippingApi.getShipping(order.shippingId!!).shipping
+    private fun shippingTab(order: Order, shipping: Shipping, tenant: Tenant): WidgetAware {
         val children = mutableListOf<WidgetAware>()
 
         // Shipping Method
@@ -290,14 +294,14 @@ abstract class AbstractOrderScreen(
         Row(
             children = listOf(
                 Flexible(
-                    flex = 1,
+                    flex = 2,
                     child = Container(
                         padding = 5.0,
                         child = Text(name, bold = true, size = Theme.TEXT_SIZE_SMALL)
                     )
                 ),
                 Flexible(
-                    flex = 3,
+                    flex = 5,
                     child = Container(
                         padding = 5.0,
                         child = value

@@ -175,6 +175,42 @@
                                     "value": "1"
                                   },
                                   "children": []
+                                },
+                                {
+                                  "type": "DropdownMenuItem",
+                                  "attributes": {
+                                    "caption": "2",
+                                    "enabled": true,
+                                    "value": "2"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "DropdownMenuItem",
+                                  "attributes": {
+                                    "caption": "3",
+                                    "enabled": true,
+                                    "value": "3"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "DropdownMenuItem",
+                                  "attributes": {
+                                    "caption": "4",
+                                    "enabled": true,
+                                    "value": "4"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "DropdownMenuItem",
+                                  "attributes": {
+                                    "caption": "5",
+                                    "enabled": true,
+                                    "value": "5"
+                                  },
+                                  "children": []
                                 }
                               ],
                               "action": {

@@ -6,6 +6,7 @@ import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
+import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.platform.account.WutsiAccountApi
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,5 +23,5 @@ class MyOrderScreen(
 ) : AbstractOrderScreen(orderApi, accountApi, catalogApi, shippingApi, tenantProvider) {
     override fun getPageId() = Page.MY_ORDER
     override fun showMerchantInfo() = true
-    override fun getAppBarAction(order: Order): WidgetAware? = null
+    override fun getAppBarAction(order: Order, shipping: Shipping?): WidgetAware? = null
 }

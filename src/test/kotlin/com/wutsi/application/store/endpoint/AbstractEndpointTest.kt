@@ -407,14 +407,18 @@ abstract class AbstractEndpointTest {
         deliveryTime = 24,
     )
 
-    fun createOrder(shippingAddress: Address? = createAddress(), shippingId: Long? = 333) = Order(
+    fun createOrder(
+        shippingAddress: Address? = createAddress(),
+        shippingId: Long? = 333,
+        status: OrderStatus = OrderStatus.CREATED
+    ) = Order(
         id = "111",
         merchantId = 55L,
         totalPrice = 25000.0,
         subTotalPrice = 30000.0,
         savingsAmount = 5000.0,
         currency = "XAF",
-        status = OrderStatus.CREATED.name,
+        status = status.name,
         reservationId = 777L,
         items = listOf(
             OrderItem(productId = 1, quantity = 10, unitPrice = 100.0, unitComparablePrice = 150.0),
@@ -425,7 +429,7 @@ abstract class AbstractEndpointTest {
         expectedDelivered = OffsetDateTime.of(2020, 1, 3, 15, 0, 0, 0, ZoneOffset.UTC),
         deliveryFees = 1000.0,
         accountId = ACCOUNT_ID,
-        created = OffsetDateTime.of(LocalDateTime.of(2022, 4, 14, 0, 0, 0, 0), ZoneOffset.UTC)
+        created = OffsetDateTime.of(LocalDateTime.of(2022, 4, 14, 0, 0, 0, 0), ZoneOffset.UTC),
     )
 
     fun createAddress(id: Long = 111L, firstName: String = "Ray") = Address(

@@ -1,7 +1,6 @@
 package com.wutsi.application.store.endpoint.settings.shipping.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
@@ -30,13 +29,11 @@ import org.springframework.web.bind.annotation.RestController
 class SettingsShippingProfileScreen(
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
-    private val cityService: CityService,
 ) : AbstractQuery() {
     @PostMapping
     fun index(@RequestParam id: Long): Widget {
         val shipping = shippingApi.getShipping(id).shipping
         val tenant = tenantProvider.get()
-        val city = cityService.get(shipping.cityId)
 
         return Screen(
             id = Page.SETTINGS_STORE_SHIPPING_PROFILE,
