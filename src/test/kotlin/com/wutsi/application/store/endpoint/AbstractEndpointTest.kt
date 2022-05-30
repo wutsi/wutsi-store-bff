@@ -453,7 +453,5 @@ abstract class AbstractEndpointTest {
             id = id,
             title = title,
             sortOrder = sortOrder,
-            productCount = productCount,
-            publishedProductCount = productCount
         )
 }

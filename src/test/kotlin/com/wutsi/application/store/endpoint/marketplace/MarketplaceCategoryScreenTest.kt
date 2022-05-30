@@ -27,7 +27,7 @@ internal class MarketplaceCategoryScreenTest : AbstractEndpointTest() {
 
     @Test
     fun index() {
-        val category = Category(id = 555L, title = "Cat 1", publishedProductCount = 10)
+        val category = Category(id = 555L, title = "Cat 1")
         doReturn(GetCategoryResponse(category)).whenever(catalogApi).getCategory(any())
 
         val products = listOf(

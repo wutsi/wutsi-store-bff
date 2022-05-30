@@ -61,14 +61,14 @@
                               "attributes": {
                                 "elevation": 5.0,
                                 "backgroundColor": "#1D7EDF",
-                                "caption": "Section 2"
+                                "caption": "Section 1"
                               },
                               "children": []
                             }
                           ],
                           "action": {
                             "type": "Route",
-                            "url": "http://localhost:0/section?id=2"
+                            "url": "http://localhost:0/section?id=1"
                           }
                         },
                         {
@@ -80,14 +80,14 @@
                               "attributes": {
                                 "elevation": 5.0,
                                 "backgroundColor": "#1D7EDF",
-                                "caption": "Section 1"
+                                "caption": "Section 2"
                               },
                               "children": []
                             }
                           ],
                           "action": {
                             "type": "Route",
-                            "url": "http://localhost:0/section?id=1"
+                            "url": "http://localhost:0/section?id=2"
                           }
                         },
                         {

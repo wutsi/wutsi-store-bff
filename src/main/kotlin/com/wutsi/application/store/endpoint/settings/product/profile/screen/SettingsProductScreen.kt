@@ -271,7 +271,7 @@ class SettingsProductScreen(
                 Flexible(
                     child = toStatWidget(
                         "page.settings.store.product.stats-conversion",
-                        product.overallMetrics.conversion * 100.0,
+                        product.overallMetrics.conversion,
                         tenant,
                         percent = true,
                     )

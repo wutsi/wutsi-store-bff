@@ -165,8 +165,6 @@ class HomeScreen(
 
     private fun toSectionListWidget(merchant: Account): WidgetAware? {
         val sections = catalogApi.listSections(merchant.id).sections
-            .sortedByDescending { it.publishedProductCount }
-            .filter { it.publishedProductCount > 0 }
             .take(5)
         if (sections.isEmpty())
             return null
