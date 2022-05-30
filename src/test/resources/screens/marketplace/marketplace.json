@@ -2,100 +2,185 @@
   "type": "Screen",
   "attributes": {
     "id": "page.marketplace",
-    "safe": false
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
   },
   "children": [
     {
-      "type": "Container",
+      "type": "SingleChildScrollView",
       "attributes": {},
       "children": [
         {
-          "type": "Column",
+          "type": "Container",
           "attributes": {
-            "mainAxisAlignment": "start",
-            "crossAxisAlignment": "start"
+            "margin": 5.0,
+            "background": "#FFFFFF",
+            "borderColor": "#8c8c8c"
           },
           "children": [
             {
-              "type": "Center",
-              "attributes": {},
+              "type": "Column",
+              "attributes": {
+                "mainAxisAlignment": "start",
+                "crossAxisAlignment": "start"
+              },
               "children": [
                 {
-                  "type": "Container",
-                  "attributes": {
-                    "padding": 10.0
-                  },
+                  "type": "Center",
+                  "attributes": {},
                   "children": [
                     {
-                      "type": "Text",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "Browse products by category"
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Visit the Stores",
+                            "bold": true
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Divider",
+                  "attributes": {
+                    "height": 1.0,
+                    "color": "#8c8c8c"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "",
+                    "iconRight": "e15f",
+                    "padding": 10.0,
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
                       },
                       "children": []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Flexible",
-              "attributes": {
-                "flex": 1,
-                "fit": "Tight"
-              },
-              "children": [
-                {
-                  "type": "ListView",
-                  "attributes": {
-                    "separator": true,
-                    "separatorColor": "#8c8c8c"
-                  },
-                  "children": [
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Cat 1",
-                        "trailing": {
-                          "type": "Icon",
-                          "attributes": {
-                            "code": "e15f"
-                          },
-                          "children": []
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/marketplace/category?id=1"
-                      }
                     },
-                    {
-                      "type": "ListItem",
+                    "leading": {
+                      "type": "CircleAvatar",
                       "attributes": {
-                        "caption": "Cat 2",
-                        "trailing": {
-                          "type": "Icon",
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
                           "attributes": {
-                            "code": "e15f"
+                            "caption": "",
+                            "bold": true,
+                            "size": 16.0
                           },
                           "children": []
                         }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/marketplace/category?id=2"
-                      }
+                      ]
                     }
-                  ]
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=111&tab=store"
+                  }
+                },
+                {
+                  "type": "Divider",
+                  "attributes": {
+                    "height": 1.0,
+                    "color": "#8c8c8c"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "",
+                    "iconRight": "e15f",
+                    "padding": 10.0,
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    },
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=222&tab=store"
+                  }
+                },
+                {
+                  "type": "Divider",
+                  "attributes": {
+                    "height": 1.0,
+                    "color": "#8c8c8c"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "",
+                    "iconRight": "e15f",
+                    "padding": 10.0,
+                    "trailing": {
+                      "type": "Icon",
+                      "attributes": {
+                        "code": "e15f"
+                      },
+                      "children": []
+                    },
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=333&tab=store"
+                  }
                 }
               ]
             }
