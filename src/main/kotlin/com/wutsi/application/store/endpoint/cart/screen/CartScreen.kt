@@ -70,7 +70,8 @@ class CartScreen(
                             size = Theme.TEXT_SIZE_LARGE
                         ),
                         ProfileListItem(
-                            model = sharedUIMapper.toAccountModel(merchant)
+                            model = sharedUIMapper.toAccountModel(merchant),
+                            showAccountType = false
                         )
                     ),
                 )
