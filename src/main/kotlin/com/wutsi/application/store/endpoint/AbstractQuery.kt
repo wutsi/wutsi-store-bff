@@ -90,4 +90,18 @@ abstract class AbstractQuery : AbstractEndpoint() {
             }
         )
     }
+
+    protected fun toSectionWidget(
+        child: WidgetAware,
+        padding: Double? = 10.0,
+        background: String? = Theme.COLOR_WHITE
+    ) = Container(
+        padding = padding,
+        margin = 5.0,
+        border = 1.0,
+        borderColor = Theme.COLOR_GRAY_LIGHT,
+        background = background,
+        width = Double.MAX_VALUE,
+        child = child,
+    )
 }

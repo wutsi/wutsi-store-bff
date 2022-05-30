@@ -95,7 +95,7 @@ abstract class AbstractOrderScreen(
             length = tabs.tabs.size,
             child = Screen(
                 id = getPageId(),
-                backgroundColor = Theme.COLOR_WHITE,
+                backgroundColor = Theme.COLOR_GRAY_LIGHT,
                 appBar = AppBar(
                     elevation = 0.0,
                     backgroundColor = Theme.COLOR_PRIMARY,
@@ -107,7 +107,7 @@ abstract class AbstractOrderScreen(
                     }
                 ),
                 child = tabViews,
-                bottomNavigationBar = bottomNavigationBar()
+                bottomNavigationBar = bottomNavigationBar(),
             )
         ).toWidget()
     }
@@ -119,24 +119,22 @@ abstract class AbstractOrderScreen(
 
         // Merchant
         if (showMerchantInfo())
-            children.addAll(
-                listOf(
-                    ProfileCard(
+            children.add(
+                toSectionWidget(
+                    child = ProfileCard(
                         model = sharedUIMapper.toAccountModel(
                             accountApi.getAccount(order.merchantId).account
                         ),
                         type = ProfileCardType.SUMMARY
                     ),
-                    Divider(color = Theme.COLOR_DIVIDER)
+                    background = Theme.COLOR_WHITE
                 )
             )
 
         // Status
         children.add(
-            Container(
-                background = Theme.COLOR_GRAY_LIGHT,
-                padding = 10.0,
-                margin = 10.0,
+            toSectionWidget(
+                background = Theme.COLOR_WHITE,
                 child = Column(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
@@ -185,18 +183,16 @@ abstract class AbstractOrderScreen(
                 limit = order.items.size
             )
         ).products.associateBy { it.id }
-        order.items.map { toItemWidget(it, products[it.productId]!!, tenant) }
-            .forEach {
-                children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
-                children.add(it)
-            }
+        children.add(toProductListWidget(order, products, tenant))
 
         // Price
         children.add(toPriceWidget(order, tenant))
 
         // Result
         return SingleChildScrollView(
-            child = Column(children = children)
+            child = Column(
+                children = children
+            )
         )
     }
 
@@ -204,79 +200,91 @@ abstract class AbstractOrderScreen(
         val children = mutableListOf<WidgetAware>()
 
         // Shipping Method
-        children.addAll(
-            listOf(
-                Text(getText("page.order.shipping-method"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                Container(
-                    padding = 5.0,
-                    child = ShippingCard(
-                        model = sharedUIMapper.toShippingModel(order, shipping, tenant),
-                        showExpectedDeliveryDate = false
+        children.add(
+            toSectionWidget(
+                child = Column(
+                    mainAxisAlignment = MainAxisAlignment.start,
+                    crossAxisAlignment = CrossAxisAlignment.start,
+                    children = listOf(
+                        Text(getText("page.order.shipping-method"), bold = true, size = Theme.TEXT_SIZE_LARGE),
+                        ShippingCard(
+                            model = sharedUIMapper.toShippingModel(order, shipping, tenant),
+                            showExpectedDeliveryDate = false
+                        )
                     )
                 )
             )
         )
 
-//        // Pickup Location
-//        if (shipping.type == ShippingType.LOCAL_PICKUP.name) {
-//            val city = shipping.cityId?.let { cityService.get(it) }
-//            children.addAll(
-//                listOfNotNull(
-//                    Container(padding = 10.0),
-//                    Text(getText("page.order.shipping.pickup-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-//                    shipping.street?.let { Text(it) },
-//                    city?.let {
-//                        Text(
-//                            "${city.name}, " +
-//                                Locale("en", city.country).getDisplayCountry(LocaleContextHolder.getLocale())
-//                        )
-//                    }
-//                )
-//            )
-//        }
-
         // Shipping Address
         if (order.shippingAddress != null)
-            children.addAll(
-                listOfNotNull(
-                    Container(padding = 10.0),
-                    Text(getText("page.order.shipping-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                    Container(
-                        padding = 5.0,
-                        child = AddressCard(model = sharedUIMapper.toAddressModel(order.shippingAddress!!))
+            children.add(
+                toSectionWidget(
+                    child = Column(
+                        mainAxisAlignment = MainAxisAlignment.start,
+                        crossAxisAlignment = CrossAxisAlignment.start,
+                        children = listOfNotNull(
+                            Text(getText("page.order.shipping-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
+                            AddressCard(model = sharedUIMapper.toAddressModel(order.shippingAddress!!))
+                        )
                     )
                 )
             )
 
         // Shipping Instruction
         if (!shipping.message.isNullOrEmpty())
-            children.addAll(
-                listOf(
-                    Container(padding = 10.0),
-                    Text(getText("page.order.shipping-instructions"), bold = true, size = Theme.TEXT_SIZE_LARGE),
-                    Container(
-                        padding = 5.0,
-                        child = Text(shipping.message!!)
+            children.add(
+                toSectionWidget(
+                    child = Column(
+                        mainAxisAlignment = MainAxisAlignment.start,
+                        crossAxisAlignment = CrossAxisAlignment.start,
+                        children = listOf(
+                            Text(
+                                getText("page.order.shipping-instructions"),
+                                bold = true,
+                                size = Theme.TEXT_SIZE_LARGE
+                            ),
+                            Text(shipping.message!!)
+                        )
                     )
                 )
+
             )
 
         // Result
         return SingleChildScrollView(
-            child = Container(
-                padding = 10.0,
-                child = Column(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = children
-                )
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
             )
         )
     }
 
-    private fun qrCodeTab(order: Order) = DynamicWidget(
-        url = urlBuilder.build("order/qr-code-widget?id=${order.id}")
+    private fun qrCodeTab(order: Order) = toSectionWidget(
+        child = DynamicWidget(
+            url = urlBuilder.build("order/qr-code-widget?id=${order.id}")
+        )
     )
+
+    private fun toProductListWidget(order: Order, products: Map<Long, ProductSummary>, tenant: Tenant): WidgetAware {
+        val children = mutableListOf<WidgetAware>()
+        var i = 0
+        order.items.map { toItemWidget(it, products[it.productId]!!, tenant) }
+            .forEach {
+                if (i++ > 0)
+                    children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
+                children.add(it)
+            }
+        return toSectionWidget(
+            padding = null,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
+            )
+        )
+    }
 
     private fun toItemWidget(item: OrderItem, product: ProductSummary, tenant: Tenant) = OrderItemListItem(
         model = sharedUIMapper.toOrderItemModel(item, product, tenant)

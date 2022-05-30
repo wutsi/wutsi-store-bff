@@ -2,7 +2,8 @@
   "type": "Screen",
   "attributes": {
     "id": "page.cart",
-    "safe": false
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
   },
   "children": [
     {
@@ -19,75 +20,36 @@
             {
               "type": "Container",
               "attributes": {
-                "padding": 10.0
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
               },
               "children": [
                 {
-                  "type": "Column",
+                  "type": "ListItem",
                   "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
+                    "caption": "Ray Sponsible",
+                    "subCaption": "Marketing - Cameroon",
+                    "padding": 10.0,
+                    "leading": {
+                      "type": "CircleAvatar",
                       "attributes": {
-                        "caption": "Merchant",
-                        "bold": true,
-                        "size": 16.0
+                        "radius": 24.0
                       },
-                      "children": []
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Ray Sponsible",
-                        "subCaption": "Marketing - Cameroon",
-                        "padding": 10.0,
-                        "leading": {
-                          "type": "CircleAvatar",
+                      "children": [
+                        {
+                          "type": "Text",
                           "attributes": {
-                            "radius": 24.0
+                            "caption": "RS",
+                            "bold": true,
+                            "size": 16.0
                           },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "RS",
-                                "bold": true,
-                                "size": 16.0
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
                         }
-                      },
-                      "children": []
+                      ]
                     }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "Products",
-                    "bold": true,
-                    "size": 16.0
                   },
                   "children": []
                 }
@@ -95,307 +57,346 @@
             },
             {
               "type": "Container",
-              "attributes": {},
+              "attributes": {
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
               "children": [
                 {
                   "type": "Column",
                   "attributes": {
                     "mainAxisAlignment": "start",
-                    "mainAxisSize": "min",
                     "crossAxisAlignment": "start"
                   },
                   "children": [
                     {
-                      "type": "ListItem",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "",
-                        "trailing": {
-                          "type": "Column",
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
                           "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "100 CFA",
-                                "bold": true
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "Image",
-                          "attributes": {
-                            "url": "http://img.com/nopicture.png",
-                            "width": 48.0,
-                            "height": 48.8
+                            "caption": "Products",
+                            "bold": true,
+                            "size": 16.0
                           },
                           "children": []
                         }
+                      ]
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "color": "#8c8c8c"
                       },
                       "children": []
                     },
                     {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "center"
-                      },
+                      "type": "Container",
+                      "attributes": {},
                       "children": [
                         {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0,
-                            "width": 100.0
-                          },
-                          "children": [
-                            {
-                              "type": "DropdownButton",
-                              "attributes": {
-                                "name": "quantity",
-                                "value": "1",
-                                "outlinedBorder": false
-                              },
-                              "children": [
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "1",
-                                    "enabled": true,
-                                    "value": "1"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "2",
-                                    "enabled": true,
-                                    "value": "2"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "3",
-                                    "enabled": true,
-                                    "value": "3"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "4",
-                                    "enabled": true,
-                                    "value": "4"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "5",
-                                    "enabled": true,
-                                    "value": "5"
-                                  },
-                                  "children": []
-                                }
-                              ],
-                              "action": {
-                                "type": "Command",
-                                "url": "http://localhost:0/commands/update-cart?merchant-id=0&product-id=1"
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Button",
-                          "attributes": {
-                            "caption": "Remove",
-                            "padding": 10.0,
-                            "type": "Text",
-                            "stretched": false
-                          },
-                          "children": [],
-                          "action": {
-                            "type": "Command",
-                            "url": "http://localhost:0/commands/remove-from-cart?merchant-id=0&product-id=1"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {},
-              "children": [
-                {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "mainAxisSize": "min",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "",
-                        "trailing": {
                           "type": "Column",
                           "attributes": {
                             "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "end"
+                            "mainAxisSize": "min",
+                            "crossAxisAlignment": "start"
                           },
                           "children": [
                             {
-                              "type": "Text",
+                              "type": "ListItem",
                               "attributes": {
-                                "caption": "2,000 CFA",
-                                "bold": true
+                                "caption": "",
+                                "trailing": {
+                                  "type": "Column",
+                                  "attributes": {
+                                    "mainAxisAlignment": "start",
+                                    "crossAxisAlignment": "end"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "100 CFA",
+                                        "bold": true
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                "leading": {
+                                  "type": "Image",
+                                  "attributes": {
+                                    "url": "http://img.com/nopicture.png",
+                                    "width": 48.0,
+                                    "height": 48.8
+                                  },
+                                  "children": []
+                                }
                               },
                               "children": []
                             },
                             {
-                              "type": "Text",
+                              "type": "Row",
                               "attributes": {
-                                "caption": "(1,000 CFA each)",
-                                "size": 10.0
+                                "mainAxisAlignment": "start",
+                                "crossAxisAlignment": "center"
                               },
-                              "children": []
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 10.0
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 10.0,
+                                    "width": 100.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "DropdownButton",
+                                      "attributes": {
+                                        "name": "quantity",
+                                        "value": "1",
+                                        "outlinedBorder": false
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "1",
+                                            "enabled": true,
+                                            "value": "1"
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "2",
+                                            "enabled": true,
+                                            "value": "2"
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "3",
+                                            "enabled": true,
+                                            "value": "3"
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "4",
+                                            "enabled": true,
+                                            "value": "4"
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "5",
+                                            "enabled": true,
+                                            "value": "5"
+                                          },
+                                          "children": []
+                                        }
+                                      ],
+                                      "action": {
+                                        "type": "Command",
+                                        "url": "http://localhost:0/commands/update-cart?merchant-id=0&product-id=1"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Button",
+                                  "attributes": {
+                                    "caption": "Remove",
+                                    "padding": 10.0,
+                                    "type": "Text",
+                                    "stretched": false
+                                  },
+                                  "children": [],
+                                  "action": {
+                                    "type": "Command",
+                                    "url": "http://localhost:0/commands/remove-from-cart?merchant-id=0&product-id=1"
+                                  }
+                                }
+                              ]
                             }
                           ]
-                        },
-                        "leading": {
-                          "type": "Image",
-                          "attributes": {
-                            "url": "http://img.com/nopicture.png",
-                            "width": 48.0,
-                            "height": 48.8
-                          },
-                          "children": []
                         }
+                      ]
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "color": "#8c8c8c"
                       },
                       "children": []
                     },
                     {
-                      "type": "Row",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "center"
-                      },
+                      "type": "Container",
+                      "attributes": {},
                       "children": [
                         {
-                          "type": "Container",
+                          "type": "Column",
                           "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0,
-                            "width": 100.0
+                            "mainAxisAlignment": "start",
+                            "mainAxisSize": "min",
+                            "crossAxisAlignment": "start"
                           },
                           "children": [
                             {
-                              "type": "DropdownButton",
+                              "type": "ListItem",
                               "attributes": {
-                                "name": "quantity",
-                                "value": "2",
-                                "outlinedBorder": false
-                              },
-                              "children": [
-                                {
-                                  "type": "DropdownMenuItem",
+                                "caption": "",
+                                "trailing": {
+                                  "type": "Column",
                                   "attributes": {
-                                    "caption": "1",
-                                    "enabled": true,
-                                    "value": "1"
+                                    "mainAxisAlignment": "start",
+                                    "crossAxisAlignment": "end"
                                   },
-                                  "children": []
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "2,000 CFA",
+                                        "bold": true
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "(1,000 CFA each)",
+                                        "size": 10.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
                                 },
-                                {
-                                  "type": "DropdownMenuItem",
+                                "leading": {
+                                  "type": "Image",
                                   "attributes": {
-                                    "caption": "2",
-                                    "enabled": true,
-                                    "value": "2"
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "DropdownMenuItem",
-                                  "attributes": {
-                                    "caption": "3",
-                                    "enabled": true,
-                                    "value": "3"
+                                    "url": "http://img.com/nopicture.png",
+                                    "width": 48.0,
+                                    "height": 48.8
                                   },
                                   "children": []
                                 }
-                              ],
-                              "action": {
-                                "type": "Command",
-                                "url": "http://localhost:0/commands/update-cart?merchant-id=0&product-id=2"
-                              }
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Row",
+                              "attributes": {
+                                "mainAxisAlignment": "start",
+                                "crossAxisAlignment": "center"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 10.0
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 10.0,
+                                    "width": 100.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "DropdownButton",
+                                      "attributes": {
+                                        "name": "quantity",
+                                        "value": "2",
+                                        "outlinedBorder": false
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "1",
+                                            "enabled": true,
+                                            "value": "1"
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "2",
+                                            "enabled": true,
+                                            "value": "2"
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "DropdownMenuItem",
+                                          "attributes": {
+                                            "caption": "3",
+                                            "enabled": true,
+                                            "value": "3"
+                                          },
+                                          "children": []
+                                        }
+                                      ],
+                                      "action": {
+                                        "type": "Command",
+                                        "url": "http://localhost:0/commands/update-cart?merchant-id=0&product-id=2"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Button",
+                                  "attributes": {
+                                    "caption": "Remove",
+                                    "padding": 10.0,
+                                    "type": "Text",
+                                    "stretched": false
+                                  },
+                                  "children": [],
+                                  "action": {
+                                    "type": "Command",
+                                    "url": "http://localhost:0/commands/remove-from-cart?merchant-id=0&product-id=2"
+                                  }
+                                }
+                              ]
                             }
                           ]
-                        },
-                        {
-                          "type": "Button",
-                          "attributes": {
-                            "caption": "Remove",
-                            "padding": 10.0,
-                            "type": "Text",
-                            "stretched": false
-                          },
-                          "children": [],
-                          "action": {
-                            "type": "Command",
-                            "url": "http://localhost:0/commands/remove-from-cart?merchant-id=0&product-id=2"
-                          }
                         }
                       ]
                     }
                   ]
                 }
               ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "color": "#8c8c8c"
-              },
-              "children": []
             },
             {
               "type": "Container",
               "attributes": {
                 "padding": 10.0,
                 "margin": 10.0,
+                "background": "#FFFFFF",
                 "border": 1.0,
                 "borderRadius": 2.0,
                 "borderColor": "#8c8c8c"

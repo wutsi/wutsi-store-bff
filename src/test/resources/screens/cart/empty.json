@@ -2,7 +2,8 @@
   "type": "Screen",
   "attributes": {
     "id": "page.cart",
-    "safe": false
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
   },
   "children": [
     {
@@ -19,62 +20,40 @@
             {
               "type": "Container",
               "attributes": {
-                "padding": 10.0
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
               },
               "children": [
                 {
-                  "type": "Column",
+                  "type": "ListItem",
                   "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "start"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
+                    "caption": "Ray Sponsible",
+                    "subCaption": "Marketing - Cameroon",
+                    "padding": 10.0,
+                    "leading": {
+                      "type": "CircleAvatar",
                       "attributes": {
-                        "caption": "Merchant",
-                        "bold": true,
-                        "size": 16.0
+                        "radius": 24.0
                       },
-                      "children": []
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Ray Sponsible",
-                        "subCaption": "Marketing - Cameroon",
-                        "padding": 10.0,
-                        "leading": {
-                          "type": "CircleAvatar",
+                      "children": [
+                        {
+                          "type": "Text",
                           "attributes": {
-                            "radius": 24.0
+                            "caption": "RS",
+                            "bold": true,
+                            "size": 16.0
                           },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "RS",
-                                "bold": true,
-                                "size": 16.0
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
                         }
-                      },
-                      "children": []
+                      ]
                     }
-                  ]
+                  },
+                  "children": []
                 }
               ]
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
             },
             {
               "type": "Container",

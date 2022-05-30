@@ -63,46 +63,17 @@ class CheckoutReviewScreen(
 
         // Merchant
         val children = mutableListOf<WidgetAware?>(
-            Container(
-                padding = 10.0,
-                child = Column(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
-                        Text(
-                            caption = getText("page.checkout.review.merchant"),
-                            bold = true,
-                            size = Theme.TEXT_SIZE_LARGE
-                        ),
-                        ProfileListItem(
-                            model = sharedUIMapper.toAccountModel(merchant),
-                            showAccountType = false
-                        )
-                    ),
-                )
-            ),
-        )
-
-        // Products
-        children.addAll(
-            listOf(
-                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                Container(
-                    padding = 10.0,
-                    child = Text(
-                        caption = getText("page.checkout.review.products", arrayOf(order.items.size.toString())),
-                        bold = true,
-                        size = Theme.TEXT_SIZE_LARGE
-                    )
+            toSectionWidget(
+                padding = null,
+                child = ProfileListItem(
+                    model = sharedUIMapper.toAccountModel(merchant),
+                    showAccountType = false
                 )
             )
         )
-        order.items
-            .map { toItemWidget(it, products[it.productId]!!, tenant) }
-            .forEach {
-                children.add(it)
-                children.add(Divider(color = Theme.COLOR_DIVIDER))
-            }
+
+        // Products
+        children.add(toProductListWidget(order, products, tenant))
 
         // Shipping
         if (order.shippingId != null)
@@ -126,13 +97,45 @@ class CheckoutReviewScreen(
                     crossAxisAlignment = CrossAxisAlignment.start,
                     children = children.filterNotNull()
                 )
-            )
+            ),
+            backgroundColor = Theme.COLOR_GRAY_LIGHT,
         ).toWidget()
     }
 
     private fun toItemWidget(item: OrderItem, product: ProductSummary, tenant: Tenant) = OrderItemListItem(
         model = sharedUIMapper.toOrderItemModel(item, product, tenant)
     )
+
+    private fun toProductListWidget(order: Order, products: Map<Long, ProductSummary>, tenant: Tenant): WidgetAware {
+        val children = mutableListOf<WidgetAware>()
+        children.addAll(
+            listOf(
+                Container(
+                    padding = 10.0,
+                    child = Text(
+                        caption = getText("page.checkout.review.products", arrayOf(order.items.size.toString())),
+                        bold = true,
+                        size = Theme.TEXT_SIZE_LARGE
+                    )
+                )
+            )
+        )
+        order.items
+            .map { toItemWidget(it, products[it.productId]!!, tenant) }
+            .forEach {
+                children.add(Divider(color = Theme.COLOR_DIVIDER))
+                children.add(it)
+            }
+
+        return toSectionWidget(
+            padding = null,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
+            )
+        )
+    }
 
     private fun toPriceWidget(order: Order, tenant: Tenant) = PriceSummaryCard(
         model = sharedUIMapper.toPriceSummaryModel(order, tenant),
@@ -195,8 +198,7 @@ class CheckoutReviewScreen(
                 )
             )
 
-        return Container(
-            padding = 10.0,
+        return toSectionWidget(
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,

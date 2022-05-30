@@ -44,6 +44,19 @@ class CartScreen(
     fun index(@RequestParam(name = "merchant-id") merchantId: Long): Widget {
         val tenant = tenantProvider.get()
         val merchant = accountApi.getAccount(merchantId).account
+
+        // Merchant
+        val children = mutableListOf<WidgetAware>(
+            toSectionWidget(
+                padding = null,
+                child = ProfileListItem(
+                    model = sharedUIMapper.toAccountModel(merchant),
+                    showAccountType = false
+                )
+            )
+        )
+
+        // Products
         val cart = cartApi.getCart(merchantId).cart
         val products = if (cart.products.isEmpty())
             emptyList()
@@ -55,62 +68,7 @@ class CartScreen(
                     limit = cart.products.size
                 )
             ).products
-
-        // Merchant
-        val children = mutableListOf<WidgetAware>(
-            Container(
-                padding = 10.0,
-                child = Column(
-                    mainAxisAlignment = MainAxisAlignment.start,
-                    crossAxisAlignment = CrossAxisAlignment.start,
-                    children = listOf(
-                        Text(
-                            caption = getText("page.cart.merchant"),
-                            bold = true,
-                            size = Theme.TEXT_SIZE_LARGE
-                        ),
-                        ProfileListItem(
-                            model = sharedUIMapper.toAccountModel(merchant),
-                            showAccountType = false
-                        )
-                    ),
-                )
-            ),
-        )
-
-        // Products
-        if (products.isNotEmpty()) {
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    Container(
-                        padding = 10.0,
-                        child = Text(
-                            caption = getText("page.cart.products", arrayOf(cart.products.size.toString())),
-                            bold = true,
-                            size = Theme.TEXT_SIZE_LARGE
-                        )
-                    )
-                )
-            )
-            products.map { toCartItemWidget(cart, it, tenant) }
-                .filterNotNull()
-                .forEach {
-                    children.add(it)
-                    children.add(Divider(color = Theme.COLOR_DIVIDER))
-                }
-        } else {
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
-                    Container(
-                        padding = 10.0,
-                        alignment = Alignment.Center,
-                        child = Text(getText("page.cart.empty"))
-                    )
-                )
-            )
-        }
+        children.add(toCartItemListWidget(cart, products, tenant))
 
         // Price
         if (products.isNotEmpty()) {
@@ -131,8 +89,45 @@ class CartScreen(
                     crossAxisAlignment = CrossAxisAlignment.start,
                     children = children
                 )
-            )
+            ),
+            backgroundColor = Theme.COLOR_GRAY_LIGHT
         ).toWidget()
+    }
+
+    private fun toCartItemListWidget(cart: Cart, products: List<ProductSummary>, tenant: Tenant): WidgetAware {
+        val children = mutableListOf<WidgetAware>()
+        val cartItems = products.map { toCartItemWidget(cart, it, tenant) }
+            .filterNotNull()
+        if (cartItems.isEmpty())
+            return Container(
+                padding = 10.0,
+                alignment = Alignment.Center,
+                child = Text(getText("page.cart.empty")),
+            )
+
+        children.add(
+            Container(
+                padding = 10.0,
+                child = Text(
+                    caption = getText("page.cart.products", arrayOf(cart.products.size.toString())),
+                    bold = true,
+                    size = Theme.TEXT_SIZE_LARGE
+                )
+            )
+        )
+        cartItems.forEach {
+            children.add(Divider(color = Theme.COLOR_DIVIDER))
+            children.add(it)
+        }
+
+        return toSectionWidget(
+            padding = null,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = children
+            )
+        )
     }
 
     private fun toCartItemWidget(cart: Cart, product: ProductSummary, tenant: Tenant): WidgetAware? {

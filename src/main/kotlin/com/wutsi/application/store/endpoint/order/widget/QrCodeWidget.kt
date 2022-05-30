@@ -4,7 +4,6 @@ import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.QrService
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.flutter.sdui.Center
-import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Image
 import com.wutsi.flutter.sdui.Widget
@@ -35,25 +34,20 @@ class QrCodeWidget(
         ).token
         val imageUrl = qrService.imageUrl(token)
 
-        return Column(
-            children = listOf(
-                Container(padding = 10.0),
-                Center(
-                    child = Container(
-                        padding = 10.0,
-                        margin = 10.0,
-                        alignment = Alignment.Center,
-                        borderColor = Theme.COLOR_DIVIDER,
-                        border = 1.0,
-                        borderRadius = 5.0,
-                        child = Image(
-                            url = imageUrl,
-                            width = 230.0,
-                            height = 230.0
-                        ),
-                    )
+        return Center(
+            child = Container(
+                padding = 10.0,
+                margin = 10.0,
+                alignment = Alignment.Center,
+                borderColor = Theme.COLOR_DIVIDER,
+                border = 1.0,
+                borderRadius = 5.0,
+                child = Image(
+                    url = imageUrl,
+                    width = 230.0,
+                    height = 230.0
                 ),
-            ),
+            )
         ).toWidget()
     }
 }

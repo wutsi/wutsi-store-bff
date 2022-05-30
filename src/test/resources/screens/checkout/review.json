@@ -2,7 +2,8 @@
   "type": "Screen",
   "attributes": {
     "id": "page.checkout.review",
-    "safe": false
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
   },
   "children": [
     {
@@ -19,7 +20,49 @@
             {
               "type": "Container",
               "attributes": {
-                "padding": 10.0
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
+              "children": [
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Ray Sponsible",
+                    "subCaption": "Marketing - Cameroon",
+                    "padding": 10.0,
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "RS",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
               },
               "children": [
                 {
@@ -30,36 +73,117 @@
                   },
                   "children": [
                     {
-                      "type": "Text",
+                      "type": "Container",
                       "attributes": {
-                        "caption": "Merchant",
-                        "bold": true,
-                        "size": 16.0
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Products",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "color": "#8c8c8c"
                       },
                       "children": []
                     },
                     {
                       "type": "ListItem",
                       "attributes": {
-                        "caption": "Ray Sponsible",
-                        "subCaption": "Marketing - Cameroon",
-                        "padding": 10.0,
-                        "leading": {
-                          "type": "CircleAvatar",
+                        "caption": "Item 1",
+                        "subCaption": "Quantity: 10",
+                        "trailing": {
+                          "type": "Column",
                           "attributes": {
-                            "radius": 24.0
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "end"
                           },
                           "children": [
                             {
                               "type": "Text",
                               "attributes": {
-                                "caption": "RS",
-                                "bold": true,
-                                "size": 16.0
+                                "caption": "1,000 CFA",
+                                "bold": true
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "1,500 CFA",
+                                "size": 10.0,
+                                "decoration": "Strikethrough"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "(100 CFA each)",
+                                "size": 10.0
                               },
                               "children": []
                             }
                           ]
+                        },
+                        "leading": {
+                          "type": "Image",
+                          "attributes": {
+                            "url": "http://img.com/nopicture.png",
+                            "width": 48.0,
+                            "height": 48.8
+                          },
+                          "children": []
+                        }
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "color": "#8c8c8c"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "Item 2",
+                        "subCaption": "Quantity: 1",
+                        "trailing": {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "end"
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "15,000 CFA",
+                                "bold": true
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        "leading": {
+                          "type": "Image",
+                          "attributes": {
+                            "url": "http://img.com/nopicture.png",
+                            "width": 48.0,
+                            "height": 48.8
+                          },
+                          "children": []
                         }
                       },
                       "children": []
@@ -69,133 +193,14 @@
               ]
             },
             {
-              "type": "Divider",
-              "attributes": {
-                "height": 1.0,
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
               "type": "Container",
               "attributes": {
-                "padding": 10.0
-              },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "Products",
-                    "bold": true,
-                    "size": 16.0
-                  },
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "ListItem",
-              "attributes": {
-                "caption": "Item 1",
-                "subCaption": "Quantity: 10",
-                "trailing": {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "end"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "1,000 CFA",
-                        "bold": true
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "1,500 CFA",
-                        "size": 10.0,
-                        "decoration": "Strikethrough"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "(100 CFA each)",
-                        "size": 10.0
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                "leading": {
-                  "type": "Image",
-                  "attributes": {
-                    "url": "http://img.com/nopicture.png",
-                    "width": 48.0,
-                    "height": 48.8
-                  },
-                  "children": []
-                }
-              },
-              "children": []
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "ListItem",
-              "attributes": {
-                "caption": "Item 2",
-                "subCaption": "Quantity: 1",
-                "trailing": {
-                  "type": "Column",
-                  "attributes": {
-                    "mainAxisAlignment": "start",
-                    "crossAxisAlignment": "end"
-                  },
-                  "children": [
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "15,000 CFA",
-                        "bold": true
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                "leading": {
-                  "type": "Image",
-                  "attributes": {
-                    "url": "http://img.com/nopicture.png",
-                    "width": 48.0,
-                    "height": 48.8
-                  },
-                  "children": []
-                }
-              },
-              "children": []
-            },
-            {
-              "type": "Divider",
-              "attributes": {
-                "color": "#8c8c8c"
-              },
-              "children": []
-            },
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 10.0
+                "padding": 10.0,
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
               },
               "children": [
                 {
@@ -306,6 +311,7 @@
               "attributes": {
                 "padding": 10.0,
                 "margin": 10.0,
+                "background": "#FFFFFF",
                 "border": 1.0,
                 "borderRadius": 2.0,
                 "borderColor": "#8c8c8c"

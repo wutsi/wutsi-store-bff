@@ -4,6 +4,7 @@ import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.model.AccountModel
 import com.wutsi.application.shared.model.ProductModel
+import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.StringUtil
 import com.wutsi.application.shared.service.TenantProvider
@@ -27,7 +28,6 @@ import com.wutsi.flutter.sdui.CarouselSlider
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
-import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.ExpandablePanel
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.Image
@@ -62,6 +62,7 @@ class ProductScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
     private val tenantProvider: TenantProvider,
+    private val cityService: CityService
 ) : ProductActionProvider, AbstractQuery() {
     override fun getAction(model: ProductModel): Action =
         gotoUrl(
@@ -83,6 +84,7 @@ class ProductScreen(
         val children = mutableListOf<WidgetAware>(
             Container(
                 padding = 10.0,
+                background = Theme.COLOR_WHITE,
                 child = Text(
                     caption = StringUtil.capitalizeFirstLetter(product.title),
                     size = Theme.TEXT_SIZE_LARGE,
@@ -95,28 +97,29 @@ class ProductScreen(
         if (product.pictures.isNotEmpty())
             children.addAll(
                 listOf(
-                    CarouselSlider(
-                        viewportFraction = .9,
-                        enableInfiniteScroll = false,
-                        reverse = false,
-                        height = 250.0,
-                        children = product.pictures.map {
-                            AspectRatio(
-                                aspectRatio = 8.0 / 10.0,
-                                child = Image(
-                                    url = it.url,
-                                    height = 300.0
+                    toSectionWidget(
+                        padding = null,
+                        child = CarouselSlider(
+                            viewportFraction = .9,
+                            enableInfiniteScroll = false,
+                            reverse = false,
+                            height = 250.0,
+                            children = product.pictures.map {
+                                AspectRatio(
+                                    aspectRatio = 8.0 / 10.0,
+                                    child = Image(
+                                        url = it.url,
+                                        height = 300.0
+                                    )
                                 )
-                            )
-                        }
-                    ),
-                    Divider(color = Theme.COLOR_DIVIDER)
+                            }
+                        )
+                    )
                 )
             )
 
         children.add(
-            Container(
-                padding = 10.0,
+            toSectionWidget(
                 child = Column(
                     mainAxisAlignment = MainAxisAlignment.start,
                     crossAxisAlignment = CrossAxisAlignment.start,
@@ -151,10 +154,14 @@ class ProductScreen(
 
         // Product Details
         if (!product.description.isNullOrEmpty())
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER),
-                    ExpandablePanel(
+            children.add(
+                Container(
+                    padding = 10.0,
+                    margin = 5.0,
+                    border = 1.0,
+                    borderColor = Theme.COLOR_GRAY_LIGHT,
+                    background = Theme.COLOR_WHITE,
+                    child = ExpandablePanel(
                         header = getText("page.product.product-details"),
                         expanded = Container(
                             padding = 10.0,
@@ -164,33 +171,16 @@ class ProductScreen(
                 )
             )
 
-        // Vendor
+
         val shareUrl = "${tenant.webappUrl}/product?id=$id"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
         children.addAll(
-            listOf(
-                Divider(color = Theme.COLOR_DIVIDER),
+            listOfNotNull(
                 toVendorWidget(product, merchant, whatsappUrl),
+                toSimilarProductsWidget(product, tenant),
+                toOtherProductsWidget(product, tenant),
             )
         )
-
-        val others = toMerchantProductsWidget(product, tenant)
-        if (others != null)
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER),
-                    others
-                )
-            )
-
-        val similar = toSimilarProductsWidget(product, tenant)
-        if (similar != null)
-            children.addAll(
-                listOf(
-                    Divider(color = Theme.COLOR_DIVIDER),
-                    similar
-                )
-            )
 
         try {
             // Screen
@@ -213,7 +203,8 @@ class ProductScreen(
                         children = children,
                     )
                 ),
-                bottomNavigationBar = bottomNavigationBar()
+                bottomNavigationBar = bottomNavigationBar(),
+                backgroundColor = Theme.COLOR_GRAY_LIGHT
             ).toWidget()
         } finally {
             track(product, request)
@@ -287,7 +278,6 @@ class ProductScreen(
                     caption = fmt.format(comparablePrice),
                     decoration = TextDecoration.Strikethrough,
                     color = Theme.COLOR_GRAY,
-                    size = Theme.TEXT_SIZE_SMALL
                 )
             )
             if (percent >= 1)
@@ -307,8 +297,7 @@ class ProductScreen(
     }
 
     private fun toVendorWidget(product: Product, merchant: Account, whatsappUrl: String?): WidgetAware =
-        Container(
-            padding = 10.0,
+        toSectionWidget(
             child = Row(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
@@ -326,7 +315,13 @@ class ProductScreen(
                             mainAxisSize = MainAxisSize.min,
                             children = listOfNotNull(
                                 Text(caption = merchant.displayName ?: "", bold = true),
-                                merchant.category?.let { Text(it.title, color = Theme.COLOR_GRAY) },
+                                Text(
+                                    caption = if (merchant.category == null)
+                                        toLocation(merchant)
+                                    else
+                                        merchant.category!!.title + " - " + toLocation(merchant),
+                                    color = Theme.COLOR_GRAY
+                                ),
                                 whatsappUrl?.let {
                                     Button(
                                         type = if (togglesProvider.isCartEnabled()) ButtonType.Outlined else ButtonType.Elevated,
@@ -348,53 +343,15 @@ class ProductScreen(
             )
         )
 
+    private fun toLocation(merchant: Account): String =
+        sharedUIMapper.toLocationText(cityService.get(merchant.cityId), merchant.country)
+
     private fun toSimilarProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
         // Get products
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
-                categoryIds = listOf(product.category.id, product.subCategory.id),
-                status = ProductStatus.PUBLISHED.name,
-                sortBy = ProductSort.RECOMMENDED.name,
-                limit = 30
-            )
-        ).products
-        if (products.isEmpty())
-            return null
-
-        // Sort - ensure all products in the same sub-categories... and from other merchants
-        val tmp = mutableListOf<ProductSummary>()
-        tmp.addAll(products.filter { it.subCategoryId == product.subCategory.id })
-        tmp.addAll(products.filter { it.subCategoryId != product.subCategory.id })
-        val xproducts = tmp.filter { it.accountId != product.accountId && it.id != product.id }
-        if (xproducts.isEmpty())
-            return null
-
-        // Component
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = listOf(
-                Container(
-                    padding = 10.0,
-                    child = Text(getText("page.product.similar-products"), bold = true)
-                ),
-                ProductGridView(
-                    spacing = 5.0,
-                    productsPerRow = 2,
-                    models = xproducts.take(4)
-                        .map { sharedUIMapper.toProductModel(it, tenant, null) },
-                    actionProvider = this,
-                    type = ProductCardType.SUMMARY,
-                )
-            )
-        )
-    }
-
-    private fun toMerchantProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
-        // Get products
-        val products = catalogApi.searchProducts(
-            request = SearchProductRequest(
                 accountId = product.accountId,
+                categoryIds = listOf(product.category.id, product.subCategory.id),
                 status = ProductStatus.PUBLISHED.name,
                 sortBy = ProductSort.RECOMMENDED.name,
                 limit = 30
@@ -403,41 +360,91 @@ class ProductScreen(
         if (products.isEmpty())
             return null
 
+        // Sort - ensure all products in the same sub-categories... and from other merchants
+        val similar = mutableListOf<ProductSummary>()
+        similar.addAll(products.filter { it.subCategoryId == product.subCategory.id })
+        similar.addAll(products.filter { it.subCategoryId != product.subCategory.id })
+
         // Component
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = listOfNotNull(
-                Container(
-                    padding = 10.0,
-                    child = Text(getText("page.product.merchant-products"), bold = true)
-                ),
-                ProductGridView(
-                    spacing = 5.0,
-                    productsPerRow = 2,
-                    models = products.take(4)
-                        .map { sharedUIMapper.toProductModel(it, tenant, null) },
-                    actionProvider = this,
-                    type = ProductCardType.SUMMARY,
-                ),
-                if (products.size > 4)
-                    Center(
-                        child = Container(
-                            padding = 10.0,
-                            alignment = Alignment.Center,
-                            child = Button(
-                                caption = getText("page.product.button.more-products"),
+        return toSectionWidget(
+            padding = null,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = listOf(
+                    Container(
+                        padding = 10.0,
+                        child = Text(getText("page.product.similar-products"), bold = true)
+                    ),
+                    ProductGridView(
+                        spacing = 5.0,
+                        productsPerRow = 2,
+                        models = similar.take(4)
+                            .map { sharedUIMapper.toProductModel(it, tenant, null) },
+                        actionProvider = this,
+                        type = ProductCardType.SUMMARY,
+                    )
+                )
+            )
+        )
+    }
+
+    private fun toOtherProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
+        // Get products
+        val categoryIds = listOf(product.category.id, product.subCategory.id)
+        val products = catalogApi.searchProducts(
+            request = SearchProductRequest(
+                accountId = product.accountId,
+                status = ProductStatus.PUBLISHED.name,
+                sortBy = ProductSort.RECOMMENDED.name,
+                limit = 30
+            )
+        ).products.filter {
+            it.id != product.id &&
+                !categoryIds.contains(it.subCategoryId) &&
+                !categoryIds.contains(it.categoryId)
+        }
+        if (products.isEmpty())
+            return null
+
+        // Component
+        return toSectionWidget(
+            padding = null,
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = listOfNotNull(
+                    Container(
+                        padding = 10.0,
+                        child = Text(getText("page.product.merchant-products"), bold = true)
+                    ),
+                    ProductGridView(
+                        spacing = 5.0,
+                        productsPerRow = 2,
+                        models = products.take(4)
+                            .map { sharedUIMapper.toProductModel(it, tenant, null) },
+                        actionProvider = this,
+                        type = ProductCardType.SUMMARY,
+                    ),
+                    if (products.size > 4)
+                        Center(
+                            child = Container(
                                 padding = 10.0,
-                                type = ButtonType.Outlined,
-                                stretched = false,
-                                action = gotoUrl(
-                                    url = urlBuilder.build(shellUrl, "/profile?id=${product.accountId}&tab=store")
+                                alignment = Alignment.Center,
+                                child = Button(
+                                    caption = getText("page.product.button.more-products"),
+                                    padding = 10.0,
+                                    type = ButtonType.Outlined,
+                                    stretched = false,
+                                    action = gotoUrl(
+                                        url = urlBuilder.build(shellUrl, "/profile?id=${product.accountId}&tab=store")
+                                    )
                                 )
                             )
                         )
-                    )
-                else
-                    null
+                    else
+                        null
+                )
             )
         )
     }
