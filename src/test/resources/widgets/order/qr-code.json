@@ -1,39 +1,26 @@
 {
-  "type": "Column",
+  "type": "Center",
   "attributes": {},
   "children": [
     {
       "type": "Container",
       "attributes": {
-        "padding": 10.0
+        "alignment": "Center",
+        "padding": 10.0,
+        "margin": 10.0,
+        "border": 1.0,
+        "borderRadius": 5.0,
+        "borderColor": "#8c8c8c"
       },
-      "children": []
-    },
-    {
-      "type": "Center",
-      "attributes": {},
       "children": [
         {
-          "type": "Container",
+          "type": "Image",
           "attributes": {
-            "alignment": "Center",
-            "padding": 10.0,
-            "margin": 10.0,
-            "border": 1.0,
-            "borderRadius": 5.0,
-            "borderColor": "#8c8c8c"
+            "url": "https://wutsi-qr-server-test.herokuapp.com/image/xxxxx.png",
+            "width": 230.0,
+            "height": 230.0
           },
-          "children": [
-            {
-              "type": "Image",
-              "attributes": {
-                "url": "https://wutsi-qr-server-test.herokuapp.com/image/xxxxx.png",
-                "width": 230.0,
-                "height": 230.0
-              },
-              "children": []
-            }
-          ]
+          "children": []
         }
       ]
     }

@@ -171,7 +171,6 @@ class ProductScreen(
                 )
             )
 
-
         val shareUrl = "${tenant.webappUrl}/product?id=$id"
         val whatsappUrl = PhoneUtil.toWhatsAppUrl(merchant.whatsapp, shareUrl)
         children.addAll(
