@@ -81,7 +81,7 @@ class SettingsProductScreen(
         val tabViews = TabBarView(
             children = listOf(
                 productTab(product, tenant, errors),
-                statsTab(product, tenant)
+                statisticsTab(product, tenant)
             )
         )
 
@@ -239,7 +239,7 @@ class SettingsProductScreen(
         )
     }
 
-    private fun statsTab(product: Product, tenant: Tenant): WidgetAware =
+    private fun statisticsTab(product: Product, tenant: Tenant): WidgetAware =
         Column(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,

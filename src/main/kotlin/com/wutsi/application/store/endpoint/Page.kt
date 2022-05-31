@@ -49,4 +49,5 @@ object Page {
     const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_STREET = "page.settings.store.shipping.attribute.street"
     const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_RATE = "page.settings.store.shipping.attribute.rate"
     const val SETTINGS_STORE_SHIPPING_ATTRIBUTE_CITY = "page.settings.store.shipping.attribute.city"
+    const val SETTINGS_STORE_STATISTICS = "page.settings.statistics"
 }

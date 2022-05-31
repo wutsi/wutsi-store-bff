@@ -79,6 +79,15 @@ class SettingsStoreScreen : AbstractQuery() {
                                 else
                                     null,
 
+                                ListItem(
+                                    caption = getText("page.settings.store.statistics"),
+                                    leading = Icon(code = Theme.ICON_BAR_CHART, color = Theme.COLOR_PRIMARY),
+                                    trailing = Icon(code = Theme.ICON_CHEVRON_RIGHT),
+                                    action = gotoUrl(
+                                        urlBuilder.build("settings/store/statistics")
+                                    )
+                                ),
+
                                 Container(
                                     padding = 20.0
                                 ),

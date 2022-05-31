@@ -1,0 +1,242 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.settings.statistics",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {
+        "mainAxisAlignment": "start",
+        "crossAxisAlignment": "start"
+      },
+      "children": [
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "center",
+                    "crossAxisAlignment": "center"
+                  },
+                  "children": [
+                    {
+                      "type": "MoneyText",
+                      "attributes": {
+                        "value": 0.0,
+                        "color": "#1D7EDF",
+                        "currency": "FCFA",
+                        "numberFormat": "#,###,##0",
+                        "valueFontSize": 40.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "SALES",
+                            "size": 10.0,
+                            "alignment": "Center"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "center",
+                    "crossAxisAlignment": "center"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "0",
+                        "color": "#000000",
+                        "size": 30.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "VIEWS",
+                            "size": 10.0,
+                            "alignment": "Center"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "center",
+                    "crossAxisAlignment": "center"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "0",
+                        "color": "#000000",
+                        "size": 30.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "ORDERS",
+                            "size": 10.0,
+                            "alignment": "Center"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Flexible",
+          "attributes": {
+            "flex": 1,
+            "fit": "Tight"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderColor": "#8c8c8c"
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "center",
+                    "crossAxisAlignment": "center"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "0.00%",
+                        "color": "#000000",
+                        "size": 30.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "CONVERSION",
+                            "size": 10.0,
+                            "alignment": "Center"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Store Statistics",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}
