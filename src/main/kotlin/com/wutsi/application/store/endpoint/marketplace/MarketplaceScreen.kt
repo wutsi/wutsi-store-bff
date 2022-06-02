@@ -174,7 +174,8 @@ class MarketplaceScreen(
             return null
 
         children.add(
-            0, Center(
+            0,
+            Center(
                 Container(
                     padding = 10.0,
                     child = Text(getText("page.marketplace.carts"), bold = true)
@@ -239,7 +240,6 @@ class MarketplaceScreen(
                     )
                 )
             )
-
         } catch (ex: Exception) {
             LOGGER.warn("Unexpected error", ex)
             return null

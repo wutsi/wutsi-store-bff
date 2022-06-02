@@ -18,8 +18,8 @@
   </parent>
 
   <properties>
-    <jacoco.threshold.line>0.92</jacoco.threshold.line>
-    <jacoco.threshold.class>0.92</jacoco.threshold.class>
+    <jacoco.threshold.line>0.91</jacoco.threshold.line>
+    <jacoco.threshold.class>0.91</jacoco.threshold.class>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <jdk.version>11</jdk.version>
 

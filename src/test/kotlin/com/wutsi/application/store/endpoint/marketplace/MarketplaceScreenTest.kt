@@ -54,7 +54,6 @@ internal class MarketplaceScreenTest : AbstractEndpointTest() {
         Category(id = 4, title = "Cat 4"),
     )
 
-
     @BeforeEach
     override fun setUp() {
         super.setUp()
