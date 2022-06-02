@@ -164,7 +164,7 @@ class HomeScreen(
     }
 
     private fun toSectionListWidget(merchant: Account): WidgetAware? {
-        val sections = catalogApi.listSections(merchant.id).sections
+        val sections = catalogApi.listSections(merchant.id, true).sections
             .take(5)
         if (sections.isEmpty())
             return null

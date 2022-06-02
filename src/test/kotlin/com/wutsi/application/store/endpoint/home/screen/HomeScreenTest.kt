@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.home.screen
 
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
@@ -43,13 +44,13 @@ internal class HomeScreenTest : AbstractEndpointTest() {
             createSectionSummary(2, "Section 2", productCount = 12),
             createSectionSummary(3, "Section 3", productCount = 3),
         )
-        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections(any())
+        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections(any(), anyOrNull())
     }
 
     @Test
     fun empty() {
         doReturn(SearchProductResponse()).whenever(catalogApi).searchProducts(any())
-        doReturn(ListSectionResponse()).whenever(catalogApi).listSections(any())
+        doReturn(ListSectionResponse()).whenever(catalogApi).listSections(any(), anyOrNull())
 
         val url = "http://localhost:$port"
         assertEndpointEquals("/screens/home/catalog-empty.json", url)
@@ -63,7 +64,7 @@ internal class HomeScreenTest : AbstractEndpointTest() {
 
     @Test
     fun otherCatalog() {
-        doReturn(ListSectionResponse()).whenever(catalogApi).listSections(any())
+        doReturn(ListSectionResponse()).whenever(catalogApi).listSections(any(), anyOrNull())
 
         val accountId = 9L
         val url = "http://localhost:$port?id=$accountId"

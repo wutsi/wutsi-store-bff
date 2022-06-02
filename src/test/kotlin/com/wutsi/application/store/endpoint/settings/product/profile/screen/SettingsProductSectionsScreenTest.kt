@@ -1,6 +1,7 @@
 package com.wutsi.application.store.endpoint.settings.product.profile.screen
 
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
@@ -27,7 +28,7 @@ internal class SettingsProductSectionsScreenTest : AbstractEndpointTest() {
                 createSectionSummary(112, "Section 112", 112),
             )
         )
-        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections(any())
+        doReturn(ListSectionResponse(sections)).whenever(catalogApi).listSections(any(), anyOrNull())
 
         val url = "http://localhost:$port/settings/store/product/sections?id=777"
         assertEndpointEquals("/screens/settings/product/sections.json", url)
