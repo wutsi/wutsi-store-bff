@@ -8,7 +8,7 @@ import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.core.logging.KVLogger
 import com.wutsi.platform.payment.WutsiPaymentApi
-import com.wutsi.platform.payment.dto.CreateTransferRequest
+import com.wutsi.platform.payment.dto.CreateChargeRequest
 import feign.FeignException
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -30,12 +30,14 @@ class PayOrderCommand(
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
+        @RequestParam(name = "payment-token") paymentToken: String
     ): Action {
         try {
             // Pay
             val order = orderApi.getOrder(orderId).order
-            val id = paymentApi.createTransfer(
-                request = CreateTransferRequest(
+            val id = paymentApi.createCharge(
+                request = CreateChargeRequest(
+                    paymentMethodToken = paymentToken,
                     recipientId = order.merchantId,
                     amount = order.totalPrice,
                     currency = order.currency,

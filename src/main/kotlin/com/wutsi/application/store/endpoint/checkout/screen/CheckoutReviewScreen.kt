@@ -148,7 +148,7 @@ class CheckoutReviewScreen(
                     )
                 ),
                 action = gotoUrl(
-                    url = urlBuilder.build(loginUrl, getPaymentUrl(order.id))
+                    url = urlBuilder.build("/checkout/payment?order-id=${order.id}")
                 )
             )
         else

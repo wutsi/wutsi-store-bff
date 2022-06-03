@@ -259,7 +259,7 @@ class MarketplaceScreen(
                 emptyList()
         } catch (ex: Exception) {
             LOGGER.warn("Unable to resolve the opened carts", ex)
-            emptyList<CartSummary>()
+            emptyList()
         }
 
     private fun getStore(cart: CartSummary, storeMap: MutableMap<Long, AccountSummary>): AccountSummary? {

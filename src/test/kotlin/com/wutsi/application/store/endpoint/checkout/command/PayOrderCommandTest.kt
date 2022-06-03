@@ -18,8 +18,8 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.ErrorCode
-import com.wutsi.platform.payment.dto.CreateTransferRequest
-import com.wutsi.platform.payment.dto.CreateTransferResponse
+import com.wutsi.platform.payment.dto.CreateChargeRequest
+import com.wutsi.platform.payment.dto.CreateChargeResponse
 import com.wutsi.platform.payment.error.ErrorURN
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -59,7 +59,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/commands/pay-order?order-id=111"
+        url = "http://localhost:$port/commands/pay-order?order-id=111&payment-token=xxx"
     }
 
     @Test
@@ -67,7 +67,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        doReturn(CreateTransferResponse("xxx")).whenever(paymentApi).createTransfer(any())
+        doReturn(CreateChargeResponse("3039-f9009")).whenever(paymentApi).createCharge(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
@@ -75,12 +75,13 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
-        val request = argumentCaptor<CreateTransferRequest>()
-        verify(paymentApi).createTransfer(request.capture())
+        val request = argumentCaptor<CreateChargeRequest>()
+        verify(paymentApi).createCharge(request.capture())
         assertEquals(order.id, request.firstValue.orderId)
         assertEquals(order.currency, request.firstValue.currency)
         assertEquals(order.merchantId, request.firstValue.recipientId)
         assertEquals(order.totalPrice, request.firstValue.amount)
+        assertEquals("xxx", request.firstValue.paymentMethodToken)
         assertNull(request.firstValue.description)
 
         verify(cartApi).emptyCart(order.merchantId)
@@ -97,7 +98,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
         val ex = createFeignException(ErrorURN.TRANSACTION_FAILED.urn, downstreamError = ErrorCode.NOT_ENOUGH_FUNDS)
-        doThrow(ex).whenever(paymentApi).createTransfer(any())
+        doThrow(ex).whenever(paymentApi).createCharge(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
@@ -120,7 +121,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
         val ex = createFeignException(ErrorURN.TRANSACTION_FAILED.urn, downstreamError = ErrorCode.UNEXPECTED_ERROR)
-        doThrow(ex).whenever(paymentApi).createTransfer(any())
+        doThrow(ex).whenever(paymentApi).createCharge(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)

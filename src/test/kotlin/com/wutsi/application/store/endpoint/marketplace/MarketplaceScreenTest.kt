@@ -67,12 +67,21 @@ internal class MarketplaceScreenTest : AbstractEndpointTest() {
 
     @Test
     fun index() {
-        assertEndpointEquals("/screens/marketplace/marketplace.json", url)
+        assertEndpointEquals("/screens/marketplace/index.json", url)
+    }
+
+    @Test
+    fun empty() {
+        doReturn(SearchAccountResponse()).whenever(accountApi).searchAccount(any())
+
+        assertEndpointEquals("/screens/marketplace/empty.json", url)
     }
 
     @Test
     fun openedCart() {
         // WHEN
+        doReturn(true).whenever(togglesProvider).isCartEnabled()
+
         val products = listOf(
             ProductSummary(100, thumbnail = PictureSummary(id = 100, url = "https://www.g.com/0.png")),
             ProductSummary(101, thumbnail = PictureSummary(id = 100, url = "https://www.g.com/1.png")),
@@ -101,6 +110,6 @@ internal class MarketplaceScreenTest : AbstractEndpointTest() {
         doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
 
         // GIVEN
-        assertEndpointEquals("/screens/marketplace/marketplace-opened-cart.json", url)
+        assertEndpointEquals("/screens/marketplace/opened-cart.json", url)
     }
 }

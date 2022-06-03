@@ -515,7 +515,7 @@
                       "children": [],
                       "action": {
                         "type": "Route",
-                        "url": "https://wutsi-gateway-test.herokuapp.com/login/?phone=%2B12376666666677777&icon=f197&screen-id=page.checkout.pin&title=Authorization&sub-title=Enter+your+PIN+to+authorize+the+transaction&auth=false&return-to-route=false&return-url=http%3A%2F%2Flocalhost%3A0%2Fcommands%2Fpay-order%3Forder-id%3D111"
+                        "url": "http://localhost:0/checkout/payment?order-id=111"
                       }
                     }
                   ]

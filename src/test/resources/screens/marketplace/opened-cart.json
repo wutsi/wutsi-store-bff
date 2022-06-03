@@ -1,0 +1,514 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.marketplace",
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
+  },
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Column",
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
+                  },
+                  "children": [
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Continue shopping",
+                                "bold": true
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "height": 1.0,
+                        "color": "#8c8c8c"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Column",
+                          "attributes": {
+                            "mainAxisAlignment": "start",
+                            "crossAxisAlignment": "start"
+                          },
+                          "children": [
+                            {
+                              "type": "ListItem",
+                              "attributes": {
+                                "caption": "",
+                                "iconRight": "e15f",
+                                "padding": 10.0,
+                                "trailing": {
+                                  "type": "Icon",
+                                  "attributes": {
+                                    "code": "e15f"
+                                  },
+                                  "children": []
+                                },
+                                "leading": {
+                                  "type": "CircleAvatar",
+                                  "attributes": {
+                                    "radius": 24.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "",
+                                        "bold": true,
+                                        "size": 16.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              },
+                              "children": [],
+                              "action": {
+                                "type": "Route",
+                                "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=111&tab=store"
+                              }
+                            },
+                            {
+                              "type": "Row",
+                              "attributes": {
+                                "mainAxisAlignment": "start",
+                                "crossAxisAlignment": "start"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/0.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/1.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/2.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/3.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/4.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/5.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/6.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "padding": 5.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Image",
+                                      "attributes": {
+                                        "url": "https://www.g.com/7.png",
+                                        "width": 24.0,
+                                        "height": 24.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": []
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
+                  },
+                  "children": [
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 10.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "Visit the Stores",
+                                "bold": true
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "height": 1.0,
+                        "color": "#8c8c8c"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "",
+                        "iconRight": "e15f",
+                        "padding": 10.0,
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e15f"
+                          },
+                          "children": []
+                        },
+                        "leading": {
+                          "type": "CircleAvatar",
+                          "attributes": {
+                            "radius": 24.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=111&tab=store"
+                      }
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "height": 1.0,
+                        "color": "#8c8c8c"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "",
+                        "iconRight": "e15f",
+                        "padding": 10.0,
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e15f"
+                          },
+                          "children": []
+                        },
+                        "leading": {
+                          "type": "CircleAvatar",
+                          "attributes": {
+                            "radius": 24.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=222&tab=store"
+                      }
+                    },
+                    {
+                      "type": "Divider",
+                      "attributes": {
+                        "height": 1.0,
+                        "color": "#8c8c8c"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "ListItem",
+                      "attributes": {
+                        "caption": "",
+                        "iconRight": "e15f",
+                        "padding": 10.0,
+                        "trailing": {
+                          "type": "Icon",
+                          "attributes": {
+                            "code": "e15f"
+                          },
+                          "children": []
+                        },
+                        "leading": {
+                          "type": "CircleAvatar",
+                          "attributes": {
+                            "radius": 24.0
+                          },
+                          "children": [
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "",
+                                "bold": true,
+                                "size": 16.0
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=333&tab=store"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Marketplace",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  },
+  "bottomNavigationBar": {
+    "type": "BottomNavigationBar",
+    "attributes": {
+      "background": "#1D7EDF",
+      "selectedItemColor": "#FFFFFF",
+      "unselectedItemColor": "#FFFFFF"
+    },
+    "children": [
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f107",
+          "caption": "Home"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "route:/~"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f27b",
+          "caption": "Me"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile"
+        }
+      },
+      {
+        "type": "BottomNavigationBarItem",
+        "attributes": {
+          "icon": "f36e",
+          "caption": "Settings"
+        },
+        "children": [],
+        "action": {
+          "type": "Route",
+          "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
+        }
+      }
+    ]
+  }
+}

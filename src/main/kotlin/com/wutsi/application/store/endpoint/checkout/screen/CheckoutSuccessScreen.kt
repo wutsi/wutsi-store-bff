@@ -1,17 +1,15 @@
 package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.ui.ProfileCard
+import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
-import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
-import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Text
@@ -43,6 +41,7 @@ class CheckoutSuccessScreen(
 
         return Screen(
             id = error?.let { Page.CHECKOUT_ERROR } ?: Page.CHECKOUT_SUCCESS,
+            backgroundColor = Theme.COLOR_GRAY_LIGHT,
             appBar = AppBar(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
@@ -51,45 +50,53 @@ class CheckoutSuccessScreen(
             ),
             child = Column(
                 children = listOf(
-                    Center(
-                        child = ProfileCard(
+                    toSectionWidget(
+                        padding = null,
+                        child = ProfileListItem(
                             model = sharedUIMapper.toAccountModel(merchant),
-                            showWebsite = false,
-                            showPhoneNumber = false
+                            showAccountType = false
                         )
                     ),
-                    Divider(color = Theme.COLOR_DIVIDER),
-                    Container(
-                        alignment = Alignment.Center,
-                        child = Icon(
-                            code = error?.let { Theme.ICON_ERROR } ?: Theme.ICON_CHECK_CIRCLE,
-                            size = 80.0,
-                            color = error?.let { Theme.COLOR_DANGER } ?: Theme.COLOR_SUCCESS
-                        )
-                    ),
-                    Container(
-                        alignment = Alignment.Center,
-                        padding = 10.0,
-                        child = Text(
-                            error?.let { getText("page.checkout.success.failed", arrayOf(it)) }
-                                ?: getText("page.checkout.success.message"),
-                            color = error?.let { Theme.COLOR_DANGER } ?: Theme.COLOR_SUCCESS,
-                            alignment = TextAlignment.Center,
-                            bold = true
-                        ),
-                    ),
-                    Container(
-                        padding = 10.0,
-                        child = Button(
-                            caption = getText("page.checkout.success.button.submit"),
-                            action = Action(
-                                type = ActionType.Route,
-                                url = "route:/~"
+                    toSectionWidget(
+                        child = Column(
+                            children = listOf(
+                                Container(
+                                    padding = 10.0,
+                                    alignment = Alignment.Center,
+                                    child = Icon(
+                                        code = error?.let { Theme.ICON_ERROR } ?: Theme.ICON_CHECK_CIRCLE,
+                                        size = 80.0,
+                                        color = error?.let { Theme.COLOR_DANGER } ?: Theme.COLOR_SUCCESS
+                                    )
+                                ),
+                                Container(
+                                    alignment = Alignment.Center,
+                                    child = Text(
+                                        error?.let { getText("page.checkout.success.failed", arrayOf(it)) }
+                                            ?: getText("page.checkout.success.message"),
+                                        color = error?.let { Theme.COLOR_DANGER } ?: Theme.COLOR_SUCCESS,
+                                        alignment = TextAlignment.Center,
+                                        bold = true
+                                    ),
+                                ),
+                                Container(padding = 10.0),
+                                Container(
+                                    child = Button(
+                                        caption = getText("page.checkout.success.button.submit"),
+                                        action = Action(
+                                            type = ActionType.Route,
+                                            url = if (error == null)
+                                                "route:/~"
+                                            else
+                                                urlBuilder.build(shellUrl, "profile?id=${merchant.id}&tab=store")
+                                        )
+                                    )
+                                )
                             )
                         )
-                    )
+                    ),
                 ),
-            )
+            ),
         ).toWidget()
     }
 }

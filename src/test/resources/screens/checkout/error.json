@@ -2,7 +2,8 @@
   "type": "Screen",
   "attributes": {
     "id": "page.checkout.error",
-    "safe": false
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
   },
   "children": [
     {
@@ -10,258 +11,121 @@
       "attributes": {},
       "children": [
         {
-          "type": "Center",
-          "attributes": {},
+          "type": "Container",
+          "attributes": {
+            "margin": 5.0,
+            "background": "#FFFFFF",
+            "border": 1.0,
+            "borderColor": "#e8e8e8",
+            "width": 1.7976931348623157E308
+          },
           "children": [
             {
-              "type": "Center",
-              "attributes": {},
-              "children": [
-                {
-                  "type": "Column",
+              "type": "ListItem",
+              "attributes": {
+                "caption": "Ray Sponsible",
+                "subCaption": "Marketing - Cameroon",
+                "padding": 10.0,
+                "leading": {
+                  "type": "CircleAvatar",
                   "attributes": {
-                    "mainAxisAlignment": "center",
-                    "crossAxisAlignment": "center"
+                    "radius": 24.0
                   },
                   "children": [
                     {
-                      "type": "Container",
+                      "type": "Text",
                       "attributes": {
-                        "alignment": "Center",
-                        "padding": 10.0
+                        "caption": "RS",
+                        "bold": true,
+                        "size": 16.0
                       },
-                      "children": [
-                        {
-                          "type": "CircleAvatar",
-                          "attributes": {
-                            "radius": 32.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "RS",
-                                "bold": true,
-                                "size": 24.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    },
+                      "children": []
+                    }
+                  ]
+                }
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0,
+            "margin": 5.0,
+            "background": "#FFFFFF",
+            "border": 1.0,
+            "borderColor": "#e8e8e8",
+            "width": 1.7976931348623157E308
+          },
+          "children": [
+            {
+              "type": "Column",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "alignment": "Center",
+                    "padding": 10.0
+                  },
+                  "children": [
                     {
-                      "type": "Container",
+                      "type": "Icon",
                       "attributes": {
+                        "code": "e238",
+                        "size": 80.0,
+                        "color": "#8B0000"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "alignment": "Center"
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Your order has failed. failure",
+                        "color": "#8B0000",
+                        "bold": true,
                         "alignment": "Center"
                       },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Ray Sponsible",
-                            "color": "#1D7EDF",
-                            "bold": true,
-                            "size": 16.0,
-                            "alignment": "Center"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Container",
+                  "attributes": {},
+                  "children": [
                     {
-                      "type": "Container",
+                      "type": "Button",
                       "attributes": {
-                        "alignment": "Center",
-                        "padding": 10.0
+                        "caption": "OK",
+                        "padding": 15.0,
+                        "type": "Elevated"
                       },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Business Account",
-                            "color": "#95A5A6",
-                            "alignment": "Center"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "alignment": "Center"
-                      },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Short bio to descbribe my business",
-                            "alignment": "Center"
-                          },
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "Container",
-                      "attributes": {
-                        "padding": 10.0
-                      },
-                      "children": [
-                        {
-                          "type": "Wrap",
-                          "attributes": {
-                            "spacing": 10.0,
-                            "runSpacing": 10.0,
-                            "direction": "Horizontal"
-                          },
-                          "children": [
-                            {
-                              "type": "Container",
-                              "attributes": {},
-                              "children": [
-                                {
-                                  "type": "Row",
-                                  "attributes": {
-                                    "mainAxisSize": "min"
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Icon",
-                                      "attributes": {
-                                        "code": "e4c9",
-                                        "size": 16.0
-                                      },
-                                      "children": []
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "padding": 2.0
-                                      },
-                                      "children": []
-                                    },
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "Cameroon",
-                                        "color": "#95A5A6"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {},
-                              "children": [
-                                {
-                                  "type": "Row",
-                                  "attributes": {
-                                    "mainAxisSize": "min"
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Icon",
-                                      "attributes": {
-                                        "code": "ef0b",
-                                        "size": 16.0
-                                      },
-                                      "children": []
-                                    },
-                                    {
-                                      "type": "Container",
-                                      "attributes": {
-                                        "padding": 2.0
-                                      },
-                                      "children": []
-                                    },
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "Marketing",
-                                        "color": "#95A5A6"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777&tab=store"
+                      }
                     }
                   ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "Divider",
-          "attributes": {
-            "color": "#8c8c8c"
-          },
-          "children": []
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "alignment": "Center"
-          },
-          "children": [
-            {
-              "type": "Icon",
-              "attributes": {
-                "code": "e238",
-                "size": 80.0,
-                "color": "#8B0000"
-              },
-              "children": []
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "alignment": "Center",
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "Text",
-              "attributes": {
-                "caption": "Your order failed. failure",
-                "color": "#8B0000",
-                "bold": true,
-                "alignment": "Center"
-              },
-              "children": []
-            }
-          ]
-        },
-        {
-          "type": "Container",
-          "attributes": {
-            "padding": 10.0
-          },
-          "children": [
-            {
-              "type": "Button",
-              "attributes": {
-                "caption": "OK",
-                "padding": 15.0,
-                "type": "Elevated"
-              },
-              "children": [],
-              "action": {
-                "type": "Route",
-                "url": "route:/~"
-              }
             }
           ]
         }

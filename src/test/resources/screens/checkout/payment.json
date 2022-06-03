@@ -1,0 +1,167 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.payment",
+    "safe": false,
+    "backgroundColor": "#e8e8e8"
+  },
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Form",
+          "attributes": {},
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
+              "children": [
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Ray Sponsible",
+                    "subCaption": "Marketing - Cameroon",
+                    "padding": 10.0,
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "RS",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
+              "children": [
+                {
+                  "type": "Column",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "DropdownButton",
+                      "attributes": {
+                        "name": "paymentToken",
+                        "hint": "Choose account to pay from",
+                        "required": true
+                      },
+                      "children": [
+                        {
+                          "type": "DropdownMenuItem",
+                          "attributes": {
+                            "caption": "+237 990000000",
+                            "icon": "http://www.goole.com/images/mtn.png",
+                            "enabled": true,
+                            "value": "xxxx"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "DropdownMenuItem",
+                          "attributes": {
+                            "caption": "+237 990000001",
+                            "icon": "http://www.goole.com/images/orange.png",
+                            "enabled": true,
+                            "value": "yyy"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Center",
+                      "attributes": {},
+                      "children": [
+                        {
+                          "type": "MoneyText",
+                          "attributes": {
+                            "value": 25000.0,
+                            "color": "#1D7EDF",
+                            "currency": "XAF",
+                            "numberFormat": "#,###,##0"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "Input",
+                      "attributes": {
+                        "name": "submit",
+                        "hideText": false,
+                        "required": false,
+                        "caption": "Pay 25,000 CFA",
+                        "enabled": true,
+                        "readOnly": false,
+                        "type": "Submit",
+                        "minLength": 0
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Command",
+                        "url": "http://localhost:0/commands/authorize-order-payment?order-id=111"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Payment",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}
