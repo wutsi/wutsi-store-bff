@@ -236,6 +236,62 @@
                                   ]
                                 }
                               ]
+                            },
+                            {
+                              "type": "Row",
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "type": "Flexible",
+                                  "attributes": {
+                                    "flex": 2,
+                                    "fit": "Tight"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 5.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Payment Status:",
+                                            "bold": true,
+                                            "size": 10.0
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Flexible",
+                                  "attributes": {
+                                    "flex": 5,
+                                    "fit": "Tight"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 5.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Partially Paid"
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
                             }
                           ]
                         }
@@ -592,7 +648,8 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "-5,000 CFA",
+                                            "caption": "5,000 CFA",
+                                            "color": "#8B0000",
                                             "bold": true,
                                             "alignment": "Right"
                                           },

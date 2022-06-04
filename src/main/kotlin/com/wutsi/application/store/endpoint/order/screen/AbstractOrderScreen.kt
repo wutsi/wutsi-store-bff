@@ -16,6 +16,7 @@ import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
 import com.wutsi.ecommerce.order.entity.OrderStatus
+import com.wutsi.ecommerce.order.entity.PaymentStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.Shipping
 import com.wutsi.flutter.sdui.AppBar
@@ -171,6 +172,22 @@ abstract class AbstractOrderScreen(
                                     null
                             ),
                         ),
+
+                        if (togglesProvider.isOrderPaymentEnabled())
+                            toRow(
+                                getText("page.order.payment-status"),
+                                Text(
+                                    caption = getText("payment.status.${order.paymentStatus}"),
+                                    color = if (PaymentStatus.PAID.name == order.paymentStatus)
+                                        Theme.COLOR_SUCCESS
+                                    else if (PaymentStatus.PENDING.name == order.status)
+                                        Theme.COLOR_DANGER
+                                    else
+                                        null
+                                ),
+                            )
+                        else
+                            null,
                     ),
                 )
             ),
