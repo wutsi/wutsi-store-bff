@@ -85,10 +85,7 @@ class CheckoutSuccessScreen(
                                         caption = getText("page.checkout.success.button.submit"),
                                         action = Action(
                                             type = ActionType.Route,
-                                            url = if (error == null)
-                                                "route:/~"
-                                            else
-                                                urlBuilder.build(shellUrl, "profile?id=${merchant.id}&tab=store")
+                                            url = "route:/~"
                                         )
                                     )
                                 )
