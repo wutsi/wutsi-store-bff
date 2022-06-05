@@ -17,16 +17,19 @@ abstract class AbstractCommand : AbstractEndpoint() {
             if (code == ErrorURN.PRODUCT_AVAILABILITY_ERROR.urn) {
                 return getText("error.order.PRODUCT_AVAILABILITY_ERROR")
             } else if (code == com.wutsi.platform.payment.error.ErrorURN.TRANSACTION_FAILED.urn) {
-                try {
-                    val downstreamCode = response.error.downstreamCode
-                    return getText("error.payment.$downstreamCode")
-                } catch (ex: Exception) {
-                    return getText("error.payment")
-                }
+                val downstreamCode = response.error.downstreamCode
+                return getTransactionErrorText(downstreamCode)
             }
         } catch (ex: Exception) {
         }
 
         return getText("error.unexpected")
     }
+
+    protected fun getTransactionErrorText(errorCode: String?): String =
+        try {
+            getText("error.payment.$errorCode")
+        } catch (ex: Exception) {
+            getText("error.payment")
+        }
 }

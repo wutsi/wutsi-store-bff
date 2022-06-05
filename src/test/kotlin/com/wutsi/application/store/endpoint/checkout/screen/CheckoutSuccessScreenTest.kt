@@ -7,6 +7,7 @@ import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.application.store.endpoint.TrackingHttpRequestInterceptor
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
+import com.wutsi.ecommerce.order.entity.OrderStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,13 +22,9 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
 
-    private val order = createOrder()
-
     @BeforeEach
     override fun setUp() {
         super.setUp()
-
-        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
         rest.interceptors.add(
             TrackingHttpRequestInterceptor(
@@ -40,13 +37,28 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
 
     @Test
     fun success() {
-        val url = "http://localhost:$port/checkout/success?order-id=111"
+        val order = createOrder(status = OrderStatus.OPENED)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val url = "http://localhost:$port/checkout/success?order-id=${order.id}"
         assertEndpointEquals("/screens/checkout/success.json", url)
     }
 
     @Test
     fun error() {
-        val url = "http://localhost:$port/checkout/success?order-id=111&error=failure"
+        val order = createOrder(status = OrderStatus.CREATED)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val url = "http://localhost:$port/checkout/success?order-id=${order.id}&error=failure"
         assertEndpointEquals("/screens/checkout/error.json", url)
+    }
+
+    @Test
+    fun timeout() {
+        val order = createOrder(status = OrderStatus.CREATED)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val url = "http://localhost:$port/checkout/success?order-id=${order.id}"
+        assertEndpointEquals("/screens/checkout/timeout.json", url)
     }
 }

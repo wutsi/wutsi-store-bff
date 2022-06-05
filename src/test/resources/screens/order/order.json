@@ -201,7 +201,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "Order Status",
+                                            "caption": "Order Status:",
                                             "bold": true,
                                             "size": 10.0
                                           },

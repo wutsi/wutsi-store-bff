@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
@@ -18,8 +19,11 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.ErrorCode
+import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.CreateChargeRequest
 import com.wutsi.platform.payment.dto.CreateChargeResponse
+import com.wutsi.platform.payment.dto.GetTransactionResponse
+import com.wutsi.platform.payment.dto.Transaction
 import com.wutsi.platform.payment.error.ErrorURN
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -63,11 +67,11 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun index() {
+    fun success() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        doReturn(CreateChargeResponse("3039-f9009")).whenever(paymentApi).createCharge(any())
+        doReturn(CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)).whenever(paymentApi).createCharge(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
@@ -84,6 +88,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals("xxx", request.firstValue.paymentMethodToken)
         assertNull(request.firstValue.description)
 
+        verify(paymentApi, never()).getTransaction(any())
         verify(cartApi).emptyCart(order.merchantId)
         verify(orderApi).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
@@ -93,7 +98,95 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
     }
 
     @Test
-    fun paymentError() {
+    fun pending() {
+        // GIVEN
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val txId = "3039-f9009"
+        doReturn(CreateChargeResponse(txId, Status.PENDING.name)).whenever(paymentApi).createCharge(any())
+
+        val tx = Transaction(status = Status.PENDING.name)
+        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
+
+        // WHEN
+        val response = rest.postForEntity(url, null, Action::class.java)
+
+        // THEN
+        Thread.sleep(1000L * PayOrderCommand.DELAY_SECONDS * PayOrderCommand.MAX_RETRIES)
+
+        assertEquals(200, response.statusCodeValue)
+
+        verify(paymentApi).createCharge(any())
+        verify(paymentApi, times(PayOrderCommand.MAX_RETRIES)).getTransaction(txId)
+        verify(cartApi, never()).emptyCart(order.merchantId)
+        verify(orderApi, never()).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
+
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
+    }
+
+    @Test
+    fun pendingThenSuccess() {
+        // GIVEN
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val txId = "3039-f9009"
+        doReturn(CreateChargeResponse(txId, Status.PENDING.name)).whenever(paymentApi).createCharge(any())
+
+        val tx = Transaction(status = Status.SUCCESSFUL.name)
+        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
+
+        // WHEN
+        val response = rest.postForEntity(url, null, Action::class.java)
+
+        // THEN
+        Thread.sleep(1000L * PayOrderCommand.DELAY_SECONDS)
+
+        assertEquals(200, response.statusCodeValue)
+
+        verify(paymentApi).createCharge(any())
+        verify(paymentApi).getTransaction(txId)
+        verify(cartApi).emptyCart(order.merchantId)
+        verify(orderApi).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
+
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
+    }
+
+    @Test
+    fun pendingThenError() {
+        // GIVEN
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val txId = "3039-f9009"
+        doReturn(CreateChargeResponse(txId, Status.PENDING.name)).whenever(paymentApi).createCharge(any())
+
+        val tx = Transaction(status = Status.FAILED.name, errorCode = ErrorCode.NOT_ENOUGH_FUNDS.name)
+        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
+
+        // WHEN
+        val response = rest.postForEntity(url, null, Action::class.java)
+
+        // THEN
+        Thread.sleep(1000L * PayOrderCommand.DELAY_SECONDS)
+
+        assertEquals(200, response.statusCodeValue)
+
+        verify(paymentApi).createCharge(any())
+        verify(paymentApi).getTransaction(txId)
+        verify(cartApi, never()).emptyCart(any())
+        verify(orderApi, never()).changeStatus(any(), any())
+
+        val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
+    }
+
+    @Test
+    fun notEnoughFunds() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
@@ -106,13 +199,14 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
+        verify(paymentApi, never()).getTransaction(any())
+        verify(cartApi, never()).emptyCart(any())
+        verify(orderApi, never()).changeStatus(any(), any())
+
         val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
-
-        verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).changeStatus(any(), any())
     }
 
     @Test
@@ -129,12 +223,13 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
+        verify(paymentApi, never()).getTransaction(any())
+        verify(cartApi, never()).emptyCart(any())
+        verify(orderApi, never()).changeStatus(any(), any())
+
         val message = URLEncoder.encode(getText("error.payment"), "utf-8")
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
-
-        verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).changeStatus(any(), any())
     }
 }

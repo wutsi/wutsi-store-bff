@@ -73,9 +73,9 @@
                     {
                       "type": "Icon",
                       "attributes": {
-                        "code": "ef48",
+                        "code": "e6cb",
                         "size": 80.0,
-                        "color": "#4CAF50"
+                        "color": "#856404"
                       },
                       "children": []
                     }
@@ -90,8 +90,7 @@
                     {
                       "type": "Text",
                       "attributes": {
-                        "caption": "Your order has been completed with success",
-                        "color": "#4CAF50",
+                        "caption": "Your order is still being processed...",
                         "bold": true,
                         "alignment": "Center"
                       },
@@ -109,9 +108,22 @@
                 {
                   "type": "Button",
                   "attributes": {
-                    "caption": "OK",
+                    "caption": "Check Order Status",
                     "padding": 15.0,
                     "type": "Elevated"
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "route:/~"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "attributes": {
+                    "caption": "OK",
+                    "padding": 15.0,
+                    "type": "Text"
                   },
                   "children": [],
                   "action": {

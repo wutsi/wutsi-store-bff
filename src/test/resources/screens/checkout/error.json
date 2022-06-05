@@ -107,23 +107,17 @@
                   "children": []
                 },
                 {
-                  "type": "Container",
-                  "attributes": {},
-                  "children": [
-                    {
-                      "type": "Button",
-                      "attributes": {
-                        "caption": "OK",
-                        "padding": 15.0,
-                        "type": "Elevated"
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile?id=77777&tab=store"
-                      }
-                    }
-                  ]
+                  "type": "Button",
+                  "attributes": {
+                    "caption": "OK",
+                    "padding": 15.0,
+                    "type": "Elevated"
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "route:/~"
+                  }
                 }
               ]
             }
