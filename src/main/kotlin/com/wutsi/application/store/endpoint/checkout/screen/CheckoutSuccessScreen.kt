@@ -117,7 +117,7 @@ class CheckoutSuccessScreen(
             )
         else if (order.status == OrderStatus.CREATED.name)
             Icon(
-                code = Theme.ICON_WARNING,
+                code = Theme.ICON_PENDING,
                 size = ICON_SIZE,
                 color = Theme.COLOR_WARNING
             )
@@ -141,6 +141,7 @@ class CheckoutSuccessScreen(
                 caption = getText("page.checkout.success.message-timeout"),
                 bold = true,
                 alignment = TextAlignment.Center,
+                maxLines = 3
             )
         else
             Text(

@@ -73,7 +73,7 @@
                     {
                       "type": "Icon",
                       "attributes": {
-                        "code": "e6cb",
+                        "code": "f269",
                         "size": 80.0,
                         "color": "#856404"
                       },
@@ -90,9 +90,10 @@
                     {
                       "type": "Text",
                       "attributes": {
-                        "caption": "Your order is still being processed...",
+                        "caption": "Your order is being processed. You'll receive a notification once completed.",
                         "bold": true,
-                        "alignment": "Center"
+                        "alignment": "Center",
+                        "maxLines": 3
                       },
                       "children": []
                     }
