@@ -115,7 +115,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "route:/~"
+                    "url": "http://localhost:0/checkout/success?order-id=111"
                   }
                 },
                 {

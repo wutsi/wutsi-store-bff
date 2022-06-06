@@ -83,7 +83,7 @@ class CheckoutSuccessScreen(
                                         caption = getText("page.checkout.success.button.check-status"),
                                         action = Action(
                                             type = ActionType.Route,
-                                            url = "route:/~"
+                                            url = urlBuilder.build("/checkout/success?order-id=$orderId")
                                         )
                                     )
                                 else
