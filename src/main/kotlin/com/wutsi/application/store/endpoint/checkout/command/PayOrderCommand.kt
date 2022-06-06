@@ -27,7 +27,7 @@ class PayOrderCommand(
     private val logger: KVLogger,
 ) : AbstractCommand() {
     companion object {
-        const val DELAY_SECONDS = 10L
+        const val DELAY_SECONDS = 7L
         const val MAX_RETRIES = 3
         private val LOGGER = LoggerFactory.getLogger(PayOrderCommand::class.java)
     }
@@ -103,7 +103,7 @@ class PayOrderCommand(
             }
             return tx
         } finally {
-            logger.add("retries", retries)
+            logger.add("retries", retries - 1)
         }
     }
 
