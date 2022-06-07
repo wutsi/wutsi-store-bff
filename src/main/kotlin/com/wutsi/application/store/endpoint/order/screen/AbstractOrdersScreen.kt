@@ -13,6 +13,8 @@ import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.DropdownButton
+import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Flexible
 import com.wutsi.flutter.sdui.ListItem
 import com.wutsi.flutter.sdui.ListView
@@ -30,8 +32,10 @@ import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import java.text.DecimalFormat
 import java.time.format.DateTimeFormatter
+import kotlin.reflect.full.findAnnotation
 
 abstract class AbstractOrdersScreen(
     private val accountApi: WutsiAccountApi,
@@ -53,6 +57,14 @@ abstract class AbstractOrdersScreen(
     ): Widget {
         val tenant = tenantProvider.get()
         val orders = getOrders(request)
+        val statuses = mutableListOf("")
+        statuses.addAll(
+            getOrderStatusList()
+                .map { it.name to getText("order.status.${it.name}") }
+                .sortedBy { it.second }
+                .toMap()
+                .map { it.key }
+        )
 
         return Screen(
             id = getPageId(),
@@ -66,6 +78,27 @@ abstract class AbstractOrdersScreen(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 children = listOfNotNull(
+                    Container(
+                        padding = 10.0,
+                        child = DropdownButton(
+                            name = "status",
+                            value = request?.status ?: "",
+                            children = statuses.map {
+                                DropdownMenuItem(
+                                    value = it,
+                                    caption = if (it.isEmpty())
+                                        getText("page.orders.all-orders")
+                                    else
+                                        getText("order.status.${it}")
+                                )
+                            },
+                            action = gotoUrl(
+                                url = urlBuilder.build(getUrl()),
+                                replacement = true
+                            ),
+                        )
+                    ),
+
                     Center(
                         child = Container(
                             padding = 10.0,
@@ -81,6 +114,7 @@ abstract class AbstractOrdersScreen(
                         )
                     ),
                     Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+
                     if (orders.isEmpty())
                         null
                     else
@@ -90,6 +124,9 @@ abstract class AbstractOrdersScreen(
             bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
+
+    private fun getUrl(): String =
+        this::class.findAnnotation<RequestMapping>()!!.value[0]
 
     private fun toListView(orders: List<OrderSummary>, tenant: Tenant): WidgetAware {
         val accountIds = orders.flatMap { listOf(it.merchantId, it.accountId) }.toSet()
@@ -138,7 +175,8 @@ abstract class AbstractOrdersScreen(
                 ),
             ),
             caption = getText("page.order.number", arrayOf(order.id.takeLast(4))),
-            subCaption = getText("order.status.${order.status}"),
+            subCaption = getText("order.status.${order.status}") +
+                if (togglesProvider.isOrderPaymentEnabled()) " - " + getText("payment.status.${order.paymentStatus}") else "",
             action = getAction(order),
         )
     }

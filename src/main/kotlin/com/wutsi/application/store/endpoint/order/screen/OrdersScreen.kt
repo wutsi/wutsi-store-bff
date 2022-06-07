@@ -24,7 +24,8 @@ class OrdersScreen(
     override fun getOrders(request: FilterOrderRequest?) = orderApi.searchOrders(
         request = SearchOrderRequest(
             merchantId = securityContext.currentAccountId(),
-            status = getOrderStatusList().map { it.name },
+            status = request?.status?.let { listOf(it) }
+                ?: getOrderStatusList().map { it.name },
             limit = MAX_ORDERS,
         )
     ).orders

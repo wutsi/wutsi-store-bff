@@ -13,6 +13,91 @@
       },
       "children": [
         {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "DropdownButton",
+              "attributes": {
+                "name": "status",
+                "value": ""
+              },
+              "children": [
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "All Orders",
+                    "enabled": true,
+                    "value": ""
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Cancelled",
+                    "enabled": true,
+                    "value": "CANCELLED"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Completed",
+                    "enabled": true,
+                    "value": "DONE"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Delivered",
+                    "enabled": true,
+                    "value": "DELIVERED"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "In Transit",
+                    "enabled": true,
+                    "value": "IN_TRANSIT"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Opened",
+                    "enabled": true,
+                    "value": "OPENED"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "DropdownMenuItem",
+                  "attributes": {
+                    "caption": "Ready for Pickup",
+                    "enabled": true,
+                    "value": "READY_FOR_PICKUP"
+                  },
+                  "children": []
+                }
+              ],
+              "action": {
+                "type": "Route",
+                "url": "http://localhost:0/me/orders",
+                "replacement": true
+              }
+            }
+          ]
+        },
+        {
           "type": "Center",
           "attributes": {},
           "children": [
