@@ -99,10 +99,12 @@ class CartScreen(
         val cartItems = products.map { toCartItemWidget(cart, it, tenant) }
             .filterNotNull()
         if (cartItems.isEmpty())
-            return Container(
-                padding = 10.0,
-                alignment = Alignment.Center,
-                child = Text(getText("page.cart.empty")),
+            return toSectionWidget(
+                Container(
+                    padding = 10.0,
+                    alignment = Alignment.Center,
+                    child = Text(getText("page.cart.empty")),
+                )
             )
 
         children.add(

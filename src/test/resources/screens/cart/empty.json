@@ -58,16 +58,29 @@
             {
               "type": "Container",
               "attributes": {
-                "alignment": "Center",
-                "padding": 10.0
+                "padding": 10.0,
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
               },
               "children": [
                 {
-                  "type": "Text",
+                  "type": "Container",
                   "attributes": {
-                    "caption": "Your Cart is empty"
+                    "alignment": "Center",
+                    "padding": 10.0
                   },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "Your Cart is empty"
+                      },
+                      "children": []
+                    }
+                  ]
                 }
               ]
             }
