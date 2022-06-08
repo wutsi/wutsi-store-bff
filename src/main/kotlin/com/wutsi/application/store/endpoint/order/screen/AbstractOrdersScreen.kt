@@ -89,7 +89,7 @@ abstract class AbstractOrdersScreen(
                                     caption = if (it.isEmpty())
                                         getText("page.orders.all-orders")
                                     else
-                                        getText("order.status.${it}")
+                                        getText("order.status.$it")
                                 )
                             },
                             action = gotoUrl(
