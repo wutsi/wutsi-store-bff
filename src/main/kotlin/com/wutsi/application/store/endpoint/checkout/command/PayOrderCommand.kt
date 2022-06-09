@@ -27,7 +27,7 @@ class PayOrderCommand(
     private val logger: KVLogger,
 ) : AbstractCommand() {
     companion object {
-        const val DELAY_SECONDS = 15L
+        const val DELAY_SECONDS = 9L
         const val MAX_RETRIES = 3
         private val LOGGER = LoggerFactory.getLogger(PayOrderCommand::class.java)
     }
