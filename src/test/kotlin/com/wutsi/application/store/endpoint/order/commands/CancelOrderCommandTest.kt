@@ -18,7 +18,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 
 internal class CancelOrderCommandTest : AbstractEndpointTest() {
     @LocalServerPort

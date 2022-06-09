@@ -10,7 +10,9 @@ import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import com.wutsi.platform.account.dto.SearchAccountResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 
 internal class MarketplaceCategoryScreenTest : AbstractEndpointTest() {
     @LocalServerPort

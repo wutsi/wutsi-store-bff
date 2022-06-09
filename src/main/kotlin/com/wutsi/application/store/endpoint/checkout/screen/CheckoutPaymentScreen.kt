@@ -6,6 +6,7 @@ import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.application.store.service.IdempotencyKeyGenerator
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
@@ -36,6 +37,7 @@ class CheckoutPaymentScreen(
     private val orderApi: WutsiOrderApi,
     private val accountApi: WutsiAccountApi,
     private val tenantProvider: TenantProvider,
+    private val idempotencyKeyGenerator: IdempotencyKeyGenerator
 ) : AbstractQuery() {
 
     @PostMapping
@@ -45,6 +47,7 @@ class CheckoutPaymentScreen(
         val merchant = accountApi.getAccount(order.merchantId).account
         val paymentMethods = accountApi.listPaymentMethods(securityContext.currentAccountId()).paymentMethods
         val amountText = DecimalFormat(tenant.monetaryFormat).format(order.totalPrice)
+        val idempotencyKey = idempotencyKeyGenerator.generate()
 
         // Result
         return Screen(
@@ -98,9 +101,8 @@ class CheckoutPaymentScreen(
                                         name = "submit",
                                         caption = getText("page.checkout.payment.button.submit", arrayOf(amountText)),
                                         action = executeCommand(
-                                            urlBuilder.build("commands/authorize-order-payment?order-id=$orderId")
+                                            urlBuilder.build("commands/authorize-order-payment?order-id=$orderId&idempotency-key=$idempotencyKey")
                                         )
-
                                     )
                                 )
                             )

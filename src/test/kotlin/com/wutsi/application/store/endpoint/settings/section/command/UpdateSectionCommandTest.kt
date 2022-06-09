@@ -13,7 +13,9 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 
 internal class UpdateSectionCommandTest : AbstractEndpointTest() {
     @LocalServerPort

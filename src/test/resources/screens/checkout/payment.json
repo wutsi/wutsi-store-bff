@@ -142,7 +142,7 @@
                       "children": [],
                       "action": {
                         "type": "Command",
-                        "url": "http://localhost:0/commands/authorize-order-payment?order-id=111"
+                        "url": "http://localhost:0/commands/authorize-order-payment?order-id=111&idempotency-key=123"
                       }
                     }
                   ]

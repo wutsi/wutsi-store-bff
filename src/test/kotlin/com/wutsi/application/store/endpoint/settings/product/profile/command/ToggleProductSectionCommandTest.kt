@@ -6,7 +6,9 @@ import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.catalog.dto.UpdateProductAttributeRequest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 import kotlin.test.assertEquals
 
 internal class ToggleProductSectionCommandTest : AbstractEndpointTest() {

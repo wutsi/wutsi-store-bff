@@ -11,7 +11,9 @@ import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.catalog.dto.SearchCategoryResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 
 internal abstract class AbstractSettingsProductAttributeScreenTest : AbstractEndpointTest() {
     @LocalServerPort

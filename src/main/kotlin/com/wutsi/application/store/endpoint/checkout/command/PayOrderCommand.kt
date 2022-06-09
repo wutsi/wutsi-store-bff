@@ -2,9 +2,7 @@ package com.wutsi.application.store.endpoint.checkout.command
 
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.ecommerce.order.WutsiOrderApi
-import com.wutsi.ecommerce.order.dto.ChangeStatusRequest
 import com.wutsi.ecommerce.order.dto.Order
-import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.core.logging.KVLogger
 import com.wutsi.platform.payment.WutsiPaymentApi
@@ -35,15 +33,16 @@ class PayOrderCommand(
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
-        @RequestParam(name = "payment-token") paymentToken: String
+        @RequestParam(name = "payment-token") paymentToken: String,
+        @RequestParam(name = "idempotency-key") idempotencyKey: String
     ): Action {
         try {
             // Pay
             val order = orderApi.getOrder(orderId).order
-            val response = charge(order, paymentToken)
-            var status: String = response.status
+            val response = charge(order, paymentToken, idempotencyKey)
             logger.add("transaction_id", response.id)
 
+            var status: String = response.status
             if (response.status == Status.PENDING.name) {
                 val tx = waitForCompletion(response.id)
                 logger.add("transaction_status", tx.status)
@@ -58,14 +57,7 @@ class PayOrderCommand(
                 logger.add("transaction_status", response.status)
             }
 
-            if (status == Status.SUCCESSFUL.name) {
-                // Open the order
-                orderApi.changeStatus(orderId, ChangeStatusRequest(status = OrderStatus.OPENED.name))
-
-                // Empty the cart
-                emptyCart(order)
-            }
-
+            logger.add("status", status)
             return gotoUrl(
                 url = urlBuilder.build("/checkout/success?order-id=$orderId")
             )
@@ -78,14 +70,15 @@ class PayOrderCommand(
         }
     }
 
-    private fun charge(order: Order, paymentToken: String): CreateChargeResponse =
+    private fun charge(order: Order, paymentToken: String, idempotencyKey: String): CreateChargeResponse =
         paymentApi.createCharge(
             request = CreateChargeRequest(
                 paymentMethodToken = paymentToken,
                 recipientId = order.merchantId,
                 amount = order.totalPrice,
                 currency = order.currency,
-                orderId = order.id
+                orderId = order.id,
+                idempotencyKey = idempotencyKey
             )
         )
 

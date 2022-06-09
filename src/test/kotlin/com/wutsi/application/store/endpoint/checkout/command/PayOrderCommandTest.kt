@@ -9,9 +9,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
-import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
-import com.wutsi.ecommerce.order.dto.ChangeStatusRequest
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.entity.OrderStatus
@@ -29,7 +27,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 import java.net.URLEncoder
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -45,9 +43,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var paymentApi: WutsiPaymentApi
 
-    @MockBean
-    private lateinit var cartApi: WutsiCartApi
-
     private lateinit var url: String
 
     private val order = Order(
@@ -58,12 +53,14 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         status = OrderStatus.CREATED.name,
         reservationId = 777L,
     )
+    private val idempotencyKey = "567"
 
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/commands/pay-order?order-id=111&payment-token=xxx"
+        url =
+            "http://localhost:$port/commands/pay-order?order-id=${order.id}&payment-token=xxx&idempotency-key=$idempotencyKey"
     }
 
     @Test
@@ -86,11 +83,10 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(order.merchantId, request.firstValue.recipientId)
         assertEquals(order.totalPrice, request.firstValue.amount)
         assertEquals("xxx", request.firstValue.paymentMethodToken)
+        assertEquals(idempotencyKey, request.firstValue.idempotencyKey)
         assertNull(request.firstValue.description)
 
         verify(paymentApi, never()).getTransaction(any())
-        verify(cartApi).emptyCart(order.merchantId)
-        verify(orderApi).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -118,8 +114,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi).createCharge(any())
         verify(paymentApi, times(PayOrderCommand.MAX_RETRIES)).getTransaction(txId)
-        verify(cartApi, never()).emptyCart(order.merchantId)
-        verify(orderApi, never()).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -147,8 +141,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi).createCharge(any())
         verify(paymentApi).getTransaction(txId)
-        verify(cartApi).emptyCart(order.merchantId)
-        verify(orderApi).changeStatus("111", ChangeStatusRequest(status = OrderStatus.OPENED.name))
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -176,8 +168,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi).createCharge(any())
         verify(paymentApi).getTransaction(txId)
-        verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).changeStatus(any(), any())
 
         val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
         val action = response.body!!
@@ -200,8 +190,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(200, response.statusCodeValue)
 
         verify(paymentApi, never()).getTransaction(any())
-        verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).changeStatus(any(), any())
 
         val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
         val action = response.body!!
@@ -224,8 +212,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(200, response.statusCodeValue)
 
         verify(paymentApi, never()).getTransaction(any())
-        verify(cartApi, never()).emptyCart(any())
-        verify(orderApi, never()).changeStatus(any(), any())
 
         val message = URLEncoder.encode(getText("error.payment"), "utf-8")
         val action = response.body!!

@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.ecommerce.catalog.dto.GetSectionResponse
 import org.junit.jupiter.api.Test
-import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 internal class SettingsSectionEditScreenTest : AbstractEndpointTest() {
     @LocalServerPort

@@ -9,7 +9,9 @@ import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 
 internal class OrderPickupScreenTest : AbstractEndpointTest() {
     @LocalServerPort

@@ -13,7 +13,9 @@ import com.wutsi.platform.core.storage.StorageService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 import java.net.URL
 
 internal class UploadPictureCommandTest : AbstractEndpointTest() {

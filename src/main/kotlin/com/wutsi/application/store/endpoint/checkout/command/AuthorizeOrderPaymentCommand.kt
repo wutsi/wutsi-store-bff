@@ -22,6 +22,7 @@ class AuthorizeOrderPaymentCommand(
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
+        @RequestParam(name = "idempotency-key") idempotencyKey: String,
         @RequestBody request: AuthorizeOrderPaymentRequest,
     ): Action {
         val me = accountApi.getAccount(securityContext.currentAccountId()).account
@@ -34,7 +35,7 @@ class AuthorizeOrderPaymentCommand(
             "&return-to-route=false" +
             "&return-url=" + encodeURLParam(
             urlBuilder.build(
-                "commands/pay-order?order-id=$orderId&payment-token=${request.paymentToken}"
+                "commands/pay-order?order-id=$orderId&payment-token=${request.paymentToken}&idempotency-key=$idempotencyKey"
             )
         )
         return gotoUrl(urlBuilder.build(loginUrl, path))

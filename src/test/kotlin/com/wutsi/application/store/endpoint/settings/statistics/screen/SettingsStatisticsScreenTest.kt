@@ -11,7 +11,9 @@ import com.wutsi.ecommerce.catalog.dto.Metrics
 import com.wutsi.ecommerce.catalog.dto.SearchMerchantResponse
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.web.server.LocalServerPort
+import import
+
+org.springframework.boot.test.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class SettingsStatisticsScreenTest : AbstractEndpointTest() {

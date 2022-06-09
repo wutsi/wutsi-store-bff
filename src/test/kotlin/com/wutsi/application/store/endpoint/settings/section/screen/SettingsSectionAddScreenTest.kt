@@ -2,7 +2,7 @@ package com.wutsi.application.store.endpoint.settings.section.screen
 
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import org.junit.jupiter.api.Test
-import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 internal class SettingsSectionAddScreenTest : AbstractEndpointTest() {
     @LocalServerPort

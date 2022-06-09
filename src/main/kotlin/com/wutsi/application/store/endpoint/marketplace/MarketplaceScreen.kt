@@ -29,7 +29,6 @@ import com.wutsi.platform.account.dto.Category
 import com.wutsi.platform.account.dto.SearchAccountRequest
 import com.wutsi.platform.account.entity.AccountSort
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -39,8 +38,6 @@ import org.springframework.web.bind.annotation.RestController
 class MarketplaceScreen(
     private val catalogApi: WutsiCatalogApi,
     private val accountApi: WutsiAccountApi,
-
-    @Value("\${wutsi.application.shell-url}") shellUrl: String,
 ) : AbstractQuery() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(MarketplaceScreen::class.java)
@@ -164,7 +161,7 @@ class MarketplaceScreen(
         val storeMap = stores.associateBy { it.id }.toMutableMap()
         val children = mutableListOf<WidgetAware>()
         carts.forEach {
-            val cart = toCartWidget(it, storeMap, categoryMap)
+            val cart = toCartWidget(it.merchantId, storeMap, categoryMap)
             if (cart != null) {
                 children.add(Divider(height = 1.0, color = Theme.COLOR_DIVIDER))
                 children.add(cart)
@@ -193,12 +190,12 @@ class MarketplaceScreen(
     }
 
     private fun toCartWidget(
-        cart: CartSummary,
+        merchantId: Long,
         storeMap: MutableMap<Long, AccountSummary>,
         categoryMap: Map<Long, Category>
     ): WidgetAware? {
         try {
-            val store = getStore(cart, storeMap) ?: return null
+            val store = getStore(merchantId, storeMap) ?: return null
             val cart = cartApi.getCart(store.id).cart
             val products = catalogApi.searchProducts(
                 request = SearchProductRequest(
@@ -262,10 +259,10 @@ class MarketplaceScreen(
             emptyList()
         }
 
-    private fun getStore(cart: CartSummary, storeMap: MutableMap<Long, AccountSummary>): AccountSummary? {
-        val merchant = storeMap[cart.merchantId]
+    private fun getStore(merchantId: Long, storeMap: MutableMap<Long, AccountSummary>): AccountSummary? {
+        val merchant = storeMap[merchantId]
         return merchant
-            ?: loadStore(cart.merchantId, storeMap)
+            ?: loadStore(merchantId, storeMap)
     }
 
     private fun loadStore(merchantId: Long, merchantMap: MutableMap<Long, AccountSummary>): AccountSummary? {
