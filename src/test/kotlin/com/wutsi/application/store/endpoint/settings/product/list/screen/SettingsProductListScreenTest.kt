@@ -12,9 +12,7 @@ import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class SettingsProductListScreenTest : AbstractEndpointTest() {

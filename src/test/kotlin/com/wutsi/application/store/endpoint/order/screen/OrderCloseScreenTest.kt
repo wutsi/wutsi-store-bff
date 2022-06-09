@@ -11,9 +11,7 @@ import com.wutsi.ecommerce.shipping.dto.GetShippingResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 internal class OrderCloseScreenTest : AbstractEndpointTest() {
     @LocalServerPort

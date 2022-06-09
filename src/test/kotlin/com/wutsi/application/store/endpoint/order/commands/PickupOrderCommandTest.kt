@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 import kotlin.test.assertNull
 
 internal class PickupOrderCommandTest : AbstractEndpointTest() {

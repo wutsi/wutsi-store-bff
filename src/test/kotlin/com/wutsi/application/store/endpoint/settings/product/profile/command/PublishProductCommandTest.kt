@@ -12,9 +12,7 @@ import com.wutsi.flutter.sdui.enums.ActionType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 internal class PublishProductCommandTest : AbstractEndpointTest() {
     @LocalServerPort

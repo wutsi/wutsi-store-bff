@@ -9,9 +9,7 @@ import com.wutsi.ecommerce.catalog.dto.GetProductResponse
 import com.wutsi.ecommerce.catalog.dto.ListSectionResponse
 import com.wutsi.ecommerce.catalog.dto.SectionSummary
 import org.junit.jupiter.api.Test
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 internal class SettingsProductSectionsScreenTest : AbstractEndpointTest() {
     @LocalServerPort

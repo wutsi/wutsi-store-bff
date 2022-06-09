@@ -2,9 +2,7 @@ package com.wutsi.application.store.endpoint.order.screen
 
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import org.junit.jupiter.api.Test
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 
 internal class OrderCancelScreenTest : AbstractEndpointTest() {
     @LocalServerPort

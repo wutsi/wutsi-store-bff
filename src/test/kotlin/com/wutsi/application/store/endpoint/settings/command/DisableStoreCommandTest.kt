@@ -7,9 +7,7 @@ import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.account.dto.UpdateAccountAttributeRequest
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import import
-
-org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 import kotlin.test.assertEquals
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
