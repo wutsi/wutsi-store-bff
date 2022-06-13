@@ -275,9 +275,10 @@ abstract class AbstractEndpointTest {
         withThumbnail: Boolean = true,
         type: ProductType = ProductType.PHYSICAL,
         accountId: Long = ACCOUNT_ID,
-        quantity: Int = 30
+        quantity: Int = 30,
+        id: Long = 1,
     ) = Product(
-        id = 1,
+        id = id,
         title = "Sample product",
         summary = "Summary of product",
         description = "This is a long description of the product",

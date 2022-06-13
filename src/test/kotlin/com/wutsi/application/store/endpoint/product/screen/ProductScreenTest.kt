@@ -97,8 +97,8 @@ internal class ProductScreenTest : AbstractEndpointTest() {
 
         val cart = Cart(
             products = listOf(
-                Product(productId = 1L, quantity = 1),
-                Product(productId = 2L, quantity = 3)
+                Product(productId = 11L, quantity = 1),
+                Product(productId = 20L, quantity = 3)
             )
         )
         doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
@@ -111,10 +111,29 @@ internal class ProductScreenTest : AbstractEndpointTest() {
     }
 
     @Test
+    fun productWithProductInCart() {
+        doReturn(true).whenever(togglesProvider).isCartEnabled()
+
+        val product = createProduct(true)
+        val cart = Cart(
+            products = listOf(
+                Product(productId = product.id, quantity = 5),
+                Product(productId = 20L, quantity = 3)
+            )
+        )
+        doReturn(GetCartResponse(cart)).whenever(cartApi).getCart(any())
+
+        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
+
+        assertEndpointEquals("/screens/product/product-in-cart.json", url)
+        assertTrackPushed(product)
+    }
+
+    @Test
     fun productNoStock() {
         doReturn(SearchRateResponse()).whenever(shippingApi).searchRate(any())
 
-        val product = createProduct(true, quantity = 0)
+        val product = createProduct(withThumbnail = true, quantity = 0)
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
         assertEndpointEquals("/screens/product/product-no-stock.json", url)

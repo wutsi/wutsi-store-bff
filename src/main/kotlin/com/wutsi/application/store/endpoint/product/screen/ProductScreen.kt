@@ -14,6 +14,7 @@ import com.wutsi.application.shared.ui.ProductCardType
 import com.wutsi.application.shared.ui.ProductGridView
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
+import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.Product
 import com.wutsi.ecommerce.catalog.dto.ProductSummary
@@ -146,7 +147,7 @@ class ProductScreen(
                         toAvailabilityWidget(product),
 
                         // Cart
-                        toCartWidget(merchant, product),
+                        toCartWidget(merchant, product, cart),
                     )
                 )
             )
@@ -222,8 +223,24 @@ class ProductScreen(
         )
     }
 
-    private fun toCartWidget(merchant: Account, product: Product): WidgetAware? =
-        if (product.quantity > 0 && togglesProvider.isCartEnabled())
+    private fun toCartWidget(merchant: Account, product: Product, cart: Cart?): WidgetAware? {
+        if (cart == null)
+            return null
+
+        val item = cart.products.find { it.productId == product.id }
+        return if (item != null)
+            Row(
+                children = listOf(
+                    Icon(
+                        code = Theme.ICON_CART,
+                        color = Theme.COLOR_PRIMARY,
+                        size = 16.0
+                    ),
+                    Container(padding = 5.0),
+                    Text(getText("page.product.in-cart", arrayOf(item.quantity.toString())))
+                )
+            )
+        else if (product.quantity > 0)
             Button(
                 padding = 10.0,
                 caption = getText("page.product.button.add-to-cart"),
@@ -233,6 +250,7 @@ class ProductScreen(
             )
         else
             null
+    }
 
     private fun toAvailabilityWidget(product: Product): WidgetAware =
         Row(
