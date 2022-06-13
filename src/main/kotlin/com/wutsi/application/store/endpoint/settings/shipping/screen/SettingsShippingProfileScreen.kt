@@ -74,13 +74,25 @@ class SettingsShippingProfileScreen(
                                     )
                                 ),
 
-                                if (!isFree(shipping))
+                                if (isPriceRequired(shipping))
                                     ListItem(
                                         caption = toCaption("rate", shipping),
                                         subCaption = formatRate(shipping.rate, tenant),
                                         trailing = Icon(Theme.ICON_EDIT),
                                         action = gotoUrl(
                                             urlBuilder.build("/settings/store/shipping/attribute/rate?id=$id")
+                                        )
+                                    )
+                                else
+                                    null,
+
+                                if (isCityRequired(shipping))
+                                    ListItem(
+                                        caption = toCaption("city-id", shipping),
+                                        subCaption = formatRate(shipping.rate, tenant),
+                                        trailing = Icon(Theme.ICON_EDIT),
+                                        action = gotoUrl(
+                                            urlBuilder.build("/settings/store/shipping/attribute/city-id?id=$id")
                                         )
                                     )
                                 else
@@ -102,11 +114,13 @@ class SettingsShippingProfileScreen(
         ).toWidget()
     }
 
-    private fun isFree(shipping: Shipping): Boolean =
-        shipping.type == ShippingType.LOCAL_PICKUP.name ||
-            shipping.type == ShippingType.LOCAL_DELIVERY.name ||
-            shipping.type == ShippingType.EMAIL_DELIVERY.name ||
-            shipping.type == ShippingType.IN_STORE_PICKUP.name
+    private fun isPriceRequired(shipping: Shipping): Boolean =
+        shipping.type == ShippingType.LOCAL_DELIVERY.name ||
+            shipping.type == ShippingType.INTERNATIONAL_SHIPPING.name ||
+            shipping.type == ShippingType.LOCAL_PICKUP.name
+
+    private fun isCityRequired(shipping: Shipping): Boolean =
+        shipping.type == ShippingType.LOCAL_DELIVERY.name
 
     private fun toCaption(name: String, shipping: Shipping): String =
         try {

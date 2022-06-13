@@ -93,6 +93,40 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
     }
 
+
+    @Test
+    fun successWithWallet() {
+        // GIVEN
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        doReturn(CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)).whenever(paymentApi).createCharge(any())
+
+        // WHEN
+        url =
+            "http://localhost:$port/commands/pay-order?order-id=${order.id}&payment-token=WALLET&idempotency-key=$idempotencyKey"
+        val response = rest.postForEntity(url, null, Action::class.java)
+
+        // THEN
+        assertEquals(200, response.statusCodeValue)
+
+        val request = argumentCaptor<CreateChargeRequest>()
+        verify(paymentApi).createCharge(request.capture())
+        assertEquals(order.id, request.firstValue.orderId)
+        assertEquals(order.currency, request.firstValue.currency)
+        assertEquals(order.merchantId, request.firstValue.recipientId)
+        assertEquals(order.totalPrice, request.firstValue.amount)
+        assertNull(request.firstValue.paymentMethodToken)
+        assertEquals(idempotencyKey, request.firstValue.idempotencyKey)
+        assertNull(request.firstValue.description)
+
+        verify(paymentApi, never()).getTransaction(any())
+
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
+    }
+
+
     @Test
     fun pending() {
         // GIVEN

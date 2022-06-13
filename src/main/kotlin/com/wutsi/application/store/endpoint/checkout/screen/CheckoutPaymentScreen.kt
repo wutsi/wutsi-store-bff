@@ -77,14 +77,7 @@ class CheckoutPaymentScreen(
                                         name = "paymentToken",
                                         required = true,
                                         hint = getText("page.checkout.payment.choose-account.hint"),
-                                        children = paymentMethods.map {
-                                            DropdownMenuItem(
-                                                caption = PhoneUtil.format(it.phone?.number, it.phone?.country)
-                                                    ?: it.maskedNumber,
-                                                value = it.token,
-                                                icon = getMobileCarrier(it, tenant)?.let { tenantProvider.logo(it) }
-                                            )
-                                        }
+                                        children = toPaymentMethodWidgetList(paymentMethods, tenant)
                                     ),
                                     Container(padding = 10.0),
                                     Center(
@@ -111,6 +104,31 @@ class CheckoutPaymentScreen(
                 )
             ),
         ).toWidget()
+    }
+
+    private fun toPaymentMethodWidgetList(
+        paymentMethods: List<PaymentMethodSummary>,
+        tenant: Tenant
+    ): List<DropdownMenuItem> {
+        val items = mutableListOf<DropdownMenuItem>()
+        items.add(
+            DropdownMenuItem(
+                caption = getText("page.checkout.payment.dropdown-item-wallet"),
+                value = "WALLET",
+                icon = tenantProvider.logo(tenant)
+            )
+        )
+        items.addAll(
+            paymentMethods.map {
+                DropdownMenuItem(
+                    caption = PhoneUtil.format(it.phone?.number, it.phone?.country)
+                        ?: it.maskedNumber,
+                    value = it.token,
+                    icon = getMobileCarrier(it, tenant)?.let { tenantProvider.logo(it) }
+                )
+            }
+        )
+        return items
     }
 
     protected fun getMobileCarrier(paymentMethod: PaymentMethodSummary, tenant: Tenant): MobileCarrier? =

@@ -78,6 +78,16 @@
                         {
                           "type": "DropdownMenuItem",
                           "attributes": {
+                            "caption": "Your Wallet",
+                            "icon": "http://www.goole.com/images/1.png",
+                            "enabled": true,
+                            "value": "WALLET"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "DropdownMenuItem",
+                          "attributes": {
                             "caption": "+237 990000000",
                             "icon": "http://www.goole.com/images/mtn.png",
                             "enabled": true,

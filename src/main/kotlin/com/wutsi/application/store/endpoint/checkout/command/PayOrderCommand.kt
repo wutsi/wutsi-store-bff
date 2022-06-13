@@ -73,7 +73,7 @@ class PayOrderCommand(
     private fun charge(order: Order, paymentToken: String, idempotencyKey: String): CreateChargeResponse =
         paymentApi.createCharge(
             request = CreateChargeRequest(
-                paymentMethodToken = paymentToken,
+                paymentMethodToken = if (paymentToken == "WALLET") null else paymentToken,
                 recipientId = order.merchantId,
                 amount = order.totalPrice,
                 currency = order.currency,
@@ -97,14 +97,6 @@ class PayOrderCommand(
             return tx
         } finally {
             logger.add("retries", retries - 1)
-        }
-    }
-
-    private fun emptyCart(order: Order) {
-        try {
-            cartApi.emptyCart(order.merchantId)
-        } catch (ex: Exception) {
-            LOGGER.warn("Unable to empty the cart")
         }
     }
 }
