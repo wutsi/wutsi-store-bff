@@ -26,8 +26,6 @@ internal class OrdersScreenTest : AbstractEndpointTest() {
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
 
-    private lateinit var url: String
-
     private val orders = listOf(
         OrderSummary(
             id = "111",
@@ -64,14 +62,19 @@ internal class OrdersScreenTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/orders"
+        doReturn(SearchOrderResponse(orders)).whenever(orderApi).searchOrders(any())
+        doReturn(SearchAccountResponse(customers)).whenever(accountApi).searchAccount(any())
     }
 
     @Test
-    fun index() {
-        doReturn(SearchOrderResponse(orders)).whenever(orderApi).searchOrders(any())
-        doReturn(SearchAccountResponse(customers)).whenever(accountApi).searchAccount(any())
+    fun merchant() {
+        val url = "http://localhost:$port/orders?merchant=true"
+        assertEndpointEquals("/screens/orders/merchant.json", url)
+    }
 
-        assertEndpointEquals("/screens/order/orders.json", url)
+    @Test
+    fun customer() {
+        val url = "http://localhost:$port/orders?merchant=false"
+        assertEndpointEquals("/screens/orders/customer.json", url)
     }
 }

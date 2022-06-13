@@ -13,20 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/commands/cancel-order")
-class CancelOrderCommand(
+@RequestMapping("/commands/start-order-delivery")
+class StartOrderDeliveryCommand(
     private val orderApi: WutsiOrderApi,
 ) : AbstractCommand() {
     @PostMapping
     fun index(
         @RequestParam id: String,
-        @RequestBody request: ChangeOrderStatusRequest
+        @RequestBody request: ChangeOrderStatusRequest,
     ): Action {
         orderApi.changeStatus(
             id,
             ChangeStatusRequest(
-                status = OrderStatus.CANCELLED.name,
-                reason = request.reason,
+                status = OrderStatus.IN_TRANSIT.name,
                 comment = request.comment
             )
         )

@@ -11,6 +11,6 @@ internal class OrderCancelScreenTest : AbstractEndpointTest() {
     @Test
     fun index() {
         val url = "http://localhost:$port/order/cancel?id=30293209ad00"
-        assertEndpointEquals("/screens/order/order-cancel.json", url)
+        assertEndpointEquals("/screens/order/status/cancel.json", url)
     }
 }

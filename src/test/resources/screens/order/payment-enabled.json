@@ -1,15 +1,15 @@
 {
   "type": "DefaultTabController",
   "attributes": {
-    "length": 3
+    "length": 2
   },
   "children": [
     {
       "type": "Screen",
       "attributes": {
-        "id": "page.my-order",
+        "id": "page.order",
         "safe": false,
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#e8e8e8"
       },
       "children": [
         {
@@ -25,93 +25,89 @@
                   "attributes": {},
                   "children": [
                     {
-                      "type": "Center",
-                      "attributes": {},
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0,
+                        "margin": 5.0,
+                        "background": "#FFFFFF",
+                        "border": 1.0,
+                        "borderColor": "#e8e8e8",
+                        "width": 1.7976931348623157E308
+                      },
                       "children": [
                         {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "center",
-                            "crossAxisAlignment": "center"
-                          },
+                          "type": "Center",
+                          "attributes": {},
                           "children": [
                             {
-                              "type": "Container",
+                              "type": "Column",
                               "attributes": {
-                                "alignment": "Center",
-                                "padding": 10.0
+                                "mainAxisAlignment": "center",
+                                "crossAxisAlignment": "center"
                               },
                               "children": [
                                 {
-                                  "type": "CircleAvatar",
+                                  "type": "Container",
                                   "attributes": {
-                                    "radius": 32.0
+                                    "alignment": "Center",
+                                    "padding": 10.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "CircleAvatar",
+                                      "attributes": {
+                                        "radius": 32.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "RS",
+                                            "bold": true,
+                                            "size": 24.0
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "alignment": "Center"
                                   },
                                   "children": [
                                     {
                                       "type": "Text",
                                       "attributes": {
-                                        "caption": "RS",
+                                        "caption": "Ray Sponsible",
+                                        "color": "#1D7EDF",
                                         "bold": true,
-                                        "size": 24.0
+                                        "size": 16.0,
+                                        "alignment": "Center"
                                       },
                                       "children": []
                                     }
                                   ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "alignment": "Center"
-                              },
-                              "children": [
+                                },
                                 {
-                                  "type": "Text",
+                                  "type": "Container",
                                   "attributes": {
-                                    "caption": "Ray Sponsible",
-                                    "color": "#1D7EDF",
-                                    "bold": true,
-                                    "size": 16.0,
-                                    "alignment": "Center"
+                                    "alignment": "Center",
+                                    "padding": 10.0
                                   },
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "alignment": "Center",
-                                "padding": 10.0
-                              },
-                              "children": [
-                                {
-                                  "type": "Text",
-                                  "attributes": {
-                                    "caption": "Business Account",
-                                    "color": "#95A5A6",
-                                    "alignment": "Center"
-                                  },
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Container",
-                              "attributes": {
-                                "alignment": "Center"
-                              },
-                              "children": [
-                                {
-                                  "type": "Text",
-                                  "attributes": {
-                                    "caption": "+1 2376666666677777",
-                                    "bold": true,
-                                    "alignment": "Center"
-                                  },
-                                  "children": []
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "Business Account",
+                                        "color": "#95A5A6",
+                                        "alignment": "Center"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -120,18 +116,14 @@
                       ]
                     },
                     {
-                      "type": "Divider",
-                      "attributes": {
-                        "color": "#8c8c8c"
-                      },
-                      "children": []
-                    },
-                    {
                       "type": "Container",
                       "attributes": {
                         "padding": 10.0,
-                        "margin": 10.0,
-                        "background": "#e8e8e8"
+                        "margin": 5.0,
+                        "background": "#FFFFFF",
+                        "border": 1.0,
+                        "borderColor": "#e8e8e8",
+                        "width": 1.7976931348623157E308
                       },
                       "children": [
                         {
@@ -163,7 +155,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 1,
+                                    "flex": 2,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -189,7 +181,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 3,
+                                    "flex": 5,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -231,7 +223,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 1,
+                                    "flex": 2,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -257,7 +249,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 3,
+                                    "flex": 5,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -270,7 +262,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "14 Apr 2022, 00:00"
+                                            "caption": "05 May 2020, 01:01"
                                           },
                                           "children": []
                                         }
@@ -287,7 +279,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 1,
+                                    "flex": 2,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -300,7 +292,7 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "Status",
+                                            "caption": "Order Status:",
                                             "bold": true,
                                             "size": 10.0
                                           },
@@ -313,7 +305,7 @@
                                 {
                                   "type": "Flexible",
                                   "attributes": {
-                                    "flex": 3,
+                                    "flex": 5,
                                     "fit": "Tight"
                                   },
                                   "children": [
@@ -326,7 +318,63 @@
                                         {
                                           "type": "Text",
                                           "attributes": {
-                                            "caption": "New"
+                                            "caption": "Opened"
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Row",
+                              "attributes": {},
+                              "children": [
+                                {
+                                  "type": "Flexible",
+                                  "attributes": {
+                                    "flex": 2,
+                                    "fit": "Tight"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 5.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Payment Status:",
+                                            "bold": true,
+                                            "size": 10.0
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Flexible",
+                                  "attributes": {
+                                    "flex": 5,
+                                    "fit": "Tight"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 5.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Partially Paid"
                                           },
                                           "children": []
                                         }
@@ -341,111 +389,125 @@
                       ]
                     },
                     {
-                      "type": "Divider",
+                      "type": "Container",
                       "attributes": {
-                        "height": 1.0,
-                        "color": "#8c8c8c"
+                        "margin": 5.0,
+                        "background": "#FFFFFF",
+                        "border": 1.0,
+                        "borderColor": "#e8e8e8",
+                        "width": 1.7976931348623157E308
                       },
-                      "children": []
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Item 1",
-                        "subCaption": "Quantity: 10",
-                        "trailing": {
+                      "children": [
+                        {
                           "type": "Column",
                           "attributes": {
                             "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "end"
+                            "crossAxisAlignment": "start"
                           },
                           "children": [
                             {
-                              "type": "Text",
+                              "type": "ListItem",
                               "attributes": {
-                                "caption": "1,000 CFA",
-                                "bold": true
+                                "caption": "Item 1",
+                                "subCaption": "Quantity: 10",
+                                "trailing": {
+                                  "type": "Column",
+                                  "attributes": {
+                                    "mainAxisAlignment": "start",
+                                    "crossAxisAlignment": "end"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "1,000 CFA",
+                                        "bold": true
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "1,500 CFA",
+                                        "size": 10.0,
+                                        "decoration": "Strikethrough"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "(100 CFA each)",
+                                        "size": 10.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                "leading": {
+                                  "type": "Image",
+                                  "attributes": {
+                                    "url": "http://img.com/nopicture.png",
+                                    "width": 48.0,
+                                    "height": 48.8
+                                  },
+                                  "children": []
+                                }
                               },
                               "children": []
                             },
                             {
-                              "type": "Text",
+                              "type": "Divider",
                               "attributes": {
-                                "caption": "1,500 CFA",
-                                "size": 10.0,
-                                "decoration": "Strikethrough"
+                                "height": 1.0,
+                                "color": "#8c8c8c"
                               },
                               "children": []
                             },
                             {
-                              "type": "Text",
+                              "type": "ListItem",
                               "attributes": {
-                                "caption": "(100 CFA each)",
-                                "size": 10.0
+                                "caption": "Item 2",
+                                "subCaption": "Quantity: 1",
+                                "trailing": {
+                                  "type": "Column",
+                                  "attributes": {
+                                    "mainAxisAlignment": "start",
+                                    "crossAxisAlignment": "end"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "15,000 CFA",
+                                        "bold": true
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                "leading": {
+                                  "type": "Image",
+                                  "attributes": {
+                                    "url": "http://img.com/nopicture.png",
+                                    "width": 48.0,
+                                    "height": 48.8
+                                  },
+                                  "children": []
+                                }
                               },
                               "children": []
                             }
                           ]
-                        },
-                        "leading": {
-                          "type": "Image",
-                          "attributes": {
-                            "url": "http://img.com/nopicture.png",
-                            "width": 48.0,
-                            "height": 48.8
-                          },
-                          "children": []
                         }
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "Divider",
-                      "attributes": {
-                        "height": 1.0,
-                        "color": "#8c8c8c"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Item 2",
-                        "subCaption": "Quantity: 1",
-                        "trailing": {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "15,000 CFA",
-                                "bold": true
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "Image",
-                          "attributes": {
-                            "url": "http://img.com/nopicture.png",
-                            "width": 48.0,
-                            "height": 48.8
-                          },
-                          "children": []
-                        }
-                      },
-                      "children": []
+                      ]
                     },
                     {
                       "type": "Container",
                       "attributes": {
                         "padding": 10.0,
                         "margin": 10.0,
+                        "background": "#FFFFFF",
                         "border": 1.0,
                         "borderRadius": 2.0,
                         "borderColor": "#8c8c8c"
@@ -490,47 +552,6 @@
                                       "type": "Text",
                                       "attributes": {
                                         "caption": "30,000 CFA",
-                                        "bold": false,
-                                        "alignment": "Right"
-                                      },
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "Row",
-                              "attributes": {
-                                "mainAxisAlignment": "spaceBetween"
-                              },
-                              "children": [
-                                {
-                                  "type": "Container",
-                                  "attributes": {
-                                    "padding": 10.0
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "Delivery Fees",
-                                        "bold": false
-                                      },
-                                      "children": []
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "Container",
-                                  "attributes": {
-                                    "padding": 10.0
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "Text",
-                                      "attributes": {
-                                        "caption": "1,000 CFA",
                                         "bold": false,
                                         "alignment": "Right"
                                       },
@@ -631,6 +652,105 @@
                                   ]
                                 }
                               ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "background": "#e4edf7"
+                              },
+                              "children": [
+                                {
+                                  "type": "Row",
+                                  "attributes": {
+                                    "mainAxisAlignment": "spaceBetween"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 10.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Total Paid",
+                                            "bold": true
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 10.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "20,000 CFA",
+                                            "bold": true,
+                                            "alignment": "Right"
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "background": "#e4edf7"
+                              },
+                              "children": [
+                                {
+                                  "type": "Row",
+                                  "attributes": {
+                                    "mainAxisAlignment": "spaceBetween"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 10.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "Balance",
+                                            "bold": true
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "Container",
+                                      "attributes": {
+                                        "padding": 10.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "5,000 CFA",
+                                            "color": "#8B0000",
+                                            "bold": true,
+                                            "alignment": "Right"
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
                             }
                           ]
                         }
@@ -641,134 +761,24 @@
               ]
             },
             {
-              "type": "SingleChildScrollView",
-              "attributes": {},
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0,
+                "margin": 5.0,
+                "background": "#FFFFFF",
+                "border": 1.0,
+                "borderColor": "#e8e8e8",
+                "width": 1.7976931348623157E308
+              },
               "children": [
                 {
-                  "type": "Container",
+                  "type": "DynamicWidget",
                   "attributes": {
-                    "padding": 10.0
+                    "url": "http://localhost:0/order/qr-code-widget?id=111"
                   },
-                  "children": [
-                    {
-                      "type": "Column",
-                      "attributes": {
-                        "mainAxisAlignment": "start",
-                        "crossAxisAlignment": "start"
-                      },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Shipping Method",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Local Pickup",
-                                "size": 14.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Shipping To",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "start",
-                            "crossAxisAlignment": "start"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Ray Sponsible",
-                                "bold": true,
-                                "size": 14.0
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "180 Rue des Manguier, Bonnapriso",
-                                "size": 14.0,
-                                "maxLines": 3
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Yaounde, Cameroon",
-                                "size": 14.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "type": "Container",
-                          "attributes": {
-                            "padding": 10.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "Shipping Instructions",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "This is the message to display to customer"
-                          },
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
+                  "children": []
                 }
               ]
-            },
-            {
-              "type": "DynamicWidget",
-              "attributes": {
-                "url": "http://localhost:0/order/qr-code-widget?id=111"
-              },
-              "children": []
             }
           ]
         }
@@ -780,6 +790,72 @@
           "elevation": 0.0,
           "backgroundColor": "#1D7EDF",
           "foregroundColor": "#FFFFFF",
+          "actions": [
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 4.0
+              },
+              "children": [
+                {
+                  "type": "CircleAvatar",
+                  "attributes": {
+                    "radius": 20.0,
+                    "backgroundColor": "#e4edf7"
+                  },
+                  "children": [
+                    {
+                      "type": "IconButton",
+                      "attributes": {
+                        "icon": "f8d9",
+                        "size": 20.0
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Prompt",
+                        "url": "",
+                        "prompt": {
+                          "type": "Dialog",
+                          "attributes": {
+                            "type": "Confirm",
+                            "actions": [
+                              {
+                                "type": "Button",
+                                "attributes": {
+                                  "caption": "Complete the Order",
+                                  "padding": 15.0,
+                                  "type": "Elevated"
+                                },
+                                "children": [],
+                                "action": {
+                                  "type": "Route",
+                                  "url": "http://localhost:0/order/close?id=111"
+                                }
+                              },
+                              {
+                                "type": "Button",
+                                "attributes": {
+                                  "caption": "Cancel the Order",
+                                  "padding": 15.0,
+                                  "type": "Outlined"
+                                },
+                                "children": [],
+                                "action": {
+                                  "type": "Route",
+                                  "url": "http://localhost:0/order/cancel?id=111"
+                                }
+                              }
+                            ]
+                          },
+                          "children": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "bottom": {
             "type": "TabBar",
             "attributes": {},
@@ -788,14 +864,6 @@
                 "type": "Text",
                 "attributes": {
                   "caption": "PRODUCTS",
-                  "bold": true
-                },
-                "children": []
-              },
-              {
-                "type": "Text",
-                "attributes": {
-                  "caption": "SHIPPING",
                   "bold": true
                 },
                 "children": []

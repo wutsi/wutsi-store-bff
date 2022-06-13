@@ -34,6 +34,6 @@ internal class OrderCloseScreenTest : AbstractEndpointTest() {
 
         // WHEN
         val url = "http://localhost:$port/order/close?id=30293209ad00"
-        assertEndpointEquals("/screens/order/order-close.json", url)
+        assertEndpointEquals("/screens/index/order-close.json", url)
     }
 }

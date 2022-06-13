@@ -62,14 +62,25 @@ internal class OrderScreenTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
         doReturn(SearchProductResponse(products)).whenever(catalogApi).searchProducts(any())
+
+        val order = createOrder(merchantId = ACCOUNT_ID)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
     }
 
     @Test
-    fun order() {
+    fun merchant() {
         val url = "http://localhost:$port/order?id=111"
-        assertEndpointEquals("/screens/order/order.json", url)
+        assertEndpointEquals("/screens/order/merchant.json", url)
+    }
+
+    @Test
+    fun customer() {
+        val order = createOrder(merchantId = ACCOUNT_ID - 1)
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        val url = "http://localhost:$port/order?id=111"
+        assertEndpointEquals("/screens/order/customer.json", url)
     }
 
     @Test
@@ -77,7 +88,7 @@ internal class OrderScreenTest : AbstractEndpointTest() {
         doReturn(true).whenever(togglesProvider).isOrderPaymentEnabled()
 
         val url = "http://localhost:$port/order?id=111"
-        assertEndpointEquals("/screens/order/order-payment-enabled.json", url)
+        assertEndpointEquals("/screens/order/payment-enabled.json", url)
     }
 
     @Test
@@ -96,4 +107,23 @@ internal class OrderScreenTest : AbstractEndpointTest() {
         val url = "http://localhost:$port/order?id=111"
         assertEndpointEquals("/screens/order/order-store-pickup.json", url)
     }
+
+    private fun createOrder(merchantId: Long) = Order(
+        id = "111",
+        merchantId = merchantId,
+        accountId = 12323243L,
+        totalPrice = 25000.0,
+        subTotalPrice = 30000.0,
+        savingsAmount = 5000.0,
+        currency = "XAF",
+        status = OrderStatus.OPENED.name,
+        paymentStatus = PaymentStatus.PARTIALLY_PAID.name,
+        totalPaid = 20000.0,
+        reservationId = 777L,
+        created = OffsetDateTime.of(2020, 5, 5, 1, 1, 0, 0, ZoneOffset.UTC),
+        items = listOf(
+            OrderItem(productId = 1, quantity = 10, unitPrice = 100.0, unitComparablePrice = 150.0),
+            OrderItem(productId = 2, quantity = 1, unitPrice = 15000.0)
+        )
+    )
 }

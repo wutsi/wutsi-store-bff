@@ -1,6 +1,6 @@
 package com.wutsi.application.store.endpoint.order.dto
 
-data class CancelOrderRequest(
+data class ChangeOrderStatusRequest(
     val reason: String? = null,
     val comment: String? = null
 )

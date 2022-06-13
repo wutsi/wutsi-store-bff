@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.my-orders",
+    "id": "page.orders",
     "safe": false
   },
   "children": [
@@ -91,7 +91,7 @@
               ],
               "action": {
                 "type": "Route",
-                "url": "http://localhost:0/me/orders",
+                "url": "http://localhost:0/orders?merchant=true",
                 "replacement": true
               }
             }
@@ -172,29 +172,12 @@
                           "children": []
                         }
                       ]
-                    },
-                    "leading": {
-                      "type": "CircleAvatar",
-                      "attributes": {
-                        "radius": 24.0
-                      },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "RS",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        }
-                      ]
                     }
                   },
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/me/order?id=111"
+                    "url": "http://localhost:0/order?id=111"
                   }
                 },
                 {
@@ -229,29 +212,12 @@
                           "children": []
                         }
                       ]
-                    },
-                    "leading": {
-                      "type": "CircleAvatar",
-                      "attributes": {
-                        "radius": 24.0
-                      },
-                      "children": [
-                        {
-                          "type": "Text",
-                          "attributes": {
-                            "caption": "JS",
-                            "bold": true,
-                            "size": 16.0
-                          },
-                          "children": []
-                        }
-                      ]
                     }
                   },
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/me/order?id=222"
+                    "url": "http://localhost:0/order?id=222"
                   }
                 }
               ]
@@ -264,7 +230,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "My Orders",
+      "title": "Orders",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

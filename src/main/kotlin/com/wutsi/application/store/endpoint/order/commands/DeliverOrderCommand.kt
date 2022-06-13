@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/commands/pickup-order")
-class PickupOrderCommand(
+@RequestMapping("/commands/deliver-order")
+class DeliverOrderCommand(
     private val orderApi: WutsiOrderApi,
 ) : AbstractCommand() {
     @PostMapping

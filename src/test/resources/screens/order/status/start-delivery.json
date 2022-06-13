@@ -1,7 +1,7 @@
 {
   "type": "Screen",
   "attributes": {
-    "id": "page.order.pickup",
+    "id": "page.order.start-delivery",
     "safe": false,
     "backgroundColor": "#FFFFFF"
   },
@@ -29,8 +29,24 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Confirm the customer picked up the order",
+                "caption": "Start the delivery of the order",
                 "size": 16.0
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0
+          },
+          "children": [
+            {
+              "type": "Text",
+              "attributes": {
+                "caption": "A SMS notification will be sent to inform the customer that its order is on its way.",
+                "color": "#1D7EDF"
               },
               "children": []
             }
@@ -52,14 +68,14 @@
             {
               "type": "Button",
               "attributes": {
-                "caption": "Confirm",
+                "caption": "Start the Delivery",
                 "padding": 15.0,
                 "type": "Elevated"
               },
               "children": [],
               "action": {
                 "type": "Command",
-                "url": "http://localhost:0/commands/pickup-order?id=111"
+                "url": "http://localhost:0/commands/start-order-delivery?id=111"
               }
             }
           ]
@@ -83,7 +99,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Order #555",
+      "title": "Order #111",
       "elevation": 0.0,
       "backgroundColor": "#1D7EDF",
       "foregroundColor": "#FFFFFF"

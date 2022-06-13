@@ -36,6 +36,97 @@
                       },
                       "children": [
                         {
+                          "type": "Center",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "type": "Column",
+                              "attributes": {
+                                "mainAxisAlignment": "center",
+                                "crossAxisAlignment": "center"
+                              },
+                              "children": [
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "alignment": "Center",
+                                    "padding": 10.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "CircleAvatar",
+                                      "attributes": {
+                                        "radius": 32.0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "Text",
+                                          "attributes": {
+                                            "caption": "RS",
+                                            "bold": true,
+                                            "size": 24.0
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "alignment": "Center"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "Ray Sponsible",
+                                        "color": "#1D7EDF",
+                                        "bold": true,
+                                        "size": 16.0,
+                                        "alignment": "Center"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "Container",
+                                  "attributes": {
+                                    "alignment": "Center",
+                                    "padding": 10.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "Business Account",
+                                        "color": "#95A5A6",
+                                        "alignment": "Center"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0,
+                        "margin": 5.0,
+                        "background": "#FFFFFF",
+                        "border": 1.0,
+                        "borderColor": "#e8e8e8",
+                        "width": 1.7976931348623157E308
+                      },
+                      "children": [
+                        {
                           "type": "Column",
                           "attributes": {
                             "mainAxisAlignment": "start",
@@ -544,72 +635,6 @@
           "elevation": 0.0,
           "backgroundColor": "#1D7EDF",
           "foregroundColor": "#FFFFFF",
-          "actions": [
-            {
-              "type": "Container",
-              "attributes": {
-                "padding": 4.0
-              },
-              "children": [
-                {
-                  "type": "CircleAvatar",
-                  "attributes": {
-                    "radius": 20.0,
-                    "backgroundColor": "#e4edf7"
-                  },
-                  "children": [
-                    {
-                      "type": "IconButton",
-                      "attributes": {
-                        "icon": "f8d9",
-                        "size": 20.0
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Prompt",
-                        "url": "",
-                        "prompt": {
-                          "type": "Dialog",
-                          "attributes": {
-                            "type": "Confirm",
-                            "actions": [
-                              {
-                                "type": "Button",
-                                "attributes": {
-                                  "caption": "Complete the Order",
-                                  "padding": 15.0,
-                                  "type": "Elevated"
-                                },
-                                "children": [],
-                                "action": {
-                                  "type": "Route",
-                                  "url": "http://localhost:0/order/close?id=111"
-                                }
-                              },
-                              {
-                                "type": "Button",
-                                "attributes": {
-                                  "caption": "Cancel the Order",
-                                  "padding": 15.0,
-                                  "type": "Outlined"
-                                },
-                                "children": [],
-                                "action": {
-                                  "type": "Route",
-                                  "url": "http://localhost:0/order/cancel?id=111"
-                                }
-                              }
-                            ]
-                          },
-                          "children": []
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
           "bottom": {
             "type": "TabBar",
             "attributes": {},

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.server.LocalServerPort
 
-internal class OrderPickupScreenTest : AbstractEndpointTest() {
+internal class OrderDeliverScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
 
@@ -25,7 +25,7 @@ internal class OrderPickupScreenTest : AbstractEndpointTest() {
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
         // WHEN
-        val url = "http://localhost:$port/order/pickup?id=555"
-        assertEndpointEquals("/screens/order/order-pickup.json", url)
+        val url = "http://localhost:$port/order/deliver?id=555"
+        assertEndpointEquals("/screens/order/status/delivered.json", url)
     }
 }

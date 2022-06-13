@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/order/pickup")
-class OrderPickupScreen(
+@RequestMapping("/order/deliver")
+class OrderDeliverScreen(
     private val orderApi: WutsiOrderApi,
 ) : AbstractQuery() {
     @PostMapping
@@ -36,7 +36,7 @@ class OrderPickupScreen(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_PRIMARY,
                 foregroundColor = Theme.COLOR_WHITE,
-                title = getText("page.order.pickup.app-bar.title", arrayOf(xid)),
+                title = getText("page.order.deliver.app-bar.title", arrayOf(xid)),
             ),
             bottomNavigationBar = bottomNavigationBar(),
             child = Column(
@@ -47,7 +47,7 @@ class OrderPickupScreen(
                     Container(
                         padding = 10.0,
                         child = Text(
-                            caption = getText("page.order.pickup.message"),
+                            caption = getText("page.order.deliver.message"),
                             size = Theme.TEXT_SIZE_LARGE,
                         )
                     ),
@@ -56,13 +56,13 @@ class OrderPickupScreen(
                     Container(
                         padding = 10.0,
                         child = Button(
-                            caption = getText("page.order.pickup.button.confirm"),
-                            action = executeCommand(urlBuilder.build("commands/pickup-order?id=${order.id}"))
+                            caption = getText("page.order.deliver.button.confirm"),
+                            action = executeCommand(urlBuilder.build("commands/deliver-order?id=${order.id}"))
                         )
                     ),
                     Button(
                         type = ButtonType.Text,
-                        caption = getText("page.order.close.button.not-now"),
+                        caption = getText("page.order.deliver.button.not-now"),
                         action = gotoPreviousScreen()
                     )
                 )

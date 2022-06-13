@@ -91,7 +91,7 @@
               ],
               "action": {
                 "type": "Route",
-                "url": "http://localhost:0/orders",
+                "url": "http://localhost:0/orders?merchant=false",
                 "replacement": true
               }
             }

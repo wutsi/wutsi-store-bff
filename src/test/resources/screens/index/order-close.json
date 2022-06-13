@@ -45,7 +45,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "A SMS notification will be sent to customer in inform him that his order is available in store for pickup.",
+                "caption": "A SMS notification will be sent to inform the customer that its order is available in store for pickup.",
                 "color": "#1D7EDF"
               },
               "children": []
