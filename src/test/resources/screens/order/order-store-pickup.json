@@ -652,25 +652,7 @@
                                   "type": "Text",
                                   "attributes": {
                                     "caption": "Ray Sponsible",
-                                    "bold": true,
-                                    "size": 14.0
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "Text",
-                                  "attributes": {
-                                    "caption": "180 Rue des Manguier, Bonnapriso",
-                                    "size": 14.0,
-                                    "maxLines": 3
-                                  },
-                                  "children": []
-                                },
-                                {
-                                  "type": "Text",
-                                  "attributes": {
-                                    "caption": "Cameroon",
-                                    "size": 14.0
+                                    "bold": true
                                   },
                                   "children": []
                                 }
