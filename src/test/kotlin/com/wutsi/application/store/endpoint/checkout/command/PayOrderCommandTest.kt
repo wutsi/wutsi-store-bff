@@ -93,7 +93,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
     }
 
-
     @Test
     fun successWithWallet() {
         // GIVEN
@@ -125,7 +124,6 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
     }
-
 
     @Test
     fun pending() {
