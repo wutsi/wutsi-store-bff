@@ -5,6 +5,7 @@ import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Icon
+import com.wutsi.flutter.sdui.Noop
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.platform.core.logging.KVLogger
@@ -31,13 +32,13 @@ class CheckoutStatusWidget(
     fun index(
         @RequestParam(name = "transaction-id") transactionId: String,
         @RequestParam(name = "count", required = false) count: Int? = null
-    ): Widget? {
+    ): Widget {
         try {
             val tx = paymentApi.getTransaction(transactionId).transaction
             logger.add("transaction_status", tx.status)
 
             if (tx.status == Status.PENDING.name)
-                return null
+                return Noop().toWidget()
 
             // Success widget
             return Column(
@@ -50,7 +51,6 @@ class CheckoutStatusWidget(
                 )
             ).toWidget()
         } catch (ex: FeignException.Conflict) {
-
             // Error widget
             val error = getErrorText(ex)
             return Column(
@@ -64,7 +64,7 @@ class CheckoutStatusWidget(
             ).toWidget()
         } catch (ex: Throwable) {
             LOGGER.warn("Unexpected error", ex)
-            return null
+            return Noop().toWidget()
         }
     }
 }
