@@ -1,0 +1,112 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.processing",
+    "safe": true,
+    "backgroundColor": "#e8e8e8"
+  },
+  "children": [
+    {
+      "type": "Column",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Container",
+          "attributes": {
+            "margin": 5.0,
+            "background": "#FFFFFF",
+            "border": 1.0,
+            "borderColor": "#e8e8e8",
+            "width": 1.7976931348623157E308
+          },
+          "children": [
+            {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "Ray Sponsible",
+                "subCaption": "Marketing - Cameroon",
+                "padding": 10.0,
+                "leading": {
+                  "type": "CircleAvatar",
+                  "attributes": {
+                    "radius": 24.0
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "RS",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "attributes": {
+            "padding": 10.0,
+            "margin": 5.0,
+            "background": "#FFFFFF",
+            "border": 1.0,
+            "borderColor": "#e8e8e8",
+            "width": 1.7976931348623157E308
+          },
+          "children": [
+            {
+              "type": "Column",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Center",
+                  "attributes": {},
+                  "children": [
+                    {
+                      "type": "Container",
+                      "attributes": {
+                        "padding": 10.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Processing payment..."
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Timeout",
+                  "attributes": {
+                    "url": "http://localhost:0/widgets/checkout-status?transaction-id=555",
+                    "delay": 15
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000",
+      "automaticallyImplyLeading": false
+    },
+    "children": []
+  }
+}

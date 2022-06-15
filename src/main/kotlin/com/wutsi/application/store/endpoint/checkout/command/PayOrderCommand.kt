@@ -9,7 +9,6 @@ import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.CreateChargeRequest
 import com.wutsi.platform.payment.dto.CreateChargeResponse
-import com.wutsi.platform.payment.dto.Transaction
 import feign.FeignException
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -36,31 +35,26 @@ class PayOrderCommand(
         @RequestParam(name = "payment-token") paymentToken: String,
         @RequestParam(name = "idempotency-key") idempotencyKey: String
     ): Action {
+        logger.add("order_id", orderId)
+        logger.add("payment_token", paymentToken)
+        logger.add("idempotency_key", idempotencyKey)
+
         try {
             // Pay
             val order = orderApi.getOrder(orderId).order
             val response = charge(order, paymentToken, idempotencyKey)
             logger.add("transaction_id", response.id)
+            logger.add("transaction_status", response.status)
 
-            var status: String = response.status
-            if (response.status == Status.PENDING.name) {
-                val tx = waitForCompletion(response.id)
-                logger.add("transaction_status", tx.status)
-                if (tx.status == Status.FAILED.name) {
-                    val error = getTransactionErrorText(tx.errorCode)
-                    return gotoUrl(
-                        url = urlBuilder.build("/checkout/success?order-id=$orderId&error=" + encodeURLParam(error))
-                    )
-                }
-                status = tx.status
-            } else {
-                logger.add("transaction_status", response.status)
-            }
-
-            logger.add("status", status)
-            return gotoUrl(
-                url = urlBuilder.build("/checkout/success?order-id=$orderId")
-            )
+            // Next page
+            return if (response.status == Status.PENDING.name)
+                gotoUrl(
+                    url = urlBuilder.build("/checkout/processing?order-id=$orderId&transaction-id=${response.id}")
+                )
+            else
+                return gotoUrl(
+                    url = urlBuilder.build("/checkout/success?order-id=$orderId")
+                )
         } catch (ex: FeignException) {
             logger.setException(ex)
             val error = getErrorText(ex)
@@ -81,22 +75,4 @@ class PayOrderCommand(
                 idempotencyKey = idempotencyKey
             )
         )
-
-    private fun waitForCompletion(transactionId: String): Transaction {
-        var retries = 0
-        var tx = Transaction()
-        try {
-            while (retries++ < MAX_RETRIES) {
-                LOGGER.info("$retries - Transaction #$transactionId is PENDING. Wait for $DELAY_SECONDS sec...")
-                Thread.sleep(DELAY_SECONDS * 1000) // Wait for 15 secs...
-                val response = paymentApi.getTransaction(transactionId)
-                tx = response.transaction
-                if (tx.status != Status.PENDING.name)
-                    break
-            }
-            return tx
-        } finally {
-            logger.add("retries", retries - 1)
-        }
-    }
 }

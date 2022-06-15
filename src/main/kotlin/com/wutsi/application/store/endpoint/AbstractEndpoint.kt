@@ -1,5 +1,6 @@
 package com.wutsi.application.store.endpoint
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.wutsi.analytics.tracking.WutsiTrackingApi
 import com.wutsi.analytics.tracking.dto.PushTrackRequest
 import com.wutsi.analytics.tracking.dto.Track
@@ -11,13 +12,16 @@ import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.BottomNavigationBarWidget
 import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.cart.dto.Cart
+import com.wutsi.ecommerce.order.error.ErrorURN
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.DialogType
 import com.wutsi.platform.account.dto.Account
+import com.wutsi.platform.core.error.ErrorResponse
 import com.wutsi.platform.core.tracing.TracingContext
 import com.wutsi.platform.tenant.dto.Tenant
+import feign.FeignException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -57,6 +61,32 @@ abstract class AbstractEndpoint {
 
     @Autowired
     protected lateinit var sharedUIMapper: SharedUIMapper
+
+    @Autowired
+    private lateinit var objectMapper: ObjectMapper
+
+    protected fun getErrorText(ex: FeignException): String {
+        try {
+            val response = objectMapper.readValue(ex.contentUTF8(), ErrorResponse::class.java)
+            val code = response.error.code
+            if (code == ErrorURN.PRODUCT_AVAILABILITY_ERROR.urn) {
+                return getText("error.order.PRODUCT_AVAILABILITY_ERROR")
+            } else if (code == com.wutsi.platform.payment.error.ErrorURN.TRANSACTION_FAILED.urn) {
+                val downstreamCode = response.error.downstreamCode
+                return getTransactionErrorText(downstreamCode)
+            }
+        } catch (ex: Exception) {
+        }
+
+        return getText("error.unexpected")
+    }
+
+    protected fun getTransactionErrorText(errorCode: String?): String =
+        try {
+            getText("error.payment.$errorCode")
+        } catch (ex: Exception) {
+            getText("error.payment")
+        }
 
     protected fun track(
         correlationId: String,

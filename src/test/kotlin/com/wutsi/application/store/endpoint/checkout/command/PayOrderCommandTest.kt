@@ -5,7 +5,6 @@ import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
@@ -133,78 +132,20 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         val txId = "3039-f9009"
         doReturn(CreateChargeResponse(txId, Status.PENDING.name)).whenever(paymentApi).createCharge(any())
 
-        val tx = Transaction(status = Status.PENDING.name)
+        val tx = Transaction(id = txId, status = Status.PENDING.name)
         doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
 
         // THEN
-        Thread.sleep(1000L * PayOrderCommand.DELAY_SECONDS * PayOrderCommand.MAX_RETRIES)
-
         assertEquals(200, response.statusCodeValue)
 
         verify(paymentApi).createCharge(any())
-        verify(paymentApi, times(PayOrderCommand.MAX_RETRIES)).getTransaction(txId)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
-    }
-
-    @Test
-    fun pendingThenSuccess() {
-        // GIVEN
-        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
-
-        val txId = "3039-f9009"
-        doReturn(CreateChargeResponse(txId, Status.PENDING.name)).whenever(paymentApi).createCharge(any())
-
-        val tx = Transaction(status = Status.SUCCESSFUL.name)
-        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
-
-        // WHEN
-        val response = rest.postForEntity(url, null, Action::class.java)
-
-        // THEN
-        Thread.sleep(1000L * PayOrderCommand.DELAY_SECONDS)
-
-        assertEquals(200, response.statusCodeValue)
-
-        verify(paymentApi).createCharge(any())
-        verify(paymentApi).getTransaction(txId)
-
-        val action = response.body!!
-        assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
-    }
-
-    @Test
-    fun pendingThenError() {
-        // GIVEN
-        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
-
-        val txId = "3039-f9009"
-        doReturn(CreateChargeResponse(txId, Status.PENDING.name)).whenever(paymentApi).createCharge(any())
-
-        val tx = Transaction(status = Status.FAILED.name, errorCode = ErrorCode.NOT_ENOUGH_FUNDS.name)
-        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
-
-        // WHEN
-        val response = rest.postForEntity(url, null, Action::class.java)
-
-        // THEN
-        Thread.sleep(1000L * PayOrderCommand.DELAY_SECONDS)
-
-        assertEquals(200, response.statusCodeValue)
-
-        verify(paymentApi).createCharge(any())
-        verify(paymentApi).getTransaction(txId)
-
-        val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
-        val action = response.body!!
-        assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)
+        assertEquals("http://localhost:0/checkout/processing?order-id=${order.id}&transaction-id=${tx.id}", action.url)
     }
 
     @Test
