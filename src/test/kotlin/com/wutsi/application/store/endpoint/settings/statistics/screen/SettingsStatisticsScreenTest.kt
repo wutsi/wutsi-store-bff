@@ -43,7 +43,6 @@ internal class SettingsStatisticsScreenTest : AbstractEndpointTest() {
     @Test
     fun empty() {
         // GIVEN
-        val item = MerchantSummary(id = 11)
         doReturn(SearchMerchantResponse()).whenever(catalogApi).searchMerchants(any())
 
         // WHEN

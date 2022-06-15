@@ -177,8 +177,8 @@ class ProductScreen(
         children.addAll(
             listOfNotNull(
                 toVendorWidget(product, merchant, whatsappUrl),
-                toSimilarProductsWidget(product, tenant),
-                toOtherProductsWidget(product, tenant),
+                toSimilarProductsWidget(product, cart, tenant),
+                toOtherProductsWidget(product, cart, tenant),
             )
         )
 
@@ -363,8 +363,9 @@ class ProductScreen(
     private fun toLocation(merchant: Account): String =
         sharedUIMapper.toLocationText(cityService.get(merchant.cityId), merchant.country)
 
-    private fun toSimilarProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
+    private fun toSimilarProductsWidget(product: Product, cart: Cart?, tenant: Tenant): WidgetAware? {
         // Get products
+        val cartProductIds = cart?.let { it.products.map { it.productId } } ?: emptyList()
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
                 accountId = product.accountId,
@@ -373,7 +374,10 @@ class ProductScreen(
                 sortBy = ProductSort.RECOMMENDED.name,
                 limit = 30
             )
-        ).products.filter { it.id != product.id }
+        ).products.filter {
+            it.id != product.id &&
+                !cartProductIds.contains(it.id)
+        }
         if (products.isEmpty())
             return null
 
@@ -406,8 +410,9 @@ class ProductScreen(
         )
     }
 
-    private fun toOtherProductsWidget(product: Product, tenant: Tenant): WidgetAware? {
+    private fun toOtherProductsWidget(product: Product, cart: Cart?, tenant: Tenant): WidgetAware? {
         // Get products
+        val cartProductIds = cart?.let { it.products.map { it.productId } } ?: emptyList()
         val categoryIds = listOf(product.category.id, product.subCategory.id)
         val products = catalogApi.searchProducts(
             request = SearchProductRequest(
@@ -418,6 +423,7 @@ class ProductScreen(
             )
         ).products.filter {
             it.id != product.id &&
+                !cartProductIds.contains(it.id) &&
                 !categoryIds.contains(it.subCategoryId) &&
                 !categoryIds.contains(it.categoryId)
         }
