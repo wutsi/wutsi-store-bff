@@ -26,7 +26,7 @@ class CheckoutStatusWidget(
 ) : AbstractQuery() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(CheckoutStatusWidget::class.java)
-        val MAX_COUNT = 3
+        const val MAX_COUNT = 3
     }
 
     @PostMapping
