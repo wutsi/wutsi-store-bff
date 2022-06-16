@@ -186,7 +186,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi, never()).getTransaction(any())
 
-        val message = URLEncoder.encode(getText("error.payment"), "utf-8")
+        val message = URLEncoder.encode(getText("error.payment.UNEXPECTED_ERROR"), "utf-8")
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&error=$message", action.url)

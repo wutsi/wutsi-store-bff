@@ -20,7 +20,7 @@
         {
           "type": "Text",
           "attributes": {
-            "caption": "Sorry! Unable to proceed the payment. Please try again"
+            "caption": "The transaction has failed."
           },
           "children": []
         }
