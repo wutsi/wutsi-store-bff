@@ -20,7 +20,7 @@
         {
           "type": "Text",
           "attributes": {
-            "caption": "Your order is beeing processed. You will receive a notification once completed."
+            "caption": "Your order is still being processed. You will receive a notification once completed."
           },
           "children": []
         }

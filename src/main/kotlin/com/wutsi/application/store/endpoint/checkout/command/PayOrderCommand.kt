@@ -10,7 +10,6 @@ import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.CreateChargeRequest
 import com.wutsi.platform.payment.dto.CreateChargeResponse
 import feign.FeignException
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -23,12 +22,6 @@ class PayOrderCommand(
     private val paymentApi: WutsiPaymentApi,
     private val logger: KVLogger,
 ) : AbstractCommand() {
-    companion object {
-        const val DELAY_SECONDS = 11L
-        const val MAX_RETRIES = 5
-        private val LOGGER = LoggerFactory.getLogger(PayOrderCommand::class.java)
-    }
-
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
@@ -47,13 +40,13 @@ class PayOrderCommand(
             logger.add("transaction_status", response.status)
 
             // Next page
-            return if (response.status == Status.PENDING.name)
-                gotoUrl(
-                    url = urlBuilder.build("/checkout/processing?order-id=$orderId&transaction-id=${response.id}")
-                )
-            else
+            return if (response.status == Status.SUCCESSFUL.name)
                 return gotoUrl(
                     url = urlBuilder.build("/checkout/success?order-id=$orderId")
+                )
+            else
+                gotoUrl(
+                    url = urlBuilder.build("/checkout/processing?order-id=$orderId&transaction-id=${response.id}")
                 )
         } catch (ex: FeignException) {
             logger.setException(ex)
