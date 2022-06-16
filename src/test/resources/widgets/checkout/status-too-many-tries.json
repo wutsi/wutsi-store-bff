@@ -1,0 +1,30 @@
+{
+  "type": "Column",
+  "attributes": {},
+  "children": [
+    {
+      "type": "Icon",
+      "attributes": {
+        "code": "f269",
+        "size": 40.0,
+        "color": "#1D7EDF"
+      },
+      "children": []
+    },
+    {
+      "type": "Container",
+      "attributes": {
+        "padding": 10.0
+      },
+      "children": [
+        {
+          "type": "Text",
+          "attributes": {
+            "caption": "Your order is beeing processed. You will receive a notification once completed."
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

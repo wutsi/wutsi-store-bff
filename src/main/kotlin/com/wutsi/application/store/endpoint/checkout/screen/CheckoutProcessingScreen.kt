@@ -40,8 +40,6 @@ class CheckoutProcessingScreen(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                automaticallyImplyLeading = false,
-                leading = null
             ),
             safe = true,
             child = Column(

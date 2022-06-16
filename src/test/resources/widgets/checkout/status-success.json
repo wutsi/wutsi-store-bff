@@ -1,0 +1,30 @@
+{
+  "type": "Column",
+  "attributes": {},
+  "children": [
+    {
+      "type": "Icon",
+      "attributes": {
+        "code": "e156",
+        "size": 40.0,
+        "color": "#4CAF50"
+      },
+      "children": []
+    },
+    {
+      "type": "Container",
+      "attributes": {
+        "padding": 10.0
+      },
+      "children": [
+        {
+          "type": "Text",
+          "attributes": {
+            "caption": "Your order has been completed with success"
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

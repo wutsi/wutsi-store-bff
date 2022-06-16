@@ -76,7 +76,7 @@
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "Processing payment..."
+                            "caption": "Please wait while we are processing your payment..."
                           },
                           "children": []
                         }
@@ -104,8 +104,7 @@
     "attributes": {
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
-      "foregroundColor": "#000000",
-      "automaticallyImplyLeading": false
+      "foregroundColor": "#000000"
     },
     "children": []
   }

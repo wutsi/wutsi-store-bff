@@ -26,27 +26,40 @@ class CheckoutStatusWidget(
 ) : AbstractQuery() {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(CheckoutStatusWidget::class.java)
+        val MAX_COUNT = 3
     }
 
     @PostMapping
     fun index(
         @RequestParam(name = "transaction-id") transactionId: String,
-        @RequestParam(name = "count", required = false) count: Int? = null
+        @RequestParam(name = "count") count: Int
     ): Widget {
         try {
             val tx = paymentApi.getTransaction(transactionId).transaction
             logger.add("transaction_status", tx.status)
 
-            if (tx.status == Status.PENDING.name)
-                return Noop().toWidget()
+            if (tx.status == Status.PENDING.name) {
+                return if (count > MAX_COUNT)
+                    Column(
+                        children = listOf(
+                            Icon(code = Theme.ICON_PENDING, size = 40.0, color = Theme.COLOR_PRIMARY),
+                            Container(
+                                padding = 10.0,
+                                child = Text(getText("widget.checkout.processing.pending"))
+                            )
+                        )
+                    ).toWidget()
+                else
+                    Noop().toWidget()
+            }
 
             // Success widget
             return Column(
                 children = listOf(
-                    Icon(code = Theme.ICON_CHECK, size = 80.0, color = Theme.COLOR_SUCCESS),
+                    Icon(code = Theme.ICON_CHECK, size = 40.0, color = Theme.COLOR_SUCCESS),
                     Container(
                         padding = 10.0,
-                        child = Text("widget.processing.success")
+                        child = Text(getText("widget.checkout.processing.success"))
                     )
                 )
             ).toWidget()
@@ -55,7 +68,7 @@ class CheckoutStatusWidget(
             val error = getErrorText(ex)
             return Column(
                 children = listOf(
-                    Icon(code = Theme.ICON_ERROR, size = 80.0, color = Theme.COLOR_DANGER),
+                    Icon(code = Theme.ICON_ERROR, size = 40.0, color = Theme.COLOR_DANGER),
                     Container(
                         padding = 10.0,
                         child = Text(error)

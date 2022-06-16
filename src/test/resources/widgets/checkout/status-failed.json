@@ -1,0 +1,30 @@
+{
+  "type": "Column",
+  "attributes": {},
+  "children": [
+    {
+      "type": "Icon",
+      "attributes": {
+        "code": "e238",
+        "size": 40.0,
+        "color": "#8B0000"
+      },
+      "children": []
+    },
+    {
+      "type": "Container",
+      "attributes": {
+        "padding": 10.0
+      },
+      "children": [
+        {
+          "type": "Text",
+          "attributes": {
+            "caption": "Sorry! Unable to proceed the payment. Please try again"
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}
