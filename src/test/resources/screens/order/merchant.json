@@ -699,6 +699,35 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 4.0
+              },
+              "children": [
+                {
+                  "type": "CircleAvatar",
+                  "attributes": {
+                    "radius": 20.0,
+                    "backgroundColor": "#e4edf7"
+                  },
+                  "children": [
+                    {
+                      "type": "IconButton",
+                      "attributes": {
+                        "icon": "ea47",
+                        "size": 20.0
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Share",
+                        "url": "https://www.wutsi.me/order?id=111"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "bottom": {

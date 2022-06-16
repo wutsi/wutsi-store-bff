@@ -111,9 +111,10 @@ class OrderScreen(
                     foregroundColor = Theme.COLOR_WHITE,
                     bottom = tabs,
                     title = getText("page.order.app-bar.title", arrayOf(order.id.uppercase().takeLast(4))),
-                    actions = getAppBarAction(order, shipping)?.let {
-                        listOf(it)
-                    }
+                    actions = listOfNotNull(
+                        getAppBarAction(order, shipping),
+                        getShareAction(order, tenant),
+                    )
                 ),
                 child = tabViews,
                 bottomNavigationBar = bottomNavigationBar(),
@@ -342,6 +343,23 @@ class OrderScreen(
                     child = Container(
                         padding = 5.0,
                         child = value
+                    )
+                )
+            )
+        )
+
+    private fun getShareAction(order: Order, tenant: Tenant): WidgetAware =
+        Container(
+            padding = 4.0,
+            child = CircleAvatar(
+                radius = 20.0,
+                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
+                child = IconButton(
+                    icon = Theme.ICON_SHARE,
+                    size = 20.0,
+                    action = Action(
+                        type = ActionType.Share,
+                        url = "${tenant.webappUrl}/order?id=${order.id}",
                     )
                 )
             )
