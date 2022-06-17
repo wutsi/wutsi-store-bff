@@ -73,7 +73,7 @@ class CheckoutPaymentScreen(
                             Column(
                                 children = listOf(
                                     DropdownButton(
-                                        value = if (paymentMethods.size == 1) paymentMethods[0].token else null,
+                                        value = null,
                                         name = "paymentToken",
                                         required = true,
                                         hint = getText("page.checkout.payment.choose-account.hint"),
