@@ -5,11 +5,19 @@ import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.ui.CartIcon
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.flutter.sdui.Action
+import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.CircleAvatar
+import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
+import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.IconButton
+import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
+import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.TextAlignment
+import com.wutsi.platform.payment.core.Status
+import com.wutsi.platform.payment.dto.Transaction
 import java.net.URL
 
 abstract class AbstractQuery : AbstractEndpoint() {
@@ -104,4 +112,62 @@ abstract class AbstractQuery : AbstractEndpoint() {
         width = Double.MAX_VALUE,
         child = child,
     )
+
+    protected fun toTransactionStatusWidget(tx: Transaction?, error: String? = null): WidgetAware {
+        return if (error != null)
+            toTransactionStatusWidget(
+                Icon(code = Theme.ICON_ERROR, size = 40.0, color = Theme.COLOR_DANGER),
+                Text(
+                    error,
+                    color = Theme.COLOR_DANGER,
+                    alignment = TextAlignment.Center
+                )
+            )
+        else if (tx?.status == Status.SUCCESSFUL.name)
+            toTransactionStatusWidget(
+                Icon(code = Theme.ICON_CHECK, size = 40.0, color = Theme.COLOR_SUCCESS),
+                Text(
+                    getText("widget.checkout.processing.success"),
+                    color = Theme.COLOR_SUCCESS,
+                    alignment = TextAlignment.Center
+                )
+            )
+        else if (tx?.status == Status.FAILED.name)
+            toTransactionStatusWidget(
+                Icon(code = Theme.ICON_ERROR, size = 40.0, color = Theme.COLOR_DANGER),
+                Text(
+                    getTransactionErrorText(tx.errorCode),
+                    color = Theme.COLOR_DANGER,
+                    alignment = TextAlignment.Center
+                )
+            )
+        else
+            toTransactionStatusWidget(
+                Icon(code = Theme.ICON_PENDING, size = 40.0, color = Theme.COLOR_PRIMARY),
+                Text(
+                    getText("widget.checkout.processing.pending"),
+                    alignment = TextAlignment.Center
+                )
+            )
+    }
+
+    private fun toTransactionStatusWidget(icon: Icon, text: Text): WidgetAware {
+        return Column(
+            children = listOf(
+                icon,
+                Container(
+                    padding = 10.0,
+                    alignment = Alignment.Center,
+                    child = text
+                ),
+                Container(
+                    padding = 10.0,
+                    child = Button(
+                        caption = getText("widget.checkout.processing.button.OK"),
+                        action = gotoHomeScreen()
+                    )
+                )
+            )
+        )
+    }
 }

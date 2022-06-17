@@ -42,7 +42,7 @@ class PayOrderCommand(
             // Next page
             return if (response.status == Status.SUCCESSFUL.name)
                 return gotoUrl(
-                    url = urlBuilder.build("/checkout/success?order-id=$orderId")
+                    url = urlBuilder.build("/checkout/success?order-id=$orderId&transaction-id=${response.id}")
                 )
             else
                 gotoUrl(

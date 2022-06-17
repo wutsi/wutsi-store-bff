@@ -5,7 +5,6 @@ import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.order.WutsiOrderApi
-import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -36,11 +35,7 @@ class CheckoutProcessingScreen(
         return Screen(
             id = Page.CHECKOUT_PROCESSING,
             backgroundColor = Theme.COLOR_GRAY_LIGHT,
-            appBar = AppBar(
-                elevation = 0.0,
-                backgroundColor = Theme.COLOR_WHITE,
-                foregroundColor = Theme.COLOR_BLACK,
-            ),
+            appBar = null,
             safe = true,
             child = Column(
                 children = listOf(

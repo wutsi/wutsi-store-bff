@@ -14,15 +14,38 @@
     {
       "type": "Container",
       "attributes": {
+        "alignment": "Center",
         "padding": 10.0
       },
       "children": [
         {
           "type": "Text",
           "attributes": {
-            "caption": "Your order is still being processed. You will receive a notification once completed."
+            "caption": "Your transaction is still being processed. You will receive a notification once completed.",
+            "alignment": "Center"
           },
           "children": []
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "attributes": {
+        "padding": 10.0
+      },
+      "children": [
+        {
+          "type": "Button",
+          "attributes": {
+            "caption": "OK",
+            "padding": 15.0,
+            "type": "Elevated"
+          },
+          "children": [],
+          "action": {
+            "type": "Route",
+            "url": "route:/~"
+          }
         }
       ]
     }

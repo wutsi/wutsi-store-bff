@@ -64,6 +64,15 @@
               "attributes": {},
               "children": [
                 {
+                  "type": "Icon",
+                  "attributes": {
+                    "code": "e238",
+                    "size": 40.0,
+                    "color": "#8B0000"
+                  },
+                  "children": []
+                },
+                {
                   "type": "Container",
                   "attributes": {
                     "alignment": "Center",
@@ -71,28 +80,10 @@
                   },
                   "children": [
                     {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "e238",
-                        "size": 80.0,
-                        "color": "#8B0000"
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "type": "Container",
-                  "attributes": {
-                    "alignment": "Center"
-                  },
-                  "children": [
-                    {
                       "type": "Text",
                       "attributes": {
-                        "caption": "Your order has failed. failure",
+                        "caption": "failure",
                         "color": "#8B0000",
-                        "bold": true,
                         "alignment": "Center"
                       },
                       "children": []
@@ -104,20 +95,21 @@
                   "attributes": {
                     "padding": 10.0
                   },
-                  "children": []
-                },
-                {
-                  "type": "Button",
-                  "attributes": {
-                    "caption": "OK",
-                    "padding": 15.0,
-                    "type": "Elevated"
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "route:/~"
-                  }
+                  "children": [
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "OK",
+                        "padding": 15.0,
+                        "type": "Elevated"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "route:/~"
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -125,15 +117,5 @@
         }
       ]
     }
-  ],
-  "appBar": {
-    "type": "AppBar",
-    "attributes": {
-      "elevation": 0.0,
-      "backgroundColor": "#FFFFFF",
-      "foregroundColor": "#000000",
-      "automaticallyImplyLeading": false
-    },
-    "children": []
-  }
+  ]
 }

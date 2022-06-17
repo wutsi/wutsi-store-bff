@@ -64,6 +64,15 @@
               "attributes": {},
               "children": [
                 {
+                  "type": "Icon",
+                  "attributes": {
+                    "code": "f269",
+                    "size": 40.0,
+                    "color": "#1D7EDF"
+                  },
+                  "children": []
+                },
+                {
                   "type": "Container",
                   "attributes": {
                     "alignment": "Center",
@@ -71,29 +80,10 @@
                   },
                   "children": [
                     {
-                      "type": "Icon",
-                      "attributes": {
-                        "code": "f269",
-                        "size": 80.0,
-                        "color": "#856404"
-                      },
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "type": "Container",
-                  "attributes": {
-                    "alignment": "Center"
-                  },
-                  "children": [
-                    {
                       "type": "Text",
                       "attributes": {
-                        "caption": "Your order is being processed. You'll receive a notification once completed.",
-                        "bold": true,
-                        "alignment": "Center",
-                        "maxLines": 3
+                        "caption": "Your transaction is still being processed. You will receive a notification once completed.",
+                        "alignment": "Center"
                       },
                       "children": []
                     }
@@ -104,33 +94,21 @@
                   "attributes": {
                     "padding": 10.0
                   },
-                  "children": []
-                },
-                {
-                  "type": "Button",
-                  "attributes": {
-                    "caption": "Check Order Status",
-                    "padding": 15.0,
-                    "type": "Elevated"
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "http://localhost:0/checkout/success?order-id=111"
-                  }
-                },
-                {
-                  "type": "Button",
-                  "attributes": {
-                    "caption": "OK",
-                    "padding": 15.0,
-                    "type": "Text"
-                  },
-                  "children": [],
-                  "action": {
-                    "type": "Route",
-                    "url": "route:/~"
-                  }
+                  "children": [
+                    {
+                      "type": "Button",
+                      "attributes": {
+                        "caption": "OK",
+                        "padding": 15.0,
+                        "type": "Elevated"
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Route",
+                        "url": "route:/~"
+                      }
+                    }
+                  ]
                 }
               ]
             }
@@ -138,15 +116,5 @@
         }
       ]
     }
-  ],
-  "appBar": {
-    "type": "AppBar",
-    "attributes": {
-      "elevation": 0.0,
-      "backgroundColor": "#FFFFFF",
-      "foregroundColor": "#000000",
-      "automaticallyImplyLeading": false
-    },
-    "children": []
-  }
+  ]
 }

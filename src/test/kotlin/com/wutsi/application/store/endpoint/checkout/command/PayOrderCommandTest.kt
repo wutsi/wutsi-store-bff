@@ -67,7 +67,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        doReturn(CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)).whenever(paymentApi).createCharge(any())
+        val resp = CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)
+        doReturn(resp).whenever(paymentApi).createCharge(any())
 
         // WHEN
         val response = rest.postForEntity(url, null, Action::class.java)
@@ -89,7 +90,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&transaction-id=${resp.id}", action.url)
     }
 
     @Test
@@ -97,7 +98,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         // GIVEN
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        doReturn(CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)).whenever(paymentApi).createCharge(any())
+        val resp = CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)
+        doReturn(resp).whenever(paymentApi).createCharge(any())
 
         // WHEN
         url =
@@ -121,7 +123,7 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}", action.url)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&transaction-id=${resp.id}", action.url)
     }
 
     @Test

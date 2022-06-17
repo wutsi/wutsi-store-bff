@@ -139,6 +139,11 @@ abstract class AbstractEndpoint {
         url = "route:/..",
     )
 
+    protected fun gotoHomeScreen() = Action(
+        type = ActionType.Route,
+        url = "route:/~",
+    )
+
     protected fun executeCommand(url: String) = Action(
         type = ActionType.Command,
         url = url

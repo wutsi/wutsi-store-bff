@@ -76,7 +76,7 @@
                         {
                           "type": "Text",
                           "attributes": {
-                            "caption": "Please wait while we are processing your payment..."
+                            "caption": "Processing the transaction. Please wait..."
                           },
                           "children": []
                         }
@@ -98,14 +98,5 @@
         }
       ]
     }
-  ],
-  "appBar": {
-    "type": "AppBar",
-    "attributes": {
-      "elevation": 0.0,
-      "backgroundColor": "#FFFFFF",
-      "foregroundColor": "#000000"
-    },
-    "children": []
-  }
+  ]
 }

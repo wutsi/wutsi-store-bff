@@ -8,6 +8,10 @@ import com.wutsi.application.store.endpoint.TrackingHttpRequestInterceptor
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.entity.OrderStatus
+import com.wutsi.platform.payment.WutsiPaymentApi
+import com.wutsi.platform.payment.core.Status
+import com.wutsi.platform.payment.dto.GetTransactionResponse
+import com.wutsi.platform.payment.dto.Transaction
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,6 +25,9 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
 
     @MockBean
     private lateinit var orderApi: WutsiOrderApi
+
+    @MockBean
+    private lateinit var paymentApi: WutsiPaymentApi
 
     @BeforeEach
     override fun setUp() {
@@ -40,7 +47,10 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
         val order = createOrder(status = OrderStatus.OPENED)
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        val url = "http://localhost:$port/checkout/success?order-id=${order.id}"
+        val tx = createTransaction(status = Status.SUCCESSFUL)
+        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
+
+        val url = "http://localhost:$port/checkout/success?order-id=${order.id}&transaction-id=${tx.id}"
         assertEndpointEquals("/screens/checkout/success.json", url)
     }
 
@@ -58,7 +68,14 @@ internal class CheckoutSuccessScreenTest : AbstractEndpointTest() {
         val order = createOrder(status = OrderStatus.CREATED)
         doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
 
-        val url = "http://localhost:$port/checkout/success?order-id=${order.id}"
+        val tx = createTransaction(status = Status.PENDING)
+        doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
+
+        val url = "http://localhost:$port/checkout/success?order-id=${order.id}&transaction-id=${tx.id}"
         assertEndpointEquals("/screens/checkout/timeout.json", url)
     }
+
+    private fun createTransaction(status: Status) = Transaction(
+        status = status.name
+    )
 }
