@@ -224,10 +224,10 @@ class ProductScreen(
     }
 
     private fun toCartWidget(merchant: Account, product: Product, cart: Cart?): WidgetAware? {
-        if (cart == null)
+        if (!togglesProvider.isCartEnabled())
             return null
 
-        val item = cart.products.find { it.productId == product.id }
+        val item = cart?.products?.find { it.productId == product.id }
         return if (item != null)
             Row(
                 children = listOf(
