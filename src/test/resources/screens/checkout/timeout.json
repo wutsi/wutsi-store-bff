@@ -2,7 +2,7 @@
   "type": "Screen",
   "attributes": {
     "id": "page.checkout.success",
-    "safe": false,
+    "safe": true,
     "backgroundColor": "#e8e8e8"
   },
   "children": [

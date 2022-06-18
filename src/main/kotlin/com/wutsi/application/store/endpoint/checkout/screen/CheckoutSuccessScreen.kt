@@ -23,10 +23,6 @@ class CheckoutSuccessScreen(
     private val accountApi: WutsiAccountApi,
     private val paymentApi: WutsiPaymentApi,
 ) : AbstractQuery() {
-    companion object {
-        const val ICON_SIZE = 80.0
-    }
-
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
@@ -41,6 +37,7 @@ class CheckoutSuccessScreen(
             id = error?.let { Page.CHECKOUT_ERROR } ?: Page.CHECKOUT_SUCCESS,
             backgroundColor = Theme.COLOR_GRAY_LIGHT,
             appBar = null,
+            safe = true,
             child = Column(
                 children = listOf(
                     toSectionWidget(
