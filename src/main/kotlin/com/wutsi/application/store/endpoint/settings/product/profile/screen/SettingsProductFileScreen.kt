@@ -25,7 +25,7 @@ class SettingsProductFileScreen(
 
     override fun getPageId() = Page.SETTINGS_STORE_PRODUCT_FILE
 
-    override fun showSubmitButton() = false
+    override fun getSubmitAction(id: Long, name: String) = gotoPreviousScreen()
 
     override fun getInputWidget(product: Product): WidgetAware = Column(
         children = listOfNotNull(

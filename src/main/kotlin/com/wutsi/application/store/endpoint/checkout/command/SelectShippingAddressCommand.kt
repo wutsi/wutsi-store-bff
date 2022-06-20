@@ -22,7 +22,7 @@ class SelectShippingAddressCommand(
         orderApi.setShippingAddress(
             orderId,
             SetAddressRequest(
-                id = addressId
+                addressId = addressId
             )
         )
 

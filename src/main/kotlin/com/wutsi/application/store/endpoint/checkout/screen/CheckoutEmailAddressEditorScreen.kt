@@ -1,16 +1,11 @@
 package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.CityService
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
-import com.wutsi.application.store.endpoint.checkout.dto.SelectShippingCountryRequest
-import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
-import com.wutsi.flutter.sdui.DropdownButton
-import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Form
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.Screen
@@ -21,44 +16,20 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
-import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.Locale
 
 @RestController
-@RequestMapping("/checkout/address-editor")
-class CheckoutAddressEditorScreen(
-    private val cityService: CityService,
-    private val orderApi: WutsiOrderApi,
-) : AbstractQuery() {
+@RequestMapping("/checkout/email-address-editor")
+class CheckoutEmailAddressEditorScreen : AbstractQuery() {
 
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
-        @RequestBody request: SelectShippingCountryRequest
     ): Widget {
         val account = securityContext.currentAccount()
-        val country = Locale("en", request.country).getDisplayCountry(LocaleContextHolder.getLocale())
-        val cities = mutableListOf(
-            DropdownMenuItem(
-                caption = "",
-                value = getText("page.checkout.address.editor.city")
-            )
-        )
-        cities.addAll(
-            cityService.search(null, listOf(request.country))
-                .map {
-                    DropdownMenuItem(
-                        value = it.id.toString(),
-                        caption = "${it.name}, $country"
-                    )
-                }
-                .sortedBy { it.caption }
-        )
 
         return Screen(
             id = Page.CHECKOUT_ADDRESS_EDITOR,
@@ -106,20 +77,11 @@ class CheckoutAddressEditorScreen(
                                     padding = 10.0,
                                     child = Input(
                                         name = "street",
-                                        value = account.street,
-                                        caption = getText("page.checkout.address.editor.street"),
+                                        value = account.email,
+                                        caption = getText("page.checkout.address.editor.email"),
                                         maxLength = 160,
-                                    )
-                                ),
-                                Container(
-                                    padding = 10.0,
-                                    child = DropdownButton(
-                                        name = "cityId",
-                                        value = if (account.country == request.country)
-                                            account.cityId?.toString()
-                                        else
-                                            null,
-                                        children = cities
+                                        type = InputType.Email,
+                                        required = true
                                     )
                                 ),
                                 Container(
@@ -129,7 +91,7 @@ class CheckoutAddressEditorScreen(
                                         type = InputType.Submit,
                                         caption = getText("page.checkout.address.editor.button.submit"),
                                         action = executeCommand(
-                                            urlBuilder.build("commands/save-shipping-address?order-id=$orderId&country=${request.country}&type=POSTAL")
+                                            urlBuilder.build("commands/save-shipping-address?order-id=$orderId&type=EMAIL")
                                         )
                                     )
                                 )

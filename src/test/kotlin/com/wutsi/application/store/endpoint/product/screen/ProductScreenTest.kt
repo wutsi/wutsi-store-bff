@@ -17,6 +17,7 @@ import com.wutsi.ecommerce.cart.dto.GetCartResponse
 import com.wutsi.ecommerce.cart.dto.Product
 import com.wutsi.ecommerce.catalog.dto.GetProductResponse
 import com.wutsi.ecommerce.catalog.dto.SearchProductResponse
+import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
 import com.wutsi.ecommerce.shipping.dto.SearchRateResponse
 import com.wutsi.ecommerce.shipping.entity.ShippingType
@@ -88,6 +89,15 @@ internal class ProductScreenTest : AbstractEndpointTest() {
         doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
 
         assertEndpointEquals("/screens/product/product-with-image.json", url)
+        assertTrackPushed(product)
+    }
+
+    @Test
+    fun numericProduct() {
+        val product = createProduct(true, type = ProductType.NUMERIC)
+        doReturn(GetProductResponse(product)).whenever(catalogApi).getProduct(any())
+
+        assertEndpointEquals("/screens/product/product-numeric.json", url)
         assertTrackPushed(product)
     }
 

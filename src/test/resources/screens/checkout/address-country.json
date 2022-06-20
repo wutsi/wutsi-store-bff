@@ -2333,7 +2333,7 @@
   "appBar": {
     "type": "AppBar",
     "attributes": {
-      "title": "Shipping",
+      "title": "Shipping Address",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
       "foregroundColor": "#000000"

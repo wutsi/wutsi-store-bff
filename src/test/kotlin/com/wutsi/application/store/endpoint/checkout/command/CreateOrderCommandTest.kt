@@ -14,6 +14,7 @@ import com.wutsi.ecommerce.cart.dto.Product
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.CreateOrderRequest
 import com.wutsi.ecommerce.order.dto.CreateOrderResponse
+import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.ecommerce.order.error.ErrorURN
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
@@ -68,6 +69,7 @@ internal class CreateOrderCommandTest : AbstractEndpointTest() {
         val request = argumentCaptor<CreateOrderRequest>()
         verify(orderApi).createOrder(request.capture())
         assertEquals(111L, request.firstValue.merchantId)
+        assertEquals(AddressType.POSTAL.name, request.firstValue.addressType)
         assertEquals(2, request.firstValue.items.size)
         assertEquals(cart.products[0].productId, request.firstValue.items[0].productId)
         assertEquals(cart.products[0].quantity, request.firstValue.items[0].quantity)

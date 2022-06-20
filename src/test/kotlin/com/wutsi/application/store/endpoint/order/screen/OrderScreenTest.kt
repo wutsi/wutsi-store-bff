@@ -10,6 +10,7 @@ import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
+import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.order.entity.PaymentStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
@@ -33,25 +34,6 @@ internal class OrderScreenTest : AbstractEndpointTest() {
 
     @MockBean
     private lateinit var shippingApi: WutsiShippingApi
-
-    private val order = Order(
-        id = "111",
-        merchantId = 55L,
-        accountId = 1L,
-        totalPrice = 25000.0,
-        subTotalPrice = 30000.0,
-        savingsAmount = 5000.0,
-        currency = "XAF",
-        status = OrderStatus.OPENED.name,
-        paymentStatus = PaymentStatus.PARTIALLY_PAID.name,
-        totalPaid = 20000.0,
-        reservationId = 777L,
-        created = OffsetDateTime.of(2020, 5, 5, 1, 1, 0, 0, ZoneOffset.UTC),
-        items = listOf(
-            OrderItem(productId = 1, quantity = 10, unitPrice = 100.0, unitComparablePrice = 150.0),
-            OrderItem(productId = 2, quantity = 1, unitPrice = 15000.0)
-        )
-    )
 
     private val products = listOf(
         ProductSummary(id = 1L, title = "Item 1"),
@@ -124,6 +106,7 @@ internal class OrderScreenTest : AbstractEndpointTest() {
         items = listOf(
             OrderItem(productId = 1, quantity = 10, unitPrice = 100.0, unitComparablePrice = 150.0),
             OrderItem(productId = 2, quantity = 1, unitPrice = 15000.0)
-        )
+        ),
+        addressType = AddressType.POSTAL.name,
     )
 }

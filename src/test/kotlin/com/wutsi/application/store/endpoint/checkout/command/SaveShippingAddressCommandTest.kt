@@ -1,11 +1,15 @@
 package com.wutsi.application.store.endpoint.checkout.command
 
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
 import com.wutsi.application.store.endpoint.checkout.dto.SaveShippingAddressRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.CreateAddressRequest
+import com.wutsi.ecommerce.order.dto.CreateAddressResponse
 import com.wutsi.ecommerce.order.dto.SetAddressRequest
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
@@ -30,11 +34,15 @@ internal class SaveShippingAddressCommandTest : AbstractEndpointTest() {
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/commands/save-shipping-address?order-id=111&country=CM"
+        url = "http://localhost:$port/commands/save-shipping-address?order-id=111&country=CM&type=POSTAL"
     }
 
     @Test
     fun select() {
+        // GIVEN
+        val addressId = 1111L
+        doReturn(CreateAddressResponse(id = addressId)).whenever(orderApi).createAddress(any())
+
         // WHEN
         val request = SaveShippingAddressRequest(
             firstName = "Ray",
@@ -48,14 +56,17 @@ internal class SaveShippingAddressCommandTest : AbstractEndpointTest() {
         // THEN
         assertEquals(200, response.statusCodeValue)
 
-        val req = argumentCaptor<SetAddressRequest>()
-        verify(orderApi).setShippingAddress(eq("111"), req.capture())
+        val req = argumentCaptor<CreateAddressRequest>()
+        verify(orderApi).createAddress(req.capture())
         assertEquals(request.firstName, req.firstValue.firstName)
         assertEquals(request.lastName, req.firstValue.lastName)
         assertEquals(request.email, req.firstValue.email)
         assertEquals(request.street, req.firstValue.street)
         assertEquals(request.cityId, req.firstValue.cityId)
         assertEquals("CM", req.firstValue.country)
+        assertEquals("POSTAL", req.firstValue.type)
+
+        verify(orderApi).setShippingAddress("111", SetAddressRequest(addressId = addressId))
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)

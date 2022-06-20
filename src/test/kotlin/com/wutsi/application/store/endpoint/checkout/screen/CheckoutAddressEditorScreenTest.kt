@@ -30,6 +30,6 @@ internal class CheckoutAddressEditorScreenTest : AbstractEndpointTest() {
 
         val url = "http://localhost:$port/checkout/address-editor?order-id=111"
         val request = mapOf("country" to "CM")
-        assertEndpointEquals("/screens/checkout/address-editor.json", url, request)
+        assertEndpointEquals("/screens/checkout/address-editor-postal.json", url, request)
     }
 }

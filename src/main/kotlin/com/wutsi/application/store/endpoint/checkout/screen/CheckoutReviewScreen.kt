@@ -30,7 +30,6 @@ import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.tenant.dto.Tenant
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -45,8 +44,6 @@ class CheckoutReviewScreen(
     private val catalogApi: WutsiCatalogApi,
     private val shippingApi: WutsiShippingApi,
     private val tenantProvider: TenantProvider,
-
-    @Value("\${wutsi.application.login-url}") private val loginUrl: String
 ) : AbstractQuery() {
 
     @PostMapping
@@ -177,7 +174,7 @@ class CheckoutReviewScreen(
                 Container(
                     padding = 5.0,
                     child = ShippingCard(
-                        model = sharedUIMapper.toShippingModel(order, shipping, tenant)
+                        model = sharedUIMapper.toShippingModel(order, shipping, tenant),
                     )
                 )
             )
@@ -192,7 +189,9 @@ class CheckoutReviewScreen(
                     Container(
                         padding = 5.0,
                         child = AddressCard(
-                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!)
+                            model = sharedUIMapper.toAddressModel(order.shippingAddress!!),
+                            showEmailAddress = true,
+                            showPostalAddress = true,
                         )
                     )
                 )
@@ -203,22 +202,6 @@ class CheckoutReviewScreen(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 children = children
-            )
-        )
-    }
-
-    private fun getPaymentUrl(orderId: String): String {
-        val me = accountApi.getAccount(securityContext.currentAccountId()).account
-        return "?phone=" + encodeURLParam(me.phone!!.number) +
-            "&icon=" + Theme.ICON_LOCK +
-            "&screen-id=" + Page.CHECKOUT_PIN +
-            "&title=" + encodeURLParam(getText("page.checkout-pin.title")) +
-            "&sub-title=" + encodeURLParam(getText("page.checkout-pin.sub-title")) +
-            "&auth=false" +
-            "&return-to-route=false" +
-            "&return-url=" + encodeURLParam(
-            urlBuilder.build(
-                "commands/pay-order?order-id=$orderId"
             )
         )
     }

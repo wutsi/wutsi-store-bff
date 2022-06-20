@@ -44,19 +44,60 @@
             {
               "type": "Container",
               "attributes": {
-                "alignment": "Center",
-                "padding": 10.0
+                "alignment": "TopLeft",
+                "padding": 10.0,
+                "margin": 10.0,
+                "border": 1.0,
+                "borderRadius": 4.0,
+                "borderColor": "#8c8c8c",
+                "width": 1.7976931348623157E308
               },
               "children": [
                 {
-                  "type": "Text",
+                  "type": "Column",
                   "attributes": {
-                    "caption": "No shipping address found",
-                    "alignment": "Center"
+                    "mainAxisAlignment": "start",
+                    "crossAxisAlignment": "start"
                   },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Roger Sponsible",
+                            "bold": true
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "roger.milla@gmail.com"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
                 }
-              ]
+              ],
+              "action": {
+                "type": "Command",
+                "url": "http://localhost:0/commands/select-shipping-address?order-id=111&address-id=1"
+              }
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "color": "#8c8c8c"
+              },
+              "children": []
             },
             {
               "type": "Container",
@@ -74,7 +115,7 @@
                   "children": [],
                   "action": {
                     "type": "Route",
-                    "url": "http://localhost:0/checkout/address-country?order-id=111"
+                    "url": "http://localhost:0/checkout/email-address-editor?order-id=111"
                   }
                 }
               ]

@@ -1,0 +1,198 @@
+{
+  "type": "Screen",
+  "attributes": {
+    "id": "page.checkout.address.editor",
+    "safe": false
+  },
+  "children": [
+    {
+      "type": "SingleChildScrollView",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Column",
+          "attributes": {
+            "mainAxisAlignment": "start",
+            "crossAxisAlignment": "start"
+          },
+          "children": [
+            {
+              "type": "Container",
+              "attributes": {
+                "alignment": "Center",
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Text",
+                  "attributes": {
+                    "caption": "Enter the address details where to ship the products",
+                    "color": "#1D7EDF",
+                    "size": 16.0
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Form",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Input",
+                      "attributes": {
+                        "name": "firstName",
+                        "hideText": false,
+                        "required": true,
+                        "caption": "First Name (Required)",
+                        "enabled": true,
+                        "readOnly": false,
+                        "type": "Text",
+                        "maxLength": 160,
+                        "minLength": 0
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Input",
+                      "attributes": {
+                        "name": "lastName",
+                        "hideText": false,
+                        "required": true,
+                        "caption": "Last Name (Required)",
+                        "enabled": true,
+                        "readOnly": false,
+                        "type": "Text",
+                        "maxLength": 160,
+                        "minLength": 0
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Input",
+                      "attributes": {
+                        "name": "street",
+                        "value": "3030 Linton",
+                        "hideText": false,
+                        "required": false,
+                        "caption": "Street",
+                        "enabled": true,
+                        "readOnly": false,
+                        "type": "Text",
+                        "maxLength": 160,
+                        "minLength": 0
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "DropdownButton",
+                      "attributes": {
+                        "name": "cityId",
+                        "value": "2222"
+                      },
+                      "children": [
+                        {
+                          "type": "DropdownMenuItem",
+                          "attributes": {
+                            "caption": "",
+                            "enabled": true,
+                            "value": "Select the City (required)"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "DropdownMenuItem",
+                          "attributes": {
+                            "caption": "Douala, Cameroon",
+                            "enabled": true,
+                            "value": "2"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "DropdownMenuItem",
+                          "attributes": {
+                            "caption": "Yaounde, Cameroon",
+                            "enabled": true,
+                            "value": "1"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "attributes": {
+                    "padding": 10.0
+                  },
+                  "children": [
+                    {
+                      "type": "Input",
+                      "attributes": {
+                        "name": "submit",
+                        "hideText": false,
+                        "required": false,
+                        "caption": "Submit",
+                        "enabled": true,
+                        "readOnly": false,
+                        "type": "Submit",
+                        "minLength": 0
+                      },
+                      "children": [],
+                      "action": {
+                        "type": "Command",
+                        "url": "http://localhost:0/commands/save-shipping-address?order-id=111&country=CM&type=POSTAL"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "title": "Shipping Address",
+      "elevation": 0.0,
+      "backgroundColor": "#FFFFFF",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
+}

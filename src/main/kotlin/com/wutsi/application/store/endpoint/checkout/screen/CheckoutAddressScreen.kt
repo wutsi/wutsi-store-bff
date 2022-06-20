@@ -2,10 +2,13 @@ package com.wutsi.application.store.endpoint.checkout.screen
 
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.CityService
+import com.wutsi.application.shared.ui.AddressCard
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Address
+import com.wutsi.ecommerce.order.dto.Order
+import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
 import com.wutsi.flutter.sdui.Column
@@ -54,8 +57,9 @@ class CheckoutAddressScreen(
             )
         )
 
-        val addresses = orderApi.listAddresses().addresses
-        children.addAll(toAddressWidget(orderId, addresses))
+        val order = orderApi.getOrder(orderId).order
+        val addresses = orderApi.listAddresses(type = order.addressType).addresses
+        children.addAll(toAddressWidget(order, addresses))
 
         return Screen(
             id = Page.CHECKOUT_ADDRESS,
@@ -75,7 +79,7 @@ class CheckoutAddressScreen(
         ).toWidget()
     }
 
-    private fun toAddressWidget(orderId: String, addresses: List<Address>): List<WidgetAware> {
+    private fun toAddressWidget(order: Order, addresses: List<Address>): List<WidgetAware> {
         val children = mutableListOf<WidgetAware>()
         if (addresses.isEmpty())
             children.addAll(
@@ -86,12 +90,6 @@ class CheckoutAddressScreen(
                         child = Text(
                             getText("page.checkout.address.no-address"),
                             alignment = TextAlignment.Center
-                        )
-                    ),
-                    Button(
-                        caption = getText("page.checkout.address.button.add-address"),
-                        action = gotoUrl(
-                            urlBuilder.build("checkout/address-country?order-id=$orderId")
                         )
                     )
                 )
@@ -111,31 +109,36 @@ class CheckoutAddressScreen(
                             mainAxisAlignment = MainAxisAlignment.start,
                             crossAxisAlignment = CrossAxisAlignment.start,
                             children = listOf(
-                                Text("${it.firstName} ${it.lastName}", bold = true),
-                                Text(toAddressLabel(it)),
+                                AddressCard(
+                                    model = sharedUIMapper.toAddressModel(it)
+                                )
                             )
                         ),
                         action = executeCommand(
-                            urlBuilder.build("commands/select-shipping-address?order-id=$orderId&address-id=${it.id}")
+                            urlBuilder.build("commands/select-shipping-address?order-id=${order.id}&address-id=${it.id}")
                         ),
                     )
                 }
             )
 
             children.add(Divider(color = Theme.COLOR_DIVIDER))
-            children.add(
-                Container(
-                    padding = 10.0,
-                    child = Button(
-                        type = ButtonType.Outlined,
-                        caption = getText("page.checkout.address.button.add-address"),
-                        action = gotoUrl(
-                            urlBuilder.build("checkout/address-country?order-id=$orderId")
-                        )
+        }
+
+        children.add(
+            Container(
+                padding = 10.0,
+                child = Button(
+                    type = ButtonType.Outlined,
+                    caption = getText("page.checkout.address.button.add-address"),
+                    action = gotoUrl(
+                        url = if (order.addressType == AddressType.EMAIL.name)
+                            urlBuilder.build("checkout/email-address-editor?order-id=${order.id}")
+                        else
+                            urlBuilder.build("checkout/address-country?order-id=${order.id}")
                     )
                 )
             )
-        }
+        )
 
         return children
     }

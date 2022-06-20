@@ -14,41 +14,40 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/commands/create-order")
-class CreateOrderCommand(
+@RequestMapping("/commands/buy-now")
+class BuyOrderCommand(
     private val orderApi: WutsiOrderApi,
     private val logger: KVLogger,
 ) : AbstractCommand() {
     @PostMapping
     fun index(
         @RequestParam(name = "merchant-id") merchantId: Long,
+        @RequestParam(name = "product-id") productId: Long,
+        @RequestParam(name = "address-type") addressType: AddressType,
     ): Action {
         try {
-            val cart = cartApi.getCart(merchantId).cart
             val orderId = orderApi.createOrder(
                 CreateOrderRequest(
-                    addressType = AddressType.POSTAL.name,
+                    addressType = addressType.name,
                     merchantId = merchantId,
-                    items = cart.products.map {
+                    items = listOf(
                         CreateOrderItem(
-                            productId = it.productId,
-                            quantity = it.quantity
+                            productId = productId,
+                            quantity = 1
                         )
-                    },
+                    ),
                 )
             ).id
             logger.add("order_id", orderId)
 
             val shippingEnabled = togglesProvider.isShippingEnabled()
             logger.add("shipping_enabled", shippingEnabled)
-            return if (shippingEnabled)
-                gotoUrl(
-                    url = urlBuilder.build("checkout/address?order-id=$orderId")
-                )
-            else
-                gotoUrl(
-                    url = urlBuilder.build("checkout/review?order-id=$orderId")
-                )
+            return gotoUrl(
+                url = if (shippingEnabled)
+                    urlBuilder.build("checkout/address?order-id=$orderId")
+                else
+                    urlBuilder.build("checkout/review?order-id=$orderId")
+            )
         } catch (ex: FeignException.Conflict) {
             logger.setException(ex)
             return showError(getErrorText(ex))

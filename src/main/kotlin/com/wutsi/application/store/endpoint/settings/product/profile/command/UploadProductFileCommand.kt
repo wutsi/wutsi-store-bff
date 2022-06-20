@@ -3,7 +3,6 @@ package com.wutsi.application.store.endpoint.settings.product.profile.command
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
 import com.wutsi.ecommerce.catalog.dto.UpdateProductAttributeRequest
-import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.core.logging.KVLogger
 import com.wutsi.platform.core.storage.StorageService
 import org.springframework.web.bind.annotation.PostMapping
@@ -26,13 +25,13 @@ class UploadProductFileCommand(
     fun index(
         @RequestParam(name = "product-id") productId: Long,
         @RequestParam file: MultipartFile
-    ): Action {
+    ) {
         val contentType = Files.probeContentType(Path.of(file.originalFilename))
         logger.add("file_name", file.originalFilename)
         logger.add("file_content_type", contentType)
 
         // Upload file
-        val path = "product/$productId/picture/${UUID.randomUUID()}-${file.originalFilename}"
+        val path = "product/$productId/picture/${UUID.randomUUID()}/${file.originalFilename}"
         val url = storageService.store(path, file.inputStream, contentType)
         logger.add("picture_url", url)
 
@@ -44,7 +43,5 @@ class UploadProductFileCommand(
                 value = url.toString()
             )
         )
-
-        return gotoPreviousScreen()
     }
 }

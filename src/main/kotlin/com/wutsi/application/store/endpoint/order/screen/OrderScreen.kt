@@ -16,7 +16,6 @@ import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
-import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.order.entity.PaymentStatus
 import com.wutsi.ecommerce.shipping.WutsiShippingApi
@@ -223,7 +222,6 @@ class OrderScreen(
 
     private fun shippingTab(order: Order, shipping: Shipping, tenant: Tenant): WidgetAware {
         val children = mutableListOf<WidgetAware>()
-        val type = ShippingType.valueOf(shipping.type)
 
         // Shipping Method
         children.add(
@@ -253,8 +251,7 @@ class OrderScreen(
                             Text(getText("page.order.shipping-address"), bold = true, size = Theme.TEXT_SIZE_LARGE),
                             AddressCard(
                                 model = sharedUIMapper.toAddressModel(order.shippingAddress!!),
-                                showPostalAddress = type.addressType == AddressType.POSTAL,
-                                showEmailAddress = type.addressType == AddressType.EMAIL,
+                                showPostalAddress = shipping.type != ShippingType.IN_STORE_PICKUP.name
                             )
                         )
                     )

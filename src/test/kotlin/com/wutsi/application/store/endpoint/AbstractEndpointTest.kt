@@ -16,6 +16,7 @@ import com.wutsi.ecommerce.catalog.entity.ProductType
 import com.wutsi.ecommerce.order.dto.Address
 import com.wutsi.ecommerce.order.dto.Order
 import com.wutsi.ecommerce.order.dto.OrderItem
+import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.ecommerce.order.entity.OrderStatus
 import com.wutsi.ecommerce.shipping.dto.RateSummary
 import com.wutsi.ecommerce.shipping.dto.Shipping
@@ -367,6 +368,7 @@ abstract class AbstractEndpointTest {
         cityId = 2222L,
         hasStore = true,
         street = "3030 Linton",
+        email = "ray.sponsible@gmail.com"
     )
 
     protected fun createAccountSummary(id: Long = ACCOUNT_ID, displayName: String = "Ray Sponsible") = AccountSummary(
@@ -387,7 +389,7 @@ abstract class AbstractEndpointTest {
         deliveryTime = 24,
         cityId = cityId,
         country = "CM",
-        street = "3030 Linton"
+        street = "3030 Linton",
     )
 
     fun createShippingSummary(type: ShippingType, enabled: Boolean = true, rate: Double = 150000.0) = ShippingSummary(
@@ -431,16 +433,23 @@ abstract class AbstractEndpointTest {
         deliveryFees = 1000.0,
         accountId = ACCOUNT_ID,
         created = OffsetDateTime.of(LocalDateTime.of(2022, 4, 14, 0, 0, 0, 0), ZoneOffset.UTC),
+        addressType = AddressType.POSTAL.name,
     )
 
-    fun createAddress(id: Long = 111L, firstName: String = "Ray") = Address(
+    fun createAddress(
+        id: Long = 111L,
+        firstName: String = "Ray",
+        email: String? = null,
+        type: AddressType = AddressType.POSTAL
+    ) = Address(
         id = id,
         firstName = firstName,
         lastName = "Sponsible",
         country = "CM",
         cityId = 1000,
         street = "180 Rue des Manguier, Bonnapriso",
-        email = "ray.sponsible@gmail.com"
+        email = email,
+        type = type.name,
     )
 
     fun createSection(id: Long = 555L, title: String = "Deals", sortOrder: Int = 7) = Section(

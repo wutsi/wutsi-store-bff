@@ -21,6 +21,8 @@ import com.wutsi.ecommerce.catalog.dto.ProductSummary
 import com.wutsi.ecommerce.catalog.dto.SearchProductRequest
 import com.wutsi.ecommerce.catalog.entity.ProductSort
 import com.wutsi.ecommerce.catalog.entity.ProductStatus
+import com.wutsi.ecommerce.catalog.entity.ProductType
+import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.AspectRatio
@@ -148,6 +150,7 @@ class ProductScreen(
 
                         // Cart
                         toCartWidget(merchant, product, cart),
+                        toBuyNowWidget(merchant, product),
                     )
                 )
             )
@@ -224,7 +227,8 @@ class ProductScreen(
     }
 
     private fun toCartWidget(merchant: Account, product: Product, cart: Cart?): WidgetAware? {
-        if (!togglesProvider.isCartEnabled())
+        /* Only physical product are added into the cart */
+        if (!togglesProvider.isCartEnabled() || product.type != ProductType.PHYSICAL.name)
             return null
 
         val item = cart?.products?.find { it.productId == product.id }
@@ -250,6 +254,21 @@ class ProductScreen(
             )
         else
             null
+    }
+
+    private fun toBuyNowWidget(merchant: Account, product: Product): WidgetAware? {
+        val addressType = when (product.type.uppercase()) {
+            ProductType.NUMERIC.name -> AddressType.EMAIL
+            else -> return null
+        }
+
+        return Button(
+            padding = 10.0,
+            caption = getText("page.product.button.buy-now"),
+            action = executeCommand(
+                url = urlBuilder.build("commands/buy-now?product-id=${product.id}&merchant-id=${merchant.id}&address-type=$addressType")
+            )
+        )
     }
 
     private fun toAvailabilityWidget(product: Product): WidgetAware =

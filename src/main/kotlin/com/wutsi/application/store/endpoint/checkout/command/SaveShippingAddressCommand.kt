@@ -3,7 +3,9 @@ package com.wutsi.application.store.endpoint.checkout.command
 import com.wutsi.application.store.endpoint.AbstractCommand
 import com.wutsi.application.store.endpoint.checkout.dto.SaveShippingAddressRequest
 import com.wutsi.ecommerce.order.WutsiOrderApi
+import com.wutsi.ecommerce.order.dto.CreateAddressRequest
 import com.wutsi.ecommerce.order.dto.SetAddressRequest
+import com.wutsi.ecommerce.order.entity.AddressType
 import com.wutsi.flutter.sdui.Action
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,19 +21,24 @@ class SaveShippingAddressCommand(
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
-        @RequestParam(name = "country") country: String,
+        @RequestParam country: String,
+        @RequestParam type: AddressType,
         @RequestBody request: SaveShippingAddressRequest
     ): Action {
-        orderApi.setShippingAddress(
-            orderId,
-            SetAddressRequest(
+        val address = orderApi.createAddress(
+            CreateAddressRequest(
                 firstName = request.firstName,
                 lastName = request.lastName,
                 country = country,
                 cityId = request.cityId,
                 email = request.email,
-                street = request.street
+                street = request.street,
+                type = type.name
             )
+        )
+        orderApi.setShippingAddress(
+            orderId,
+            SetAddressRequest(addressId = address.id)
         )
 
         return gotoUrl(

@@ -33,7 +33,7 @@ internal class SelectShippingAddressCommandTest : AbstractEndpointTest() {
 
         val req = argumentCaptor<SetAddressRequest>()
         verify(orderApi).setShippingAddress(eq("111"), req.capture())
-        assertEquals(555L, req.firstValue.id)
+        assertEquals(555L, req.firstValue.addressId)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)

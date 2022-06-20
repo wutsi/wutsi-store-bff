@@ -61,19 +61,29 @@
                   },
                   "children": [
                     {
-                      "type": "Text",
+                      "type": "Column",
                       "attributes": {
-                        "caption": "Roger Sponsible",
-                        "bold": true
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
                       },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "180 Rue des Manguier, Bonnapriso\nYaounde, Cameroon"
-                      },
-                      "children": []
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Roger Sponsible",
+                            "bold": true
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "180 Rue des Manguier, Bonnapriso\nYaounde, Cameroon",
+                            "maxLines": 5
+                          },
+                          "children": []
+                        }
+                      ]
                     }
                   ]
                 }
@@ -103,19 +113,29 @@
                   },
                   "children": [
                     {
-                      "type": "Text",
+                      "type": "Column",
                       "attributes": {
-                        "caption": "Milla Sponsible",
-                        "bold": true
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
                       },
-                      "children": []
-                    },
-                    {
-                      "type": "Text",
-                      "attributes": {
-                        "caption": "180 Rue des Manguier, Bonnapriso\nYaounde, Cameroon"
-                      },
-                      "children": []
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Milla Sponsible",
+                            "bold": true
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "180 Rue des Manguier, Bonnapriso\nYaounde, Cameroon",
+                            "maxLines": 5
+                          },
+                          "children": []
+                        }
+                      ]
                     }
                   ]
                 }
