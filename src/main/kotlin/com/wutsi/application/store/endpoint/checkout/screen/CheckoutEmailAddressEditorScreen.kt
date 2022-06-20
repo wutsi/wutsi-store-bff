@@ -76,7 +76,7 @@ class CheckoutEmailAddressEditorScreen : AbstractQuery() {
                                 Container(
                                     padding = 10.0,
                                     child = Input(
-                                        name = "street",
+                                        name = "email",
                                         value = account.email,
                                         caption = getText("page.checkout.address.editor.email"),
                                         maxLength = 160,

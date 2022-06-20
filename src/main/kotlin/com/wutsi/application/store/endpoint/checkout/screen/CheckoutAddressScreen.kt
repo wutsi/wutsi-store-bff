@@ -110,7 +110,9 @@ class CheckoutAddressScreen(
                             crossAxisAlignment = CrossAxisAlignment.start,
                             children = listOf(
                                 AddressCard(
-                                    model = sharedUIMapper.toAddressModel(it)
+                                    model = sharedUIMapper.toAddressModel(it),
+                                    showPostalAddress = it.type == AddressType.POSTAL.name,
+                                    showEmailAddress = it.type == AddressType.EMAIL.name
                                 )
                             )
                         ),

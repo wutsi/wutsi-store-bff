@@ -21,7 +21,7 @@ class SaveShippingAddressCommand(
     @PostMapping
     fun index(
         @RequestParam(name = "order-id") orderId: String,
-        @RequestParam country: String,
+        @RequestParam(required = false) country: String? = null,
         @RequestParam type: AddressType,
         @RequestBody request: SaveShippingAddressRequest
     ): Action {

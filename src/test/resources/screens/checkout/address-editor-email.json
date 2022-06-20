@@ -93,7 +93,7 @@
                     {
                       "type": "Input",
                       "attributes": {
-                        "name": "street",
+                        "name": "email",
                         "value": "ray.sponsible@gmail.com",
                         "hideText": false,
                         "required": true,
