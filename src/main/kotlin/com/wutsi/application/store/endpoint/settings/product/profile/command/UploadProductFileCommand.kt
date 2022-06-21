@@ -31,9 +31,9 @@ class UploadProductFileCommand(
         logger.add("file_content_type", contentType)
 
         // Upload file
-        val path = "product/$productId/picture/${UUID.randomUUID()}/${file.originalFilename}"
+        val path = "product/$productId/files/${UUID.randomUUID()}/${file.originalFilename}"
         val url = storageService.store(path, file.inputStream, contentType)
-        logger.add("picture_url", url)
+        logger.add("file_url", url)
 
         // Update user profile
         catalogApi.updateProductAttribute(
