@@ -46,7 +46,7 @@
                   "type": "DropdownButton",
                   "attributes": {
                     "name": "subCategoryId",
-                    "hint": "Category (Required)",
+                    "hint": "Sub-Category (Required)",
                     "required": true
                   },
                   "children": [

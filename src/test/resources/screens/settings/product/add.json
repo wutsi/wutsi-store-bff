@@ -20,7 +20,7 @@
             {
               "type": "Text",
               "attributes": {
-                "caption": "Select the type of product you want to create"
+                "caption": "Select the product category"
               },
               "children": []
             }
