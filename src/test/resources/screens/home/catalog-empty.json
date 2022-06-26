@@ -17,15 +17,57 @@
           },
           "children": [
             {
+              "type": "ListItem",
+              "attributes": {
+                "caption": "Ray Sponsible",
+                "subCaption": "Business Account - Marketing - Cameroon",
+                "padding": 10.0,
+                "leading": {
+                  "type": "CircleAvatar",
+                  "attributes": {
+                    "radius": 24.0
+                  },
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "RS",
+                        "bold": true,
+                        "size": 16.0
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              },
+              "children": []
+            },
+            {
+              "type": "Divider",
+              "attributes": {
+                "height": 1.0,
+                "color": "#8c8c8c"
+              },
+              "children": []
+            },
+            {
               "type": "Center",
               "attributes": {},
               "children": [
                 {
-                  "type": "Text",
+                  "type": "Container",
                   "attributes": {
-                    "caption": "The store is empty!"
+                    "padding": 10.0
                   },
-                  "children": []
+                  "children": [
+                    {
+                      "type": "Text",
+                      "attributes": {
+                        "caption": "0 product(s)"
+                      },
+                      "children": []
+                    }
+                  ]
                 }
               ]
             }

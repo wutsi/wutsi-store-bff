@@ -8,6 +8,7 @@ import com.wutsi.application.shared.ui.PriceSummaryCard
 import com.wutsi.application.shared.ui.ProfileCard
 import com.wutsi.application.shared.ui.ProfileCardType
 import com.wutsi.application.shared.ui.ShippingCard
+import com.wutsi.application.shared.ui.TitleBarAction
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -24,7 +25,6 @@ import com.wutsi.ecommerce.shipping.entity.ShippingType
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Button
-import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.DefaultTabController
@@ -32,7 +32,6 @@ import com.wutsi.flutter.sdui.Dialog
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.DynamicWidget
 import com.wutsi.flutter.sdui.Flexible
-import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Row
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.SingleChildScrollView
@@ -346,19 +345,11 @@ class OrderScreen(
         )
 
     private fun getShareAction(order: Order, tenant: Tenant): WidgetAware =
-        Container(
-            padding = 4.0,
-            child = CircleAvatar(
-                radius = 20.0,
-                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                child = IconButton(
-                    icon = Theme.ICON_SHARE,
-                    size = 20.0,
-                    action = Action(
-                        type = ActionType.Share,
-                        url = "${tenant.webappUrl}/order?id=${order.id}",
-                    )
-                )
+        TitleBarAction(
+            icon = Theme.ICON_SHARE,
+            action = Action(
+                type = ActionType.Share,
+                url = "${tenant.webappUrl}/order?id=${order.id}",
             )
         )
 
@@ -370,22 +361,14 @@ class OrderScreen(
         if (buttons.isEmpty())
             return null
 
-        return Container(
-            padding = 4.0,
-            child = CircleAvatar(
-                radius = 20.0,
-                backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                child = IconButton(
-                    icon = Theme.ICON_MORE,
-                    size = 20.0,
-                    action = Action(
-                        type = ActionType.Prompt,
-                        prompt = Dialog(
-                            type = DialogType.Confirm,
-                            actions = buttons
-                        ).toWidget()
-                    )
-                )
+        return TitleBarAction(
+            icon = Theme.ICON_MORE,
+            action = Action(
+                type = ActionType.Prompt,
+                prompt = Dialog(
+                    type = DialogType.Confirm,
+                    actions = buttons
+                ).toWidget()
             )
         )
     }

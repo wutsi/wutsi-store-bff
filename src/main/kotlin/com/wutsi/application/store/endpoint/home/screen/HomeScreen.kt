@@ -7,6 +7,7 @@ import com.wutsi.application.shared.service.PhoneUtil
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProductActionProvider
 import com.wutsi.application.shared.ui.ProductGridView
+import com.wutsi.application.shared.ui.ProfileListItem
 import com.wutsi.application.store.endpoint.AbstractQuery
 import com.wutsi.application.store.endpoint.Page
 import com.wutsi.ecommerce.catalog.WutsiCatalogApi
@@ -29,7 +30,6 @@ import com.wutsi.flutter.sdui.enums.Alignment
 import com.wutsi.flutter.sdui.enums.Axis
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
-import com.wutsi.flutter.sdui.enums.MainAxisSize
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.Account
 import com.wutsi.platform.tenant.dto.Tenant
@@ -95,14 +95,23 @@ class HomeScreen(
         tenant: Tenant
     ): WidgetAware {
         val children = mutableListOf<WidgetAware>()
+        children.addAll(
+            listOf(
+                ProfileListItem(
+                    model = sharedUIMapper.toAccountModel(merchant)
+                ),
+                Divider(color = Theme.COLOR_DIVIDER, height = 1.0),
+            )
+        )
+
         val sections = toSectionListWidget(merchant)
-        if (sections != null) {
-            children.add(sections)
+        if (sections.isNotEmpty()) {
+            children.addAll(sections)
             children.add(Divider(color = Theme.COLOR_DIVIDER, height = 1.0))
         }
 
         val products = toProductListWidget(merchant, tenant)
-        children.add(products)
+        children.addAll(products)
 
         return SingleChildScrollView(
             child = Column(
@@ -116,7 +125,7 @@ class HomeScreen(
     private fun toProductListWidget(
         merchant: Account,
         tenant: Tenant
-    ): WidgetAware {
+    ): List<WidgetAware> {
         val products = catalogApi.searchProducts(
             SearchProductRequest(
                 limit = 100,
@@ -125,8 +134,10 @@ class HomeScreen(
             )
         ).products
         if (products.isEmpty())
-            return Center(
-                child = Text(caption = getText("page.catalog.empty", arrayOf(products.size)))
+            listOf(
+                Center(
+                    child = Text(caption = getText("page.catalog.empty", arrayOf(products.size)))
+                )
             )
 
         val children = mutableListOf<WidgetAware>()
@@ -156,47 +167,38 @@ class HomeScreen(
             )
         )
 
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            children = children
-        )
+        return children
     }
 
-    private fun toSectionListWidget(merchant: Account): WidgetAware? {
+    private fun toSectionListWidget(merchant: Account): List<WidgetAware> {
         val sections = catalogApi.listSections(merchant.id, true).sections
-            .take(5)
-        if (sections.isEmpty())
-            return null
+            .take(10)
 
-        return Column(
-            mainAxisAlignment = MainAxisAlignment.start,
-            crossAxisAlignment = CrossAxisAlignment.start,
-            mainAxisSize = MainAxisSize.min,
-            children = listOf(
-                Container(
-                    alignment = Alignment.CenterLeft,
-                    padding = 10.0,
-                    child = Text(bold = true, caption = getText("page.catalog.browse-by-sections"))
-                ),
-                Center(
-                    child = Wrap(
-                        spacing = 10.0,
-                        direction = Axis.Horizontal,
-                        children = sections.map {
-                            Container(
-                                child = Chip(
-                                    caption = it.title,
-                                    backgroundColor = Theme.COLOR_PRIMARY,
-                                    elevation = 5.0,
-                                ),
-                                action = gotoUrl(
-                                    url = urlBuilder.build("section?id=${it.id}")
-                                ),
-                            )
-                        }
-                    )
-                ),
+        return if (sections.isEmpty())
+            emptyList()
+        else listOf(
+            Container(
+                alignment = Alignment.CenterLeft,
+                padding = 10.0,
+                child = Text(bold = true, caption = getText("page.catalog.browse-by-sections"))
+            ),
+            Center(
+                child = Wrap(
+                    spacing = 10.0,
+                    direction = Axis.Horizontal,
+                    children = sections.map {
+                        Container(
+                            child = Chip(
+                                caption = it.title,
+                                backgroundColor = Theme.COLOR_PRIMARY,
+                                elevation = 5.0,
+                            ),
+                            action = gotoUrl(
+                                url = urlBuilder.build("section?id=${it.id}")
+                            ),
+                        )
+                    }
+                )
             ),
         )
     }

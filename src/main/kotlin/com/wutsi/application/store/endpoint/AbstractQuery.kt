@@ -2,15 +2,14 @@ package com.wutsi.application.store.endpoint
 
 import com.wutsi.analytics.tracking.entity.EventType
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.ui.CartIcon
+import com.wutsi.application.shared.ui.TitleBarAction
+import com.wutsi.application.shared.ui.TitleBarCartAction
 import com.wutsi.ecommerce.cart.dto.Cart
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.Button
-import com.wutsi.flutter.sdui.CircleAvatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Icon
-import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.ActionType
@@ -24,16 +23,12 @@ abstract class AbstractQuery : AbstractEndpoint() {
     protected fun getFileName(url: String?): String? {
         url ?: return null
 
-        try {
-            val file = URL(url).file
-            val i = file.lastIndexOf("/")
-            return if (i >= 0)
-                file.substring(i + 1)
-            else
-                file
-        } catch (ex: Exception) {
-            return null
-        }
+        val file = URL(url).file
+        val i = file.lastIndexOf("/")
+        return if (i >= 0)
+            file.substring(i + 1)
+        else
+            file
     }
 
     protected fun titleBarActions(
@@ -45,55 +40,31 @@ abstract class AbstractQuery : AbstractEndpoint() {
     ): List<WidgetAware> {
         return listOfNotNull(
             whatsappUrl?.let {
-                Container(
-                    padding = 4.0,
-                    child = CircleAvatar(
-                        radius = 20.0,
-                        backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                        child = IconButton(
-                            icon = Theme.ICON_CHAT,
-                            size = 20.0,
-                            action = Action(
-                                type = ActionType.Navigate,
-                                url = it,
-                                trackEvent = productId?.let { EventType.CHAT.name },
-                                trackProductId = productId?.toString()
-                            )
-                        )
-                    ),
+                TitleBarAction(
+                    icon = Theme.ICON_CHAT,
+                    action = Action(
+                        type = ActionType.Navigate,
+                        url = it,
+                        trackEvent = productId?.let { EventType.CHAT.name },
+                        trackProductId = productId?.toString()
+                    )
                 )
             },
             shareUrl?.let {
-                Container(
-                    padding = 4.0,
-                    child = CircleAvatar(
-                        radius = 20.0,
-                        backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                        child = IconButton(
-                            icon = Theme.ICON_SHARE,
-                            size = 20.0,
-                            action = Action(
-                                type = ActionType.Share,
-                                url = it,
-                                trackEvent = productId?.let { EventType.SHARE.name },
-                                trackProductId = productId?.toString()
-                            )
-                        ),
+                TitleBarAction(
+                    icon = Theme.ICON_SHARE,
+                    action = Action(
+                        type = ActionType.Share,
+                        url = it,
+                        trackEvent = productId?.let { EventType.SHARE.name },
+                        trackProductId = productId?.toString()
                     )
                 )
             },
             cart?.let {
-                Container(
-                    padding = 4.0,
-                    child = CircleAvatar(
-                        radius = 20.0,
-                        backgroundColor = Theme.COLOR_PRIMARY_LIGHT,
-                        child = CartIcon(
-                            productCount = it.products.size,
-                            size = 20.0,
-                            action = gotoUrl(urlBuilder.build("cart?merchant-id=$merchantId"))
-                        ),
-                    )
+                TitleBarCartAction(
+                    productCount = it.products.size,
+                    action = gotoUrl(urlBuilder.build("cart?merchant-id=$merchantId"))
                 )
             }
         )
