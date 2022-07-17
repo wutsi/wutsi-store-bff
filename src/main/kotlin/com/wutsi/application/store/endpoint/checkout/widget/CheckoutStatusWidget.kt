@@ -6,6 +6,7 @@ import com.wutsi.flutter.sdui.Widget
 import com.wutsi.platform.core.logging.KVLogger
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.Status
+import com.wutsi.platform.payment.dto.Transaction
 import feign.FeignException
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -32,9 +33,10 @@ class CheckoutStatusWidget(
         try {
             val tx = paymentApi.getTransaction(transactionId).transaction
             logger.add("transaction_status", tx.status)
-            return if (tx.status == Status.SUCCESSFUL.name)
+            return if (tx.status == Status.SUCCESSFUL.name) {
+                emptyCart(tx)
                 toTransactionStatusWidget(tx).toWidget()
-            else if (tx.status == Status.PENDING.name && count > MAX_COUNT)
+            } else if (tx.status == Status.PENDING.name && count > MAX_COUNT)
                 toTransactionStatusWidget(tx).toWidget()
             else
                 Noop().toWidget()
@@ -43,6 +45,15 @@ class CheckoutStatusWidget(
         } catch (ex: Throwable) {
             LOGGER.warn("Unexpected error", ex)
             return Noop().toWidget()
+        }
+    }
+
+    private fun emptyCart(tx: Transaction) {
+        try {
+            if (tx.recipientId != null && tx.orderId != null)
+                tx.recipientId?.let { cartApi.emptyCart(it) }
+        } catch (ex: Exception) {
+            LOGGER.warn("Unable to empty the cart", ex)
         }
     }
 }

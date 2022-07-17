@@ -3,8 +3,11 @@ package com.wutsi.application.store.endpoint.checkout.widget
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.doThrow
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.GetTransactionResponse
@@ -21,6 +24,9 @@ internal class CheckoutStatusWidgetTest : AbstractEndpointTest() {
     val port: Int = 0
 
     @MockBean
+    private lateinit var cartApi: WutsiCartApi
+
+    @MockBean
     private lateinit var paymentApi: WutsiPaymentApi
 
     @Test
@@ -30,6 +36,8 @@ internal class CheckoutStatusWidgetTest : AbstractEndpointTest() {
 
         val url = "http://localhost:$port/widgets/checkout-status?transaction-id=1111&count=1"
         assertEndpointEquals("/widgets/checkout/status-pending.json", url)
+
+        verify(cartApi, never()).emptyCart(any())
     }
 
     @Test
@@ -39,6 +47,8 @@ internal class CheckoutStatusWidgetTest : AbstractEndpointTest() {
 
         val url = "http://localhost:$port/widgets/checkout-status?transaction-id=1111&count=1"
         assertEndpointEquals("/widgets/checkout/status-success.json", url)
+
+        verify(cartApi).emptyCart(tx.recipientId!!)
     }
 
     @Test
@@ -50,10 +60,12 @@ internal class CheckoutStatusWidgetTest : AbstractEndpointTest() {
 
         val url = "http://localhost:$port/widgets/checkout-status?transaction-id=1111&count=1"
         assertEndpointEquals("/widgets/checkout/status-failed.json", url)
+
+        verify(cartApi, never()).emptyCart(any())
     }
 
     @Test
-    fun tooManyTries() {
+    fun tooManyRetries() {
         val tx = createTransaction(status = Status.PENDING)
         doReturn(GetTransactionResponse(tx)).whenever(paymentApi).getTransaction(any())
 
@@ -64,5 +76,7 @@ internal class CheckoutStatusWidgetTest : AbstractEndpointTest() {
 
     private fun createTransaction(status: Status) = Transaction(
         status = status.name,
+        orderId = "12090239",
+        recipientId = 111
     )
 }

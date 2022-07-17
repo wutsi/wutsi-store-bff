@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.store.endpoint.AbstractEndpointTest
+import com.wutsi.ecommerce.cart.WutsiCartApi
 import com.wutsi.ecommerce.order.WutsiOrderApi
 import com.wutsi.ecommerce.order.dto.GetOrderResponse
 import com.wutsi.ecommerce.order.dto.Order
@@ -41,6 +42,9 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
     @MockBean
     private lateinit var paymentApi: WutsiPaymentApi
+
+    @MockBean
+    private lateinit var cartApi: WutsiCartApi
 
     private lateinit var url: String
 
@@ -88,6 +92,33 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi, never()).getTransaction(any())
 
+        verify(cartApi).emptyCart(order.merchantId)
+
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&transaction-id=${resp.id}", action.url)
+    }
+
+    @Test
+    fun successWithFailureOnEmptyCart() {
+        // GIVEN
+        doReturn(GetOrderResponse(order)).whenever(orderApi).getOrder(any())
+
+        doThrow(RuntimeException::class).whenever(cartApi).emptyCart(any())
+
+        val resp = CreateChargeResponse("3039-f9009", Status.SUCCESSFUL.name)
+        doReturn(resp).whenever(paymentApi).createCharge(any())
+
+        // WHEN
+        val response = rest.postForEntity(url, null, Action::class.java)
+
+        // THEN
+        assertEquals(200, response.statusCodeValue)
+
+        verify(paymentApi).createCharge(any())
+        verify(paymentApi, never()).getTransaction(any())
+        verify(cartApi).emptyCart(order.merchantId)
+
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&transaction-id=${resp.id}", action.url)
@@ -121,6 +152,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi, never()).getTransaction(any())
 
+        verify(cartApi).emptyCart(order.merchantId)
+
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/success?order-id=${order.id}&transaction-id=${resp.id}", action.url)
@@ -145,6 +178,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
 
         verify(paymentApi).createCharge(any())
 
+        verify(cartApi, never()).emptyCart(any())
+
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
         assertEquals("http://localhost:0/checkout/processing?order-id=${order.id}&transaction-id=${tx.id}", action.url)
@@ -165,6 +200,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(200, response.statusCodeValue)
 
         verify(paymentApi, never()).getTransaction(any())
+
+        verify(cartApi, never()).emptyCart(any())
 
         val message = URLEncoder.encode(getText("error.payment.NOT_ENOUGH_FUNDS"), "utf-8")
         val action = response.body!!
@@ -187,6 +224,8 @@ internal class PayOrderCommandTest : AbstractEndpointTest() {
         assertEquals(200, response.statusCodeValue)
 
         verify(paymentApi, never()).getTransaction(any())
+
+        verify(cartApi, never()).emptyCart(any())
 
         val message = URLEncoder.encode(getText("error.payment.UNEXPECTED_ERROR"), "utf-8")
         val action = response.body!!
