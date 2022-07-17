@@ -193,8 +193,7 @@ class OrdersScreen(
         request = SearchOrderRequest(
             merchantId = if (merchant) securityContext.currentAccountId() else null,
             accountId = if (!merchant) securityContext.currentAccountId() else null,
-            status = request?.status?.let { listOf(it) }
-                ?: getOrderStatusList().map { it.name },
+            status = if (request?.status.isNullOrEmpty()) getOrderStatusList().map { it.name } else listOf(request?.status!!),
             limit = MAX_ORDERS,
         )
     ).orders
