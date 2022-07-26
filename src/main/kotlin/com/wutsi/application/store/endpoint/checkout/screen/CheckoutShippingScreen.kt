@@ -59,27 +59,27 @@ class CheckoutShippingScreen(
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
-                children = if (rates.isNotEmpty())
-                    toShippingRateWidget(order, rates, tenant)
-                else
-                    listOf(
-                        Center(
-                            child = Container(
-                                padding = 10.0,
-                                alignment = Alignment.Center,
-                                child = Text(
-                                    getText("page.checkout.shipping.none"),
-                                    size = Theme.TEXT_SIZE_LARGE,
-                                    color = Theme.COLOR_DANGER
-                                )
-                            )
-                        )
-                    )
+                children = toShippingRateWidget(order, rates, tenant)
             )
         ).toWidget()
     }
 
     private fun toShippingRateWidget(order: Order, rates: List<RateSummary>, tenant: Tenant): List<WidgetAware> {
+        if (rates.isEmpty())
+            return listOf(
+                Center(
+                    child = Container(
+                        padding = 10.0,
+                        alignment = Alignment.Center,
+                        child = Text(
+                            getText("page.checkout.shipping.none"),
+                            size = Theme.TEXT_SIZE_LARGE,
+                            color = Theme.COLOR_DANGER
+                        )
+                    )
+                )
+            )
+
         val children = mutableListOf(
             Container(
                 padding = 10.0,

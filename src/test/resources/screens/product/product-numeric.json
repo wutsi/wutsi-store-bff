@@ -209,17 +209,63 @@
                       ]
                     },
                     {
-                      "type": "Button",
+                      "type": "Column",
                       "attributes": {
-                        "caption": "Buy Now",
-                        "padding": 10.0,
-                        "type": "Elevated"
+                        "mainAxisAlignment": "start",
+                        "crossAxisAlignment": "start"
                       },
-                      "children": [],
-                      "action": {
-                        "type": "Command",
-                        "url": "http://localhost:0/commands/buy-now?product-id=1&merchant-id=77777&address-type=EMAIL"
-                      }
+                      "children": [
+                        {
+                          "type": "Button",
+                          "attributes": {
+                            "caption": "Buy Now",
+                            "padding": 10.0,
+                            "type": "Elevated"
+                          },
+                          "children": [],
+                          "action": {
+                            "type": "Command",
+                            "url": "http://localhost:0/commands/buy-now?product-id=1&merchant-id=77777&address-type=EMAIL"
+                          }
+                        },
+                        {
+                          "type": "Container",
+                          "attributes": {
+                            "padding": 5.0
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Row",
+                          "attributes": {},
+                          "children": [
+                            {
+                              "type": "Icon",
+                              "attributes": {
+                                "code": "f018",
+                                "size": 16.0,
+                                "color": "#1D7EDF"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Container",
+                              "attributes": {
+                                "padding": 5.0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "Text",
+                              "attributes": {
+                                "caption": "This digital product will be delivered by email.",
+                                "color": "#1D7EDF"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }

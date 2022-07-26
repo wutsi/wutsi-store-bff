@@ -262,11 +262,35 @@ class ProductScreen(
             else -> return null
         }
 
-        return Button(
-            padding = 10.0,
-            caption = getText("page.product.button.buy-now"),
-            action = executeCommand(
-                url = urlBuilder.build("commands/buy-now?product-id=${product.id}&merchant-id=${merchant.id}&address-type=$addressType")
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = listOfNotNull<WidgetAware>(
+                Button(
+                    padding = 10.0,
+                    caption = getText("page.product.button.buy-now"),
+                    action = executeCommand(
+                        url = urlBuilder.build("commands/buy-now?product-id=${product.id}&merchant-id=${merchant.id}&address-type=$addressType")
+                    )
+                ),
+                Container(padding = 5.0),
+                if (product.type == ProductType.NUMERIC.name)
+                    Row(
+                        children = listOf(
+                            Icon(
+                                code = Theme.ICON_EMAIL,
+                                size = 16.0,
+                                color = Theme.COLOR_PRIMARY
+                            ),
+                            Container(padding = 5.0),
+                            Text(
+                                caption = getText("page.product.deliver-by-email"),
+                                color = Theme.COLOR_PRIMARY,
+                            )
+                        )
+                    )
+                else
+                    null,
             )
         )
     }
