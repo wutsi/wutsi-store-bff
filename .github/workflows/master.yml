@@ -64,7 +64,7 @@ jobs:
           heroku config:set --app ${HEROKU_APP} CLOUDAMQP_URL=${CLOUDAMQP_URL}
           heroku config:set --app ${HEROKU_APP} API_KEY=${API_KEY}
           heroku addons -a ${HEROKU_APP} | grep papertrail && echo 'addon: papertrail exists' ||  heroku addons:create papertrail -a ${HEROKU_APP}
-          heroku deploy:jar target/wutsi-store-bff.jar --app ${HEROKU_APP}
+          heroku deploy:jar wutsi-store-bff.jar --app ${HEROKU_APP}
       - name: Health check
         env:
           HEROKU_APP: wutsi-store-bff-test
@@ -89,7 +89,7 @@ jobs:
 
   deploy-prod:
     runs-on: ubuntu-latest
-    needs: [ build ]
+    needs: [ deploy-test ]
     steps:
       - uses: actions/checkout@v3
       - name: JDK
@@ -119,7 +119,7 @@ jobs:
           heroku config:set --app ${HEROKU_APP} CLOUDAMQP_URL=${CLOUDAMQP_URL}
           heroku config:set --app ${HEROKU_APP} API_KEY=${API_KEY}
           heroku addons -a ${HEROKU_APP} | grep papertrail && echo 'addon: papertrail exists' ||  heroku addons:create papertrail -a ${HEROKU_APP}
-          heroku deploy:jar target/wutsi-store-bff.jar --app ${HEROKU_APP}
+          heroku deploy:jar wutsi-store-bff.jar --app ${HEROKU_APP}
       - name: Health check
         env:
           HEROKU_APP: wutsi-store-bff-prod
