@@ -123,6 +123,7 @@ jobs:
       - name: Health check
         env:
           HEROKU_APP: wutsi-store-bff-prod
+        run: |
           sleep 90
           curl -sSf https://${HEROKU_APP}.herokuapp.com/actuator/health >> /dev/null
 
