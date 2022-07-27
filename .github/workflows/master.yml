@@ -80,7 +80,7 @@ jobs:
       - name: Notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: ${{ status() }}
           SLACK_TITLE: wutsi-store-bff-test
           SLACK_MESSAGE: Heroku Deployment in TEST
           MSG_MINIMAL: true
@@ -136,7 +136,7 @@ jobs:
       - name: Notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: ${{ jobs.deploy-prod.status }}
           SLACK_TITLE: wutsi-store-bff-prod
           SLACK_MESSAGE: Heroku Deployment in PROD
           MSG_MINIMAL: true
